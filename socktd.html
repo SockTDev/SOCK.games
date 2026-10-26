@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0404)https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-f004-820a-85bc-918a4a7b7bfc/raw?se=2026-10-26T13%3A27%3A34Z&sp=r&sv=2026-02-06&sr=b&scid=1ad13ff5-f521-4d40-963e-a3ceb8a0f7a8&skoid=8981e47a-681f-4a6a-b86c-73d6347614b7&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-26T09%3A44%3A53Z&ske=2026-10-27T09%3A44%3A53Z&sks=b&skv=2026-02-06&sig=Mqqt1Ci6sBGq9qG3Hm3ztgDDxvj56tWDTifZVX11iy8%3D -->
+<!-- saved from url=(0400)https://sdmntprnortheu.oaiusercontent.com/files/00000000-ee54-81f4-a04c-08af3bcdbd45/raw?se=2026-10-26T13%3A37%3A31Z&sp=r&sv=2026-02-06&sr=b&scid=62dbe24c-96a3-43d9-968c-ed7a9d4a2935&skoid=8981e47a-681f-4a6a-b86c-73d6347614b7&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-26T08%3A09%3A53Z&ske=2026-10-27T08%3A09%3A53Z&sks=b&skv=2026-02-06&sig=czt6%2BQWNofvGKvhK/p68YMqFWgOmuCGekCSa8DAM6Fg%3D -->
 <html style="visibility: visible;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><style>body {transition: opacity ease-in 0.2s; } 
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 
@@ -563,7 +563,13 @@ window.SockTDBackend={
   send:function(o){if(this.ws&&this.ws.readyState===1)this.ws.send(JSON.stringify(o));else this.queue.push(o)},
   flush:function(){while(this.queue.length&&this.ready)this.ws.send(JSON.stringify(this.queue.shift()))}
 };
-window.addEventListener('load',()=>SockTDBackend.connect());
+window.addEventListener('load',()=>{
+  // GitHub Pages is static hosting: it cannot serve this custom /socktd WebSocket.
+  // Skip that optional bridge there; the game itself remains fully client-side.
+  const host=String(location.hostname||'').toLowerCase();
+  const staticHost=host==='github.io'||host.endsWith('.github.io')||host==='pages.dev'||host.endsWith('.pages.dev');
+  if(!staticHost) SockTDBackend.connect();
+});
 </script><style id="socktd-map-buttons-fix">
 #choose [data-m]{pointer-events:auto!important;position:relative;z-index:4!important;cursor:pointer!important}
 #choose [data-m]:disabled{opacity:1!important;filter:none!important;pointer-events:auto!important}
@@ -818,7 +824,7 @@ body.themeGamble #recipes #detail > .item{
 <filter id="cv-tritanomaly" color-interpolation-filters="sRGB"><fecolormatrix type="matrix" values="0.967 0.033 0 0 0  0 0.733 0.267 0 0  0 0.183 0.817 0 0  0 0 0 1 0"></fecolormatrix></filter>
 <filter id="cv-achromatopsia" color-interpolation-filters="sRGB"><fecolormatrix type="saturate" values="0"></fecolormatrix></filter>
 <filter id="cv-achromatomaly" color-interpolation-filters="sRGB"><fecolormatrix type="saturate" values="0.35"></fecolormatrix></filter>
-</defs></svg><div id="app"><button id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button><div id="brightnessShade" style="opacity: 0; pointer-events: none;"></div><div id="pauseOverlay" class="hidden"><div class="pauseCard"><h2>⏸️ Game Paused</h2><p>Press Resume to continue.</p><button id="resumeGame">▶️ Resume</button></div></div><div id="gambleParticles" class="gambleParticles"></div><h1 style="text-shadow:0 4px 0 #0007;margin-bottom:2px">🧦 SOCK TD</h1><div class="small" style="margin-bottom:8px;color:#ffd54a">TEXTURED SOCK TOWER DEFENSE</div><div class="bar"><div class="card">💰 <b id="gold">150</b></div><div class="card">❤️ <b id="life">250</b></div><div class="card">🌊 <b id="wave">0</b></div><button id="recordBtn" class="recordButton">🏆 <span>Record</span> <b id="best">0</b></button><button id="start">Start wave</button><button id="fuse">🧬 Fusion</button><button id="catalogueBtn">📚 Catalogue</button><button id="book" class="hidden">📖 Recipe Book</button><button id="catalogBtn" class="">👾 Monster Catalogue</button><button id="gamble">🎰 Gamble</button><button id="sandboxControlsBtn" aria-hidden="true" tabindex="-1" style="display: none;">🏖️ Sandbox</button></div><div id="towers" class="bar"><button data-sock-type="fire">Fire Sock $45</button><button data-sock-type="ice">Ice Sock $55</button><button data-sock-type="thunder">ThunderSock $95</button><button data-sock-type="wizard">WizardSock $115</button><button data-sock-type="ninja">Ninja Sock $90</button><button data-sock-type="golden">GoldenSock $200</button><button data-sock-type="portal">Portal Sock $130</button><button data-sock-type="laundry">Laundry Sock $85</button><button data-sock-type="fight">Fight Sock $105</button></div><p id="msg">Range: 155 | Damage: 48</p><div id="info" class="towerInfo hiddenInfo"></div><canvas id="c" width="960" height="560"></canvas>
+</defs></svg><div id="app"><button id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button><div id="brightnessShade" style="opacity: 0; pointer-events: none;"></div><div id="pauseOverlay" class="hidden"><div class="pauseCard"><h2>⏸️ Game Paused</h2><p>Press Resume to continue.</p><button id="resumeGame">▶️ Resume</button></div></div><div id="gambleParticles" class="gambleParticles"></div><h1 style="text-shadow:0 4px 0 #0007;margin-bottom:2px">🧦 SOCK TD</h1><div class="small" style="margin-bottom:8px;color:#ffd54a">TEXTURED SOCK TOWER DEFENSE</div><div class="bar"><div class="card">💰 <b id="gold">150</b></div><div class="card">❤️ <b id="life">250</b></div><div class="card">🌊 <b id="wave">0</b></div><button id="recordBtn" class="recordButton">🏆 <span>Record</span> <b id="best">0</b></button><button id="start">Start wave</button><button id="fuse">🧬 Fusion</button><button id="catalogueBtn">📚 Catalogue</button><button id="book" class="hidden">📖 Recipe Book</button><button id="catalogBtn" class="">👾 Monster Catalogue</button><button id="gamble">🎰 Gamble</button><button id="sandboxControlsBtn" aria-hidden="true" tabindex="-1" style="display: none;">🏖️ Sandbox</button></div><div id="towers" class="bar" data-socktd-reliable-clicks="1"><button data-sock-type="fire" style="pointer-events: auto;">Fire Sock $45</button><button data-sock-type="ice" style="pointer-events: auto;">Ice Sock $55</button><button data-sock-type="thunder" style="pointer-events: auto;">ThunderSock $95</button><button data-sock-type="wizard" style="pointer-events: auto;">WizardSock $115</button><button data-sock-type="ninja" style="pointer-events: auto;">Ninja Sock $90</button><button data-sock-type="golden" style="pointer-events: auto;">GoldenSock $200</button><button data-sock-type="portal" style="pointer-events: auto;">Portal Sock $130</button><button data-sock-type="laundry" style="pointer-events: auto;">Laundry Sock $85</button><button data-sock-type="fight" style="pointer-events: auto;">Fight Sock $105</button></div><p id="msg">Range: 155 | Damage: 48</p><div id="info" class="towerInfo hiddenInfo"></div><canvas id="c" width="960" height="560"></canvas>
 <div id="fpsView" class="hidden" aria-label="First person tower view">
   <div id="fpsScene">
     <canvas id="fpsWorld3D" aria-hidden="true"></canvas>
@@ -835,7 +841,7 @@ body.themeGamble #recipes #detail > .item{
     <div id="fpsHint">RMB ingedrukt = rondkijken • LMB = schieten</div>
   </div>
 </div>
-</div><div id="choose" class="modal"><button id="gameModesBtn">🎮 Game Modes</button><div class="panel"><div></div><h2>Choose your map</h2><h3>Map</h3><button data-m="box" style="pointer-events: auto; position: relative; z-index: 4;">📦 Shoe Box</button><button data-m="closet" style="pointer-events: auto; position: relative; z-index: 4;">🚪 Closet</button><button data-m="hall" style="pointer-events: auto; position: relative; z-index: 4;">🚶 Hallway</button><button id="tutorialBtn">📚 Tutorial</button><h2>Choose difficulty</h2><p style="opacity:.8;margin-top:0">🧦 Build your sock army • 🧬 Discover fusions • 👾 Stop the monsters</p><button data-d="easy">🟢 Easy</button><button data-d="normal" class="clickPop">🟡 Normal</button><button data-d="hard">🔴 Hard</button><button data-d="nightmare">☠️ Nightmare</button></div></div><div id="gameModesModal" class="modal hidden"><div class="panel" style="text-align:center"><h2>🎮 Game Modes</h2><div class="gameModesTopActions"><button id="backToStartFromModes" type="button">↩ Back to Start</button></div><div class="gameModeChoices"><button id="campaignMode" class="gameModeChoice newModeChoice">📖 Campaign</button><button id="multiplayerMode" class="gameModeChoice">🌐 Multiplayer</button><button id="speedrunMode" class="gameModeChoice">⚡ Speedrun</button><button id="sandboxMode" class="gameModeChoice">🏖️ Sandbox</button><button id="eventMode" class="gameModeChoice newModeChoice">🎉 Event</button><button id="challengeMode" class="gameModeChoice newModeChoice">🏆 Challenge</button></div><button id="gameModesClose">Close</button></div></div><div id="challengeDifficultyModal" class="modal hidden"><div class="panel challengeDifficultyPanel" style="text-align:center"><h2>🏆 Choose Challenge Difficulty</h2><p>Pick a difficulty to play a random challenge on a random map.</p><div class="challengeDifficultyChoices"><button type="button" class="challengeDifficultyChoice" data-challenge-diff="easy">🟢 Easy</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="normal">🟡 Normal</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="hard">🔴 Hard</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="nightmare">☠️ Nightmare</button></div><p id="challengeDifficultyNote" aria-live="polite">Choose one of the four difficulties.</p><button id="challengeDifficultyBack" type="button">↩ Back to Game Modes</button></div></div><div id="eventHubModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event Hub"><div class="eventPainting"><div class="eventArtwork"><span class="eventGarland"></span><span class="eventSpark spark1">✦</span><span class="eventSpark spark2">★</span><span class="eventSpark spark3">✧</span><span class="eventSpark spark4">✦</span><svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px;overflow:hidden"><defs>
+</div><div id="choose" class="modal" style="display: flex; visibility: visible; pointer-events: auto; z-index: 10000;"><button id="gameModesBtn">🎮 Game Modes</button><div class="panel"><div></div><h2>Choose your map</h2><h3>Map</h3><button data-m="box" style="pointer-events: auto; position: relative; z-index: 4;">📦 Shoe Box</button><button data-m="closet" style="pointer-events: auto; position: relative; z-index: 4;">🚪 Closet</button><button data-m="hall" style="pointer-events: auto; position: relative; z-index: 4;">🚶 Hallway</button><button id="tutorialBtn">📚 Tutorial</button><h2>Choose difficulty</h2><p style="opacity:.8;margin-top:0">🧦 Build your sock army • 🧬 Discover fusions • 👾 Stop the monsters</p><button data-d="easy">🟢 Easy</button><button data-d="normal" class="clickPop">🟡 Normal</button><button data-d="hard">🔴 Hard</button><button data-d="nightmare">☠️ Nightmare</button></div></div><div id="gameModesModal" class="modal hidden"><div class="panel" style="text-align:center"><h2>🎮 Game Modes</h2><div class="gameModesTopActions"><button id="backToStartFromModes" type="button">↩ Back to Start</button></div><div class="gameModeChoices"><button id="campaignMode" class="gameModeChoice newModeChoice">📖 Campaign</button><button id="multiplayerMode" class="gameModeChoice">🌐 Multiplayer</button><button id="speedrunMode" class="gameModeChoice">⚡ Speedrun</button><button id="sandboxMode" class="gameModeChoice">🏖️ Sandbox</button><button id="eventMode" class="gameModeChoice newModeChoice">🎉 Event</button><button id="challengeMode" class="gameModeChoice newModeChoice">🏆 Challenge</button></div><button id="gameModesClose">Close</button></div></div><div id="challengeDifficultyModal" class="modal hidden"><div class="panel challengeDifficultyPanel" style="text-align:center"><h2>🏆 Choose Challenge Difficulty</h2><p>Pick a difficulty to play a random challenge on a random map.</p><div class="challengeDifficultyChoices"><button type="button" class="challengeDifficultyChoice" data-challenge-diff="easy">🟢 Easy</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="normal">🟡 Normal</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="hard">🔴 Hard</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="nightmare">☠️ Nightmare</button></div><p id="challengeDifficultyNote" aria-live="polite">Choose one of the four difficulties.</p><button id="challengeDifficultyBack" type="button">↩ Back to Game Modes</button></div></div><div id="eventHubModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event Hub"><div class="eventPainting"><div class="eventArtwork"><span class="eventGarland"></span><span class="eventSpark spark1">✦</span><span class="eventSpark spark2">★</span><span class="eventSpark spark3">✧</span><span class="eventSpark spark4">✦</span><svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px;overflow:hidden"><defs>
 <lineargradient id="eventSockPink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a91f49"></stop><stop offset=".42" stop-color="#f65b83"></stop><stop offset=".72" stop-color="#f98da5"></stop><stop offset="1" stop-color="#a91f49"></stop></lineargradient>
 <lineargradient id="eventSockBlue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#164c8b"></stop><stop offset=".45" stop-color="#48b6ec"></stop><stop offset=".72" stop-color="#a0e6ff"></stop><stop offset="1" stop-color="#174779"></stop></lineargradient>
 <lineargradient id="eventSockViolet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#54248b"></stop><stop offset=".45" stop-color="#a66be2"></stop><stop offset=".72" stop-color="#e0bdff"></stop><stop offset="1" stop-color="#4d217d"></stop></lineargradient>
@@ -6927,7 +6933,7 @@ document.getElementById('adminModal').addEventListener('click',e=>{if(e.target.i
   redeemCode.addEventListener('click',redeem);
   codeInput.addEventListener('keydown',e=>{if(e.key==='Enter')redeem()});
 })();
-</script><div id="settingsModal" class="modal hidden"><div class="panel settingsPanel"><h2>⚙️ Settings</h2><label>🎨 Themes</label><div id="themeOptions"><button data-theme="dark" class="active clickPop">🌙 Dark</button><button data-theme="light">☀️ Light</button><button data-theme="gamble" id="gambleThemeOption" class="hidden">🎰 Gamble</button></div><label for="colorVisionMode">👁️ Color vision mode</label><select id="colorVisionMode"><option value="none">Normal colors (off)</option><option value="protanopia">Protanopia — red-blindness</option><option value="protanomaly">Protanomaly — reduced red sensitivity</option><option value="deuteranopia">Deuteranopia — green-blindness</option><option value="deuteranomaly">Deuteranomaly — reduced green sensitivity</option><option value="tritanopia">Tritanopia — blue-yellow deficiency</option><option value="tritanomaly">Tritanomaly — reduced blue sensitivity</option><option value="achromatopsia">Achromatopsia — grayscale</option><option value="achromatomaly">Achromatomaly — reduced color</option><option value="monochromacy">Monochromacy — grayscale</option></select><div class="small" style="margin-top:5px;opacity:.75">Changes the game colors for accessibility. Your choice is saved on this device.</div><label for="brightness">☀️ Brightness</label><input id="brightness" type="range" min="35" max="100" value="100"><button id="pauseGame">⏸️ Pause</button><label for="speedrunScreenBehavior">⚡ Speedrun Screen Behavior</label><select id="speedrunScreenBehavior"><option value="pause">Pause Waves in Menus</option><option value="run">Keep Waves Running in Menus</option></select><div id="speedrunScreenBehaviorNote" class="small" style="margin-top:6px;opacity:.75">When the Catalogue, Recipe Book, Monster Catalogue, Gamble or Fusion screen is open.</div>
+</script><div id="settingsModal" class="modal hidden"><div class="panel settingsPanel"><h2>⚙️ Settings</h2><label>🎨 Themes</label><div id="themeOptions"><button data-theme="dark" class="active">🌙 Dark</button><button data-theme="light">☀️ Light</button><button data-theme="gamble" id="gambleThemeOption" class="hidden">🎰 Gamble</button></div><label for="colorVisionMode">👁️ Color vision mode</label><select id="colorVisionMode"><option value="none">Normal colors (off)</option><option value="protanopia">Protanopia — red-blindness</option><option value="protanomaly">Protanomaly — reduced red sensitivity</option><option value="deuteranopia">Deuteranopia — green-blindness</option><option value="deuteranomaly">Deuteranomaly — reduced green sensitivity</option><option value="tritanopia">Tritanopia — blue-yellow deficiency</option><option value="tritanomaly">Tritanomaly — reduced blue sensitivity</option><option value="achromatopsia">Achromatopsia — grayscale</option><option value="achromatomaly">Achromatomaly — reduced color</option><option value="monochromacy">Monochromacy — grayscale</option></select><div class="small" style="margin-top:5px;opacity:.75">Changes the game colors for accessibility. Your choice is saved on this device.</div><label for="brightness">☀️ Brightness</label><input id="brightness" type="range" min="35" max="100" value="100"><button id="pauseGame">⏸️ Pause</button><label for="speedrunScreenBehavior">⚡ Speedrun Screen Behavior</label><select id="speedrunScreenBehavior"><option value="pause">Pause Waves in Menus</option><option value="run">Keep Waves Running in Menus</option></select><div id="speedrunScreenBehaviorNote" class="small" style="margin-top:6px;opacity:.75">When the Catalogue, Recipe Book, Monster Catalogue, Gamble or Fusion screen is open.</div>
 <button id="openAdminFromSettings" class="hidden">🛠️ Open CRADMIN Panel</button><button id="returnToStart">🏠 Return to Start Screen</button><button id="shareGame">📤 Share Sock TD</button>
 <div id="codeSection">
 <h3>🔐 Codes</h3>
@@ -6999,7 +7005,7 @@ document.getElementById('adminModal').addEventListener('click',e=>{if(e.target.i
 <div id="socktdFriendsOverlay">
   <div class="socktdPanel">
     <div style="display:flex;align-items:center;gap:10px"><h2 style="flex:1;margin:0">👥 Friend List</h2><button id="socktdFriendsClose">✕</button></div>
-    <p><b>Your Records username:</b> <span id="socktdMyUser">Player</span></p><p id="socktdAccountState" style="margin:4px 0 10px;opacity:.75;font-size:13px">⚠️ Set your Records username first.</p>
+    <p><b>Your Records username:</b> <span id="socktdMyUser">shadySocks</span></p><p id="socktdAccountState" style="margin:4px 0 10px;opacity:.75;font-size:13px">💾 Account saved • OFFLINE</p>
     <div class="socktdAdd"><input id="socktdFriendInput" maxlength="20" placeholder="Enter Records username"><button id="socktdAddFriend">＋ Add</button></div>
     <div id="socktdFriendMsg" class="socktdMsg"></div>
     <div id="socktdPeerStatus" style="margin:8px 0;font-size:13px;opacity:.8">🌐 PeerJS: OFFLINE / STARTING</div><div id="socktdFriendList"><p style="opacity:.65">No friends yet. Add someone and wait for them to accept.</p></div>
@@ -7516,6 +7522,133 @@ document.addEventListener("DOMContentLoaded",function(){
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(attach,0),{once:true});
  else setTimeout(attach,0);
+})();
+</script>
+
+<script id="socktdForceStartSelectionOnLoad">
+(()=>{
+  // Always land on the map/difficulty chooser after a page refresh or fresh visit.
+  // Keep every other game mode and its existing click handlers unchanged.
+  const showStartSelection=()=>{
+    const choose=document.getElementById('choose');
+    if(!choose) return;
+    choose.classList.remove('hidden');
+    choose.style.display='flex';
+    choose.style.visibility='visible';
+    choose.style.pointerEvents='auto';
+    choose.style.zIndex='10000';
+    ['gameModesModal','challengeDifficultyModal','settingsModal','pauseOverlay',
+     'gameOver','sandboxSetup','multiplayerLobby','eventHubModal','tutorialDialogue']
+      .forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden')});
+    const shade=document.getElementById('brightnessShade');
+    if(shade){shade.style.opacity='0';shade.style.pointerEvents='none';}
+  };
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',showStartSelection,{once:true});
+  }else showStartSelection();
+  window.addEventListener('load',()=>{showStartSelection();setTimeout(showStartSelection,150);});
+})();
+</script>
+
+<script id="socktd-cross-host-compatibility-v1">
+(()=>{
+  'use strict';
+  const $id=id=>document.getElementById(id);
+  const staticHost=(()=>{const h=String(location.hostname||'').toLowerCase();return h==='github.io'||h.endsWith('.github.io')||h==='pages.dev'||h.endsWith('.pages.dev')})();
+  // The optional custom rendezvous bridge is not available on static hosting.
+  // Keep it from retrying forever and slowing down the page; PeerJS multiplayer remains separate.
+  if(staticHost&&window.SockTDBackend){
+    window.SockTDBackend.connect=function(){this.ready=false;this.ws=null;};
+  }
+  function wireMapAndDifficulty(){
+    const choose=$id('choose');
+    if(!choose||typeof selectMapPath!=='function')return;
+    choose.querySelectorAll('[data-m]').forEach(btn=>{
+      btn.disabled=false;
+      btn.style.pointerEvents='auto';
+      btn.onclick=ev=>{
+        ev.preventDefault();ev.stopPropagation();
+        if(typeof active!=='undefined'&&active)return;
+        if(typeof closeTutorialDialogue==='function')closeTutorialDialogue();
+        const next=btn.dataset.m;
+        if(!['box','closet','hall'].includes(next))return;
+        map=next;
+        selectMapPath();
+        choose.querySelectorAll('[data-m]').forEach(x=>x.classList.toggle('clickPop',x===btn));
+        const msg=$id('msg');
+        if(msg)msg.textContent=(typeof sandboxModeActive!=='undefined'&&sandboxModeActive?'🏖️ Sandbox • ':'')+'Map selected: '+btn.textContent.trim()+' — Path '+(Number(selectedPathIndex)+1)+'/100 is locked for this round.';
+        if(typeof draw==='function')draw();
+      };
+    });
+    choose.querySelectorAll('[data-d]').forEach(btn=>{
+      btn.onclick=ev=>{
+        ev.preventDefault();ev.stopPropagation();
+        if(typeof tutorialActive!=='undefined'&&tutorialActive)return;
+        const next=btn.dataset.d;
+        if(!['easy','normal','hard','nightmare'].includes(next))return;
+        if(typeof sandboxModeActive!=='undefined')sandboxModeActive=false;
+        const sandboxButton=$id('sandboxControlsBtn');
+        if(sandboxButton){sandboxButton.classList.remove('sandboxVisible');sandboxButton.style.display='none';}
+        const setup=$id('sandboxSetup');if(setup)setup.classList.add('hidden');
+        if(typeof closeTutorialDialogue==='function')closeTutorialDialogue();
+        diff=next;
+        choose.classList.add('hidden');
+        const msg=$id('msg');if(msg)msg.textContent='Difficulty '+next;
+        if(typeof update==='function')update();
+        if(typeof draw==='function')draw();
+      };
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wireMapAndDifficulty,{once:true});
+  else wireMapAndDifficulty();
+  // Re-apply after the existing startup screen initializer runs, without changing appearance.
+  window.addEventListener('load',wireMapAndDifficulty,{once:true});
+})();
+</script>
+
+
+<script id="socktd-tower-button-reliability-fix">
+(()=>{
+  'use strict';
+  function installTowerButtonFix(){
+    const root=document.getElementById('towers');
+    if(!root || root.dataset.socktdReliableClicks==='1') return;
+    root.dataset.socktdReliableClicks='1';
+    // Capture the click before any stale/overwritten per-button handler can swallow it.
+    root.addEventListener('click',function(ev){
+      const btn=ev.target && ev.target.closest ? ev.target.closest('button[data-sock-type]') : null;
+      if(!btn || !root.contains(btn)) return;
+      const k=btn.dataset.sockType;
+      if(typeof D==='undefined' || !D[k]) return;
+      if(typeof tutorialActive!=='undefined' && tutorialActive && !document.body.classList.contains('tutorialPlacement')) return;
+      if(document.body.classList.contains('tutorialLock') && !document.body.classList.contains('tutorialPlacement')) return;
+      if(document.body.classList.contains('tutorialPlacement') && k!==(window.tutorialAllowedTower||'fire')) return;
+      if(typeof sockTDChallengeCanUse==='function' && !sockTDChallengeCanUse(k)) return;
+      // Prevent a duplicate or stale handler from undoing the selection.
+      ev.preventDefault();
+      ev.stopPropagation();
+      ev.stopImmediatePropagation();
+      selected=k;
+      fuseMode=false;
+      root.querySelectorAll('button').forEach(q=>q.classList.remove('sel'));
+      btn.classList.add('sel');
+      const v=D[k];
+      const challenge=(typeof sockTDChallenge!=='undefined' && sockTDChallenge) ? sockTDChallenge : null;
+      const range=challenge&&challenge.rangeMult ? Math.max(12,Math.round(v[2]*challenge.rangeMult)) : v[2];
+      const damage=challenge&&challenge.damageMult ? Math.round(v[3]*challenge.damageMult) : v[3];
+      const msg=document.getElementById('msg');
+      if(msg) msg.textContent='Range: '+range+' | Damage: '+damage+' — click an open spot on the map to place '+v[0]+'.';
+    },true);
+    // Re-enable ordinary shop buttons if a stale disabled flag leaked in from a previous screen;
+    // tutorial-specific restrictions remain enforced by the click handler above.
+    root.querySelectorAll('button[data-sock-type]').forEach(btn=>{
+      if(!document.body.classList.contains('tutorialLock')) btn.disabled=false;
+      btn.style.pointerEvents='auto';
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installTowerButtonFix,{once:true});
+  else installTowerButtonFix();
+  window.addEventListener('load',installTowerButtonFix,{once:true});
 })();
 </script>
 
