@@ -915,6 +915,7 @@ body.themeGamble #recipes #detail > .item{
   </div>
 
 </div></div><div id="mpLoading" class="hidden"><div class="mpLoadingBox"><div class="mpSpinner"></div><h2 id="mpLoadingTitle">Connecting…</h2><p id="mpLoadingText">Please wait.</p><button id="mpCancelConnect" style="margin-top:20px;background:#d85b6b;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:900;cursor:pointer">✖ Stop Connecting</button></div></div><script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js'"></script>
+<script id="socktd-peerjs-reliability">
 /* Sock TD PeerJS reliability layer */
 (function(){
   window.SockTDPeerConfig = {
@@ -950,6 +951,7 @@ body.themeGamble #recipes #detail > .item{
   };
 })();
 
+</script>
 <script>
 const C=document.getElementById('c'); let x=C.getContext('2d'),$=id=>document.getElementById(id);let gold=150,life=250,wave=0,waveStartTimeout=null,best=+localStorage.getItem('socktdbest')||0,diff='normal',map='box',active=false,left=0,timer=0,gameOver=false,selected=null,movingTower=null,fuseMode=false,first=null,tw=[],en=[],drops=[],fireballs=[],iceflakes=[],kunais=[],thunderChains=[],thunderSparks=[],wizardWaves=[],wizardBursts=[],moneyBills=[],portalShots=[],soapShots=[],soapBubbles=[],symbolShots=[],lavaShots=[],prismShots=[],prismRainbows=[],cosmicShots=[],cosmicBursts=[],plasmaShots=[],shadowSpirals=[],energyChains=[],energySparks=[],mudShots=[],mudSplats=[],unlocked=(()=>{try{const saved=JSON.parse(localStorage.getItem('socktdrecipes')||'[]');return Array.isArray(saved)?[...new Set(saved.filter(x=>typeof x==='string'))]:[]}catch(e){return[]}})();let speedrunCountdownActive=false,speedrunCountdownTimer=null,speedrunModeActive=false,sandboxModeActive=false;
 let speedrunScreenBehavior=localStorage.getItem('socktdSpeedrunScreenBehavior')||'pause';
@@ -1032,6 +1034,7 @@ function selectMapPath(forcedPath=null, forcedIndex=null){
 }
 selectMapPath();
 const D={fire:['Fire Sock',45,125,30,35,'#e84b36'],ice:['Ice Sock',55,115,14,25,'#50bfe6'],thunder:['ThunderSock',95,145,40,55,'#ffd34e'],wizard:['WizardSock',115,155,48,70,'#9c55d6'],ninja:['Ninja Sock',90,82,34,18,'#334'],golden:['GoldenSock',200,135,40,42,'#ffc52c'],portal:['Portal Sock',130,120,20,10,'#8058d6'],laundry:['Laundry Sock',85,100,22,30,'#e7edf2'],fight:['Fight Sock',105,68,72,22,'#ff7043']};
+D.clock=['Clock Sock',150,145,72,18,'#d7b15c'];
 const E={frog:[55,1.25,7],fly:[32,2.1,6],golem:[290,.5,18],speed:[95,2.8,11],silver:[210,.82,16],wash:[430,.52,24],piggy:[650,.32,0],treeflame:[360,.72,28],psyguy:[190,.98,20],ironjaw:[520,.44,34],shellbum:[300,.62,25],boss:[1700,.38,75]};
 const strongVs={fire:'Sticky Moth, Washydilly and Piggy Bank',ice:'Sharpend Farao and Water Frog',thunder:'Sticky Moth, Mrsilver and Washydilly',wizard:'Stone Golem and Boss enemies',ninja:'Sticky Moth and Sharpend Farao',golden:'Piggy Bank and Boss enemies',portal:'Slow heavy enemies like Stone Golem',laundry:'Water Frog and fast enemies',fight:'Heavy enemies at close range'};
 const enemyNames={frog:'Water Frog',fly:'Sticky Moth',golem:'Stone Golem',speed:'Sharpend Farao',silver:'Mrsilver',wash:'Washydilly',piggy:'Piggy Bank',treeflame:'Treeflame',psyguy:'Phantom Pain',ironjaw:'Ironjaw',shellbum:'Brick Turtle Tank',boss:'Michael the Blub'};
@@ -1041,6 +1044,8 @@ const names=['Lava Sock','Storm Sock','Crystal Sock','Meteor Sock','Nature Sock'
 window.socktdGetSkinCatalogueItems=function(){const out=[];for(const key of Object.keys(D||{})){const d=D[key];out.push({id:'sock:'+key,key,name:String(d&&d[0]||key),kind:'sock'});}const seen=new Set();for(const [recipe,result] of Object.entries(recipes||{})){const name=String(result||'').trim();if(!name||seen.has(name))continue;seen.add(name);out.push({id:'fusion:'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),key:recipe,name,kind:'fusion'});}return out;};
 function obs(){if(diff==='easy'||diff==='normal')return[];let a=map==='box'?[{x:70,y:430,w:120,h:60,kind:'shoe'},{x:680,y:75,w:115,h:80,kind:'box'},{x:300,y:65,w:95,h:55,kind:'box'},{x:455,y:455,w:120,h:55,kind:'shoe'}]:map==='closet'?[{x:55,y:80,w:150,h:45,kind:'clothes'},{x:700,y:400,w:120,h:55,kind:'shelf'},{x:350,y:45,w:110,h:60,kind:'clothes'},{x:240,y:440,w:140,h:52,kind:'shelf'}]:[{x:90,y:70,w:110,h:160,kind:'door'},{x:720,y:340,w:150,h:40,kind:'bench'},{x:410,y:180,w:110,h:130,kind:'door'},{x:120,y:470,w:150,h:42,kind:'bench'}];if(diff==='nightmare'){if(map==='box')a.push({x:180,y:260,w:90,h:55,kind:'box'},{x:520,y:270,w:110,h:60,kind:'shoe'},{x:810,y:200,w:85,h:60,kind:'box'});else if(map==='closet')a.push({x:500,y:150,w:120,h:55,kind:'clothes'},{x:600,y:260,w:110,h:55,kind:'shelf'},{x:820,y:100,w:80,h:65,kind:'shelf'});else a.push({x:280,y:240,w:110,h:70,kind:'bench'},{x:600,y:420,w:110,h:55,kind:'door'},{x:830,y:90,w:75,h:120,kind:'door'});}return a}
 for(let k of ['fire','ice','thunder','wizard','ninja','golden',...Object.keys(D).filter(q=>!['fire','ice','thunder','wizard','golden','ninja'].includes(q))]){let v=D[k],b=document.createElement('button');b.dataset.sockType=k;b.textContent=v[0]+' $'+v[1];b.onclick=()=>{if(tutorialActive&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialPlacement')&&k!==(window.tutorialAllowedTower||'fire'))return;if(!sockTDChallengeCanUse(k))return;selected=k;fuseMode=false;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));b.classList.add('sel');$('msg').textContent='Range: '+(sockTDChallenge&&sockTDChallenge.rangeMult?Math.max(12,Math.round(v[2]*sockTDChallenge.rangeMult)):v[2])+' | Damage: '+(sockTDChallenge&&sockTDChallenge.damageMult?Math.round(v[3]*sockTDChallenge.damageMult):v[3])};$('towers').appendChild(b)}
+// Clock Sock starts locked until 15 minutes of accumulated gameplay.
+(function(){const b=document.querySelector('#towers button[data-sock-type="clock"]');if(b){b.style.display='none';b.classList.add('socktdClockLocked');b.disabled=true;}})();
 // Safety guard: the tower shop must contain only one button per tower type.
 (function dedupeTowerShopButtons(){
  const root=document.getElementById('towers');if(!root)return;
@@ -1611,6 +1616,10 @@ function mpHandleGuestAction(data){
     const cost=25+t.level*35;
     if(gold<cost)return;
     gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2);t.range+=14;
+  }else if(action.action==='sell'){
+    const idx=Number(action.i),t=tw[idx];
+    if(!t||tw.length<=1)return;
+    gold+=socktdSellPrice(t);tw.splice(idx,1);
   }else if(action.action==='fuse'){
     const a=tw[Number(action.a)],b=tw[Number(action.b)];
     if(!a||!b||a===b||a.fused||b.fused)return;
@@ -2408,6 +2417,52 @@ function sock(t){
  x.save();let idle=Math.sin(performance.now()/420+t.x)*2,col=t.fused?fusionColor(t.fusionKey):D[t.parts[0]][5],s=t.fused?1.42:1;
  if(t.fused){drawFusionSock(t,col);x.restore();return}
  x.translate(t.x,t.y);x.translate(0,idle);x.scale(s,s);
+ if(t.k==='clock'&&window.socktdClockSkinMode==='alarm'){
+   // Alarm Clock Sock: brass twin bells, detailed clock dial, ruby buttons and knitted sock silhouette.
+   x.fillStyle='rgba(0,0,0,.22)';x.beginPath();x.ellipse(0,34,31,7,0,0,Math.PI*2);x.fill();
+   const metal=x.createLinearGradient(-28,-34,27,31);metal.addColorStop(0,'#fff0aa');metal.addColorStop(.4,'#f2ad42');metal.addColorStop(.72,'#a75b24');metal.addColorStop(1,'#67381c');
+   x.fillStyle=metal;x.strokeStyle='#58321c';x.lineWidth=2.8;x.beginPath();x.moveTo(-18,-26);x.lineTo(17,-26);x.lineTo(17,7);x.quadraticCurveTo(22,16,9,26);x.quadraticCurveTo(-2,33,-28,31);x.quadraticCurveTo(-40,28,-38,17);x.quadraticCurveTo(-36,8,-24,6);x.lineTo(-18,3);x.closePath();x.fill();x.stroke();
+   // Tiny stitches around the heel and toe.
+   x.setLineDash([2,3]);x.strokeStyle='#fff0b3';x.lineWidth=1.3;x.beginPath();x.moveTo(-34,18);x.quadraticCurveTo(-32,27,-20,27);x.stroke();x.setLineDash([]);
+   // Clock dial and engraved minute marks.
+   x.save();x.translate(-2,-2);x.shadowColor='#ffe18c';x.shadowBlur=9;x.fillStyle='#734322';x.beginPath();x.arc(0,0,21,0,7);x.fill();x.shadowBlur=0;x.fillStyle='#fdf0cc';x.strokeStyle='#e5aa40';x.lineWidth=3;x.beginPath();x.arc(0,0,18.2,0,7);x.fill();x.stroke();
+   for(let i=0;i<60;i++){let a=i*Math.PI/30;x.strokeStyle=i%5===0?'#694023':'#b9a06d';x.lineWidth=i%5===0?1.6:.65;x.beginPath();x.moveTo(Math.sin(a)*(i%5===0?13:15),-Math.cos(a)*(i%5===0?13:15));x.lineTo(Math.sin(a)*16.4,-Math.cos(a)*16.4);x.stroke();}
+   x.fillStyle='#684022';x.font='bold 5px Georgia';x.textAlign='center';x.textBaseline='middle';[['XII',0,-10],['III',10,0],['VI',0,10],['IX',-10,0]].forEach(q=>x.fillText(...q));
+   const spin=performance.now()/2300;x.save();x.rotate(spin);x.strokeStyle='#4e251c';x.lineCap='round';x.lineWidth=2;x.beginPath();x.moveTo(0,3);x.lineTo(0,-11);x.stroke();x.restore();x.save();x.rotate(spin/12);x.lineWidth=2.8;x.strokeStyle='#8b311d';x.beginPath();x.moveTo(0,2);x.lineTo(7,0);x.stroke();x.restore();x.fillStyle='#a33e23';x.beginPath();x.arc(0,0,2.5,0,7);x.fill();x.restore();
+   // Two alarm bells and the striker, mounted on the cuff.
+   x.fillStyle='#713b22';x.fillRect(-19,-32,37,7);x.fillStyle='#f7b943';x.strokeStyle='#6d391c';x.lineWidth=2;for(const bx of [-17,17]){x.beginPath();x.ellipse(bx,-38,12,6,bx<0?-.35:.35,Math.PI,Math.PI*2);x.lineTo(bx+11,-37);x.quadraticCurveTo(bx,-30,bx-11,-37);x.closePath();x.fill();x.stroke();x.fillStyle='#fff2bd';x.beginPath();x.arc(bx,-40,2.2,0,7);x.fill();x.fillStyle='#f7b943';}
+   x.strokeStyle='#60351e';x.lineWidth=2;x.beginPath();x.moveTo(0,-33);x.lineTo(0,-45);x.stroke();x.fillStyle='#c43b39';x.beginPath();x.arc(0,-46,4,0,7);x.fill();
+   // Two small eyes below the clock and brass screws.
+   x.fillStyle='#2e1b12';x.beginPath();x.ellipse(-12,22,2.5,3.4,0,0,7);x.ellipse(1,23,2.5,3.4,0,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(-13,21,1,0,7);x.arc(0,22,1,0,7);x.fill();
+   for(const q of [[-25,11],[13,20]]){x.fillStyle='#ffdc7d';x.beginPath();x.arc(q[0],q[1],2.5,0,7);x.fill();x.strokeStyle='#8d4e25';x.lineWidth=.8;x.beginPath();x.moveTo(q[0]-1.4,q[1]);x.lineTo(q[0]+1.4,q[1]);x.stroke();}
+   x.restore();return;
+ }
+ if(t.k==='clock'){
+   // Hand-drawn steampunk stocking, based on the supplied Clock Sock reference.
+   const g=x.createLinearGradient(-23,-35,25,35);g.addColorStop(0,'#fff1c8');g.addColorStop(.48,'#e5bd78');g.addColorStop(1,'#8c512d');
+   x.shadowColor='#392012';x.shadowBlur=5;x.fillStyle='rgba(30,15,5,.2)';x.beginPath();x.ellipse(1,34,29,7,0,0,7);x.fill();x.shadowBlur=0;
+   x.strokeStyle='#4c2819';x.lineWidth=2.5;x.lineJoin='round';x.fillStyle=g;
+   x.beginPath();x.moveTo(-17,-29);x.lineTo(17,-29);x.lineTo(17,9);x.quadraticCurveTo(20,18,7,25);x.quadraticCurveTo(-7,32,-28,31);x.quadraticCurveTo(-40,29,-39,18);x.quadraticCurveTo(-38,9,-25,7);x.lineTo(-17,3);x.closePath();x.fill();x.stroke();
+   // Brown leather heel and toe, stitched edges.
+   x.fillStyle='#65371f';x.beginPath();x.moveTo(-39,18);x.quadraticCurveTo(-42,30,-27,31);x.lineTo(-18,31);x.quadraticCurveTo(-25,20,-39,18);x.fill();x.beginPath();x.moveTo(12,7);x.quadraticCurveTo(22,13,13,23);x.lineTo(4,27);x.quadraticCurveTo(13,13,12,7);x.fill();
+   x.strokeStyle='#f1b96d';x.lineWidth=1;x.setLineDash([2,3]);x.beginPath();x.moveTo(-35,19);x.quadraticCurveTo(-32,26,-22,28);x.stroke();x.setLineDash([]);
+   // Knit texture and small brass gears.
+   x.globalAlpha=.18;x.strokeStyle='#85502d';x.lineWidth=.7;for(let i=-22;i<20;i+=5){x.beginPath();x.moveTo(i,-22);x.lineTo(i+3,13);x.stroke()}x.globalAlpha=1;
+   function gear(cx,cy,r,phase){x.save();x.translate(cx,cy);x.rotate(phase);x.fillStyle='#c78a29';x.strokeStyle='#6d3b16';x.lineWidth=1;for(let i=0;i<12;i++){let a=i*Math.PI/6;x.beginPath();x.arc(Math.cos(a)*r,Math.sin(a)*r,r*.25,0,7);x.fill()}x.beginPath();x.arc(0,0,r,0,7);x.fill();x.stroke();x.fillStyle='#70421f';x.beginPath();x.arc(0,0,r*.45,0,7);x.fill();x.fillStyle='#e7b54f';x.beginPath();x.arc(0,0,r*.18,0,7);x.fill();x.restore()}
+   gear(13,10,8,performance.now()/2500);gear(-15,17,6,-performance.now()/3100);
+   // Raised ribbed dark-brown cuff.
+   x.fillStyle='#6c361e';x.beginPath();x.roundRect(-22,-37,44,14,5);x.fill();x.strokeStyle='#3c1e14';x.lineWidth=2;x.stroke();
+   x.strokeStyle='#b77939';x.lineWidth=1.5;for(let i=-17;i<20;i+=6){x.beginPath();x.moveTo(i,-35);x.lineTo(i,-25);x.stroke()}
+   x.strokeStyle='#e7a947';x.lineWidth=2;x.beginPath();x.moveTo(-20,-29);x.lineTo(20,-29);x.stroke();
+   // Exactly two warm glowing eyes.
+   x.fillStyle='#261409';x.beginPath();x.ellipse(-8,-10,5.6,9,0,0,7);x.ellipse(8,-10,5.6,9,0,0,7);x.fill();x.fillStyle='#ffe6a3';x.beginPath();x.ellipse(-9,-13,2,3.3,0,0,7);x.ellipse(7,-13,2,3.3,0,0,7);x.fill();
+   // Gold gear-mounted clock on cuff; rotating hands.
+   gear(19,-30,11,0);x.fillStyle='#f9e4b6';x.strokeStyle='#704018';x.lineWidth=1.8;x.beginPath();x.arc(19,-30,8,0,7);x.fill();x.stroke();
+   let hand=performance.now()/900;x.save();x.translate(19,-30);x.rotate(hand);x.strokeStyle='#593016';x.lineWidth=1.8;x.beginPath();x.moveTo(0,2);x.lineTo(0,-6);x.stroke();x.rotate(-hand*.65);x.lineWidth=2.4;x.beginPath();x.moveTo(0,1);x.lineTo(4,-3);x.stroke();x.restore();
+   // Tiny clock face sewn onto the toe.
+   x.save();x.translate(-19,17);x.rotate(-.28);x.fillStyle='#f9e3af';x.strokeStyle='#8c541d';x.lineWidth=2;x.beginPath();x.arc(0,0,10,0,7);x.fill();x.stroke();x.strokeStyle='#9d6b2e';x.lineWidth=1;for(let i=0;i<12;i++){let a=i*Math.PI/6;x.beginPath();x.moveTo(Math.sin(a)*7,Math.cos(a)*7);x.lineTo(Math.sin(a)*8.7,Math.cos(a)*8.7);x.stroke()}x.strokeStyle='#55301b';x.lineWidth=1.8;x.beginPath();x.moveTo(0,0);x.lineTo(-3,-5);x.moveTo(0,0);x.lineTo(5,2);x.stroke();x.restore();
+   x.restore();return;
+ }
  // Campfire skin: preserve Sock TD's recognizable one-piece stocking silhouette,
  // while giving it crossed logs at the bottom and a layered campfire flame crown.
  if(t.k==='fire'&&window.fireSockSkinMode==='campfire'){
@@ -4315,6 +4370,28 @@ function drawFightPunches(){
     x.restore();
   }
 }
+let clockMiniShots=[];
+function spawnClockMiniShot(t,target){
+ clockMiniShots.push({x:t.x,y:t.y,tx:target.x,ty:target.y,life:17,maxLife:17,spin:Math.random()*6.28});
+ // A tiny rewind along the existing route, never beyond the start.
+ if(Number.isFinite(target.distAlongPath)&&target.path){
+   target.distAlongPath=Math.max(0,target.distAlongPath-3.5);
+   const pt=pointAtDistance(target.path,target.pathLengths||pathLengths(target.path),target.distAlongPath);
+   target.x=pt.x;target.y=pt.y;
+ }
+}
+function drawClockMiniShots(){
+ for(const q of clockMiniShots){
+  const progress=1-q.life/q.maxLife;
+  const xx=q.x+(q.tx-q.x)*progress,yy=q.y+(q.ty-q.y)*progress;
+  x.save();x.translate(xx,yy);x.rotate(q.spin+progress*8);x.globalAlpha=Math.min(1,q.life/5);
+  x.shadowColor='#f9bd4d';x.shadowBlur=10;x.fillStyle='#d49a36';x.strokeStyle='#6e3a19';x.lineWidth=1.4;
+  for(let i=0;i<8;i++){let a=i*Math.PI/4;x.beginPath();x.arc(Math.cos(a)*7,Math.sin(a)*7,2.3,0,7);x.fill()}
+  x.beginPath();x.arc(0,0,7,0,7);x.fill();x.stroke();x.shadowBlur=0;
+  x.fillStyle='#fff0c6';x.beginPath();x.arc(0,0,5.2,0,7);x.fill();x.strokeStyle='#57321c';x.lineWidth=1.3;x.beginPath();x.moveTo(0,0);x.lineTo(0,-3.7);x.moveTo(0,0);x.lineTo(3,1);x.stroke();x.restore();
+ }
+ clockMiniShots=clockMiniShots.filter(q=>--q.life>0);
+}
 function attackFx(t){
  if(!t.attackTarget||t.attack<=0)return;
  let a=t.attack/9,tx=t.attackTarget.x,ty=t.attackTarget.y;
@@ -4325,7 +4402,7 @@ function attackFx(t){
    x.save();x.translate(t.x,t.y);x.rotate(a);x.globalAlpha=.82+.15*a;
    for(let i=0;i<cols.length;i++){x.strokeStyle=cols[i];x.lineWidth=2.5;x.beginPath();x.moveTo(0,(i-3)*2.2);x.lineTo(Math.hypot(tx-t.x,ty-t.y),(i-3)*2.2);x.stroke();}
    x.restore();
- } else if(t.parts[0]!=='fire'||t.fused){
+ } else if((t.parts[0]!=='fire'&&t.parts[0]!=='clock')||t.fused){
    x.globalAlpha=.35+.5*a;x.strokeStyle=t.fused?fusionColor(t.fusionKey):'#fff';x.lineWidth=t.fused?7:4;x.beginPath();
    let k=t.parts[0];
    if(k==='ninja'){x.moveTo(t.x-8,t.y+8);x.lineTo(tx+8,ty-8);x.moveTo(t.x+8,t.y+8);x.lineTo(tx-8,ty-8)}
@@ -4748,7 +4825,7 @@ for(let e of en){
   }
   const pos=pointAtDistance(p,lengths,e.distAlongPath);
   e.x=pos.x;e.y=pos.y;
-  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='fire'&&!t.fused)spawnFireball(t,target);if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);target.iceHit=24;}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);target.slow=.48;}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(!t.fused||(!['Crystal Sock','Cosmic Sock','Nature Sock'].includes(t.name)))hit(target,t.damage*srDamage*(isCounter(t,target)?1.5:1));for(let k of t.parts){if(k==='ice'||k==='laundry')target.slow=.6;if(k==='thunder')for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}tw.forEach(t=>{if(t.attack>0)attackFx(t)});drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();update();draw();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();requestAnimationFrame(loop)}
+  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='fire'&&!t.fused)spawnFireball(t,target);if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);target.iceHit=24;}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);target.slow=.48;}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target);}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(!t.fused||(!['Crystal Sock','Cosmic Sock','Nature Sock'].includes(t.name)))hit(target,t.damage*srDamage*(isCounter(t,target)?1.5:1));for(let k of t.parts){if(k==='ice'||k==='laundry')target.slow=.6;if(k==='thunder')for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}tw.forEach(t=>{if(t.attack>0)attackFx(t)});drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();update();draw();drawClockMiniShots();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();requestAnimationFrame(loop)}
 
 
 let stormShots=[];
@@ -6223,7 +6300,58 @@ document.addEventListener('fullscreenchange',()=>{
   if(fpsActive)requestAnimationFrame(fpsRender);
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fpsActive){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen().catch(()=>{});return;}exitFPSView()}});
-function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+d0[0]+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button type="button" onclick="hideInfo()">Close</button>'}
+function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+d0[0]+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
+
+let socktdPendingSell=null;
+function socktdSellPrice(t){
+  if(!t)return 0;
+  // A fused sock is valued using the combined purchase prices of its ingredients.
+  const parts=t.fused?(t.parts||[]):[t.k];
+  const total=parts.reduce((sum,k)=>sum+(D[k]?D[k][1]:0),0);
+  return Math.floor(total/2);
+}
+function openSockSell(i){
+  if(fpsActive)return;
+  const t=tw[i];if(!t)return;
+  if(tw.length<=1){showSocktdLastSockWarning();return;}
+  socktdPendingSell=t;
+  const modal=$('socktdSellModal');
+  $('socktdSellAmount').textContent='You will receive '+socktdSellPrice(t)+' gold.';
+  modal.classList.remove('hidden');
+}
+function showSocktdLastSockWarning(){
+  socktdPendingSell=null;
+  const modal=$('socktdSellModal');
+  $('socktdSellTitle').textContent='⚠️ Cannot Sell Sock';
+  modal.querySelector('.socktdSellPanel > p').textContent='you cannot sell this sock, you have to have atleast one sock on the map!';
+  $('socktdSellAmount').textContent='';
+  $('socktdSellConfirm').style.display='none';
+  $('socktdSellCancel').textContent='OK';
+  modal.classList.remove('hidden');
+}
+function resetSocktdSellDialog(){
+  $('socktdSellTitle').textContent='💰 Sell Sock?';
+  $('socktdSellModal').querySelector('.socktdSellPanel > p').textContent="are you sure? you will gain half the price of the sock's price. this can't be undone.";
+  $('socktdSellConfirm').style.display='';
+  $('socktdSellCancel').textContent='Cancel';
+}
+function closeSockSell(){socktdPendingSell=null;$('socktdSellModal').classList.add('hidden');resetSocktdSellDialog()}
+function confirmSockSell(){
+  const t=socktdPendingSell;const i=tw.indexOf(t);
+  if(i<0){closeSockSell();return}
+  if(tw.length<=1){showSocktdLastSockWarning();return;}
+  const refund=socktdSellPrice(t);
+  if(mpStarted&&mpRole==='guest'){
+    mpSend({type:'guestAction',action:{action:'sell',i}});
+    $('msg').textContent='Sell request sent to host.';
+  }else{
+    tw.splice(i,1);gold+=refund;
+    if(typeof mpBroadcastState==='function'&&mpStarted&&mpRole==='host')mpBroadcastState();
+    $('msg').textContent='Sock sold for '+refund+' gold.';
+  }
+  if(infoTower===t)hideInfo();
+  update();draw();closeSockSell();
+}
 function hideInfo(){infoTower=null;$('info').classList.add('hiddenInfo');draw()}function moveTower(i){if(fpsActive)return;let t=tw[i];if(!t)return;if(gold<50){$('msg').textContent='Not enough gold! Moving costs 50 gold.';return}movingTower=t;selected=null;fuseMode=false;first=null;hideInfo();$('msg').textContent='↔ Click a valid place to move this sock. Cost: 50 gold.'}function upgradeTower(i){if(sockTDChallenge&&sockTDChallenge.noUpgrades){$('msg').textContent='🚫 No Upgrades challenge: upgrading is disabled.';return}let t=tw[i];if(mpStarted&&mpRole==='guest'){if(!t||t.fused||t.level>=10)return;let cost=25+t.level*35;if(gold<cost)return;gold-=cost;mpSend({type:'guestAction',action:{action:'upgrade',i}});$('msg').textContent='Upgrade sent to host.';return}if(!t||t.fused)return;if(t.level>=10){$('msg').textContent='MAX LEVEL';showInfo(t);return}let cost=25+t.level*35;if(gold<cost){$('msg').textContent='Not enough gold!';return}gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2*(t.challengeDamageMult||1));t.range+=Math.round(14*(t.challengeRangeMult||1));showInfo(t);update();$('msg').textContent=t.level>=10?'MAX LEVEL reached!':'Upgrade complete! New model detail unlocked.'}
 function triggerGameOver(){if(gameOver)return;if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}if(speedrunModeActive)saveSpeedrunRecord();if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gameOver=true;active=false;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}else{$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>🏖️ Sandbox runs do not count for records.';}if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Challenge complete — keep pushing your record!';}$('gameOver').classList.remove('hidden');update()}
 function positionSpeedrunUpgradeMini(){
@@ -7310,6 +7438,11 @@ document.addEventListener("DOMContentLoaded",function(){
    if(!skinGrid||!skinDetail||typeof window.socktdGetSkinCatalogueItems!=='function')return;
    const item=window.socktdGetSkinCatalogueItems().find(i=>i.id===id);if(!item)return;
    skinGrid.querySelectorAll('.socktdSkinItemButton').forEach(b=>b.classList.toggle('selected',b.dataset.skinItemId===id));
+   if(item.kind==='sock'&&item.key==='clock'){
+     const available=!!window.socktdClockUnlocked;
+     skinDetail.innerHTML='<div class="item socktdSkinCard"><h3>⏰ Clock Sock — Alarm Clock Skin</h3><p>A polished golden alarm-clock sock with twin bells, engraved minute marks, Roman numerals, moving hands and fine stitched details.</p><span class="socktdSkinStatus '+(available?'available':'')+'">'+(available?'Unlocked after 15 minutes':'🔒 Unlock after 15 minutes of gameplay')+'</span><label for="socktdCatalogueClockSkin">Available skins</label><select id="socktdCatalogueClockSkin" class="socktdSkinDetailSelect"><option value="classic">⏰ Classic Clock Sock</option><option value="alarm" '+(available?'':'disabled')+'>🔔 Alarm Clock Sock '+(available?'':'🔒')+'</option></select><div id="socktdCatalogueClockSkinPreview" class="socktdSkinPreview">'+(available?'🔔 Alarm Clock skin unlocked!':'⏳ Play for 15 minutes to unlock this skin.')+'</div></div>';
+     const sel=$('socktdCatalogueClockSkin');sel.value=available&&window.socktdClockSkinMode==='alarm'?'alarm':'classic';sel.addEventListener('change',()=>{window.socktdClockSkinMode=sel.value;try{localStorage.setItem('socktdClockSkinChoice',sel.value)}catch(e){}if(typeof draw==='function')draw();});return;
+   }
    if(item.kind==='sock'&&item.key==='fire'){
      skinDetail.innerHTML='<div class="item socktdSkinCard"><h3>🔥 '+item.name+'</h3><p>Choose the appearance for Fire Sock. The selected skin is saved on this device and changes the in-game tower.</p><span class="socktdSkinStatus available">2 skins available</span><label for="socktdCatalogueFireSkin">Available skins</label><select id="socktdCatalogueFireSkin" class="socktdSkinDetailSelect"><option value="classic">🔥 Classic Fire Sock</option><option value="campfire">🪵 Campfire Sock</option></select><div id="socktdCatalogueFireSkinPreview" class="socktdSkinPreview"></div></div>';
      const choice=$('socktdCatalogueFireSkin');
@@ -7519,4 +7652,122 @@ document.addEventListener("DOMContentLoaded",function(){
 })();
 </script>
 
+<style id="socktd-clock-style">
+#socktdClockHUD{position:fixed;top:12px;left:12px;z-index:900;pointer-events:none;padding:8px 12px;border:2px solid #c7a457;border-radius:12px;background:rgba(24,19,37,.91);color:#ffe8a2;font:700 16px system-ui,sans-serif;box-shadow:0 4px 16px #0008;font-variant-numeric:tabular-nums}
+#towers button[data-sock-type="clock"].socktdClockLocked{display:none!important}
+#towers button[data-sock-type="clock"]:not(.socktdClockLocked){background:linear-gradient(145deg,#a67b24,#f3d57a)!important;color:#241704!important;border:2px solid #ffe7a2!important;opacity:1!important;filter:none!important}
+#socktdClockCinematic{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;pointer-events:auto;overflow:hidden;background:rgba(5,5,18,.05);font-family:system-ui,sans-serif}
+#socktdClockCinematic .clockPrompt{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:min(760px,88vw);box-sizing:border-box;background:linear-gradient(145deg,#fff8e8,#d8c5a6);color:#20180f;border:4px solid #4a2d18;border-radius:22px;padding:18px 175px 16px 22px;box-shadow:0 10px 30px #000b,0 0 30px #d8b4ff55;text-align:left;font-size:18px;line-height:1.45;font-weight:700;z-index:12;animation:sockPromptPulse 1.7s ease-in-out infinite}
+#socktdClockCinematic .clockPrompt:after{content:'Click to continue';position:absolute;right:18px;bottom:14px;background:#30263d;color:#fff;border:2px solid #111;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:900;white-space:nowrap}
+#socktdClockCinematic .clockFace:before{content:'';position:absolute;inset:8%;border:2px dashed #fff9;border-radius:50%;box-shadow:inset 0 0 30px #fff4}
+#socktdClockCinematic .clockFace:after{content:'XII      I      II      III      IV      V      VI      VII      VIII      IX      X      XI';position:absolute;inset:12%;display:flex;align-items:flex-start;justify-content:center;text-align:center;font-size:clamp(9px,1.5vw,16px);font-weight:900;letter-spacing:2px;color:#ffeab9;text-shadow:0 0 12px #fff8;overflow:hidden;border-radius:50%}
+#socktdClockCinematic .clockParticles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#socktdClockCinematic .clockParticle{position:absolute;left:50%;top:50%;width:var(--sz);height:var(--sz);border-radius:50%;background:var(--clr);box-shadow:0 0 13px var(--clr);opacity:0}
+#socktdClockCinematic.rewinding .clockParticle{animation:sockTimeSpark var(--dur) ease-in-out var(--delay) infinite}
+@keyframes sockTimeSpark{0%{opacity:0;transform:rotate(var(--angle)) translateX(45px) scale(.2)}30%{opacity:.9}100%{opacity:0;transform:rotate(var(--angle)) translateX(var(--dist)) scale(.1)}}
+#socktdClockCinematic .clockHole{position:absolute;left:50%;top:50%;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%) scale(0);opacity:0;background:radial-gradient(circle at 48% 50%,#000 0 48%,#241036 56%,#aa6cff 69%,#ffdc8e 78%,transparent 83%);box-shadow:0 0 45px #8d4dff,0 0 95px #5e24cb;z-index:5;pointer-events:none}
+#socktdClockCinematic.imploding .clockHole{animation:sockHoleGrow 1.65s ease-in-out forwards}
+@keyframes sockHoleGrow{0%{opacity:0;transform:translate(-50%,-50%) scale(0)}35%{opacity:1;transform:translate(-50%,-50%) scale(10)}65%{opacity:1;transform:translate(-50%,-50%) scale(15)}100%{opacity:0;transform:translate(-50%,-50%) scale(.05)}}
+#socktdClockCinematic .clockShockwave{position:absolute;left:50%;top:50%;width:80px;height:80px;border:5px solid #ffdf92;border-radius:50%;transform:translate(-50%,-50%) scale(.1);opacity:0;box-shadow:0 0 30px #ffb84d,0 0 90px #a26cff;z-index:7;pointer-events:none}
+#socktdClockCinematic.imploding .clockShockwave{animation:sockShockwave .7s ease-out 1.25s forwards}
+@keyframes sockShockwave{0%{opacity:1;transform:translate(-50%,-50%) scale(.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(15)}}
+#socktdClockCinematic.imploding .clockParticle{animation:sockTimeSpark .7s ease-out 1.15s both}
+@media(max-width:500px){#socktdClockCinematic .clockPrompt{padding-right:22px;padding-bottom:62px;font-size:16px}#socktdClockCinematic .clockPrompt:after{left:18px;right:auto}}
+#socktdClockCinematic .clockFace{width:min(65vw,65vh,470px);height:min(65vw,65vh,470px);border:12px solid rgba(255,230,163,.58);border-radius:50%;background:rgba(233,214,157,.13);box-shadow:0 0 90px #d6b9ff77,inset 0 0 45px #fff5;position:relative;opacity:0;transform:scale(1.2);transition:opacity .4s,transform .4s;display:grid;place-items:center}
+#socktdClockCinematic.rewinding .clockFace{opacity:1;transform:scale(1)}
+#socktdClockCinematic .clockHand{position:absolute;width:5px;height:39%;left:calc(50% - 2.5px);bottom:50%;border-radius:5px;background:rgba(255,242,188,.78);transform-origin:bottom center;box-shadow:0 0 16px #fff9}
+#socktdClockCinematic .clockCenter{position:absolute;width:20px;height:20px;border-radius:50%;background:#fff3d0;box-shadow:0 0 22px #fff}
+#socktdClockCinematic .clockReadout{position:absolute;top:65%;color:white;font-size:clamp(24px,5vw,48px);font-weight:900;font-variant-numeric:tabular-nums;text-shadow:0 3px 15px #000}
+#socktdClockCinematic.imploding .clockFace{transition:transform 1.35s cubic-bezier(.65,0,1,.3),opacity 1.35s;transform:translate(0,0) scale(.01) rotate(-1080deg);opacity:0}
+#socktdClockCinematic.imploding{background:transparent;transition:background .8s}
+#socktdClockCinematic .clockFlash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle,#ffe6a0 0%,transparent 45%)}
+#socktdClockCinematic.imploding .clockFlash{animation:sockClockFlash .8s ease-out 1.25s}
+@keyframes sockPromptPulse{50%{opacity:.65}}@keyframes sockClockFlash{25%{opacity:.7}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){#socktdClockCinematic .clockFace{transition-duration:.2s!important}#socktdClockCinematic .clockPrompt{animation:none}}
+
+/* Chromatic supernova, gravitational lensing and map-only bass shake */
+#socktdClockCinematic .clockShockwave{border:8px solid #8ffaff;box-shadow:0 0 22px #fff,0 0 55px #16dcff,0 0 95px #fc47fa,inset 0 0 30px #ffb22b;background:radial-gradient(circle,transparent 54%,#ff69ed22 68%,transparent 85%)}
+#socktdClockCinematic .clockShockwave.second{border-color:#ffcb4e;box-shadow:0 0 35px #ffad16,0 0 85px #ff428d;z-index:8}
+#socktdClockCinematic.imploding .clockShockwave.second{animation:sockShockwave 1.1s cubic-bezier(.08,.6,.3,1) 1.43s forwards}
+#socktdClockCinematic .clockHole{box-shadow:0 0 18px 8px #b46aff,0 0 65px 25px #eb52ff77,0 0 120px 45px #29d7ff55}
+#socktdClockCinematic .clockFlash{background:radial-gradient(circle,#fff 0%,#ffef90 8%,#ff6a9c 20%,#a24aff 32%,#25d5ff 43%,transparent 67%);mix-blend-mode:screen}
+#socktdClockCinematic.imploding .clockFlash{animation:sockClockSupernova 1.15s ease-out 1.28s both}
+@keyframes sockClockSupernova{0%{opacity:0;transform:scale(.04)}12%{opacity:1;transform:scale(.35)}30%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(2.3)}}
+#socktdClockCinematic .clockBurst{position:absolute;inset:0;pointer-events:none;z-index:9;overflow:hidden}
+#socktdClockCinematic .clockBurst i{position:absolute;left:50%;top:50%;width:var(--size);height:var(--size);border-radius:40%;background:var(--color);box-shadow:0 0 12px 3px var(--color);opacity:0;transform:translate(-50%,-50%)}
+#socktdClockCinematic.imploding .clockBurst i{animation:sockBurstFly var(--speed) cubic-bezier(.12,.58,.3,1) var(--wait) both}
+@keyframes sockBurstFly{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(0) scale(.1)}12%{opacity:1}65%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(var(--distance)) scale(.1)}}
+#socktdClockCinematic .clockFace{filter:drop-shadow(0 0 22px #70ecff)}
+#socktdClockCinematic.imploding .clockFace{filter:drop-shadow(0 0 35px #e55aff)}
+@keyframes sockMapBassShake{0%,100%{transform:translate(0,0) rotate(0)}8%{transform:translate(-5px,3px) rotate(-.25deg)}18%{transform:translate(7px,-5px) rotate(.3deg)}30%{transform:translate(-8px,5px) rotate(-.4deg)}43%{transform:translate(6px,5px) rotate(.3deg)}58%{transform:translate(-5px,-4px) rotate(-.2deg)}73%{transform:translate(3px,3px) rotate(.12deg)}88%{transform:translate(-2px,-1px) rotate(-.08deg)}}
+.socktdBassShake{animation:sockMapBassShake .55s cubic-bezier(.2,.1,.5,1) both!important;will-change:transform}
+@media(prefers-reduced-motion:reduce){.socktdBassShake{animation:none!important}}
+
+/* Accurate Roman numerals arranged around the dial, and sparks flying OUT of the clock */
+#socktdClockCinematic .clockFace:after{content:none!important}
+#socktdClockCinematic .clockNumerals{position:absolute;inset:0;pointer-events:none;z-index:3}
+#socktdClockCinematic .clockNumeral{position:absolute;transform:translate(-50%,-50%);color:#ffe6a2;font-family:Georgia,serif;font-weight:900;font-size:clamp(12px,2.4vw,25px);text-shadow:0 2px 5px #231123,0 0 13px #ffdb85;white-space:nowrap}
+#socktdClockCinematic .clockParticles{position:absolute;inset:0;overflow:visible;pointer-events:none;z-index:8}
+#socktdClockCinematic .clockParticle{left:50%;top:50%;transform-origin:center;will-change:transform,opacity}
+@keyframes sockTimeSpark{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(12px) scale(.3)}18%{opacity:1}72%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(var(--dist)) scale(.1)}}
+</style>
+<script id="socktd-clock-feature">
+(function(){
+'use strict';
+const KEY='socktdClockPlayedSeconds',UNLOCK='socktdClockSockUnlocked';
+// One-time migration: old builds accidentally unlocked Clock Sock using stale stored time.
+// Reset that legacy progress once, without resetting progress earned in this fixed build.
+const MIGRATION='socktdClockFreshUnlockV2';
+try{if(localStorage.getItem(MIGRATION)!=='1'){localStorage.removeItem(KEY);localStorage.removeItem(UNLOCK);localStorage.setItem(MIGRATION,'1');}}catch(e){}
+let seconds=0;try{seconds=Math.max(0,Math.floor(Number(localStorage.getItem(KEY))||0));}catch(e){}
+// Unlock is intentionally session-only: each fresh launch starts locked.
+let unlocked=false;window.socktdClockUnlocked=false;window.socktdClockSkinMode='classic';try{localStorage.removeItem(UNLOCK);localStorage.removeItem('socktdClockSkinChoice');}catch(e){}
+let cinematic=null,cinematicRunning=false;
+let sessionSeconds=0, previousWave=0;
+const hud=document.createElement('div');hud.id='socktdClockHUD';hud.setAttribute('aria-label','Current game stopwatch');document.body.appendChild(hud);
+const fmt=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
+function save(){try{localStorage.setItem(KEY,String(seconds));localStorage.removeItem(UNLOCK);}catch(e){}}
+function sync(){hud.textContent='⏱️ '+fmt(sessionSeconds);const b=document.querySelector('#towers button[data-sock-type="clock"]');if(b){b.classList.toggle('socktdClockLocked',!unlocked);b.style.display=unlocked?'':'none';b.disabled=!unlocked;}}
+function shakeMap(){const map=document.getElementById("c");if(!map)return;map.classList.remove("socktdBassShake");void map.offsetWidth;map.classList.add("socktdBassShake");setTimeout(()=>map.classList.remove("socktdBassShake"),650);}
+function finishUnlock(){unlocked=true;window.socktdClockUnlocked=true;cinematicRunning=false;save();sync();if(cinematic){cinematic.remove();cinematic=null;}const notice=document.createElement('div');notice.className='socktdClockUnlockNotice';notice.textContent='You have unlocked the Clock sock!';document.body.appendChild(notice);setTimeout(()=>notice.remove(),5200);const b=document.querySelector('#towers button[data-sock-type="clock"]');if(b){b.animate([{filter:'brightness(3)',transform:'scale(1.25)'},{filter:'brightness(1)',transform:'scale(1)'}],{duration:850,easing:'ease-out'});}}
+function beginUnlock(){if(unlocked||cinematicRunning)return;cinematicRunning=true;cinematic=document.createElement('div');cinematic.id='socktdClockCinematic';cinematic.innerHTML='<div class="clockFace"><div class="clockHand"></div><div class="clockCenter"></div><div class="clockReadout">15:00</div><div class="clockNumerals"></div><div class="clockParticles"></div></div><div class="clockFlash"></div><div class="clockHole"></div><div class="clockShockwave"></div><div class="clockShockwave second"></div><div class="clockBurst"></div><div class="clockPrompt">woah wait whats happening?</div>';document.body.appendChild(cinematic);
+ const numerals=cinematic.querySelector('.clockNumerals');['XII','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'].forEach((roman,i)=>{const el=document.createElement('span');el.textContent=roman;el.className='clockNumeral';const angle=(i*30-90)*Math.PI/180;el.style.left=(50+39*Math.cos(angle))+'%';el.style.top=(50+39*Math.sin(angle))+'%';numerals.appendChild(el);});
+ const particles=cinematic.querySelector('.clockParticles');for(let i=0;i<48;i++){const p=document.createElement('i');p.className='clockParticle';p.style.setProperty('--angle',(i*137.508)+'deg');p.style.setProperty('--dist',(270+i%9*38)+'px');p.style.setProperty('--delay',(i%12*.085)+'s');p.style.setProperty('--dur',(1.2+i%5*.28)+'s');p.style.setProperty('--sz',(2+i%4*2)+'px');p.style.setProperty('--clr',i%3===0?'#ffe8a4':i%3===1?'#b18bff':'#fff');particles.appendChild(p);}const burst=cinematic.querySelector('.clockBurst');const colors=['#ffdd54','#ff559f','#a76cff','#53e9ff','#73ffbb','#fff'];for(let i=0;i<100;i++){const spark=document.createElement('i');spark.style.setProperty('--angle',(i*137.508)+'deg');spark.style.setProperty('--distance',(180+(i%11)*35)+'px');spark.style.setProperty('--size',(2+i%5*2)+'px');spark.style.setProperty('--speed',(.65+i%6*.12)+'s');spark.style.setProperty('--wait',(1.27+i%9*.025)+'s');spark.style.setProperty('--color',colors[i%colors.length]);burst.appendChild(spark);}const prompt=cinematic.querySelector('.clockPrompt'),face=cinematic.querySelector('.clockFace'),hand=cinematic.querySelector('.clockHand'),readout=cinematic.querySelector('.clockReadout');
+ const start=()=>{cinematic.removeEventListener('pointerdown',start);cinematic.removeEventListener('click',start);prompt.remove();cinematic.classList.add('rewinding');const duration=3200,startTime=performance.now();
+ function frame(now){if(!cinematic||!cinematic.isConnected)return;const progress=Math.min(1,(now-startTime)/duration),remaining=Math.max(0,Math.ceil(900*(1-progress)));readout.textContent=fmt(remaining);hand.style.transform='rotate('+(-360*8*progress)+'deg)';hud.textContent='⏱️ '+fmt(remaining);if(progress<1){requestAnimationFrame(frame);}else{const target=document.querySelector('#towers button[data-sock-type="clock"]');const rect=target?target.getBoundingClientRect():null;const centerX=rect?rect.left+rect.width/2:innerWidth*.85,centerY=rect?rect.top+rect.height/2:innerHeight*.85;const dx=centerX-innerWidth/2,dy=centerY-innerHeight/2;face.style.setProperty('--implode-x',dx+'px');face.style.setProperty('--implode-y',dy+'px');cinematic.classList.add('imploding');setTimeout(shakeMap,1280);setTimeout(shakeMap,1480);setTimeout(finishUnlock,2550);}}requestAnimationFrame(frame);};
+ cinematic.addEventListener('pointerdown',start,{once:true});cinematic.addEventListener('click',start,{once:true});
+}
+function addTime(n,fromGameplay=false){if(!Number.isFinite(n)||n<0)return;const amount=Math.floor(n);seconds=Math.min(999999999,seconds+amount);if(fromGameplay)sessionSeconds+=amount;save();if(sessionSeconds>=900&&!unlocked&&!cinematicRunning)beginUnlock();if(!cinematicRunning)sync();}
+function isPlaying(){const choose=document.getElementById('choose');if(choose&&!choose.classList.contains('hidden')&&getComputedStyle(choose).display!=='none')return false;if(typeof gameOver!=='undefined'&&gameOver)return false;if(typeof gamePaused!=='undefined'&&gamePaused)return false;return typeof wave!=='undefined'&&wave>=1;}
+let last=performance.now(),acc=0;setInterval(()=>{const now=performance.now(),delta=Math.min(1500,now-last);last=now;const currentWave=typeof wave==='number'?wave:0;if(currentWave===0&&previousWave>=1){sessionSeconds=0;sync();}previousWave=currentWave;if(cinematicRunning||document.visibilityState!=='visible'||!isPlaying()){acc=0;return;}acc+=delta;if(acc>=1000){const n=Math.floor(acc/1000);acc-=n*1000;addTime(n,true);}},250);
+const panel=document.querySelector('#adminModal .adminGrid')||document.querySelector('#adminModal .adminPanel');if(panel){const section=document.createElement('div');section.className='adminSection';section.innerHTML='<h3>⏰ Time Skip</h3><div class="small">Add played minutes to test the Clock Sock unlock.</div><div class="adminControl"><label for="socktdTimeSkipMinutes">Minutes to add</label><input class="adminInput" id="socktdTimeSkipMinutes" type="number" min="0" max="100000" step="1" value="15"></div><div class="adminRow"><button type="button" class="adminGood" id="socktdTimeSkipApply">⏩ Time Skip</button></div><div class="small" id="socktdTimeSkipStatus"></div>';panel.appendChild(section);section.querySelector('button').addEventListener('click',()=>{const v=Number(section.querySelector('input').value);if(!Number.isSafeInteger(v)||v<0||v>100000){section.querySelector('#socktdTimeSkipStatus').textContent='Enter a whole number between 0 and 100000.';return;}addTime(v*60,true);section.querySelector('#socktdTimeSkipStatus').textContent='Total played: '+fmt(seconds);});}
+window.socktdClockTime=()=>seconds;save();sync();
+})();
+</script>
+
+<style id="socktd-clock-new-polish">
+#choose button[data-m],#choose button[data-d],#choose button[data-diff],#choose button[data-difficulty],#choose .panel button{transition:box-shadow .17s ease,outline-color .17s ease,filter .17s ease}
+#choose button.socktdStartSelected{outline:3px solid #ffde55!important;outline-offset:2px!important;box-shadow:0 0 0 2px #fff4a2,0 0 17px 6px #ffc928b8,0 0 32px #e9a60099!important;filter:brightness(1.12)!important}
+.socktdClockUnlockNotice{position:fixed;z-index:2147483646;top:18%;left:50%;transform:translateX(-50%);pointer-events:none;max-width:92vw;text-align:center;padding:17px 30px;border-radius:18px;background:linear-gradient(130deg,#fff5c8,#f9cc58);border:3px solid #ac6b21;color:#56300c;font:bold clamp(19px,3vw,32px) Georgia,serif;text-shadow:0 1px #fff;box-shadow:0 8px 40px #f8b52e99,0 8px 25px #0007;animation:socktdUnlockNotice 5.2s both}
+@keyframes socktdUnlockNotice{0%{opacity:0;transform:translate(-50%,-25px) scale(.75)}9%,78%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-12px) scale(.97)}}
+</style>
+<script id="socktd-start-selected-glow">
+(function(){const choose=document.getElementById('choose');if(!choose)return;const groups=[['[data-m]','map'],['[data-d],[data-diff],[data-difficulty]','difficulty']];function groupOf(b){for(const [selector,group] of groups)if(b.matches(selector))return group;return null;}choose.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!choose.contains(b))return;const group=groupOf(b);if(!group)return;choose.querySelectorAll('button.socktdStartSelected').forEach(other=>{if(groupOf(other)===group)other.classList.remove('socktdStartSelected')});b.classList.add('socktdStartSelected')},true);})();
+</script>
+
+<style id="socktd-sell-style">
+#info .socktdSellBtn{background:linear-gradient(135deg,#e7a929,#9d6410)!important;border:2px solid #ffe07b!important;color:#231502!important;font-weight:900;box-shadow:0 0 13px #ffc84966}
+#socktdSellModal{position:fixed;inset:0;z-index:999995;background:#070610c9;display:flex;align-items:center;justify-content:center;padding:18px;box-sizing:border-box}
+#socktdSellModal.hidden{display:none!important}
+#socktdSellModal .socktdSellPanel{width:min(440px,95vw);box-sizing:border-box;text-align:center;background:linear-gradient(150deg,#33253d,#15111f);border:3px solid #ffd45b;border-radius:20px;padding:28px 22px;color:white;box-shadow:0 0 45px #000b,0 0 22px #ffd54a55}
+#socktdSellModal h2{margin:0 0 16px;color:#ffe18b}
+#socktdSellModal p{font-size:17px;line-height:1.55}
+#socktdSellModal .socktdSellActions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+#socktdSellModal button{min-width:125px;padding:12px 18px;border-radius:11px;font-weight:800;cursor:pointer}
+#socktdSellConfirm{background:#dba532;color:#1b1207;border:2px solid #ffe08b}
+#socktdSellCancel{background:#4a4158;color:white;border:2px solid #8c829b}
+</style>
+<div id="socktdSellModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="socktdSellTitle">
+ <div class="socktdSellPanel"><h2 id="socktdSellTitle">💰 Sell Sock?</h2><p>are you sure? you will gain half the price of the sock's price. this can't be undone.</p><p id="socktdSellAmount"></p><div class="socktdSellActions"><button type="button" id="socktdSellCancel" onclick="closeSockSell()">Cancel</button><button type="button" id="socktdSellConfirm" onclick="confirmSockSell()">Sell Sock</button></div></div>
+</div>
 </body></html>
