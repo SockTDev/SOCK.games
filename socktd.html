@@ -25,6 +25,24 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 .socktdSkinPreview{border:2px solid #ffffffaa;box-shadow:inset 0 0 0 1px #0001,0 5px 12px #0002;transition:background .2s,color .2s}
 @media(max-width:520px){#iceSockSkinMode,#fireSockSkinMode,#thunderSockSkinMode,#socktdCatalogueIceSkin,#socktdCatalogueFireSkin,#socktdCatalogueThunderSkin{max-width:100%;min-height:46px;font-size:14px!important}.socktdSkinCard{padding:13px!important}}
 
+
+/* FPS 2.1 VISUAL FIX: WebGL-independent rendered world; HUD confirms active build. */
+#fpsFallbackCanvas{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:0;pointer-events:none}
+#fpsWorld3D{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+#fpsVersionBadge{position:absolute;left:50%;top:19px;transform:translateX(-50%);z-index:12;padding:8px 16px;border:1px solid #7de5f8aa;border-radius:10px;background:#092232dc;color:#e4fbff;font:900 12px/1.2 system-ui,Arial,sans-serif;letter-spacing:1.7px;pointer-events:none;box-shadow:0 4px 22px #02151dd0,0 0 16px #1ccee13a;text-shadow:0 0 8px #32d6ff}
+#fpsVersionBadge span{color:#ffca69}
+#fpsHint{z-index:12!important;text-shadow:0 2px 5px #000!important}
+#fpsView.fpsLocked #fpsScene,#fpsView.fpsLocked #fpsScene *{cursor:none!important}
+#fpsWorld3D,#fpsFallbackCanvas{image-rendering:auto}
+/* FPS 2.0: centred reticle, pointer-lock fallback and map-specific atmosphere. */
+#fpsWorld3D{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+#fpsHorizon{pointer-events:none}
+#fpsTargets{pointer-events:none}
+#fpsScene{touch-action:none;background:#272b33}
+#fpsCrosshair{filter:drop-shadow(0 0 3px #17232e)}
+#fpsView.fpsLocked #fpsScene{cursor:none!important}
+#fpsHint{pointer-events:none;bottom:9px;font-size:11px;opacity:.85}
+#fpsStats{pointer-events:none}
 </style><style>body {transition: opacity ease-in 0.2s; } 
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 
@@ -809,7 +827,7 @@ body.themeGamble #recipes #detail > .item{
 @media(max-width:560px){#eventHubModal .eventPainting{min-height:410px;padding:28px 15px 24px;border-width:12px}#eventHubModal .eventHubActions{gap:12px;margin-top:195px}#eventHubModal .eventHubButton{min-width:125px;padding:12px 16px!important;font-size:18px!important}#eventHubModal .eventArtSock{width:42px;height:85px}#eventHubModal .eventArtSock:after{width:32px;height:24px;right:-16px}#eventHubModal .eventArtSock:before{left:7px;top:38%;transform:scale(.8)}#eventHubModal .eventArtSock.three{width:36px;height:72px;left:calc(50% - 18px)}#eventHubModal .eventArtSock.three:after{width:27px;height:20px;right:-14px}#eventHubModal .eventSpark{font-size:25px!important}}
 </style>
 
-<meta name="socktd-build" content="SockTD-GitHubFix-20261026"></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+<meta name="socktd-build" content="SockTD-FPS-2.1-RENDER-20261026"></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
 <filter id="cv-protanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-deuteranopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-tritanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/></filter>
@@ -829,17 +847,18 @@ body.themeGamble #recipes #detail > .item{
 <div id="fpsView" class="hidden" aria-label="First person tower view">
   <div id="fpsScene">
     <canvas id="fpsWorld3D" aria-hidden="true"></canvas>
+    <canvas id="fpsFallbackCanvas" aria-hidden="true"></canvas>
     <div id="fpsHorizon"></div>
     <div id="fpsTargets"></div>
     <div id="fpsCrosshair"></div>
     <div id="fpsWeaponRig"><div class="weapon"><span class="weaponIcon">🧦</span><span class="weaponName">Sock Weapon</span><span class="projectile">💥</span><span class="burst">✨</span><span class="specialFx"></span></div></div>
     <div id="fpsMuzzle"></div>
     <div id="fpsHitmarker"></div>
-    <div id="fpsStats">🎯 Aim: mouse • 🖱️ Shoot</div>
+    <div id="fpsStats">🎯 Aim: mouse • 🖱️ Shoot</div><div id="fpsVersionBadge">FPS MODE 2.1 <span>• REBUILT</span></div>
     <div id="fpsInfo">🎯 FPS View</div><div id="fpsBaseHP"><div id="fpsBaseHPLabel">🏰 BASE HP</div><div id="fpsBaseHPBar"><div id="fpsBaseHPFill"></div></div><div id="fpsBaseHPText">250 / 250</div></div><div id="fpsLocation">📍 Position: —</div><div id="fpsMapPanel"><canvas id="fpsMiniMap" width="340" height="210"></canvas><div id="fpsMapLabel">🗺️ Map</div></div>
     <button id="fpsFullscreen" type="button">⛶ Fullscreen</button><button id="fpsExit" type="button">↩ Back</button>
     <div id="fpsWeapon">🧦</div>
-    <div id="fpsHint">RMB ingedrukt = rondkijken • LMB = schieten</div>
+    <div id="fpsHint">RECHTSKLIK + SLEPEN = RONDKIJKEN (ook omhoog/omlaag) • LINKSKLIK = SCHIETEN • ESC = TERUG</div>
   </div>
 </div>
 </div><div id="choose" class="modal"><button id="gameModesBtn">🎮 Game Modes</button><div class="panel"><div></div><h2>Choose your map</h2><h3>Map</h3><button data-m="box" style="pointer-events: auto; position: relative; z-index: 4;">📦 Shoe Box</button><button data-m="closet" style="pointer-events: auto; position: relative; z-index: 4;">🚪 Closet</button><button data-m="hall" style="pointer-events: auto; position: relative; z-index: 4;">🚶 Hallway</button><button id="tutorialBtn">📚 Tutorial</button><h2>Choose difficulty</h2><p style="opacity:.8;margin-top:0">🧦 Build your sock army • 🧬 Discover fusions • 👾 Stop the monsters</p><button data-d="easy">🟢 Easy</button><button data-d="normal" class="clickPop">🟡 Normal</button><button data-d="hard">🔴 Hard</button><button data-d="nightmare">☠️ Nightmare</button></div></div><div id="gameModesModal" class="modal hidden"><div class="panel" style="text-align:center"><h2>🎮 Game Modes</h2><div class="gameModesTopActions"><button id="backToStartFromModes" type="button">↩ Back to Start</button></div><div class="gameModeChoices"><button id="campaignMode" class="gameModeChoice newModeChoice">📖 Campaign</button><button id="multiplayerMode" class="gameModeChoice">🌐 Multiplayer</button><button id="speedrunMode" class="gameModeChoice">⚡ Speedrun</button><button id="sandboxMode" class="gameModeChoice">🏖️ Sandbox</button><button id="eventMode" class="gameModeChoice newModeChoice">🎉 Event</button><button id="challengeMode" class="gameModeChoice newModeChoice">🏆 Challenge</button></div><button id="gameModesClose">Close</button></div></div><div id="challengeDifficultyModal" class="modal hidden"><div class="panel challengeDifficultyPanel" style="text-align:center"><h2>🏆 Choose Challenge Difficulty</h2><p>Pick a difficulty to play a random challenge on a random map.</p><div class="challengeDifficultyChoices"><button type="button" class="challengeDifficultyChoice" data-challenge-diff="easy">🟢 Easy</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="normal">🟡 Normal</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="hard">🔴 Hard</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="nightmare">☠️ Nightmare</button></div><p id="challengeDifficultyNote" aria-live="polite">Choose one of the four difficulties.</p><button id="challengeDifficultyBack" type="button">↩ Back to Game Modes</button></div></div><div id="eventHubModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event Hub"><div class="eventPainting"><div class="eventArtwork"><span class="eventGarland"></span><span class="eventSpark spark1">✦</span><span class="eventSpark spark2">★</span><span class="eventSpark spark3">✧</span><span class="eventSpark spark4">✦</span><svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px;overflow:hidden"><defs>
@@ -1005,6 +1024,9 @@ function openSpeedrunUpgradeInfo(){if(!speedrunUpgrade)return;const u=speedrunUp
 function applySpeedrunUpgrade(u){if(!u)return;const k=u[4],v=u[5];window.speedrunBonuses=window.speedrunBonuses||{};window.speedrunBonuses[k]=(window.speedrunBonuses[k]||0)+v}
 
 const maps={box:null,closet:null,hall:null};
+let shoeBoxProps=[];
+let messyClosetProps=[];
+let chaoticHallProps=[];
 let currentPath=null;
 let activeWavePath=null;
 let selectedPathIndex=0;
@@ -1031,10 +1053,13 @@ function selectMapPath(forcedPath=null, forcedIndex=null){
   }
   maps[map]=currentPath;
   activeWavePath=null;
+  if(map==='box')randomizeShoeBoxProps();
+  if(map==='closet')randomizeMessyClosetProps();
+  if(map==='hall')randomizeChaoticHallProps();
 }
 selectMapPath();
 const D={fire:['Fire Sock',45,125,30,35,'#e84b36'],ice:['Ice Sock',55,115,14,25,'#50bfe6'],thunder:['ThunderSock',95,145,40,55,'#ffd34e'],wizard:['WizardSock',115,155,48,70,'#9c55d6'],ninja:['Ninja Sock',90,82,34,18,'#334'],golden:['GoldenSock',200,135,40,42,'#ffc52c'],portal:['Portal Sock',130,120,20,10,'#8058d6'],laundry:['Laundry Sock',85,100,22,30,'#e7edf2'],fight:['Fight Sock',105,68,72,22,'#ff7043']};
-D.clock=['Clock Sock',150,145,72,18,'#d7b15c'];
+D.clock=['Clock Sock',1500,145,72,18,'#d7b15c'];
 const E={frog:[55,1.25,7],fly:[32,2.1,6],golem:[290,.5,18],speed:[95,2.8,11],silver:[210,.82,16],wash:[430,.52,24],piggy:[650,.32,0],treeflame:[360,.72,28],psyguy:[190,.98,20],ironjaw:[520,.44,34],shellbum:[300,.62,25],boss:[1700,.38,75]};
 const strongVs={fire:'Sticky Moth, Washydilly and Piggy Bank',ice:'Sharpend Farao and Water Frog',thunder:'Sticky Moth, Mrsilver and Washydilly',wizard:'Stone Golem and Boss enemies',ninja:'Sticky Moth and Sharpend Farao',golden:'Piggy Bank and Boss enemies',portal:'Slow heavy enemies like Stone Golem',laundry:'Water Frog and fast enemies',fight:'Heavy enemies at close range'};
 const enemyNames={frog:'Water Frog',fly:'Sticky Moth',golem:'Stone Golem',speed:'Sharpend Farao',silver:'Mrsilver',wash:'Washydilly',piggy:'Piggy Bank',treeflame:'Treeflame',psyguy:'Phantom Pain',ironjaw:'Ironjaw',shellbum:'Brick Turtle Tank',boss:'Michael the Blub'};
@@ -1042,7 +1067,75 @@ const enemyInfo={frog:'A balanced amphibious monster. Medium speed and low healt
 const names=['Lava Sock','Storm Sock','Crystal Sock','Meteor Sock','Nature Sock','Cosmic Sock','Shadow Sock','Prism Sock','Energy Sock'];const recipes={};let ks=Object.keys(D),n=0;for(let i=0;i<ks.length;i++)for(let j=i+1;j<ks.length;j++){let k=[ks[i],ks[j]].sort().join('|');recipes[k]=names[n++%names.length]}recipes['fire|thunder']='Plasma Sock'; for(let same of ks) recipes[same+'|'+same]='Fusion Undefined Sock';
 // Live source for the Catalogue's skin picker: recomputed from the actual game definitions so newly added socks/fusions appear automatically.
 window.socktdGetSkinCatalogueItems=function(){const out=[];for(const key of Object.keys(D||{})){const d=D[key];out.push({id:'sock:'+key,key,name:String(d&&d[0]||key),kind:'sock'});}const seen=new Set();for(const [recipe,result] of Object.entries(recipes||{})){const name=String(result||'').trim();if(!name||seen.has(name))continue;seen.add(name);out.push({id:'fusion:'+name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),key:recipe,name,kind:'fusion'});}return out;};
-function obs(){if(diff==='easy'||diff==='normal')return[];let a=map==='box'?[{x:70,y:430,w:120,h:60,kind:'shoe'},{x:680,y:75,w:115,h:80,kind:'box'},{x:300,y:65,w:95,h:55,kind:'box'},{x:455,y:455,w:120,h:55,kind:'shoe'}]:map==='closet'?[{x:55,y:80,w:150,h:45,kind:'clothes'},{x:700,y:400,w:120,h:55,kind:'shelf'},{x:350,y:45,w:110,h:60,kind:'clothes'},{x:240,y:440,w:140,h:52,kind:'shelf'}]:[{x:90,y:70,w:110,h:160,kind:'door'},{x:720,y:340,w:150,h:40,kind:'bench'},{x:410,y:180,w:110,h:130,kind:'door'},{x:120,y:470,w:150,h:42,kind:'bench'}];if(diff==='nightmare'){if(map==='box')a.push({x:180,y:260,w:90,h:55,kind:'box'},{x:520,y:270,w:110,h:60,kind:'shoe'},{x:810,y:200,w:85,h:60,kind:'box'});else if(map==='closet')a.push({x:500,y:150,w:120,h:55,kind:'clothes'},{x:600,y:260,w:110,h:55,kind:'shelf'},{x:820,y:100,w:80,h:65,kind:'shelf'});else a.push({x:280,y:240,w:110,h:70,kind:'bench'},{x:600,y:420,w:110,h:55,kind:'door'},{x:830,y:90,w:75,h:120,kind:'door'});}return a}
+// Shoe Box props are randomized once per map opening, not on every draw frame.
+function boxPathDistance(px,py,path){
+  let best=Infinity;
+  for(let i=1;i<path.length;i++){
+    const a=path[i-1],b=path[i],dx=b.x-a.x,dy=b.y-a.y;
+    const t=Math.max(0,Math.min(1,((px-a.x)*dx+(py-a.y)*dy)/(dx*dx+dy*dy||1)));
+    best=Math.min(best,Math.hypot(px-a.x-t*dx,py-a.y-t*dy));
+  }
+  return best;
+}
+function randomizeShoeBoxProps(){
+  shoeBoxProps=[];
+  const path=currentPath||maps.box;
+  if(!path)return;
+  const sizes=[[112,78],[108,77],[115,65],[110,75],[100,72],[105,72],[110,68]];
+  for(let i=0;i<7;i++){
+    const [w,h]=sizes[i];let placed=false;
+    for(let tries=0;tries<1400&&!placed;tries++){
+      const x=40+Math.random()*(880-w),y=45+Math.random()*(470-h);
+      const cx=x+w/2,cy=y+h/2;
+      // Check the whole visible prop, not just its centre, against the route.
+      const pad=Math.hypot(w,h)*.58+32;
+      if(boxPathDistance(cx,cy,path)<pad)continue;
+      if(shoeBoxProps.some(o=>Math.abs(cx-(o.x+o.w/2))<(w+o.w)/2+18&&Math.abs(cy-(o.y+o.h/2))<(h+o.h)/2+18))continue;
+      shoeBoxProps.push({x,y,w,h,kind:'packaging',visualType:i%4});placed=true;
+    }
+  }
+}
+// Messy Closet props use the exact same route-avoidance logic as Shoe Box.
+function randomizeMessyClosetProps(){
+  messyClosetProps=[];
+  const path=currentPath||maps.closet;
+  if(!path)return;
+  const sizes=[[124,72],[100,88],[112,70],[114,70],[118,76],[106,80],[118,74]];
+  for(let i=0;i<7;i++){
+    const [w,h]=sizes[i];
+    for(let tries=0;tries<1500;tries++){
+      const px=37+Math.random()*(886-w),py=40+Math.random()*(480-h);
+      const cx=px+w/2,cy=py+h/2;
+      if(boxPathDistance(cx,cy,path)<Math.hypot(w,h)*.60+34)continue;
+      if(messyClosetProps.some(o=>Math.abs(cx-o.x-o.w/2)<(w+o.w)/2+20&&Math.abs(cy-o.y-o.h/2)<(h+o.h)/2+20))continue;
+      messyClosetProps.push({x:px,y:py,w,h,kind:'messyCloset',visualType:i});break;
+    }
+  }
+}
+// Chaotic Hallway props: randomized on map entry, safely away from the full monster route.
+function randomizeChaoticHallProps(){
+ chaoticHallProps=[];
+ const path=currentPath||maps.hall;if(!path)return;
+ const sizes=[[116,80],[104,78],[116,82],[104,75],[110,82],[105,75],[112,78]];
+ for(let i=0;i<7;i++){
+  const [w,h]=sizes[i];
+  for(let attempt=0;attempt<2000;attempt++){
+   const px=38+Math.random()*(884-w),py=39+Math.random()*(478-h);
+   const cx=px+w/2,cy=py+h/2;
+   if(boxPathDistance(cx,cy,path)<Math.hypot(w,h)*.62+36)continue;
+   if(chaoticHallProps.some(o=>Math.abs(cx-o.x-o.w/2)<(w+o.w)/2+20&&Math.abs(cy-o.y-o.h/2)<(h+o.h)/2+20))continue;
+   chaoticHallProps.push({x:px,y:py,w,h,kind:'chaoticHall',visualType:i});break;
+  }
+ }
+}
+function obs(){
+  if(diff==='easy'||diff==='normal')return[];
+  if(map==='box')return shoeBoxProps.slice(0,diff==='nightmare'?7:4);
+  if(map==='closet')return messyClosetProps.slice(0,diff==='nightmare'?7:4);
+  if(map==='hall')return chaoticHallProps.slice(0,diff==='nightmare'?7:4);
+  let a=map==='closet'?[{x:55,y:80,w:150,h:45,kind:'clothes'},{x:700,y:400,w:120,h:55,kind:'shelf'},{x:350,y:45,w:110,h:60,kind:'clothes'},{x:240,y:440,w:140,h:52,kind:'shelf'}]:[{x:90,y:70,w:110,h:160,kind:'door'},{x:720,y:340,w:150,h:40,kind:'bench'},{x:410,y:180,w:110,h:130,kind:'door'},{x:120,y:470,w:150,h:42,kind:'bench'}];
+  if(diff==='nightmare'){if(map==='closet')a.push({x:500,y:150,w:120,h:55,kind:'clothes'},{x:600,y:260,w:110,h:55,kind:'shelf'},{x:820,y:100,w:80,h:65,kind:'shelf'});else a.push({x:280,y:240,w:110,h:70,kind:'bench'},{x:600,y:420,w:110,h:55,kind:'door'},{x:830,y:90,w:75,h:120,kind:'door'});}return a;
+}
 for(let k of ['fire','ice','thunder','wizard','ninja','golden',...Object.keys(D).filter(q=>!['fire','ice','thunder','wizard','golden','ninja'].includes(q))]){let v=D[k],b=document.createElement('button');b.dataset.sockType=k;b.textContent=v[0]+' $'+v[1];b.onclick=()=>{if(tutorialActive&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialPlacement')&&k!==(window.tutorialAllowedTower||'fire'))return;if(!sockTDChallengeCanUse(k))return;selected=k;fuseMode=false;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));b.classList.add('sel');$('msg').textContent='Range: '+(sockTDChallenge&&sockTDChallenge.rangeMult?Math.max(12,Math.round(v[2]*sockTDChallenge.rangeMult)):v[2])+' | Damage: '+(sockTDChallenge&&sockTDChallenge.damageMult?Math.round(v[3]*sockTDChallenge.damageMult):v[3])};$('towers').appendChild(b)}
 // Clock Sock starts locked until 15 minutes of accumulated gameplay.
 (function(){const b=document.querySelector('#towers button[data-sock-type="clock"]');if(b){b.style.display='none';b.classList.add('socktdClockLocked');b.disabled=true;}})();
@@ -2418,23 +2511,40 @@ function sock(t){
  if(t.fused){drawFusionSock(t,col);x.restore();return}
  x.translate(t.x,t.y);x.translate(0,idle);x.scale(s,s);
  if(t.k==='clock'&&window.socktdClockSkinMode==='alarm'){
-   // Alarm Clock Sock: brass twin bells, detailed clock dial, ruby buttons and knitted sock silhouette.
-   x.fillStyle='rgba(0,0,0,.22)';x.beginPath();x.ellipse(0,34,31,7,0,0,Math.PI*2);x.fill();
-   const metal=x.createLinearGradient(-28,-34,27,31);metal.addColorStop(0,'#fff0aa');metal.addColorStop(.4,'#f2ad42');metal.addColorStop(.72,'#a75b24');metal.addColorStop(1,'#67381c');
-   x.fillStyle=metal;x.strokeStyle='#58321c';x.lineWidth=2.8;x.beginPath();x.moveTo(-18,-26);x.lineTo(17,-26);x.lineTo(17,7);x.quadraticCurveTo(22,16,9,26);x.quadraticCurveTo(-2,33,-28,31);x.quadraticCurveTo(-40,28,-38,17);x.quadraticCurveTo(-36,8,-24,6);x.lineTo(-18,3);x.closePath();x.fill();x.stroke();
-   // Tiny stitches around the heel and toe.
-   x.setLineDash([2,3]);x.strokeStyle='#fff0b3';x.lineWidth=1.3;x.beginPath();x.moveTo(-34,18);x.quadraticCurveTo(-32,27,-20,27);x.stroke();x.setLineDash([]);
-   // Clock dial and engraved minute marks.
-   x.save();x.translate(-2,-2);x.shadowColor='#ffe18c';x.shadowBlur=9;x.fillStyle='#734322';x.beginPath();x.arc(0,0,21,0,7);x.fill();x.shadowBlur=0;x.fillStyle='#fdf0cc';x.strokeStyle='#e5aa40';x.lineWidth=3;x.beginPath();x.arc(0,0,18.2,0,7);x.fill();x.stroke();
-   for(let i=0;i<60;i++){let a=i*Math.PI/30;x.strokeStyle=i%5===0?'#694023':'#b9a06d';x.lineWidth=i%5===0?1.6:.65;x.beginPath();x.moveTo(Math.sin(a)*(i%5===0?13:15),-Math.cos(a)*(i%5===0?13:15));x.lineTo(Math.sin(a)*16.4,-Math.cos(a)*16.4);x.stroke();}
-   x.fillStyle='#684022';x.font='bold 5px Georgia';x.textAlign='center';x.textBaseline='middle';[['XII',0,-10],['III',10,0],['VI',0,10],['IX',-10,0]].forEach(q=>x.fillText(...q));
-   const spin=performance.now()/2300;x.save();x.rotate(spin);x.strokeStyle='#4e251c';x.lineCap='round';x.lineWidth=2;x.beginPath();x.moveTo(0,3);x.lineTo(0,-11);x.stroke();x.restore();x.save();x.rotate(spin/12);x.lineWidth=2.8;x.strokeStyle='#8b311d';x.beginPath();x.moveTo(0,2);x.lineTo(7,0);x.stroke();x.restore();x.fillStyle='#a33e23';x.beginPath();x.arc(0,0,2.5,0,7);x.fill();x.restore();
-   // Two alarm bells and the striker, mounted on the cuff.
-   x.fillStyle='#713b22';x.fillRect(-19,-32,37,7);x.fillStyle='#f7b943';x.strokeStyle='#6d391c';x.lineWidth=2;for(const bx of [-17,17]){x.beginPath();x.ellipse(bx,-38,12,6,bx<0?-.35:.35,Math.PI,Math.PI*2);x.lineTo(bx+11,-37);x.quadraticCurveTo(bx,-30,bx-11,-37);x.closePath();x.fill();x.stroke();x.fillStyle='#fff2bd';x.beginPath();x.arc(bx,-40,2.2,0,7);x.fill();x.fillStyle='#f7b943';}
-   x.strokeStyle='#60351e';x.lineWidth=2;x.beginPath();x.moveTo(0,-33);x.lineTo(0,-45);x.stroke();x.fillStyle='#c43b39';x.beginPath();x.arc(0,-46,4,0,7);x.fill();
-   // Two small eyes below the clock and brass screws.
-   x.fillStyle='#2e1b12';x.beginPath();x.ellipse(-12,22,2.5,3.4,0,0,7);x.ellipse(1,23,2.5,3.4,0,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(-13,21,1,0,7);x.arc(0,22,1,0,7);x.fill();
-   for(const q of [[-25,11],[13,20]]){x.fillStyle='#ffdc7d';x.beginPath();x.arc(q[0],q[1],2.5,0,7);x.fill();x.strokeStyle='#8d4e25';x.lineWidth=.8;x.beginPath();x.moveTo(q[0]-1.4,q[1]);x.lineTo(q[0]+1.4,q[1]);x.stroke();}
+   // Bedside digital alarm-clock skin: matte black housing, glossy glass and glowing red LED digits.
+   const now=performance.now();
+   x.fillStyle='rgba(0,0,0,.28)';x.beginPath();x.ellipse(0,35,33,7,0,0,Math.PI*2);x.fill();
+   // A recognizable stocking silhouette with a rounded heel and toe.
+   const casing=x.createLinearGradient(-32,-38,28,31);
+   casing.addColorStop(0,'#565960');casing.addColorStop(.19,'#25272d');casing.addColorStop(.6,'#111216');casing.addColorStop(1,'#050508');
+   x.fillStyle=casing;x.strokeStyle='#07080b';x.lineWidth=3.5;x.lineJoin='round';
+   x.beginPath();x.moveTo(-19,-31);x.quadraticCurveTo(-24,-31,-24,-24);x.lineTo(-24,7);x.quadraticCurveTo(-25,11,-33,14);x.quadraticCurveTo(-42,18,-39,27);x.quadraticCurveTo(-36,34,-24,34);x.lineTo(4,34);x.quadraticCurveTo(23,32,24,17);x.lineTo(24,-24);x.quadraticCurveTo(24,-31,18,-31);x.closePath();x.fill();x.stroke();
+   // Dark red toe and heel panels, with restrained stitched seams.
+   x.fillStyle='#330a0e';x.beginPath();x.moveTo(-39,23);x.quadraticCurveTo(-40,34,-23,34);x.lineTo(-9,34);x.quadraticCurveTo(-22,23,-39,23);x.fill();
+   x.strokeStyle='#7b2228';x.lineWidth=1.1;x.setLineDash([2,3]);x.beginPath();x.moveTo(-37,25);x.quadraticCurveTo(-31,31,-16,31);x.stroke();x.setLineDash([]);
+   // Top cuff resembles the black bevel and buttons of a real bedside alarm clock.
+   const top=x.createLinearGradient(0,-43,0,-26);top.addColorStop(0,'#696b72');top.addColorStop(.35,'#24252a');top.addColorStop(1,'#09090c');
+   x.fillStyle=top;x.strokeStyle='#07080a';x.lineWidth=2;x.beginPath();x.roundRect(-26,-39,52,13,5);x.fill();x.stroke();
+   for(const bx of [-16,-3,10]){x.fillStyle='#18191e';x.beginPath();x.roundRect(bx,-40,9,3,1.5);x.fill();x.fillStyle='#5c5f65';x.fillRect(bx+2,-40,5,.8);}
+   // Glossy dark-red glass display.
+   x.save();x.shadowColor='#f21c23';x.shadowBlur=8;x.fillStyle='#140406';x.strokeStyle='#56565d';x.lineWidth=2.1;
+   x.beginPath();x.roundRect(-21,-23,43,32,5);x.fill();x.stroke();x.shadowBlur=0;
+   const glass=x.createLinearGradient(-20,-23,22,9);glass.addColorStop(0,'rgba(160,60,65,.22)');glass.addColorStop(.46,'rgba(255,255,255,.045)');glass.addColorStop(.48,'rgba(0,0,0,.02)');glass.addColorStop(1,'rgba(70,4,10,.2)');x.fillStyle=glass;x.beginPath();x.roundRect(-19,-21,39,28,4);x.fill();
+   // Segmented red LED numerals synchronized to the in-game stopwatch (MM:SS).
+   const segments={0:'abcfed',1:'bc',2:'abged',3:'abgcd',4:'fgbc',5:'afgcd',6:'afgecd',7:'abc',8:'abcdefg',9:'abfgcd'};
+   function digit(v,dx,dy,w,h){const th=2.15;const q={a:[th,0,w-2*th,th],d:[th,h-th,w-2*th,th],g:[th,h/2-th/2,w-2*th,th],f:[0,th,th,h/2-th],b:[w-th,th,th,h/2-th],e:[0,h/2,th,h/2-th],c:[w-th,h/2,th,h/2-th]};for(const [k,r] of Object.entries(q)){x.fillStyle=segments[v].includes(k)?'#ff242c':'rgba(90,7,12,.35)';x.fillRect(dx+r[0],dy+r[1],r[2],r[3]);}}
+   const elapsed=Math.max(0,Math.floor(Number(window.socktdClockSessionSeconds?.() ?? 0)));
+   const mins=Math.min(99,Math.floor(elapsed/60)),secs=elapsed%60;
+   const led=[Math.floor(mins/10),mins%10,Math.floor(secs/10),secs%10];
+   x.shadowColor='#ff1722';x.shadowBlur=5;digit(led[0],-17,-13,8,16);digit(led[1],-8,-13,8,16);digit(led[2],3,-13,8,16);digit(led[3],12,-13,8,16);
+   x.fillStyle='#ff252d';for(const yy of [-8,-2]){x.beginPath();x.arc(1.4,yy,1.05,0,Math.PI*2);x.fill();}x.shadowBlur=0;
+   x.font='bold 3.6px sans-serif';x.textAlign='left';x.fillStyle='#ff3c43';x.fillText('AM',-17,-16);x.fillText('AL',-17,5);
+   x.restore();
+   // Two friendly glowing eyes and small speaker grille below the display.
+   x.shadowColor='#ff232d';x.shadowBlur=4;x.fillStyle='#ff3039';for(const ex of [-7,8]){x.beginPath();x.ellipse(ex,18,3.2,4.2,0,0,Math.PI*2);x.fill();}x.shadowBlur=0;
+   x.fillStyle='#07080a';x.beginPath();x.roundRect(-11,26,24,4,2);x.fill();x.strokeStyle='#55545b';x.lineWidth=.8;for(let i=-8;i<=10;i+=3){x.beginPath();x.moveTo(i,27);x.lineTo(i,29);x.stroke();}
+   // Tiny red indicator light on the right side.
+   x.shadowColor='#ff2633';x.shadowBlur=5;x.fillStyle='#f92732';x.beginPath();x.arc(20,13,1.7,0,Math.PI*2);x.fill();x.shadowBlur=0;
    x.restore();return;
  }
  if(t.k==='clock'){
@@ -4777,7 +4887,309 @@ function monster(e){
 }
 function drawSockBackground(theme){
 }
-function draw(){updateMoneyBills();x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){x.fillStyle='#e9c084';x.fillRect(15,15,930,530);x.strokeStyle='#855334';x.lineWidth=5;x.strokeRect(15,15,930,530);x.fillStyle='#fff4';for(let i=0;i<8;i++)x.fillRect(40+i*110,40,60,10);x.fillStyle='#9b633b';x.font='bold 18px Arial';x.fillText('PREMIUM SHOE BOX',32,535);for(let i=0;i<5;i++){x.fillStyle=i%2?'#d9534f':'#354f78';x.beginPath();x.ellipse(110+i*175,510,42,16,0,0,7);x.fill();x.fillStyle='#fff8';x.fillRect(85+i*175,505,38,4)}}if(map==='closet'){x.fillStyle='#6a472f';for(let y of [110,250,400])x.fillRect(0,y,960,10);x.fillStyle='#c0805c';for(let i=0;i<8;i++){x.fillRect(30+i*115,40,55,65);x.strokeStyle='#e0bd8b';x.strokeRect(30+i*115,40,55,65)}x.strokeStyle='#2e2118';x.lineWidth=3;for(let i=0;i<7;i++){x.beginPath();x.arc(95+i*125,155,24,3.4,6);x.stroke();x.fillStyle=i%2?'#e68fa5':'#6caed0';x.fillRect(85+i*125,158,20,48)}}if(map==='hall'){x.fillStyle='#aaa';x.fillRect(0,0,960,35);x.fillStyle='#c5b9a5';x.fillRect(0,380,960,180);for(let i=0;i<5;i++){x.fillStyle='#eee';x.fillRect(70+i*190,50,60,110);x.fillStyle='#fff7';x.fillRect(85+i*190,65,30,8)}for(let i=0;i<10;i++){x.fillStyle=i%2?'#b9ad99':'#d6ccba';x.fillRect(i*96,420,94,140)}x.fillStyle='#8c785f';for(let i=0;i<6;i++){x.beginPath();x.arc(90+i*160,22,10,0,7);x.fill()}drawSockBackground('hall')}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let q of p.slice(1))x.lineTo(q.x,q.y);x.lineWidth=56;x.strokeStyle='#563b2a';x.stroke();x.lineWidth=42;x.strokeStyle='#946846';x.stroke();for(let o of obs()){if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
+
+// Shoe Box 2.0: cosmetic-only cartoon scenery. Route, obstacles and placement remain unchanged.
+function drawShoeBoxCartoonBackground(){
+  const t=performance.now()/1000;
+  x.save();
+  x.fillStyle='#f4d69b';x.fillRect(0,0,960,560);
+  // Warm cardboard fibers, deterministic so the floor never flickers.
+  for(let i=0;i<155;i++){
+    const px=32+(i*137.37)%896,py=30+(i*79.73)%490;
+    x.fillStyle=i%3===0?'rgba(138,77,44,.12)':'rgba(255,255,237,.27)';
+    x.fillRect(px,py,2+i%3,1.5);
+  }
+  // Extra layered cardboard grain: fibers, pressed ridges, tiny flecks and fold marks.
+  for(let i=0;i<760;i++){
+    const px=26+(i*173.31)%908,py=25+(i*97.17)%510;
+    const len=3+(i*7)%19;
+    x.strokeStyle=i%5===0?'rgba(110,66,37,.14)':i%3===0?'rgba(255,251,220,.42)':'rgba(174,105,57,.11)';
+    x.lineWidth=i%7===0?1.6:.65;x.beginPath();x.moveTo(px,py);x.lineTo(Math.min(934,px+len),py+(i%4-2)*.4);x.stroke();
+  }
+  for(let i=0;i<85;i++){
+    const px=27+(i*241.9)%905,py=27+(i*151.7)%505;
+    x.fillStyle=i%2?'rgba(110,68,41,.16)':'rgba(255,248,216,.5)';
+    x.fillRect(px,py,1.5+(i%3),1+(i%2));
+  }
+  x.strokeStyle='rgba(139,82,44,.11)';x.lineWidth=2;
+  for(let i=0;i<6;i++){
+    const yy=55+i*86;x.beginPath();x.moveTo(27,yy);x.bezierCurveTo(250,yy+7,670,yy-7,933,yy+3);x.stroke();
+  }
+  // Layered carton frame and folds.
+  x.fillStyle='#a96b3e';x.fillRect(0,0,960,22);x.fillRect(0,538,960,22);x.fillRect(0,0,22,560);x.fillRect(938,0,22,560);
+  x.fillStyle='#d99655';x.fillRect(9,10,942,12);x.fillRect(9,538,942,12);
+  x.fillStyle='#e9b475';x.fillRect(10,21,13,517);x.fillRect(937,21,13,517);
+  x.strokeStyle='#683c2b';x.lineWidth=6;x.strokeRect(12,12,936,536);
+  x.strokeStyle='#ffe5a9';x.lineWidth=3;x.strokeRect(25,25,910,510);
+  x.strokeStyle='rgba(112,62,37,.45)';x.lineWidth=2;
+  for(const [ax,ay,bx,by] of [[25,25,53,52],[935,25,907,52],[25,535,53,507],[935,535,907,507]]){
+    x.beginPath();x.moveTo(ax,ay);x.lineTo(bx,by);x.stroke();
+  }
+  // Sturdy blue paper label and colored tape pieces (pure decoration).
+  x.save();x.translate(780,42);x.rotate(-.055);
+  x.fillStyle='#396f91';x.strokeStyle='#25455a';x.lineWidth=3;
+  x.beginPath();x.roundRect(0,0,142,31,7);x.fill();x.stroke();
+  x.fillStyle='#fff3c5';x.font='bold 15px Arial';x.textAlign='center';x.fillText('SOCK CO. ★',71,21);x.restore();
+  for(const [px,py,ang] of [[48,39,-.25],[900,507,.24],[454,29,.04]]){
+    x.save();x.translate(px,py);x.rotate(ang);x.fillStyle='rgba(106,204,220,.56)';x.fillRect(-22,-7,44,14);
+    x.strokeStyle='rgba(41,109,125,.6)';x.lineWidth=1.5;x.strokeRect(-22,-7,44,14);x.restore();
+  }
+  // Stickers, shoelace and a couple of paper scraps near the frame.
+  for(const [px,py,c] of [[73,76,'#f17b83'],[876,460,'#8f75d7'],[814,91,'#f6c64e']]){
+    x.save();x.translate(px,py);x.rotate(Math.sin(px)*.3);
+    x.fillStyle=c;x.strokeStyle='#633f38';x.lineWidth=2.5;
+    x.beginPath();for(let k=0;k<10;k++){const a=k*Math.PI/5-Math.PI/2,r=k%2?9:17;const xx=Math.cos(a)*r,yy=Math.sin(a)*r;k?x.lineTo(xx,yy):x.moveTo(xx,yy)}x.closePath();x.fill();x.stroke();x.restore();
+  }
+  x.strokeStyle='#4a9cbb';x.lineWidth=5;x.lineCap='round';
+  x.beginPath();x.moveTo(66,467);x.bezierCurveTo(115,447,128,496,165,474);x.bezierCurveTo(183,461,194,481,207,475);x.stroke();
+  x.strokeStyle='#d6eff5';x.lineWidth=1.5;x.stroke();
+  for(const [px,py,a] of [[255,65,.22],[668,495,-.3],[365,504,.16]]){
+    x.save();x.translate(px,py);x.rotate(a);x.fillStyle='#fff0c9';x.strokeStyle='#bb8657';x.lineWidth=2;
+    x.beginPath();x.moveTo(-14,-8);x.lineTo(13,-11);x.lineTo(17,8);x.lineTo(-11,10);x.closePath();x.fill();x.stroke();x.restore();
+  }
+  // Ambient floating dust; no game physics or collisions.
+  for(let i=0;i<17;i++){
+    const px=36+(i*113.31)%888,py=35+((i*83.11+t*(4+i%3))%480);
+    x.globalAlpha=.18+.12*Math.sin(t*1.6+i);x.fillStyle=i%2?'#fff9dc':'#a8794b';
+    x.beginPath();x.arc(px,py,1.5+(i%3)*.5,0,Math.PI*2);x.fill();
+  }
+  x.restore();
+}
+function drawShoeBoxCartoonPathDetails(p){
+  x.save();
+  // Little cardboard scuffs follow the exact existing polyline, without altering it.
+  let dist=0;
+  for(let i=1;i<p.length;i++){
+    const a=p[i-1],b=p[i],len=Math.hypot(b.x-a.x,b.y-a.y);if(!len)continue;
+    const nx=-(b.y-a.y)/len,ny=(b.x-a.x)/len;
+    for(let d=24;d<len;d+=64){
+      const px=a.x+(b.x-a.x)*d/len,py=a.y+(b.y-a.y)*d/len;
+      x.strokeStyle='rgba(113,68,40,.32)';x.lineWidth=2.3;x.lineCap='round';
+      const side=(Math.floor((dist+d)/64)%2?1:-1);
+      x.beginPath();x.moveTo(px+nx*side*11,py+ny*side*11);x.lineTo(px+nx*side*17+5,py+ny*side*17+2);x.stroke();
+    }
+    dist+=len;
+  }
+  x.restore();
+}
+// Shoe Box packaging clutter, strictly visual: the original obstacle rectangles remain the hitboxes.
+function drawShoeBoxPackagingObstacle(o,index){
+  const w=o.w,h=o.h,type=o.visualType??index%4;
+  x.save();x.translate(o.x+w/2,o.y+h/2);
+  x.shadowColor='rgba(56,38,23,.22)';x.shadowBlur=8;x.shadowOffsetY=4;
+  x.lineJoin='round';x.lineCap='round';
+  if(type===0){ // Two large separate crumpled paper balls, twice the former size.
+    for(const [cx,cy,r,seed] of [[-w*.21,-h*.04,h*.47,1],[w*.22,h*.08,h*.43,4]]){
+      x.beginPath();for(let j=0;j<15;j++){let a=j*Math.PI*2/15,rr=r*(.85+.12*Math.sin(j*5.2+seed));j?x.lineTo(cx+rr*Math.cos(a),cy+rr*Math.sin(a)):x.moveTo(cx+rr*Math.cos(a),cy+rr*Math.sin(a))}x.closePath();
+      x.fillStyle='#fff2d5';x.strokeStyle='#c3a47d';x.lineWidth=1.7;x.fill();x.stroke();
+      x.shadowColor='transparent';
+      x.strokeStyle='#c9ac88';x.lineWidth=1.25;
+      for(let k=0;k<7;k++){let a=k*2.4+seed;x.beginPath();x.moveTo(cx+Math.cos(a)*r*.15,cy+Math.sin(a)*r*.14);x.quadraticCurveTo(cx+Math.cos(a+.6)*r*.55,cy+Math.sin(a+.6)*r*.25,cx+Math.cos(a+1)*r*.66,cy+Math.sin(a+1)*r*.6);x.stroke()}
+      x.fillStyle='rgba(255,255,255,.45)';x.beginPath();x.ellipse(cx-r*.18,cy-r*.23,r*.23,r*.13,-.5,0,7);x.fill();
+    }
+  }else if(type===1){ // Irregular expanded polystyrene with many individual beads.
+    x.beginPath();x.moveTo(-w*.43,-h*.28);x.lineTo(-w*.29,-h*.42);x.lineTo(w*.32,-h*.35);x.lineTo(w*.44,-h*.13);x.lineTo(w*.36,h*.32);x.lineTo(-w*.35,h*.38);x.closePath();
+    x.fillStyle='#f5f8ee';x.strokeStyle='#c7d4ca';x.lineWidth=2;x.fill();x.stroke();x.shadowColor='transparent';
+    for(let j=0;j<125;j++){let px=-w*.34+((j*37.77)%(w*.68)),py=-h*.27+((j*19.63)%(h*.54));let r=1.1+(j%5)*.55;x.beginPath();x.arc(px,py,r,0,7);x.fillStyle=j%4===0?'#d3e0d8':'#ffffff';x.fill();if(j%3===0){x.strokeStyle='#c4d2c8';x.lineWidth=.5;x.stroke()}}
+    x.strokeStyle='rgba(255,255,255,.9)';x.lineWidth=3;x.beginPath();x.moveTo(-w*.27,-h*.29);x.lineTo(w*.21,-h*.26);x.stroke();
+  }else if(type===2){ // Two distinct braided laces with loops, crossings and metal tips.
+    const laces=[{col:'#338bd2',light:'#9de5ff',y:-h*.19,flip:1},{col:'#e35e75',light:'#ffd0d9',y:h*.22,flip:-1}];
+    for(const lace of laces){
+      x.save();x.translate(0,lace.y);x.rotate(lace.flip*.11);
+      const drawLine=()=>{x.beginPath();x.moveTo(-w*.43,0);x.bezierCurveTo(-w*.26,-h*.42,-w*.05,h*.34,w*.06,0);x.bezierCurveTo(w*.15,-h*.26,w*.34,-h*.21,w*.40,h*.08)};
+      x.strokeStyle='rgba(35,39,58,.22)';x.lineWidth=11;drawLine();x.stroke();
+      x.strokeStyle=lace.col;x.lineWidth=8;drawLine();x.stroke();
+      x.strokeStyle=lace.light;x.lineWidth=2.1;drawLine();x.stroke();
+      // Small woven cross stitches follow the curve.
+      x.strokeStyle='rgba(255,255,255,.48)';x.lineWidth=1.2;
+      for(let j=0;j<15;j++){let xx=-w*.37+j*w*.051,yy=Math.sin(j*.78)*h*.12;x.beginPath();x.moveTo(xx-2,yy-2);x.lineTo(xx+2,yy+2);x.stroke()}
+      // Looped lace near its centre.
+      x.strokeStyle=lace.col;x.lineWidth=6;x.beginPath();x.ellipse(w*.04,-h*.13,w*.15,h*.15,-.5,0,Math.PI*1.95);x.stroke();
+      x.strokeStyle=lace.light;x.lineWidth=1.5;x.stroke();
+      x.strokeStyle='#d7dce4';x.lineWidth=7;x.beginPath();x.moveTo(w*.37,h*.055);x.lineTo(w*.44,h*.10);x.stroke();
+      x.strokeStyle='#fff';x.lineWidth=1;x.beginPath();x.moveTo(w*.37,h*.05);x.lineTo(w*.44,h*.095);x.stroke();x.restore();
+    }
+  }else{ // Folded, translucent, reflective plastic sheet.
+    x.rotate(-.09);x.beginPath();x.moveTo(-w*.44,-h*.25);x.lineTo(-w*.2,-h*.39);x.lineTo(w*.36,-h*.32);x.lineTo(w*.43,h*.19);x.lineTo(w*.24,h*.37);x.lineTo(-w*.36,h*.3);x.closePath();
+    let grad=x.createLinearGradient(-w*.4,-h*.35,w*.4,h*.35);grad.addColorStop(0,'rgba(240,255,255,.73)');grad.addColorStop(.42,'rgba(107,206,223,.22)');grad.addColorStop(.72,'rgba(228,255,255,.53)');grad.addColorStop(1,'rgba(99,171,196,.3)');x.fillStyle=grad;x.strokeStyle='rgba(110,160,179,.8)';x.lineWidth=1.7;x.fill();x.stroke();x.shadowColor='transparent';
+    x.strokeStyle='rgba(255,255,255,.85)';x.lineWidth=2.1;x.beginPath();x.moveTo(-w*.36,-h*.20);x.lineTo(w*.26,-h*.25);x.lineTo(w*.33,h*.18);x.moveTo(-w*.12,-h*.33);x.lineTo(-w*.02,h*.26);x.lineTo(w*.22,h*.31);x.stroke();
+    x.strokeStyle='rgba(85,149,178,.35)';x.lineWidth=1;x.beginPath();x.moveTo(-w*.36,h*.28);x.lineTo(-w*.12,h*.05);x.lineTo(w*.3,-h*.28);x.stroke();
+    x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(-w*.19,-h*.13,w*.15,h*.07,-.3,0,7);x.fill();
+  }
+  x.restore();
+}
+
+// Messy Closet 2.0: hand-drawn wardrobe scenery, cosmetic only.
+function drawMessyClosetBackground(){
+ x.save();
+ const wood=x.createLinearGradient(0,0,960,560);wood.addColorStop(0,'#d5a16c');wood.addColorStop(.5,'#b9784f');wood.addColorStop(1,'#8f553f');
+ x.fillStyle=wood;x.fillRect(0,0,960,560);
+ // Floorboards, knots, alternating wood grain and subtle scratches.
+ for(let i=0;i<9;i++){
+  const yy=i*67-12;x.fillStyle=i%2?'rgba(255,222,155,.10)':'rgba(73,37,27,.08)';x.fillRect(0,yy,960,66);
+  x.strokeStyle='#70452f';x.lineWidth=3;x.beginPath();x.moveTo(0,yy);x.lineTo(960,yy);x.stroke();
+  x.strokeStyle='rgba(255,223,166,.38)';x.lineWidth=1.5;x.beginPath();x.moveTo(0,yy+4);x.lineTo(960,yy+4);x.stroke();
+ }
+ for(let i=0;i<165;i++){
+  const px=28+(i*149.31)%900,py=27+(i*87.17)%505,len=15+(i*19)%77;
+  x.strokeStyle=i%4===0?'rgba(70,34,29,.20)':'rgba(255,228,176,.17)';x.lineWidth=i%6===0?1.6:.7;
+  x.beginPath();x.moveTo(px,py);x.bezierCurveTo(px+len*.35,py-3,px+len*.65,py+3,px+len,py);x.stroke();
+ }
+ for(let i=0;i<12;i++){
+  const px=64+(i*179)%828,py=55+(i*113)%455;
+  x.strokeStyle='rgba(88,44,28,.28)';x.lineWidth=1.8;
+  x.beginPath();x.ellipse(px,py,13+i%5,5+i%3,-.18,0,Math.PI*2);x.stroke();
+ }
+ // Thick cartoon closet frame, shelf corners, bolts and colorful garment stickers.
+ x.fillStyle='#653a2e';x.fillRect(0,0,960,25);x.fillRect(0,535,960,25);x.fillRect(0,0,26,560);x.fillRect(934,0,26,560);
+ x.fillStyle='#9e5b3b';x.fillRect(10,10,940,14);x.fillRect(10,535,940,14);x.fillRect(10,24,15,511);x.fillRect(935,24,15,511);
+ x.strokeStyle='#e9b17a';x.lineWidth=3;x.strokeRect(26,26,908,508);
+ for(const px of [45,915])for(const py of [43,517]){
+  x.fillStyle='#e7bb69';x.beginPath();x.arc(px,py,6,0,Math.PI*2);x.fill();x.strokeStyle='#765034';x.lineWidth=1.5;x.stroke();
+  x.beginPath();x.moveTo(px-3,py);x.lineTo(px+3,py);x.stroke();
+ }
+ // Small sewn-in wardrobe label, kept clear of the middle of the board.
+ x.save();x.translate(790,43);x.rotate(.04);x.fillStyle='#f4e3b7';x.strokeStyle='#6e4531';x.lineWidth=2;x.beginPath();x.roundRect(0,0,125,24,5);x.fill();x.stroke();
+ x.font='bold 11px sans-serif';x.textAlign='center';x.fillStyle='#7e4a39';x.fillText('SOCK CO. • CLOSET',62,16);x.restore();
+ // Tiny floating fabric lint. Position is deterministic, opacity gently animates.
+ const t=performance.now()*.00055;
+ for(let i=0;i<25;i++){
+  const px=35+(i*199.3)%888,py=34+(i*127.7)%488;
+  x.globalAlpha=.12+.13*(.5+.5*Math.sin(t+i));x.fillStyle=i%2?'#fff0cb':'#edc4df';
+  x.beginPath();x.arc(px+Math.sin(t+i)*3,py+Math.cos(t*.7+i)*3,1.2+i%3*.4,0,Math.PI*2);x.fill();
+ }
+ x.globalAlpha=1;x.restore();
+}
+function drawMessyClosetObstacle(o){
+ const {x:ox,y:oy,w,h}=o,kind=o.visualType%7;
+ x.save();x.translate(ox,oy);x.scale(w/120,h/80);
+ x.fillStyle='rgba(45,26,33,.24)';x.beginPath();x.ellipse(60,70,53,10,0,0,Math.PI*2);x.fill();
+ const blob=(px,py,ww,hh,c,ang=0)=>{x.save();x.translate(px,py);x.rotate(ang);x.fillStyle=c;x.strokeStyle='#513949';x.lineWidth=2.6;x.beginPath();x.roundRect(-ww/2,-hh/2,ww,hh,9);x.fill();x.stroke();x.restore();};
+ if(kind===0||kind===4){ // untidy sweaters, with cuffs, seams and sewn stripes
+  blob(54,51,93,34,kind===0?'#d57aa9':'#66bbba',-.13);blob(65,35,83,35,kind===0?'#f1c65f':'#9a7cda',.14);
+  blob(53,21,75,27,kind===0?'#82c6df':'#ed8995',-.08);
+  x.strokeStyle='#fff1d4';x.lineWidth=2;for(let i=0;i<5;i++){x.beginPath();x.moveTo(25+i*12,18);x.lineTo(25+i*12,29);x.stroke();}
+  x.fillStyle='#fff4dc';x.fillRect(35,41,51,3);x.fillRect(28,56,45,2);
+ }else if(kind===1){ // a pair of shoes with laces
+  for(let i=0;i<2;i++){x.save();x.translate(i?77:38,i?42:38);x.rotate(i?.22:-.28);
+   blob(0,0,43,65,i?'#ef9b6d':'#6ba5d7');blob(0,24,45,16,'#f1eee8');
+   x.strokeStyle='#f8ead3';x.lineWidth=2;for(let k=0;k<4;k++){x.beginPath();x.moveTo(-10,-18+k*8);x.lineTo(10,-18+k*8);x.stroke();}x.restore();}
+ }else if(kind===2){ // overlapping hangers, not solid rectangular boxes
+  for(let i=0;i<3;i++){x.save();x.translate(45+i*13,29+i*10);x.rotate((i-1)*.22);
+   x.strokeStyle=['#e9bb62','#8fd6ce','#e49fc9'][i];x.lineWidth=5;x.lineJoin='round';
+   x.beginPath();x.moveTo(0,3);x.bezierCurveTo(-8,-8,8,-12,8,-3);x.bezierCurveTo(8,4,0,5,0,9);x.lineTo(-39,35);x.lineTo(39,35);x.lineTo(0,9);x.stroke();x.restore();}
+ }else if(kind===3){ // coiled belt with buckle
+  x.strokeStyle='#4c3640';x.lineWidth=17;x.lineCap='round';x.beginPath();x.ellipse(58,43,38,25,-.22,.3,Math.PI*2.2);x.stroke();
+  x.strokeStyle='#ac8061';x.lineWidth=3;x.beginPath();x.ellipse(58,43,38,25,-.22,.3,Math.PI*2.2);x.stroke();
+  x.fillStyle='#efce7b';x.strokeStyle='#654632';x.lineWidth=3;x.beginPath();x.roundRect(80,17,22,21,4);x.fill();x.stroke();
+  x.beginPath();x.moveTo(84,27);x.lineTo(97,27);x.stroke();
+ }else if(kind===5){ // scarf, fabric folds and fringe
+  x.save();x.translate(60,41);x.rotate(-.25);blob(0,0,104,34,'#ad80cf');
+  x.strokeStyle='#e9d2fa';x.lineWidth=3;for(let i=-3;i<=3;i++){x.beginPath();x.moveTo(i*12,-13);x.lineTo(i*12+8,13);x.stroke();}
+  x.strokeStyle='#654779';for(let i=0;i<7;i++){x.beginPath();x.moveTo(-52+i*3,-14);x.lineTo(-57+i*3,-23);x.stroke();}x.restore();
+ }else{ // scattered socks with visible heels and cuffs
+  for(let i=0;i<3;i++){x.save();x.translate(33+i*24,37+(i%2)*12);x.rotate((i-1)*.48);
+   x.fillStyle=['#f3d17d','#8ac9dc','#ed93b3'][i];x.strokeStyle='#624b4b';x.lineWidth=2.5;
+   x.beginPath();x.moveTo(-11,-25);x.lineTo(13,-25);x.lineTo(13,7);x.quadraticCurveTo(28,9,23,24);x.quadraticCurveTo(15,32,-3,23);x.lineTo(-11,15);x.closePath();x.fill();x.stroke();
+   x.strokeStyle='#fff5e4';x.lineWidth=3;x.beginPath();x.moveTo(-11,-18);x.lineTo(13,-18);x.stroke();x.restore();}
+ }
+ x.restore();
+}
+// Chaotic Hallway 2.0: warm illustrated parquet, skirting boards, doorways and sunlit dust.
+function drawChaoticHallBackground(){
+ x.save();
+ const g=x.createLinearGradient(0,0,960,560);g.addColorStop(0,'#edc38a');g.addColorStop(.53,'#c58b58');g.addColorStop(1,'#a76d48');x.fillStyle=g;x.fillRect(0,0,960,560);
+ // Alternating wooden boards with offset seams, highlights and grain.
+ for(let row=0;row<9;row++){
+  const yy=row*67-10;
+  x.fillStyle=row%2?'rgba(90,47,27,.08)':'rgba(255,238,195,.10)';x.fillRect(0,yy,960,66);
+  x.strokeStyle='#8e5739';x.lineWidth=2.5;x.beginPath();x.moveTo(0,yy);x.lineTo(960,yy);x.stroke();
+  for(let col=-1;col<6;col++){
+   const xx=col*195+(row%2)*98;x.strokeStyle='rgba(97,50,31,.40)';x.lineWidth=2;x.beginPath();x.moveTo(xx,yy);x.lineTo(xx,yy+66);x.stroke();
+  }
+ }
+ for(let i=0;i<230;i++){
+  const xx=32+(i*149.27)%900,yy=32+(i*83.61)%490,len=10+(i*17)%56;
+  x.strokeStyle=i%4?'rgba(92,46,29,.15)':'rgba(255,240,195,.31)';x.lineWidth=i%5?1:1.7;
+  x.beginPath();x.moveTo(xx,yy);x.bezierCurveTo(xx+len*.3,yy-2,xx+len*.7,yy+2,xx+len,yy);x.stroke();
+ }
+ // Cream skirting and doorframes around the edge of the play area.
+ x.fillStyle='#684936';x.fillRect(0,0,960,24);x.fillRect(0,536,960,24);x.fillRect(0,0,23,560);x.fillRect(937,0,23,560);
+ x.fillStyle='#f7e5c6';x.fillRect(5,4,950,13);x.fillRect(5,539,950,14);x.fillRect(5,18,13,522);x.fillRect(942,18,13,522);
+ x.strokeStyle='#a67d58';x.lineWidth=2;x.strokeRect(23,24,914,512);
+ for(const xx of [110,410,735]){
+  x.save();x.translate(xx,18);x.fillStyle='#8d6248';x.fillRect(-48,0,96,17);x.fillStyle='#fff0d4';x.fillRect(-40,0,80,10);
+  x.fillStyle='#d9ac5b';x.beginPath();x.arc(33,7,4,0,Math.PI*2);x.fill();x.restore();
+ }
+ // Sunlight patches are purely cosmetic and never change placement.
+ for(let i=0;i<3;i++){
+  const xx=125+i*290;x.save();x.translate(xx,80+i*85);x.rotate(-.22);
+  const light=x.createLinearGradient(0,0,0,150);light.addColorStop(0,'rgba(255,250,205,.20)');light.addColorStop(1,'rgba(255,246,181,0)');x.fillStyle=light;x.fillRect(0,0,105,150);x.restore();
+ }
+ // A pair of abandoned shoes by the upper hallway wall (purely decorative).
+ x.save();x.translate(345,15);for(let j=0;j<2;j++){x.save();x.translate(j*46,0);x.rotate(j?.24:-.18);x.fillStyle=j?'#d98664':'#7199c5';x.strokeStyle='#4c4d53';x.lineWidth=1.6;x.beginPath();x.roundRect(-17,-8,34,25,8);x.fill();x.stroke();x.fillStyle='#f6e9d8';x.beginPath();x.roundRect(-18,10,36,8,3);x.fill();x.stroke();x.strokeStyle='#f6f3e9';x.lineWidth=1.5;for(let z=0;z<3;z++){x.beginPath();x.moveTo(-8,-2+z*4);x.lineTo(8,-2+z*4);x.stroke();}x.restore();}x.restore();
+ x.save();x.translate(752,38);x.rotate(.025);x.fillStyle='#fff1d7';x.strokeStyle='#956c4c';x.lineWidth=2;x.beginPath();x.roundRect(0,0,170,24,5);x.fill();x.stroke();x.fillStyle='#76503a';x.font='bold 11px sans-serif';x.textAlign='center';x.fillText('SOCKS MUST BE WORN',85,16);x.restore();
+ const t=performance.now()*.0004;
+ for(let i=0;i<34;i++){
+  const xx=34+(i*173.3)%888,yy=30+(i*117.7)%488;
+  x.globalAlpha=.09+.15*(.5+.5*Math.sin(t*2+i));x.fillStyle=i%2?'#fff9d9':'#fff0c4';x.beginPath();x.arc(xx+Math.sin(t+i)*3,yy+Math.cos(t+i)*2,1+i%3*.4,0,Math.PI*2);x.fill();
+ }
+ x.restore();
+}
+function drawChaoticHallObstacle(o){
+ const k=o.visualType%7;
+ x.save();x.translate(o.x,o.y);x.scale(o.w/120,o.h/82);
+ x.fillStyle='rgba(58,35,29,.20)';x.beginPath();x.ellipse(60,70,51,9,0,0,Math.PI*2);x.fill();
+ const shape=(xx,yy,w,h,fill,rot=0)=>{x.save();x.translate(xx,yy);x.rotate(rot);x.fillStyle=fill;x.strokeStyle='#604b46';x.lineWidth=2.7;x.beginPath();x.roundRect(-w/2,-h/2,w,h,11);x.fill();x.stroke();x.restore();};
+ if(k===0||k===5){ // oversized sneakers, separately outlined and laced
+  for(let j=0;j<2;j++){x.save();x.translate(j?79:39,j?40:37);x.rotate(j?.28:-.29);
+   shape(0,0,43,65,j?'#e9a35e':'#6d9dd4');shape(0,24,46,16,'#fff6e9');
+   x.strokeStyle='#fff5e1';x.lineWidth=2.5;for(let z=0;z<4;z++){x.beginPath();x.moveTo(-11,-18+z*8);x.lineTo(10,-18+z*8);x.stroke();}
+   x.fillStyle='#f5d37d';x.fillRect(-7,-28,14,7);x.restore();}
+ }else if(k===1){ // folded umbrella with curved handle and fabric ribs
+  x.save();x.translate(59,40);x.rotate(-.35);x.strokeStyle='#4d566c';x.lineWidth=7;x.lineCap='round';x.beginPath();x.moveTo(-43,0);x.lineTo(40,0);x.quadraticCurveTo(55,1,51,16);x.quadraticCurveTo(44,26,34,15);x.stroke();
+  x.fillStyle='#8f70cf';x.strokeStyle='#5c4b7d';x.lineWidth=2;x.beginPath();x.moveTo(-45,-11);x.lineTo(31,-11);x.lineTo(41,0);x.lineTo(-44,8);x.closePath();x.fill();x.stroke();
+  x.strokeStyle='#e3d0fa';x.lineWidth=2;for(let i=0;i<4;i++){x.beginPath();x.moveTo(-38+i*18,-10);x.lineTo(-38+i*18,7);x.stroke();}x.restore();
+ }else if(k===2){ // realistic keyring with distinct metal keys, bow holes and cut teeth
+  x.save();x.translate(48,35);
+  x.fillStyle='rgba(50,40,35,.23)';x.beginPath();x.ellipse(13,15,43,12,-.12,0,Math.PI*2);x.fill();
+  x.strokeStyle='#71767c';x.lineWidth=3.5;x.beginPath();x.arc(0,0,15,0,Math.PI*2);x.stroke();
+  x.strokeStyle='#dfe3e6';x.lineWidth=1.4;x.beginPath();x.arc(0,0,12,0,Math.PI*2);x.stroke();
+  for(let i=0;i<3;i++){
+   x.save();x.rotate([-.75,.12,.88][i]);x.translate(7,3);
+   const metal=['#d4ac54','#c1cbd1','#d6ba79'][i];
+   x.fillStyle=metal;x.strokeStyle='#5d6269';x.lineWidth=1.5;
+   x.beginPath();x.arc(0,0,8,0,Math.PI*2);x.fill();x.stroke();
+   x.fillStyle='#6c7277';x.beginPath();x.arc(0,0,3.2,0,Math.PI*2);x.fill();
+   x.fillStyle=metal;x.beginPath();x.moveTo(5,-3.5);x.lineTo(34,-3.5);x.lineTo(34,1);x.lineTo(30,1);x.lineTo(30,6);x.lineTo(25,6);x.lineTo(25,2);x.lineTo(21,2);x.lineTo(21,5);x.lineTo(17,5);x.lineTo(17,3.5);x.lineTo(5,3.5);x.closePath();x.fill();x.stroke();
+   x.strokeStyle='rgba(255,255,255,.65)';x.lineWidth=1;x.beginPath();x.moveTo(9,-2);x.lineTo(30,-2);x.stroke();x.restore();
+  }x.restore();
+ }else if(k===3){ // upright terracotta plant pot with visible soil and foliage
+  x.save();x.translate(60,44);
+  x.fillStyle='rgba(60,33,23,.20)';x.beginPath();x.ellipse(0,23,39,9,0,0,Math.PI*2);x.fill();
+  x.fillStyle='#b96642';x.strokeStyle='#80402d';x.lineWidth=2.8;
+  x.beginPath();x.moveTo(-30,-9);x.lineTo(-23,24);x.quadraticCurveTo(0,32,23,24);x.lineTo(30,-9);x.closePath();x.fill();x.stroke();
+  x.fillStyle='#e49a69';x.beginPath();x.roundRect(-34,-14,68,12,3);x.fill();x.stroke();
+  x.fillStyle='#493025';x.beginPath();x.ellipse(0,-14,30,8,0,0,Math.PI*2);x.fill();
+  // clumps of soil spilling over the rim onto the floor
+  x.fillStyle='#65442e';for(const [sx,sy,r] of [[-38,4,5],[-46,10,3],[-36,16,4],[39,9,5],[46,15,3],[32,22,3],[-51,18,2]]){x.beginPath();x.arc(sx,sy,r,0,Math.PI*2);x.fill();}
+  x.fillStyle='#8b6040';for(const [sx,sy] of [[-42,8],[42,12],[-35,17],[0,-12],[13,-15],[-12,-15]]){x.beginPath();x.arc(sx,sy,1.6,0,Math.PI*2);x.fill();}
+  x.strokeStyle='#3f7650';x.lineWidth=4;x.lineCap='round';
+  for(let i=0;i<6;i++){let ex=-31+i*12,ey=-34-(i%3)*8;x.beginPath();x.moveTo(0,-14);x.quadraticCurveTo(ex*.4,-38,ex,ey);x.stroke();x.fillStyle=i%2?'#7db968':'#3e975d';x.beginPath();x.ellipse(ex,ey,12,6,(i-2)*.34,0,Math.PI*2);x.fill();x.strokeStyle='#2e6b42';x.lineWidth=1;x.stroke();x.strokeStyle='#3f7650';x.lineWidth=4;}
+  x.strokeStyle='rgba(255,216,165,.55)';x.lineWidth=2;x.beginPath();x.moveTo(-22,-1);x.lineTo(-17,18);x.stroke();x.restore();
+ }else if(k===4){ // mismatched slippers with stitched seams
+  for(let i=0;i<2;i++){x.save();x.translate(i?79:38,i?42:39);x.rotate(i?.28:-.18);shape(0,0,42,62,i?'#f1aeaf':'#88c5b6');shape(0,-9,43,27,i?'#e38f9b':'#63b4a3');x.strokeStyle='#fff2dd';x.lineWidth=2;x.beginPath();x.arc(0,-7,13,0,Math.PI);x.stroke();x.restore();}
+ }else{ // fallen small toy blocks
+  for(let i=0;i<4;i++){x.save();x.translate(31+(i%2)*49,27+Math.floor(i/2)*31);x.rotate((i-1.5)*.22);shape(0,0,40,28,['#e9b75c','#79b5df','#d88eac','#91c78b'][i]);x.fillStyle='rgba(255,255,255,.4)';x.fillRect(-13,-9,24,4);x.restore();}
+ }
+ x.restore();
+}
+function drawChaoticHallPathDetails(path){
+ x.save();x.beginPath();x.moveTo(path[0].x,path[0].y);for(const p of path.slice(1))x.lineTo(p.x,p.y);
+ x.lineWidth=3;x.strokeStyle='rgba(255,211,137,.8)';x.setLineDash([5,12]);x.stroke();x.setLineDash([]);
+ x.restore();
+}
+function draw(){updateMoneyBills();x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){drawShoeBoxCartoonBackground();}if(map==='closet'){drawMessyClosetBackground();}if(map==='hall'){drawChaoticHallBackground();}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let q of p.slice(1))x.lineTo(q.x,q.y);x.lineWidth=map==='box'?66:56;x.strokeStyle=map==='box'?'#653a29':map==='closet'?'#59405c':'#6c3136';x.stroke();x.lineWidth=map==='box'?57:42;x.strokeStyle=map==='box'?'#e0a464':map==='closet'?'#a788ba':'#b34d53';x.stroke();if(map==='box'){x.save();x.lineWidth=3;x.strokeStyle='rgba(255,239,190,.65)';x.setLineDash([7,15]);x.stroke();x.setLineDash([]);x.restore();drawShoeBoxCartoonPathDetails(p);}if(map==='hall')drawChaoticHallPathDetails(p);for(let [obstacleIndex,o] of obs().entries()){if(map==='box'){drawShoeBoxPackagingObstacle(o,obstacleIndex);continue;}if(map==='closet'){drawMessyClosetObstacle(o);continue;}if(map==='hall'){drawChaoticHallObstacle(o);continue;}if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
   x.save();
   const rr=infoTower.range, cx=infoTower.x, cy=infoTower.y;
   // Premium range indicator: soft black tint + layered rings + cardinal ticks.
@@ -4896,17 +5308,18 @@ function showEnemyInfo(e){infoTower=null;let box=$('info');box.classList.remove(
 /* Basic first-person control for a selected sock. This is intentionally local-only:
    it reuses the existing enemy objects and hit() function and does not alter
    normal tower targeting or the multiplayer protocol. */
+let fpsPointerLocked=false,fpsViewEventsBound=false;
 let fpsActive=false, fpsBaseMaxHP=250,fpsTower=null,fpsCameraX=0,fpsCameraY=0,fpsYaw=0,fpsPitch=0,fpsBaseYaw=0,fpsAnim=0,fpsMouseX=0.5,fpsMouseY=0.5,fpsLastShot=0,fpsLookX=null,fpsLookY=null,fpsLookHeld=false,fpsCrosshairY=0.5,fpsYawTarget=0,fpsPitchTarget=0,fpsHP=100,fpsMaxHP=100,fpsLastDamage=0;
 const fpsMonsterEmoji={frog:'🐸',fly:'🪰',golem:'🗿',speed:'💨',silver:'🥈',wash:'🧼',piggy:'🐷',treeflame:'🌳',psyguy:'🧠',ironjaw:'🦷',shellbum:'🐚',boss:'👹'};
 function fpsNormAngle(a){while(a>Math.PI)a-=Math.PI*2;while(a<-Math.PI)a+=Math.PI*2;return a}
 function enterFPSView(i){
   const t=tw[i]; if(!t)return;
   if(document.body.classList.contains('tutorialLock')&&(!document.body.classList.contains('tutorialPlacement'))){return}
-  fpsTower=t;fpsCameraX=t.x;fpsCameraY=t.y;fpsActive=true;fpsLastShot=0;fpsBaseMaxHP=Math.max(1,Number(window.sandboxBaseHp)||250);fpsPitch=0;fpsMouseX=.5;fpsMouseY=.5;fpsLookX=null;fpsLookY=null;fpsLookHeld=false;fpsLastClientX=null;fpsLastClientY=null;
+  fpsTower=t;fpsCameraX=t.x;fpsCameraY=t.y;fpsActive=true;fpsLastShot=0;fpsBaseMaxHP=Math.max(1,Number(window.sandboxBaseHp)||250);fpsPitch=0;fpsMouseX=.5;fpsMouseY=.5;fpsLookX=null;fpsLookY=null;fpsLookHeld=false;fpsLastClientX=null;fpsLastClientY=null;fpsPointerLocked=false;fpsFallbackDrawKey=null;fpsRender._last=performance.now();
   // Start the FPS view aligned with the actual map/path direction instead of
   // the nearest enemy. This keeps the flat map straight ahead when entering FPS.
   // The camera itself still has zero pitch and zero roll.
-  let pathYaw=0, pathBest=Infinity;
+  let pathYaw=0, pathBest=Infinity, pathFocusX=480,pathFocusY=280;
   const pts=fpsGetWorldPath();
   for(let k=0;k<pts.length-1;k++){
     const a=pts[k],b=pts[k+1];
@@ -4916,74 +5329,76 @@ function enterFPSView(i){
     const u=Math.max(0,Math.min(1,(pax*abx+pay*aby)/(len*len)));
     const qx=a.x+abx*u, qy=a.y+aby*u;
     const d=Math.hypot(t.x-qx,t.y-qy);
-    if(d<pathBest){ pathBest=d; pathYaw=Math.atan2(aby,abx); }
+    if(d<pathBest){ pathBest=d; pathYaw=Math.atan2(aby,abx); pathFocusX=qx;pathFocusY=qy; }
   }
   // Make the first view face along the map, not diagonally across it.
-  fpsBaseYaw=pathBest<260?pathYaw:0;
+  fpsBaseYaw=pathBest>32&&pathBest<430?Math.atan2(pathFocusY-t.y,pathFocusX-t.x):pathBest<260?pathYaw:0;
   fpsYaw=fpsBaseYaw;fpsYawTarget=fpsBaseYaw;fpsPitchTarget=0;
   $('fpsView').classList.remove('hidden'); $('info').classList.add('hiddenInfo'); fpsSetWeapon();
   const r=$('fpsScene').getBoundingClientRect();
   $('fpsCrosshair').style.left=(r.width*.5)+'px'; $('fpsCrosshair').style.top=(r.height*.5)+'px';
-  fpsRender();
+  cancelAnimationFrame(fpsAnim);fpsRender();
 }
 function exitFPSView(){
-  fpsActive=false;fpsLookHeld=false;fpsLookX=null;fpsLookY=null;
-  if(document.pointerLockElement===$('fpsScene')&&document.exitPointerLock)document.exitPointerLock();
+  fpsActive=false;fpsLookHeld=false;fpsPointerLocked=false;fpsLookX=null;fpsLookY=null;
+  if(document.pointerLockElement&&document.exitPointerLock)document.exitPointerLock();
   if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});
   fpsTower=null;cancelAnimationFrame(fpsAnim);
   $('fpsView').classList.add('hidden');draw();
 }
+// True FPS camera: yaw and pitch come from the same mouse input path.
+// Right mouse drag is always supported, including file:// and browsers where
+// pointer lock is denied. Pointer lock is optional, never a prerequisite.
 function fpsSetCrosshairY(y){
-  const scene=$('fpsScene'),r=scene.getBoundingClientRect();
-  scene.style.setProperty('--fps-kick',String(fpsFeelKick));
-  const clamped=Math.max(0,Math.min(r.height,y));
-  fpsCrosshairY=r.height?clamped/r.height:0.5;
-  const cross=$('fpsCrosshair');
-  cross.style.left=(r.width*.5)+'px';
-  cross.style.top=clamped+'px';
+  const r=$('fpsScene').getBoundingClientRect();
+  const ch=$('fpsCrosshair');
+  fpsCrosshairY=.5;
+  ch.style.left=(r.width*.5)+'px';ch.style.top=(r.height*.5)+'px';
 }
 function fpsApplyLook(dx,dy){
   if(!fpsActive||!fpsLookHeld)return;
-  // RMB only rotates horizontally. Vertical mouse movement moves the crosshair,
-  // not the camera, so the player can aim at different heights while standing still.
-  fpsYawTarget=fpsNormAngle(fpsYawTarget+dx*0.0044);
-  const scene=$('fpsScene'),r=scene.getBoundingClientRect();
-  fpsSetCrosshairY(fpsCrosshairY*r.height+dy);
-  fpsPitchTarget=0;
+  fpsYawTarget=fpsNormAngle(fpsYawTarget+dx*.0040);
+  fpsPitchTarget=Math.max(-1.04,Math.min(1.04,fpsPitchTarget-dy*.0034));
 }
 function fpsAimFromMouse(clientX,clientY){
-  if(!fpsActive)return;
-  const r=$('fpsScene').getBoundingClientRect();
-  const x=Math.max(0,Math.min(r.width,clientX-r.left)),y=Math.max(0,Math.min(r.height,clientY-r.top));
-  if(!fpsLookHeld){
-    fpsSetCrosshairY(y);
-    return;
-  }
-  if(fpsLookX===null){fpsLookX=x;fpsLookY=y;fpsSetCrosshairY(y);return}
-  fpsApplyLook(x-fpsLookX,y-fpsLookY);
-  fpsLookX=x;fpsLookY=y;
+  // The centre reticle is used by both hit detection and WebGL. Only moving
+  // the view changes the target; the mouse cursor cannot desync the hitbox.
+  if(fpsActive)fpsSetCrosshairY(0);
+}
+function fpsCameraVP(sw,sh){
+  const cp=Math.cos(fpsPitch),sp=Math.sin(fpsPitch);
+  const cx=fpsCameraX+Math.cos(fpsYaw)*cp*100;
+  const cz=fpsCameraY+Math.sin(fpsYaw)*cp*100;
+  const view=fpsLookAt(fpsCameraX,34,fpsCameraY,cx,34+sp*100,cz);
+  return fpsMatMul(fpsPerspective(Math.PI/3,sw/sh,.5,3200),view);
+}
+function fpsProjectPoint(wx,wy,wz,sw,sh){
+  const dx=wx-fpsCameraX,dz=wz-fpsCameraY,dy=wy-34;
+  const c=Math.cos(fpsYaw),s=Math.sin(fpsYaw);
+  const forward=dx*c+dz*s, lateral=-dx*s+dz*c;
+  const cp=Math.cos(fpsPitch),sp=Math.sin(fpsPitch);
+  const depth=forward*cp+dy*sp;
+  if(depth<=.5)return null;
+  const height=dy*cp-forward*sp;
+  const focal=(sh*.5)/Math.tan(Math.PI/6);
+  return {x:sw*.5+lateral/depth*focal,y:sh*.5-height/depth*focal,forward:depth,lateral,focalY:focal,focalX:focal};
 }
 
 function fpsEnemyProjection(e,sw,sh){
   if(!e||e.dead)return null;
-  const ground=fpsProjectGround(e.x,e.y,sw,sh);
-  if(!ground)return null;
+  const foot=fpsProjectPoint(e.x,-9,e.y,sw,sh);
+  const head=fpsProjectPoint(e.x,43,e.y,sw,sh);
+  if(!foot||!head)return null;
   const yawErr=fpsNormAngle(Math.atan2(e.y-fpsCameraY,e.x-fpsCameraX)-fpsYaw);
-  if(Math.abs(yawErr)>1.05)return null;
-
-  // One projection is used for both rendering and shooting. This prevents
-  // the crosshair from using a different hitbox than the visible enemy.
-  const scale=Math.max(.34,Math.min(3.3,ground.focalY/Math.max(1,ground.forward)*0.17));
-  const w=150*scale, h=162*scale;
-  const left=ground.x-w*.5;
-  const top=(ground.y-28)-h*.82;
-  return {
-    e,x:ground.x,y:ground.y-28,scale,w,h,
-    left,top,right:left+w,bottom:top+h,
-    centerY:top+h*.54,
-    distance:ground.forward,
-    yawErr
-  };
+  if(Math.abs(yawErr)>1.25)return null;
+  // Monster art is rendered at 150x162. Its apparent world height is 52.
+  // Use that same rectangle for shooting, with a slight edge tolerance.
+  const h=Math.max(13,Math.min(sh*2.8,Math.abs(foot.y-head.y)));
+  const scale=Math.max(.08,Math.min(4.0,h/162));
+  const w=150*scale;
+  const left=foot.x-w*.5,top=foot.y-h;
+  if(left>sw+60||left+w< -60||top>sh+60||foot.y< -60)return null;
+  return {e,x:foot.x,y:foot.y,scale,w,h,left,top,right:left+w,bottom:foot.y,centerY:top+h*.55,distance:foot.forward,yawErr};
 }
 
 function fpsShotCooldownMs(){
@@ -5076,9 +5491,10 @@ function fpsShoot(targetOverride){
   if(fpsLastShot&&now-fpsLastShot<cooldownMs)return;
   fpsLastShot=now;
   fpsAttackAnimation();
+  fpsFeelOnShot();
 
   const scene=$('fpsScene'),sw=scene.clientWidth||960,sh=scene.clientHeight||560;
-  const crossX=sw*.5, crossY=fpsCrosshairY*sh;
+  const crossX=sw*.5, crossY=sh*.5;
   const candidates=[];
 
   for(const e of en){
@@ -5112,7 +5528,6 @@ function fpsShoot(targetOverride){
   if(hitTarget){
     const before=hitTarget.hp;
     hit(hitTarget,Math.max(1,Math.round(fpsTower.damage)));
-    fpsTower.cool=0;
     const dealt=Math.max(0,Math.min(before,Math.round(fpsTower.damage)));
     $('fpsHitmarker').classList.remove('show');
     void $('fpsHitmarker').offsetWidth;
@@ -5126,29 +5541,7 @@ function fpsShoot(targetOverride){
 }
 
 function fpsProjectGround(wx,wy,sw,sh){
-  // Single camera model shared with the WebGL world. The player is a fixed
-  // observer; only horizontal yaw changes. Every DOM object uses the exact
-  // same perspective as the 3D map so nothing appears to slide or warp.
-  const dx=wx-fpsCameraX, dz=wy-fpsCameraY;
-  const c=Math.cos(fpsYaw), s=Math.sin(fpsYaw);
-  const forward=dx*c+dz*s;
-  const lateral=-dx*s+dz*c;
-  if(forward<=0.5)return null;
-  const fov=Math.PI/3;
-  const focalY=(sh*0.5)/Math.tan(fov*0.5);
-  const focalX=focalY*(sw/sh);
-  // FPS enemies walk inside the recessed path channel.
-  const cameraHeight=34;
-  const channelFloor=-9;
-  const relativeGroundHeight=cameraHeight-channelFloor;
-  return {
-    x:sw*0.5+(lateral/forward)*focalX,
-    y:sh*0.5+(relativeGroundHeight/forward)*focalY,
-    forward,
-    lateral,
-    focalY,
-    focalX
-  };
+  return fpsProjectPoint(wx,-9,wy,sw,sh);
 }
 
 let fpsGL=null,fpsGLProg=null,fpsGLBuf=null,fpsGLReady=false;
@@ -5165,7 +5558,7 @@ function fpsLookAt(ex,ey,ez,cx,cy,cz){
   let yx=zy*xz-zz*xy,yy=zz*xx-zx*xz,yz=zx*xy-zy*xx;
   return new Float32Array([xx,yx,zx,0,xy,yy,zy,0,xz,yz,zz,0,-(xx*ex+xy*ey+xz*ez),-(yx*ex+yy*ey+yz*ez),-(zx*ex+zy*ey+zz*ez),1])
 }
-function fpsGLInit(){if(fpsGLReady)return true;const c=$('fpsWorld3D');if(!c)return false;fpsGL=c.getContext('webgl',{alpha:false,antialias:true,depth:true});if(!fpsGL)return false;const vs=`attribute vec3 aPos;attribute vec3 aCol;uniform mat4 uVP;varying vec3 vCol;varying vec3 vWorld;void main(){gl_Position=uVP*vec4(aPos,1.0);vCol=aCol;vWorld=aPos;}`;
+function fpsGLInit(){if(fpsGLReady)return true;const c=$('fpsWorld3D');if(!c)return false;fpsGL=c.getContext('webgl',{alpha:false,antialias:true,depth:true})||c.getContext('experimental-webgl',{alpha:false,antialias:true,depth:true});if(!fpsGL)return false;const vs=`attribute vec3 aPos;attribute vec3 aCol;uniform mat4 uVP;varying vec3 vCol;varying vec3 vWorld;void main(){gl_Position=uVP*vec4(aPos,1.0);vCol=aCol;vWorld=aPos;}`;
 const fs=`precision mediump float;varying vec3 vCol;varying vec3 vWorld;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float noise(vec2 p){
@@ -5265,6 +5658,7 @@ function fpsSockVisualKey(t){
     String(t.k==='thunder'?(window.thunderSockSkinMode||'classic'):''),
     String(t.k==='golden'?(window.goldenSockSkinMode||'classic'):''),
     String(t.k==='laundry'?(window.laundrySockSkinMode||'classic'):''),
+    String(t.k==='clock'?(window.socktdClockSkinMode||'classic'):''),
     String(t.rot||0)
   ].join('|');
 }
@@ -5276,7 +5670,8 @@ function fpsSockTexture(t){
   const key='td-wrap-sock:'+fpsSockVisualKey(t);
   let state=fpsSockTextureState.get(key);
   const now=performance.now();
-  if(state && state.tex && (now-state.lastBake)<FPS_TEX_REFRESH_MS)return state.tex;
+  const refresh=t.k==='clock'&&window.socktdClockSkinMode==='alarm'?950:2500;
+  if(state && state.tex && (now-state.lastBake)<refresh)return state.tex;
 
   // Build one opaque wrap texture from the exact TD sock artwork.
   // The centre is the original TD view; the opposite half is a mirrored view;
@@ -5317,7 +5712,7 @@ function fpsSockTexture(t){
   ctx.save();
   ctx.translate(1024,0);
   ctx.scale(-1,1);
-  ctx.drawImage(frontOpaque,512,0,-512,512);
+  ctx.drawImage(frontOpaque,0,0,512,512);
   ctx.restore();
 
   // Soften the two side seams with the outermost columns of the TD artwork.
@@ -5338,11 +5733,17 @@ function fpsSockTexture(t){
   gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
   if(!state)state={tex:null,lastBake:0};
   state.tex=tex;state.lastBake=now;
   fpsSockTextureState.set(key,state);
+  if(fpsSockTextureState.size>36){
+    for(const [oldKey,oldState] of fpsSockTextureState){
+      if(oldKey===key)continue;gl.deleteTexture(oldState.tex);fpsSockTextureState.delete(oldKey);
+      if(fpsSockTextureState.size<=22)break;
+    }
+  }
   return tex;
 }
 
@@ -5383,7 +5784,7 @@ function fpsTriangulatePolygon(poly){
     for(let n=0;n<idx.length;n++){
       const ia=idx[(n-1+idx.length)%idx.length],ib=idx[n],ic=idx[(n+1)%idx.length];
       const a=poly[ia],b=poly[ib],c=poly[ic];
-      if((ccw?cross(a,b,c):cross(a,b,c))<=0)continue;
+      if((ccw?cross(a,b,c):-cross(a,b,c))<=.00001)continue;
       let blocked=false;
       for(const id of idx){
         if(id===ia||id===ib||id===ic)continue;
@@ -5438,6 +5839,123 @@ function fpsGLAddSockModel(arr,t,rot,now){
   const addTri=(a,b,c,col)=>arr.push(a.x,a.y,a.z,...col,b.x,b.y,b.z,...col,c.x,c.y,c.z,...col);
   const seg=18;
 
+  if(t.k==='fire'&&!t.fused){
+    // FIRE SOCK V3: smoothly sculpted, solid stocking body.
+    // Catmull-Rom outline + bevelled sides + short-edge face triangles.
+    // No triangle-fan stretching across the sock.
+    const outline=[
+      [-10.4,51.3],[-10.7,47.0],[-10.5,40.0],[-10.3,31.0],
+      [-10.4,22.0],[-10.5,14.0],[-10.6,7.0],[-10.4,1.0],
+      [-8.5,-3.5],[-3.0,-6.3],[4.5,-6.9],[12.5,-6.8],
+      [19.0,-5.0],[23.2,-1.7],[24.0,3.0],[22.2,6.7],
+      [18.1,8.6],[13.1,9.6],[11.0,12.6],[10.6,19.0],
+      [10.5,29.0],[10.5,39.0],[10.5,47.0],[10.3,51.3]
+    ];
+    const smooth=[];
+    const steps=4;
+    for(let i=0;i<outline.length;i++){
+      const p0=outline[(i-1+outline.length)%outline.length],p1=outline[i];
+      const p2=outline[(i+1)%outline.length],p3=outline[(i+2)%outline.length];
+      for(let j=0;j<steps;j++){
+        const u=j/steps,u2=u*u,u3=u2*u;
+        const coord=k=>.5*((2*p1[k])+(-p0[k]+p2[k])*u+
+          (2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*u2+
+          (-p0[k]+3*p1[k]-3*p2[k]+p3[k])*u3);
+        smooth.push([coord(0),coord(1)]);
+      }
+    }
+    const N=smooth.length;
+    const mid=[4.0,21.0];
+    const red=[.91,.15,.055],orange=[1,.47,.065],warm=[1,.62,.12],
+          shade=[.66,.16,.055],rim=[1,.55,.10];
+    const mix=(a,b,t)=>a.map((v,i)=>v*(1-t)+b[i]*t);
+    // The rear surface is rounded as well, not a flat triangle fan.
+    function backDepth(x,y){
+      const taper=Math.min(1,Math.abs(x-3.0)/27);
+      return -9.1-1.35*(1-taper*taper)-.25*Math.sin(y*.10);
+    }
+    function frontDepth(x,y){
+      const taper=Math.min(1,Math.abs(x)/27);
+      return 9.1+1.5*(1-taper*taper)+.32*Math.sin(y*.11);
+    }
+    const ringLayers=[
+      {z:-9.3,s:.97},{z:-8.5,s:1.01},{z:-6.2,s:1.035},
+      {z:-3.0,s:1.055},{z:0,s:1.06},{z:3.0,s:1.055},
+      {z:6.2,s:1.035},{z:8.5,s:1.01},{z:9.3,s:.97}
+    ];
+    const rings=ringLayers.map(L=>smooth.map(([x,y])=>{
+      const z=L.z>8?frontDepth(x,y):L.z< -9?backDepth(x,y):L.z;
+      return world(mid[0]+(x-mid[0])*L.s,mid[1]+(y-mid[1])*L.s,z);
+    }));
+    for(let layer=0;layer<rings.length-1;layer++){
+      for(let i=0;i<N;i++){
+        const j=(i+1)%N;
+        // Warm orange highlights run around both sides, with deeper red in
+        // the side shadow. Avoid sudden flat color changes at each ring.
+        const angle=(layer+.5)/(rings.length-1)*Math.PI;
+        const lightness=Math.max(0,Math.sin(angle));
+        const color=mix(mix(shade,red,.45+lightness*.35),orange,
+          .20+.42*lightness+.10*Math.sin(smooth[i][1]*.095));
+        addTri(rings[layer][i],rings[layer][j],rings[layer+1][j],color);
+        addTri(rings[layer][i],rings[layer+1][j],rings[layer+1][i],color);
+      }
+    }
+    // Ear-clip the concave sock outline rather than connecting everything to
+    // one centre. Each face is subdivided into compact triangles.
+    const points=smooth.map(([x,y])=>[mid[0]+(x-mid[0])*.97,mid[1]+(y-mid[1])*.97]);
+    let signed=0;
+    for(let i=0;i<N;i++){const a=points[i],b=points[(i+1)%N];signed+=a[0]*b[1]-b[0]*a[1]}
+    const ids=Array.from({length:N},(_,i)=>i);
+    if(signed<0)ids.reverse();
+    const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+    const inTri=(p,a,b,c)=>cross(a,b,p)>=-1e-7&&cross(b,c,p)>=-1e-7&&cross(c,a,p)>=-1e-7;
+    function faceTriangle(a,b,c,depth=0,back=false){
+      const length=(u,v)=>Math.hypot(u[0]-v[0],u[1]-v[1]);
+      if(depth<5&&Math.max(length(a,b),length(b,c),length(c,a))>6.5){
+        const ab=[(a[0]+b[0])/2,(a[1]+b[1])/2];
+        const bc=[(b[0]+c[0])/2,(b[1]+c[1])/2];
+        const ca=[(c[0]+a[0])/2,(c[1]+a[1])/2];
+        faceTriangle(a,ab,ca,depth+1,back);faceTriangle(ab,b,bc,depth+1,back);
+        faceTriangle(ca,bc,c,depth+1,back);faceTriangle(ab,bc,ca,depth+1,back);
+        return;
+      }
+      const avgY=(a[1]+b[1]+c[1])/3;
+      const blend=Math.max(0,Math.min(1,(avgY+7)/64));
+      const color=back?mix(shade,orange,.22+.30*blend):
+        mix(red,orange,.40+.32*Math.sin(avgY*.07)+.16*blend);
+      const vertex=p=>world(p[0],p[1],back?backDepth(p[0],p[1]):frontDepth(p[0],p[1]));
+      if(back)addTri(vertex(c),vertex(b),vertex(a),color);
+      else addTri(vertex(a),vertex(b),vertex(c),color);
+    }
+    let guard=0;
+    while(ids.length>3&&guard++<N*N){
+      let clipped=false;
+      for(let i=0;i<ids.length;i++){
+        const ia=ids[(i-1+ids.length)%ids.length],ib=ids[i],ic=ids[(i+1)%ids.length];
+        const a=points[ia],b=points[ib],c=points[ic];
+        if(cross(a,b,c)<=1e-5)continue;
+        if(ids.some(id=>id!==ia&&id!==ib&&id!==ic&&inTri(points[id],a,b,c)))continue;
+        faceTriangle(a,b,c);
+        faceTriangle(a,b,c,0,true);
+        ids.splice(i,1);clipped=true;break;
+      }
+      if(!clipped)break;
+    }
+    if(ids.length===3){
+      faceTriangle(points[ids[0]],points[ids[1]],points[ids[2]]);
+      faceTriangle(points[ids[0]],points[ids[1]],points[ids[2]],0,true);
+    }
+    // Small rounded stitch accents on the two side seams.
+    for(const side of [-1,1]){
+      for(let y=13;y<47;y+=5.5){
+        const x=side*10.35;
+        const z=-.4;
+        const a=world(x,y,z-1.35),b=world(x,y+.9,z),
+              c=world(x,y,z+1.35);
+        addTri(a,b,c,mix(red,warm,.48));
+      }
+    }
+  }else{
   // The TD sock silhouette is the reference, but this is a real rounded 3D mesh.
   // Local +Z points toward the road.  The front silhouette is a classic hanging
   // stocking: straight leg, ankle, heel/foot extension and a rounded toe.
@@ -5487,6 +6005,7 @@ function fpsGLAddSockModel(arr,t,rot,now){
     addTri(bc,world(profile[n][0]*.90,profile[n][1]+9.5,backZ),world(profile[i][0]*.90,profile[i][1]+9.5,backZ),mat.dark);
   }
 
+  }
   // Rounded cuff, matching the recognizable TD top section.
   const cuffY=52.2, cuffR=11.0;
   for(let j=0;j<4;j++){
@@ -5501,7 +6020,7 @@ function fpsGLAddSockModel(arr,t,rot,now){
 
   // A rounded sole band makes the bottom read as a real sock instead of a card.
   const sole=mat.dark;
-  for(let q=0;q<14;q++){
+  if(t.k!=='fire'||t.fused)for(let q=0;q<14;q++){
     const z=-4.0+q*1.75, w=20.5-Math.abs(z-8)*.28;
     const a=world(-w,2.7,z),b=world(w,2.7,z),c=world(w*.96,1.8,z+.8),d=world(-w*.96,1.8,z+.8);
     addTri(a,b,c,sole);addTri(a,c,d,sole);
@@ -5519,10 +6038,52 @@ function fpsGLAddSockModel(arr,t,rot,now){
     const p1=world(-w,y,z),p2=world(w,y,z),p3=world(w,y+h,z+.8),p4=world(-w,y+h,z+.8);
     addTri(p1,p2,p3,col);addTri(p1,p3,p4,col);
   }
-  // Two small eyes keep the character readable without making it scary.
-  const eyeCol=(k==='fire'||k==='fight')?[1,.10,.10]:k==='ice'?[.35,.85,1]:k==='thunder'?[1,.9,.12]:k==='golden'?[1,.85,.25]:[.65,.35,1];
-  if(!t.fused){
-    ball(-4.2,31.5,9.0,1.65,eyeCol);ball(4.2,31.5,9.0,1.65,eyeCol);
+  // FIRE SOCK FACE V2: sculpted angry expression with animated flame eyes.
+  // All geometry uses the same rotated local coordinates as the sock body.
+  if(k==='fire'){
+    const time=now*.001;
+    const coal=[.19,.035,.025], ember=[1,.22,.025], gold=[1,.79,.10], hot=[1,.97,.52];
+    function faceTri(x1,y1,z1,x2,y2,z2,x3,y3,z3,color){
+      addTri(world(x1,y1,z1),world(x2,y2,z2),world(x3,y3,z3),color);
+      addTri(world(x3,y3,z3),world(x2,y2,z2),world(x1,y1,z1),color);
+    }
+    function faceBar(ax,ay,bx,by,width,z,color){
+      const dx=bx-ax,dy=by-ay,len=Math.hypot(dx,dy)||1;
+      const nx=-dy/len*width*.5,ny=dx/len*width*.5;
+      faceTri(ax+nx,ay+ny,z,bx+nx,by+ny,z, bx-nx,by-ny,z,color);
+      faceTri(ax+nx,ay+ny,z,bx-nx,by-ny,z, ax-nx,ay-ny,z,color);
+    }
+    // Deep charcoal eye sockets and downward-sloping brows create the scowl.
+    for(const side of [-1,1]){
+      const x=side*4.8;
+      ball(x,32.0,9.25,3.15,coal);
+      ball(x,32.0,11.4,2.12,ember);
+      ball(x,32.25,12.85,1.15,gold);
+      ball(x,32.6,13.65,.53,hot);
+      // Angry eyebrows slant down toward the middle.
+      faceBar(x-side*2.95,37.6,x+side*2.65,35.35,2.5,12.6,coal);
+      faceBar(x-side*2.7,38.05,x+side*2.35,35.85,.75,13.0,[.96,.28,.06]);
+      // A living tongue of fire grows from each eye and flickers every frame.
+      const flick=Math.sin(time*8.0+(side+1)*1.8);
+      const tipX=x+side*(.45+flick*.75);
+      const tipY=39.0+flick*1.65;
+      faceTri(x-2.0,33.25,12.25,x+2.0,33.25,12.25,tipX,tipY,12.8,ember);
+      faceTri(x-.8,33.7,13.4,x+.8,33.7,13.4,tipX,tipY-1.3,13.45,gold);
+      faceTri(x-.4,34.2,13.75,x+.4,34.2,13.75,tipX,tipY-2.2,13.9,hot);
+    }
+    // Tight, furious mouth with a glowing hot lower edge.
+    faceBar(-4.5,22.9,-1.7,21.7,1.55,11.7,coal);
+    faceBar(-1.7,21.7,1.7,21.7,1.55,11.7,coal);
+    faceBar(1.7,21.7,4.5,22.9,1.55,11.7,coal);
+    faceBar(-2.5,20.7,2.5,20.7,.62,12.05,ember);
+    // Two small cheek embers frame the expression.
+    ball(-8.2,26.8,9.8,.95,[.98,.30,.045]);
+    ball(8.2,26.8,9.8,.95,[.98,.30,.045]);
+  }else{
+    const eyeCol=k==='fight'?[1,.10,.10]:k==='ice'?[.35,.85,1]:k==='thunder'?[1,.9,.12]:k==='golden'?[1,.85,.25]:[.65,.35,1];
+    if(!t.fused){
+      ball(-4.2,31.5,9.0,1.65,eyeCol);ball(4.2,31.5,9.0,1.65,eyeCol);
+    }
   }
   // Simple 3D motif per TD sock: color bands/plates rather than a copied texture.
   if(k==='fire'){
@@ -5571,6 +6132,51 @@ function fpsGLAddSockModel(arr,t,rot,now){
   }
 }
 
+// FPS-only Fire Sock flame crowns: animated 3D triangular tongues and sparks.
+// No transparent textures or billboard sprites; flames are double-sided geometry.
+function fpsGLFireSockFlames(arr,t,rot,now){
+  const co=Math.cos(rot),si=Math.sin(rot),cx=t.x,cz=t.y;
+  const point=(x,y,z)=>({x:cx+x*co-z*si,y,z:cz+x*si+z*co});
+  const tri=(a,b,c,color)=>{
+    arr.push(a.x,a.y,a.z,...color,b.x,b.y,b.z,...color,c.x,c.y,c.z,...color);
+    arr.push(c.x,c.y,c.z,...color,b.x,b.y,b.z,...color,a.x,a.y,a.z,...color);
+  };
+  const time=now*.001;
+  const campfire=window.fireSockSkinMode==='campfire';
+  const core=campfire?[1,.77,.23]:[1,.85,.22];
+  const orange=campfire?[1,.40,.09]:[1,.34,.07];
+  const red=[.85,.10,.045];
+  // Each tongue is anchored at the cuff and moves independently at the tip.
+  for(let i=0;i<11;i++){
+    const a=i*Math.PI*2/11;
+    const sway=Math.sin(time*4.1+i*1.77)*3.1;
+    const rise=12+4*Math.sin(time*5.0+i*2.3);
+    const r=8.6;
+    const x=Math.cos(a)*r,z=Math.sin(a)*r;
+    const left=point(x-Math.sin(a)*3.3,53,z+Math.cos(a)*3.3);
+    const right=point(x+Math.sin(a)*3.3,53,z-Math.cos(a)*3.3);
+    const tip=point(x+Math.cos(a)*sway,58+rise,z+Math.sin(a)*sway);
+    const mid=point(x*.92,57+rise*.40,z*.92);
+    tri(left,right,tip,i%3===0?red:orange);
+    tri(left,mid,tip,core);
+  }
+  // Smaller flickering flames on the shoulders, without covering the eyes.
+  for(const side of [-1,1])for(let j=0;j<3;j++){
+    const x=side*(8.5+j*.7),z=2+j*2;
+    const flick=Math.sin(time*6+j*2.1+side)*2;
+    tri(point(x,38+j*2,z-2),point(x,39+j*2,z+2),point(x+side*(3+flick),47+j*2,z),orange);
+  }
+  // Bright sparks float above the crown, each with an individual phase.
+  for(let i=0;i<8;i++){
+    const phase=(time*.55+i*.137)%1;
+    const x=Math.sin(i*2.399+time*.9)*12;
+    const z=Math.cos(i*2.399+time*.7)*9;
+    const y=68+phase*23;
+    const sz=(1-phase)*1.65+.3;
+    tri(point(x-sz,y,z),point(x+sz,y,z),point(x,y+sz*2,z),i%2?orange:core);
+  }
+}
+
 function fpsGLDrawTDArtSkin(t,rot){
   if(!fpsGLMakeTextureProgram())return;
   const tex=fpsSockTexture(t); if(!tex)return;
@@ -5597,7 +6203,7 @@ function fpsGLDrawTDArtSkin(t,rot){
   gl.enableVertexAttribArray(ap); gl.enableVertexAttribArray(au);
   gl.vertexAttribPointer(ap,3,gl.FLOAT,false,20,0); gl.vertexAttribPointer(au,2,gl.FLOAT,false,20,12);
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D,tex);
-  gl.uniformMatrix4fv(fpsGLTexLoc,false,fpsMatMul(fpsPerspective(Math.PI/3.0,gl.canvas.width/gl.canvas.height,.5,3200),fpsLookAt(fpsCameraX,34,fpsCameraY,fpsCameraX+Math.cos(fpsYaw)*100,34,fpsCameraY+Math.sin(fpsYaw)*100)));
+  gl.uniformMatrix4fv(fpsGLTexLoc,false,fpsCameraVP(gl.canvas.width,gl.canvas.height));
   gl.uniform1i(gl.getUniformLocation(fpsGLTexProg,'uTex'),0);
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,fpsGLTexUVBuf); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(idx),gl.DYNAMIC_DRAW);
   gl.drawElements(gl.TRIANGLES,idx.length,gl.UNSIGNED_SHORT,0);
@@ -5708,21 +6314,13 @@ function fpsGLDrawTexturedSock3D(t,rot,vp){
     }
   }
 
-  // Broad front and rear faces use the TD texture directly. The texture is
-  // therefore seen as the actual artwork on the 3D sock, not as a floating plane.
-  function cap(layer,flip){
-    const center=verts.length/5;
-    const p=world(0,25,depth[layer]);
-    // Centre follows the same half of the atlas as the cap perimeter.
-    push(p,flip ? .75 : .25,.5);
-    for(let i=0;i<P;i++){
-      const n=(i+1)%P;
-      if(flip)tri(center,rings[layer][n],rings[layer][i]);
-      else tri(center,rings[layer][i],rings[layer][n]);
-    }
+  // Proper concave polygon triangulation prevents diagonal triangles from
+  // cutting through the ankle/toe. Both faces remain real mesh surfaces.
+  const capTriangles=fpsTriangulatePolygon(profile);
+  for(const [a,b,c] of capTriangles){
+    tri(rings[depth.length-1][a],rings[depth.length-1][b],rings[depth.length-1][c]);
+    tri(rings[0][c],rings[0][b],rings[0][a]);
   }
-  cap(depth.length-1,false);
-  cap(0,true);
 
   // A separate rounded cuff keeps the recognizable TD top shape.
   const cuffR=11.2,cuffY=52.5,cuffH=4.2,seg=24,cuff=[];
@@ -5778,6 +6376,7 @@ function fpsGLDrawSockModels(towers,vp){
     // Golden, fusions, etc. cannot accidentally receive a different FPS body.
     const targetRot=fpsSockPathYaw(t,pathPts);
     const rot=fpsSockModelSmoothAngle(t,targetRot,now);
+    if(t.k==='fire' && !t.fused)continue; // Rendered as a real 3D mesh in the world pass.
     fpsGLDrawTexturedSock3D(t,rot,vp);
   }
 }
@@ -5794,35 +6393,364 @@ function fpsGetWorldPath(){
   if(live)return live.path;
   return currentPath||maps[map]||[];
 }
+// Small, deliberately FPS-only scene props; share the exact randomized
+// obstacle list with TD but never modify its collision, route or economy.
+function fpsAddThemedRoom3D(verts,distToPath){
+  const box=(x,y,z,w,h,d,c)=>fpsGLBox(verts,x,y,z,w,h,d,c);
+  const palette={
+    box:{floor:[.56,.37,.23],edge:[.72,.50,.28],trim:[.36,.22,.13]},
+    closet:{floor:[.35,.21,.16],edge:[.53,.33,.22],trim:[.21,.12,.11]},
+    hall:{floor:[.58,.38,.24],edge:[.75,.54,.36],trim:[.36,.24,.19]}
+  }[map]||{floor:[.5,.4,.3],edge:[.7,.5,.3],trim:[.3,.2,.15]};
+  // Parallel 3D planks: every surface is below towers and clear of the path.
+  for(let z=23;z<545;z+=35){
+    for(let x=20;x<945;x+=120){
+      if(distToPath(x+56,z+15)<35)continue;
+      const tint=(Math.sin(x*.33+z*.22)+1)*.024;
+      const c=palette.floor.map(v=>v+tint);
+      box(x+56,2.9,z+15,110,.23,30,c);
+      box(x+56,3.1,z+1,110,.15,.65,palette.trim);
+    }
+  }
+  // The 2D levels are viewed as fully furnished rooms in FPS. Wall faces
+  // and tall frame edges sit outside the gameplay map, never in the route.
+  const frame=palette.edge,shadow=palette.trim;
+  if(map==='closet'||map==='hall'){
+    box(480,0,-12,990,115,12,frame);
+    box(480,0,572,990,115,12,frame);
+    box(-12,0,280,12,115,570,frame);
+    box(972,0,280,12,115,570,frame);
+    for(let x=95;x<950;x+=180){
+      box(x,0,-5,8,114,8,shadow);
+      box(x,0,565,8,114,8,shadow);
+    }
+    box(480,115,-12,990,7,16,shadow);
+    box(480,115,572,990,7,16,shadow);
+    if(map==='hall'){
+      // House hallway: baseboards, sunlight and colourful door panels.
+      box(480,0,9,950,9,4,[.91,.83,.69]);
+      box(480,0,551,950,9,4,[.91,.83,.69]);
+      for(let x of [175,535,795]){
+        box(x,12,-4,100,91,4,[.41,.26,.18]);
+        box(x,10,-1,78,84,2,[.64,.42,.26]);
+        box(x+26,49,1,5,5,3,[.94,.73,.3]);
+        box(x,12,564,100,91,4,[.41,.26,.18]);
+        box(x,10,561,78,84,2,[.62,.4,.28]);
+      }
+      for(let x of [75,330,610,875]){
+        if(distToPath(x,275)>90)box(x,3.6,275,28,.4,420,[.77,.53,.28]);
+      }
+    }else{
+      // Closet: dark shelf rails and hanging fabrics around the room edges.
+      for(let x of [125,300,500,740,880]){
+        box(x,17,-1,54,77,4,[.70,.29+.18*(x%3),.43]);
+        box(x,18,559,46,65,4,[.33,.62,.70]);
+      }
+      box(480,96,-4,910,3,7,[.78,.65,.45]);
+      box(480,96,564,910,3,7,[.78,.65,.45]);
+    }
+  }
+  // Match the same obstacles that block construction in TD on Hard/Nightmare.
+  // All parts remain visual only; their position/size comes from obs().
+  const props=obs();
+  const shoe=[[.23,.47,.76],[.87,.35,.23],[.93,.72,.35]];
+  for(let i=0;i<props.length;i++){
+    const o=props[i],cx=o.x+o.w*.5,cz=o.y+o.h*.5;
+    const type=o.visualType??i;
+    if(map==='box'){
+      const card=type%3===0?[.73,.52,.3]:type%3===1?[.92,.89,.72]:[.44,.66,.71];
+      box(cx,2,cz,o.w*.7,5,o.h*.6,card);
+      box(cx,7,cz,o.w*.35,1,o.h*.55,palette.trim);
+      box(cx+o.w*.11,8,cz-o.h*.13,o.w*.16,3,o.h*.12,[.9,.79,.56]);
+    }else if(map==='closet'){
+      if(type%7===1||type%7===5){
+        for(let j=0;j<2;j++){
+          const c=shoe[(i+j)%3];
+          box(cx+(j?15:-15),3,cz+(j?7:-7),19,11,35,c);
+          box(cx+(j?15:-15),3,cz+(j?22:8),22,3,14,[.90,.88,.83]);
+        }
+      }else{
+        const layerCols=[[.82,.36,.52],[.34,.63,.75],[.94,.72,.32],[.51,.37,.71]];
+        for(let n=0;n<3;n++){
+          box(cx+(n-1)*3,3+n*7,cz+(n-1)*4,o.w*.62-n*10,6,o.h*.45,layerCols[(type+n)%4]);
+          box(cx+6,8+n*7,cz,o.w*.30,1,2,[.92,.87,.77]);
+        }
+      }
+    }else if(map==='hall'){
+      if(type%7===0||type%7===1||type%7===5){
+        // Sneakers and slippers have toes, contrasting soles and upper bodies.
+        for(let j=0;j<2;j++){
+          const color=shoe[(type+j)%shoe.length];
+          box(cx+(j?17:-17),2,cz+(j?9:-9),23,4,44,[.89,.86,.80]);
+          box(cx+(j?17:-17),6,cz+(j?10:-10),21,13,29,color);
+          box(cx+(j?17:-17),8,cz+(j?23:4),24,4,14,[.96,.92,.86]);
+          for(let k=0;k<3;k++)box(cx+(j?17:-17),19,cz+(j?5:-15)+k*6,12,.4,1,[.95,.93,.83]);
+        }
+      }else if(type%7===4){
+        // Upright terracotta pot: brown soil, green stems, broad leaves.
+        box(cx,2,cz,35,22,35,[.63,.29,.17]);
+        box(cx,24,cz,33,2,33,[.23,.17,.11]);
+        for(let j=0;j<6;j++){
+          const ang=j*Math.PI/3;
+          const px=cx+Math.cos(ang)*9,pz=cz+Math.sin(ang)*9;
+          box(px,25,pz,3,30,3,[.18,.44,.21]);
+          box(px+Math.cos(ang)*9,49,pz+Math.sin(ang)*9,15,3,10,[.23+.04*(j%2),.61,.25]);
+        }
+        for(let j=0;j<3;j++)box(cx+26+j*4,2,cz+10-j*7,7,1.5,5,[.27,.19,.12]);
+      }else{
+        const colors=[[.95,.73,.18],[.30,.59,.75],[.81,.34,.33],[.40,.57,.34]];
+        for(let j=0;j<3;j++){
+          box(cx+(j-1)*12,3+j*3,cz+(j-1)*9,24,3,42,colors[(i+j)%4]);
+        }
+      }
+    }
+  }
+  // Permanent room furniture, independent of obstacle difficulty, all cosmetic.
+  if(map==='hall'){
+    for(let j=0;j<3;j++){
+      const px=90+j*86,zz=38,co=shoe[j%shoe.length];
+      box(px,2,zz,19,3,36,[.90,.88,.82]);
+      box(px,5,zz-4,17,12,28,co);
+      box(px,18,zz-8,10,1.5,9,[.94,.92,.86]);
+    }
+    box(842,2,506,34,24,34,[.66,.37,.23]);
+    box(842,27,506,34,3,34,[.25,.16,.10]);
+    for(let j=0;j<5;j++){
+      box(838+j*4,30,502+j*2,3,35,3,[.15,.47,.23]);
+      box(830+j*5,56,496+j*5,15,3,10,[.40,.74,.34]);
+    }
+    for(let j=0;j<3;j++)box(860+j*4,2,511-j*8,7,1.4,5,[.30,.20,.13]);
+  }else if(map==='closet'){
+    const fabric=[[.82,.34,.50],[.35,.65,.75],[.65,.42,.79],[.79,.65,.31],[.29,.62,.53]];
+    for(let j=0;j<5;j++){
+      box(85+j*92,2,43,62,9,42,fabric[j]);
+      box(85+j*92,12,43,51,5,33,fabric[(j+2)%5]);
+    }
+  }else{
+    for(let j=0;j<4;j++){
+      box(95+j*150,1.8,41,86,7,45,[.72,.51,.29]);
+      box(95+j*150,8.5,41,43,1,20,[.90,.78,.60]);
+    }
+  }
+
+}
+
+// FPS 2.1: complete perspective fallback when this browser blocks WebGL.
+// Uses the SAME map/path/obstacle coordinates and shared FPS yaw + pitch.
+// Never changes TD collision, waves, towers, prices or game state.
+let fpsFallbackNoticeShown=false, fpsFallbackDrawKey=null;
+function fpsDrawSoftwareWorld(sw,sh){
+  const canvas=$('fpsFallbackCanvas'),world=$('fpsWorld3D');
+  if(!canvas)return;
+  const key=[map,Math.round(fpsYaw*900),Math.round(fpsPitch*900),fpsCameraX,fpsCameraY,tw.length,(fpsGetWorldPath()||[]).length].join('/');
+  if(key===fpsFallbackDrawKey && canvas.width>0)return;
+  fpsFallbackDrawKey=key;
+  canvas.style.display='block';world.style.display='none';
+  const dpr=Math.min(1.5,window.devicePixelRatio||1);
+  const ww=Math.round(sw*dpr),hh=Math.round(sh*dpr);
+  if(canvas.width!==ww||canvas.height!==hh){canvas.width=ww;canvas.height=hh;}
+  const ctx=canvas.getContext('2d');if(!ctx)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,sw,sh);
+  const colors={box:{sky:'#aa8156',floor:'#936339',wall:'#ba8d55',trim:'#715035',path:'#916139',light:'#d6ad69'},closet:{sky:'#493750',floor:'#75503e',wall:'#9a665b',trim:'#432c35',path:'#69427e',light:'#bf89b9'},hall:{sky:'#a3a9b3',floor:'#ad7955',wall:'#dfc49a',trim:'#774d38',path:'#963b42',light:'#ffd18a'}}[map]||{sky:'#66717b',floor:'#88654b',wall:'#b39570',trim:'#5b3c32',path:'#994657',light:'#edb47d'};
+  const horizon=sh*.5+Math.tan(fpsPitch)*sh*.9;
+  const sky=ctx.createLinearGradient(0,0,0,Math.max(sh*.20,horizon));sky.addColorStop(0,'#1e2736');sky.addColorStop(1,colors.sky);
+  ctx.fillStyle=sky;ctx.fillRect(0,0,sw,Math.max(0,Math.min(sh,horizon)));
+  const ground=ctx.createLinearGradient(0,Math.max(0,horizon),0,sh);ground.addColorStop(0,colors.floor);ground.addColorStop(1,colors.trim);
+  ctx.fillStyle=ground;ctx.fillRect(0,Math.max(0,horizon),sw,sh);
+  // Clip every projected face against the camera near plane, so looking around
+  // from inside the room never makes giant walls/floor flicker or disappear.
+  const cc=Math.cos(fpsYaw),ss=Math.sin(fpsYaw),cp=Math.cos(fpsPitch),sp=Math.sin(fpsPitch);
+  const depth=p=>((p[0]-fpsCameraX)*cc+(p[2]-fpsCameraY)*ss)*cp+(p[1]-34)*sp;
+  const shapes=[];
+  const queue=(poly,color,outline)=>{
+    const polyDepth=poly.map(p=>depth(p));
+    if(polyDepth.every(d=>d<1.5))return;
+    const clipped=[];
+    for(let i=0;i<poly.length;i++){
+      const a=poly[i],b=poly[(i+1)%poly.length],da=polyDepth[i],db=polyDepth[(i+1)%poly.length];
+      if(da>=1.5)clipped.push(a);
+      if((da>=1.5)!==(db>=1.5)){
+        const t=(1.5-da)/(db-da);
+        clipped.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1]),a[2]+t*(b[2]-a[2])]);
+      }
+    }
+    if(clipped.length<3)return;
+    const projected=clipped.map(p=>fpsProjectPoint(p[0],p[1],p[2],sw,sh));
+    if(projected.some(p=>!p))return;
+    const minX=Math.min(...projected.map(p=>p.x)),maxX=Math.max(...projected.map(p=>p.x));
+    const minY=Math.min(...projected.map(p=>p.y)),maxY=Math.max(...projected.map(p=>p.y));
+    if(maxX < -100||minX > sw+100||maxY < -100||minY > sh+100)return;
+    shapes.push({projected,color,outline,dist:polyDepth.reduce((a,b)=>a+b,0)/polyDepth.length});
+  };
+  const quad=(a,b,c,d,col,edge)=>queue([a,b,c,d],col,edge);
+  const box=(x,y,z,w,h,d,col,edge)=>{
+    const x1=x-w/2,x2=x+w/2,z1=z-d/2,z2=z+d/2,y2=y+h;
+    quad([x1,y,z1],[x2,y,z1],[x2,y2,z1],[x1,y2,z1],col,edge);
+    quad([x2,y,z1],[x2,y,z2],[x2,y2,z2],[x2,y2,z1],col,edge);
+    quad([x2,y,z2],[x1,y,z2],[x1,y2,z2],[x2,y2,z2],col,edge);
+    quad([x1,y,z2],[x1,y,z1],[x1,y2,z1],[x1,y2,z2],col,edge);
+    quad([x1,y2,z1],[x2,y2,z1],[x2,y2,z2],[x1,y2,z2],col,edge);
+  };
+  // A complete 960 x 560 room with the same world geometry as the 3D path.
+  box(480,-12,280,960,10,560,colors.floor);
+  const border={box:'#946a3e',closet:'#b98f72',hall:'#f4ddae'}[map];
+  box(480,0,-7,990,130,14,colors.wall,border);
+  box(480,0,567,990,130,14,colors.wall,border);
+  box(-7,0,280,14,130,580,colors.wall,border);
+  box(967,0,280,14,130,580,colors.wall,border);
+  // Decorative vertical door-frame panels, always outside the path.
+  if(map==='hall'){
+    for(const px of [145,400,725]){
+      box(px,3,-1,78,99,6,'#855c43','#d9b48a');
+      box(px,4,560,78,99,6,'#855c43','#d9b48a');
+      box(px+22,47,5,5,5,4,'#ffcb5e');
+    }
+    box(480,0,8,960,7,7,'#f8e1bc');
+    box(480,0,552,960,7,7,'#f8e1bc');
+  }else if(map==='closet'){
+    for(let px=80;px<950;px+=160){
+      const dress=['#b64e71','#7196b9','#d7ab4a','#9277c0'][Math.floor(px/160)%4];
+      box(px,34,2,52,65,5,dress);
+      box(px,34,558,52,65,5,dress);
+    }
+    box(480,102,2,960,4,9,'#d6b084');
+    box(480,102,558,960,4,9,'#d6b084');
+  }else{
+    // Full-height Shoe Box walls, oversized cardboard flaps and folds.
+    for(let px=130;px<=900;px+=190){
+      box(px,0,3,5,118,7,'#785032');
+      box(px,0,557,5,118,7,'#785032');
+    }
+  }
+  // Wood grain/board seams are long, shallow 3D strips; avoid raised obstacles.
+  for(let z=18;z<560;z+=47){
+    box(480,2,z,920,.35,1.2,map==='hall'?'#73452c':map==='closet'?'#503329':'#9b7644');
+  }
+  for(let x=22;x<950;x+=165){
+    for(let z=20;z<550;z+=94)box(x,2.15,z,1,.20,46,colors.trim);
+  }
+  // Carpet follows the actual monster path exactly: not a guessed path.
+  const route=fpsGetWorldPath();
+  if(route&&route.length>1){
+    for(let i=1;i<route.length;i++){
+      const a=route[i-1],b=route[i],vx=b.x-a.x,vz=b.y-a.y;
+      const len=Math.hypot(vx,vz)||1,nx=-vz/len,nz=vx/len;
+      const pt=(p,d,y)=>[p.x+nx*d,y,p.y+nz*d];
+      quad(pt(a,-24,-8.5),pt(b,-24,-8.5),pt(b,24,-8.5),pt(a,24,-8.5),colors.path,'#332521');
+      for(const d of [-21,21]){
+        const p1=pt(a,d,-8.0),p2=pt(b,d,-8.0),p3=pt(b,d+1.5,-8.0),p4=pt(a,d+1.5,-8.0);
+        quad(p1,p2,p3,p4,colors.light);
+      }
+      // Correct path tangent, never blocks live enemies.
+      if(len>48){
+        for(let t=24;t<len;t+=33){
+          const u=t/len,p={x:a.x+vx*u,y:a.y+vz*u};
+          quad(pt(p,-3,-7.9),pt(p,3,-7.9),pt({x:p.x+vx/len*2,y:p.y+vz/len*2},3,-7.9),pt({x:p.x+vx/len*2,y:p.y+vz/len*2},-3,-7.9),colors.light);
+        }
+      }
+    }
+  }
+  const shoeColors=['#3284d3','#e97149','#f2bd52','#915fc6'];
+  const props=typeof obs==='function'?obs():[];
+  for(let i=0;i<props.length;i++){
+    const o=props[i],x=o.x+o.w/2,z=o.y+o.h/2,typ=(o.visualType??i)%7;
+    if(map==='hall'){
+      if(typ===4){
+        box(x,3,z,32,27,32,'#bb663d','#5a3627');
+        box(x,29,z,30,3,30,'#352315');
+        for(const [j,ang] of [0,1,2,3,4].map(j=>[j,j*Math.PI*2/5])){
+          const xx=x+Math.cos(ang)*12,zz=z+Math.sin(ang)*10;
+          box(xx,31,zz,5,31,5,'#3a7941');
+          box(xx+Math.cos(ang)*7,55,zz+Math.sin(ang)*7,14,3,10,'#75b95b');
+        }
+        for(let j=0;j<3;j++)box(x+17+j*4,2,z+4+j*3,5,1.4,5,'#553e2c');
+      }else if([0,1,5].includes(typ)){
+        for(let j=0;j<2;j++){
+          const xx=x+(j?13:-13),zz=z+(j?9:-9),co=shoeColors[(i+j)%shoeColors.length];
+          box(xx,2,zz,18,3,37,'#ece4d5');
+          box(xx,5,zz-2,17,11,25,co,'#283446');
+          box(xx,11,zz+12,19,4,14,'#f6e9df');
+          for(let k=0;k<3;k++)box(xx,16,zz-8+k*5,12,1,1,'#fffefa');
+        }
+      }else if(typ===3){
+        box(x,2,z,5,4,39,'#3d4c62');
+        box(x,6,z+7,16,5,23,'#64a0af');
+      }else{
+        box(x,2,z,o.w*.67,5,o.h*.60,'#e5ac54');
+        box(x,8,z,o.w*.44,4,o.h*.42,'#6c79be');
+      }
+    }else if(map==='closet'){
+      for(let j=0;j<3;j++)box(x+(j-1)*2,3+j*7,z+(j-1)*4,o.w*.63-j*4,6,o.h*.46-j*3,['#ce526b','#5c9ecc','#d9ba68','#8664b9'][(typ+j)%4]);
+    }else{
+      box(x,2,z,o.w*.75,6,o.h*.7,'#c79d65','#795039');
+      box(x-6,9,z,o.w*.35,2,o.h*.3,'#ecddad');
+      box(x+6,9,z-5,o.w*.21,4,o.h*.2,'#7aaeb5');
+    }
+  }
+  // Even Easy / Normal have furniture in the 3D world. These are decorative
+  // items tucked against the room edge; no new TD obstacles are created.
+  if(map==='hall'){
+    for(let j=0;j<3;j++){
+      const px=90+j*86,zz=38,co=shoeColors[j%shoeColors.length];
+      box(px,2,zz,19,3,36,'#eae8e2');box(px,5,zz-4,17,12,28,co,'#ffffff');
+      box(px,18,zz-8,10,1.5,9,'#ffffff');
+    }
+    box(842,2,506,34,24,34,'#bd7750','#5e3d2c');
+    box(842,27,506,34,3,34,'#382718');
+    for(let j=0;j<5;j++){
+      box(838+j*4,30,502+j*2,3,35,3,'#267a43');
+      box(830+j*5,56,496+j*5,15,3,10,'#66b965');
+    }
+    for(let j=0;j<3;j++)box(860+j*4,2,511-j*8,7,1.4,5,'#503a26');
+    box(785,3,49,8,2,26,'#d8ce99');box(797,3,49,8,2,26,'#d8ce99');
+  }else if(map==='closet'){
+    for(let j=0;j<5;j++){
+      box(85+j*92,2,43,62,9,42,['#d45d74','#62a6bc','#a46ec0','#cbb25b','#4c9e84'][j],'#503037');
+      box(85+j*92,12,43,51,5,33,['#efac8b','#e5cb6b','#6ab7cd','#ec829d','#b69ee0'][j]);
+    }
+  }else{
+    for(let j=0;j<4;j++){
+      box(95+j*150,1.8,41,86,7,45,'#bc8b51','#704e29');
+      box(95+j*150,8.5,41,43,1,20,'#edd4a5');
+    }
+  }
+  // Atmosphere stays entirely visual and does not affect other game systems.
+  shapes.sort((a,b)=>b.dist-a.dist);
+  for(const shpe of shapes){
+    const p=shpe.projected;
+    ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);
+    for(let i=1;i<p.length;i++)ctx.lineTo(p[i].x,p[i].y);
+    ctx.closePath();ctx.fillStyle=shpe.color;ctx.fill();
+    if(shpe.outline){ctx.lineWidth=1.2;ctx.strokeStyle=shpe.outline;ctx.stroke();}
+  }
+  // Visible software status only when a fallback is in use.
+  if(!fpsFallbackNoticeShown){fpsFallbackNoticeShown=true; console.info('Sock TD FPS: Canvas 2D world is active because WebGL is unavailable.');}
+  const sun=ctx.createRadialGradient(sw*.72,sh*.13,5,sw*.72,sh*.13,Math.max(sw,sh)*.7);
+  sun.addColorStop(0,'rgba(255,232,180,.10)');sun.addColorStop(1,'rgba(255,232,180,0)');
+  ctx.fillStyle=sun;ctx.fillRect(0,0,sw,sh);
+}
+
 function fpsDraw3DWorld(sw,sh){
   const c=$('fpsWorld3D');if(!c||!fpsTower)return;
-  if(!fpsGLInit())return;
+  if(!fpsGLInit()){fpsDrawSoftwareWorld(sw,sh);return;} $('fpsFallbackCanvas').style.display='none'; c.style.display='block';
   const dpr=Math.min(2,window.devicePixelRatio||1);
-  c.width=Math.floor(sw*dpr);c.height=Math.floor(sh*dpr);
+  const cw=Math.max(1,Math.floor(sw*dpr)),ch=Math.max(1,Math.floor(sh*dpr));
+  if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}
   fpsGL.viewport(0,0,c.width,c.height);
+  fpsGL.clearColor(...(map==='box'?[.27,.19,.125,1]:[.05,.07,.09,1]));
   fpsGL.clear(fpsGL.COLOR_BUFFER_BIT|fpsGL.DEPTH_BUFFER_BIT);
   const gl=fpsGL,verts=[];
   // Flat FPS world: everything sits on one level. The player is a fixed
   // observer; there are no raised walls, ceiling or sloped 3D surfaces.
   const eyeY=34, ex=fpsCameraX, ez=fpsCameraY;
-  const fx=Math.cos(fpsYaw),fz=Math.sin(fpsYaw);
-  const proj=fpsPerspective(Math.PI/3.0,sw/sh,.5,3200);
-  const view=fpsLookAt(ex,eyeY,ez,ex+fx*100,eyeY,ez+fz*100);
-  const vp=fpsMatMul(proj,view);
+  const vp=fpsCameraVP(sw,sh);
   const room={box:[.52,.34,.19],closet:[.34,.40,.48],hall:[.48,.48,.48]}[map]||[.38,.42,.45];
 
   // Deep safety floor underneath the whole map. The visible map is built from
   // actual 3D blocks above it; this base only prevents seeing through gaps.
   fpsGLQuad(verts,ex-1800,ez-1800,ex+1800,ez+1800,-10.5,[room[0]*.55,room[1]*.55,room[2]*.55]);
 
-  // FPS map presentation: the underlying 2D gameplay map is unchanged, but
-  // visually it is assembled from chunky 3D terrain blocks. Heights are
-  // deterministic so the same map always looks identical for every player.
-  // The enemy-path corridor is left open because the separate recessed road
-  // channel below occupies that space.
-  const blockSize=40, blockGap=1.5;
-  const blockBaseCol=[room[0]*.72,room[1]*.72,room[2]*.72];
-  const blockTopCol=[Math.min(1,room[0]*.88+.05),Math.min(1,room[1]*.88+.05),Math.min(1,room[2]*.88+.05)];
+  // Shared path-distance helper: needed by both the box and non-box maps.
   const pathPts=fpsGetWorldPath();
   const distToPath=(px,pz)=>{
     let best=1e9;
@@ -5835,6 +6763,16 @@ function fpsDraw3DWorld(sw,sh){
     }
     return best;
   };
+
+  if(map!=='box'){
+  // FPS map presentation: the underlying 2D gameplay map is unchanged, but
+  // visually it is assembled from chunky 3D terrain blocks. Heights are
+  // deterministic so the same map always looks identical for every player.
+  // The enemy-path corridor is left open because the separate recessed road
+  // channel below occupies that space.
+  const blockSize=40, blockGap=1.5;
+  const blockBaseCol=[room[0]*.72,room[1]*.72,room[2]*.72];
+  const blockTopCol=[Math.min(1,room[0]*.88+.05),Math.min(1,room[1]*.88+.05),Math.min(1,room[2]*.88+.05)];
   const blockHeight=(gx,gz)=>{
     // Deterministic low-frequency variation: chunky, readable terrain rather
     // than random noisy hills.
@@ -5863,45 +6801,194 @@ function fpsDraw3DWorld(sw,sh){
     }
   }
 
-  // SHOE BOX ONLY: turn the FPS room into an actual cardboard box.
-  // Gameplay remains 2D; these are purely visual FPS walls/ceiling.
+  }
+
+  // OPEN SHOEBOX: lightweight geometry, no ceiling, and no opaque
+  // foreground walls above the camera. Keep WebGL comfortably within budget.
   if(map==='box'){
-    const cw=960, cd=560;
-    const wallH=230;
-    const cardboard=[.56,.36,.19];
-    const cardboardDark=[.34,.21,.11];
-    const cardboardLight=[.68,.45,.25];
-
-    // Solid cardboard side walls.
-    fpsGLBox(verts,cw/2,0,4,cw,wallH,8,cardboard);
-    fpsGLBox(verts,cw/2,0,cd-4,cw,wallH,8,cardboard);
-    fpsGLBox(verts,4,0,cd/2,8,wallH,cd,cardboard);
-    fpsGLBox(verts,cw-4,0,cd/2,8,wallH,cd,cardboard);
-
-    // Cardboard ceiling: large slab above the player. It is intentionally
-    // slightly uneven in panels so it reads as folded cardboard.
-    const roofY=wallH;
-    fpsGLBox(verts,cw/2,roofY,cd/2,cw,8,cd,cardboard);
-
-    // Fold/seam strips: these are actual 3D geometry, not gameplay objects.
-    // They make the walls/roof look like joined cardboard panels.
-    const seam=.035;
-    for(let x=120;x<cw;x+=160){
-      fpsGLBox(verts,x,wallH*.52,5,2,wallH*.96,3,cardboardDark);
-      fpsGLBox(verts,x,roofY+4,cd/2,3,2,cd,cardboardDark);
+    const cardboard=[.66,.43,.25], inside=[.76,.54,.33],
+          rim=[.88,.68,.44], seam=[.48,.30,.16];
+    const W=960,D=560,H=112;
+    // Continuous cardboard floor, slightly below the path surface.
+    fpsGLBox(verts,W/2,-12,D/2,W,11,D,cardboard);
+    fpsGLBox(verts,W/2,-.85,D/2,W-22,.35,D-22,inside);
+    // HAND-CRAFTED SHOEBOX FLOOR: one continuous cardboard sheet, not tiles.
+    // All decoration is almost flush with the surface so towers and enemies
+    // remain unchanged. No texture downloads or new rendering dependencies.
+    const ink=[.56,.35,.19], fold=[.69,.46,.27], scratch=[.88,.67,.43],
+          torn=[.46,.27,.14], tape=[.84,.73,.53], tapeEdge=[.68,.56,.39];
+    const line=(x1,z1,x2,z2,width,y,col)=>{
+      const dx=x2-x1,dz=z2-z1,len=Math.hypot(dx,dz)||1;
+      const nx=-dz/len*width*.5,nz=dx/len*width*.5;
+      const a=[x1+nx,y,z1+nz],b=[x2+nx,y,z2+nz];
+      const c=[x2-nx,y,z2-nz],d=[x1-nx,y,z1-nz];
+      verts.push(...a,...col,...b,...col,...c,...col,
+                 ...a,...col,...c,...col,...d,...col);
+    };
+    // Long compressed cardboard grain running along the box.
+    for(let z=19;z<D-14;z+=14){
+      const wave=Math.sin(z*.29)*2.1;
+      line(14,z+wave,W-14,z+wave, .6+(z%5)*.16,-.47,
+        z%3===0?scratch:fold);
+      if(z%4===0)line(20,z+3,W-20,z+3,.38,-.465,ink);
     }
-    for(let z=100;z<cd;z+=140){
-      fpsGLBox(verts,5,wallH*.52,z,3,wallH*.96,2,cardboardDark);
-      fpsGLBox(verts,cw/2,roofY+4,z,cw,2,3,cardboardDark);
+    // Original cardboard fold lines, including a double centre seam.
+    for(const z of [142,281,284,417]){
+      line(13,z,W-13,z,z===281?2.5:1.1,-.44,ink);
+      line(13,z+3,W-13,z+3,.7,-.435,scratch);
     }
+    for(const x of [160,480,800]){
+      line(x,13,x,D-13,1.15,-.43,fold);
+      line(x+2.5,13,x+2.5,D-13,.5,-.425,scratch);
+    }
+    // Jagged cracks and peeled cardboard tears; intentionally irregular.
+    const cracks=[
+      [[83,95],[104,102],[119,96],[135,113],[154,109],[174,123]],
+      [[700,64],[711,82],[705,101],[726,112],[734,135],[752,141]],
+      [[340,380],[354,365],[372,371],[387,352],[410,357],[429,339]],
+      [[818,441],[803,450],[811,464],[794,474],[797,492]],
+      [[219,238],[238,244],[247,233],[262,247],[276,241]]
+    ];
+    for(const crack of cracks){
+      for(let i=1;i<crack.length;i++){
+        const a=crack[i-1],b=crack[i];
+        line(a[0],a[1],b[0],b[1],1.3,-.39,torn);
+        line(a[0]+1.6,a[1]+1.1,b[0]+1.6,b[1]+1.1,.55,-.38,scratch);
+      }
+    }
+    // Short translucent-looking packing tape patches over seams. The color
+    // imitates aged transparent adhesive without requiring blending changes.
+    const tapeStrip=(x,z,dx,dz,width=15)=>{
+      line(x,z,x+dx,z+dz,width,-.29,tape);
+      const l=Math.hypot(dx,dz)||1,nx=-dz/l,nz=dx/l;
+      for(const side of [-1,1]){
+        const ox=nx*width*.46*side,oz=nz*width*.46*side;
+        line(x+ox,z+oz,x+dx+ox,z+dz+oz,.75,-.27,tapeEdge);
+      }
+      line(x+nx*width*.24,z+nz*width*.24,
+           x+dx+nx*width*.24,z+dz+nz*width*.24,1.2,-.25,scratch);
+    };
+    tapeStrip(255,281,80,0,17);
+    tapeStrip(625,281,96,0,19);
+    tapeStrip(480,100,0,85,16);
+    tapeStrip(160,398,0,66,14);
+    tapeStrip(795,417,75,0,17);
+    tapeStrip(93,142,67,0,13);
+    // Tiny wear marks, deterministic, sparse enough to keep the floor clean.
+    for(let i=0;i<110;i++){
+      const x=19+((i*173+43)%922),z=17+((i*107+59)%522);
+      const len=2+(i%7)*1.3;
+      line(x,z,x+len,z+((i%3)-1)*1.4,.4,-.37,i%4===0?torn:scratch);
+    }
+    // Four real walls, with inner lining and visible thickness.
+    fpsGLBox(verts,W/2,-7,5,W,H,10,cardboard);
+    fpsGLBox(verts,W/2,-7,D-5,W,H,10,cardboard);
+    fpsGLBox(verts,5,-7,D/2,10,H,D,cardboard);
+    fpsGLBox(verts,W-5,-7,D/2,10,H,D,cardboard);
+    fpsGLBox(verts,W/2,0,11,W-24,H-5,1,inside);
+    fpsGLBox(verts,W/2,0,D-11,W-24,H-5,1,inside);
+    fpsGLBox(verts,11,0,D/2,1,H-5,D-24,inside);
+    fpsGLBox(verts,W-11,0,D/2,1,H-5,D-24,inside);
+    // Reinforced corners and top lips.
+    for(const x of [13,W-13])for(const z of [13,D-13])
+      fpsGLBox(verts,x,0,z,7,H-2,7,seam);
+    fpsGLBox(verts,W/2,H-3,5,W,4,15,rim);
+    fpsGLBox(verts,W/2,H-3,D-5,W,4,15,rim);
+    fpsGLBox(verts,5,H-3,D/2,15,4,D,rim);
+    fpsGLBox(verts,W-5,H-3,D/2,15,4,D,rim);
+    // Lid is REMOVED: four small folded-out flaps only.
+    fpsGLBox(verts,W/2,H-5,-22,W-36,3,35,cardboard);
+    fpsGLBox(verts,W/2,H-5,D+22,W-36,3,35,cardboard);
+    fpsGLBox(verts,-22,H-5,D/2,35,3,D-36,cardboard);
+    fpsGLBox(verts,W+22,H-5,D/2,35,3,D-36,cardboard);
+    // Subtle seams, without hundreds of extra WebGL faces.
+    for(let x=90;x<W-50;x+=160){
+      fpsGLBox(verts,x,0,11.8,1,H-12,.5,seam);
+      fpsGLBox(verts,x,0,D-11.8,1,H-12,.5,seam);
+    }
+  }
 
-    // A few broad lighter cardboard panels give the box a natural,
-    // slightly varied cardboard appearance without affecting gameplay.
-    fpsGLBox(verts,260,wallH*.50,1,260,wallH*.92,1,cardboardLight);
-    fpsGLBox(verts,700,wallH*.50,1,300,wallH*.92,1,cardboardLight);
-    fpsGLBox(verts,1,wallH*.50,280,1,wallH*.92,280,cardboardLight);
-    fpsGLBox(verts,480,roofY+1,140,300,2,2,cardboardLight);
-    fpsGLBox(verts,480,roofY+1,420,300,2,2,cardboardLight);
+  // DUSTY ATTIC ABOVE THE OPEN SHOEBOX — genuine WebGL 3D geometry.
+  // The lid stays absent. Looking upwards from any tower reveals the attic
+  // surrounding the box, including its pitched roof, beams and skylight.
+  if(map==='box'){
+    const wood=[.43,.245,.12],woodLit=[.62,.37,.19],woodDark=[.24,.135,.075];
+    const boards=[.36,.235,.145],rafters=[.49,.285,.14],dust=[.68,.52,.34];
+    const x0=-430,x1=1390,z0=-440,z1=1000,roofEdge=325,ridge=665;
+    const ridgeZ=(z0+z1)*.5;
+    // Two broad, pitched roof planes. Both are ABOVE the open box.
+    const roofPanel=(xa,za,ya,xb,zb,yb,xc,zc,yc,xd,zd,yd,color)=>{
+      verts.push(xa,ya,za,...color,xb,yb,zb,...color,xc,yc,zc,...color,
+                 xa,ya,za,...color,xc,yc,zc,...color,xd,yd,zd,...color);
+    };
+    roofPanel(x0,z0,roofEdge,x1,z0,roofEdge,x1,ridgeZ,ridge,x0,ridgeZ,ridge,boards);
+    roofPanel(x0,ridgeZ,ridge,x1,ridgeZ,ridge,x1,z1,roofEdge,x0,z1,roofEdge,[.31,.205,.13]);
+    // Subtle parallel planks on the sloping underside of the roof.
+    for(let x=x0+35;x<x1;x+=68){
+      const c=(Math.round((x-x0)/68)%2)?woodDark:wood;
+      for(const side of [-1,1]){
+        const ze=side<0?z0:z1;
+        roofPanel(x,ze,roofEdge+1,x+3,ze,roofEdge+1,
+          x+3,ridgeZ,ridge+1,x,ridgeZ,ridge+1,c);
+      }
+    }
+    // Strong wooden rafters, angled from the eaves to the roof ridge.
+    const beam=(ax,ay,az,bx,by,bz,width,col)=>{
+      const dx=bx-ax,dy=by-ay,dz=bz-az;
+      const n=Math.max(1,Math.ceil(Math.hypot(dx,dy,dz)/52));
+      for(let i=0;i<n;i++){
+        const t=(i+.5)/n;
+        fpsGLBox(verts,ax+dx*t,ay+dy*t-5,az+dz*t,width,15,width,col);
+      }
+    };
+    for(let x=x0+55;x<=x1-40;x+=230){
+      beam(x,roofEdge-10,z0,x,ridge-12,ridgeZ,15,rafters);
+      beam(x,ridge-12,ridgeZ,x,roofEdge-10,z1,15,rafters);
+      fpsGLBox(verts,x,roofEdge-24,ridgeZ,19,35,19,woodLit);
+      // Horizontal tie beam across the roof, high above the shoebox.
+      fpsGLBox(verts,x,roofEdge-18,ridgeZ,17,15,z1-z0,wood);
+      for(const z of [z0+75,z1-75])
+        fpsGLBox(verts,x,110,z,23,roofEdge-105,23,woodDark);
+    }
+    fpsGLBox(verts,(x0+x1)/2,ridge-21,ridgeZ,x1-x0,19,21,woodLit);
+    // A bright skylight on the left roof slope, with timber framing.
+    // It is a luminous roof inset rather than a real light source.
+    const sx=640,sz=ridgeZ-240,sy=ridge-240*(ridge-roofEdge)/(ridgeZ-z0)+3;
+    roofPanel(sx-125,sz-90,sy-90*(ridge-roofEdge)/(ridgeZ-z0),
+      sx+125,sz-90,sy-90*(ridge-roofEdge)/(ridgeZ-z0),
+      sx+125,sz+90,sy+90*(ridge-roofEdge)/(ridgeZ-z0),
+      sx-125,sz+90,sy+90*(ridge-roofEdge)/(ridgeZ-z0),[.66,.83,.88]);
+    fpsGLBox(verts,sx,sy+7,sz,255,8,9,woodLit);
+    fpsGLBox(verts,sx-126,sy,sz,12,10,185,woodLit);
+    fpsGLBox(verts,sx+126,sy,sz,12,10,185,woodLit);
+    // Old stored crates and cartons are outside the shoebox, not on the path.
+    for(const [x,z,w,h,d] of [[-250,120,130,100,110],[1160,640,180,140,135],
+      [1220,-100,140,90,120],[-260,700,150,125,120]]){
+      fpsGLBox(verts,x,135,z,w,h,d,[.54,.37,.22]);
+      fpsGLBox(verts,x,135+h-6,z,w+3,8,d+3,[.64,.45,.28]);
+      fpsGLBox(verts,x,135,z-d*.5-1,3,h,3,woodDark);
+    }
+    // Cobweb strands near the roof corners, made from fine 3D segments.
+    const strand=(ax,ay,az,bx,by,bz)=>{
+      const n=9;
+      for(let i=0;i<n;i++){
+        const t=(i+.5)/n;
+        fpsGLBox(verts,ax+(bx-ax)*t,ay+(by-ay)*t,az+(bz-az)*t,
+          1.3,1.1,1.3,[.61,.57,.48]);
+      }
+    };
+    for(const x of [x0+70,x1-70]){
+      for(let k=0;k<5;k++){
+        strand(x,roofEdge-20,z0+20,x+(k-2)*30,roofEdge-100,z0+85);
+      }
+    }
+    // Sparse golden dust motes, deterministic positions, very cheap geometry.
+    for(let i=0;i<85;i++){
+      const a=Math.sin(i*127.1)*43758.5453,b=Math.sin(i*73.7)*15731.23;
+      const fx=a-Math.floor(a),fz=b-Math.floor(b);
+      const x=-170+fx*1280,z=-80+fz*760,y=160+((i*37)%290);
+      fpsGLBox(verts,x,y,z,1.6,1.6,1.6,i%4===0?[.91,.77,.48]:dust);
+    }
   }
 
   // Keep the actual map boundary flat as low curbs instead of tall walls.
@@ -5954,13 +7041,15 @@ function fpsDraw3DWorld(sw,sh){
     };
 
     // Deep roadbed: broad enough to read as an actual road/trench.
-    strip(left,right,channelFloor,[.12,.10,.09]);
+    const runner=map==='hall'?[.43,.10,.15]:map==='closet'?[.31,.20,.45]:[.53,.35,.19];
+    const runnerTrim=map==='hall'?[.86,.64,.27]:map==='closet'?[.60,.44,.76]:[.70,.49,.25];
+    strip(left,right,channelFloor,runner);
 
     // Slightly inset inner road surface: gives the channel floor a finished,
     // road-like surface instead of a single flat color.
     const innerL=left.map(p=>({x:p.x-(p.nx*2.8),y:p.y-(p.nz*2.8)}));
     const innerR=right.map(p=>({x:p.x+(p.nx*2.8),y:p.y+(p.nz*2.8)}));
-    strip(innerL,innerR,channelFloor+.35,[.18,.15,.12]);
+    strip(innerL,innerR,channelFloor+.35,runner.map(v=>Math.min(.95,v*1.13)));
 
     // Sloped shoulders from the recessed roadbed up toward the map surface.
     for(let i=1;i<left.length;i++){
@@ -5994,13 +7083,13 @@ function fpsDraw3DWorld(sw,sh){
       const inset=2.4;
       const ax=a.x+nx*inset,az=a.y+nz*inset;
       const bx=b.x+nx*inset,bz=b.y+nz*inset;
-      fpsGLQuad(verts,ax,az,bx,bz,channelFloor+.48,[.25,.21,.16]);
+      fpsGLQuad(verts,ax,az,bx,bz,channelFloor+.48,runnerTrim);
     }
   }
 
   // Flat distance grid: this is intentionally a ground reference, not a 3D structure.
-  for(let gx=-600;gx<=1560;gx+=80)fpsGLBox(verts,gx,.02,280,.7,.04,560,[.16,.18,.19]);
-  for(let gz=-600;gz<=1160;gz+=80)fpsGLBox(verts,480,.021,gz,960,.04,.7,[.16,.18,.19]);
+  // Ground decoration is themed per room rather than a debug grid.
+  fpsAddThemedRoom3D(verts,distToPath);
 
   // FPS-only tower geometry. The original TD renderer is untouched.
   // A small depth body remains underneath, while the visible front uses the
@@ -6011,7 +7100,26 @@ function fpsDraw3DWorld(sw,sh){
     if(!t||t===fpsTower||t.hidden)continue;
     fpsOtherTowers.push(t);
   }
-  // Enemies are still rendered with the exact Tower Defence monster() model.
+  // Fire Sock is a true volumetric 3D tower in FPS, with animated flames.
+  // Gameplay and the original 2D tower art remain completely unchanged.
+  const fireNow=performance.now();
+  for(const tower of fpsOtherTowers){
+    if(tower.k!=='fire' || tower.fused)continue;
+    const facing=fpsSockModelSmoothAngle(tower,fpsSockPathYaw(tower,fpsGetWorldPath()),fireNow);
+    fpsGLAddSockModel(verts,tower,facing,fireNow);
+    fpsGLFireSockFlames(verts,tower,facing,fireNow);
+  }
+  // FPS refined: Water Frog has layered geometry, facial detail and animated webbed feet.
+  // All other enemies still use their original 2D artwork until converted.
+  for(const enemy of en){
+    if(!enemy || enemy.dead || (enemy.type!=='frog' && enemy.type!=='fly')) continue;
+    // Generate the existing detailed model unchanged, then turn all its vertices
+    // around its own centre to face the direction of travel on the actual path.
+    const firstVertex=verts.length;
+    if(enemy.type==='frog') fpsGLFrogEnemy(verts,enemy);
+    else fpsGLMothEnemy(verts,enemy);
+    fpsGLOrientEnemyVertices(verts,firstVertex,enemy);
+  }
 
   const data=new Float32Array(verts);
   gl.bindBuffer(gl.ARRAY_BUFFER,fpsGLBuf);
@@ -6030,6 +7138,309 @@ function fpsDraw3DWorld(sw,sh){
   // FPS ONLY: all visible sock faces/details come from sock() via the texture
   // above. Do not add hand-drawn eyes/mouths/faces here.
   fpsGLDrawSockModels(fpsOtherTowers,vp);
+}
+
+// FPS 3D enemies face forward along their actual route, including corners.
+// The 2D game, enemy movement, collision and tower logic are untouched.
+const fpsEnemyHeadings=new WeakMap();
+function fpsGLOrientEnemyVertices(vertices,start,e){
+  const route=e.path||activeWavePath||currentPath||maps[map];
+  if(!route || route.length<2) return;
+  const lengths=e.pathLengths||pathLengths(route);
+  const total=lengths[lengths.length-1];
+  const d=Math.max(0,Math.min(total,Number(e.distAlongPath)||0));
+  // Sample slightly ahead and behind: smooth direction changes at sharp bends.
+  const back=pointAtDistance(route,lengths,Math.max(0,d-5));
+  const front=pointAtDistance(route,lengths,Math.min(total,d+5));
+  let dx=front.x-back.x,dz=front.y-back.y;
+  if(Math.hypot(dx,dz)<.001){
+    const a=route[0],b=route[1];dx=b.x-a.x;dz=b.y-a.y;
+  }
+  // Model faces -Z in local coordinates. Rotate -Z onto (dx,dz).
+  const target=Math.atan2(dx,-dz);
+  const prev=fpsEnemyHeadings.get(e);
+  let angle=target;
+  if(prev!==undefined){
+    const delta=Math.atan2(Math.sin(target-prev),Math.cos(target-prev));
+    // Frame-independent turn smoothing; still responsive at corners.
+    const t=0.22;
+    angle=prev+delta*t;
+  }
+  fpsEnemyHeadings.set(e,angle);
+  const c=Math.cos(angle),sn=Math.sin(angle),cx=e.x,cz=e.y;
+  for(let i=start;i<vertices.length;i+=6){
+    const x=vertices[i]-cx,z=vertices[i+2]-cz;
+    vertices[i]=cx+x*c-z*sn;
+    vertices[i+2]=cz+x*sn+z*c;
+  }
+}
+
+// First fully 3D enemy: Water Frog. Only changes the FPS WebGL scene.
+// Enemy movement, HP, attacks and the original TD artwork stay unchanged.
+function fpsGLFrogEnemy(verts,e){
+  // Refined Water Frog: layered low-poly shapes, subtle swim animation,
+  // expressive face and webbed feet. FPS visuals only; gameplay unchanged.
+  const px=e.x,pz=e.y;
+  // Time-driven hopping: works even when the enemy's travelled distance is
+  // updated in tiny steps or paused by game timing.
+  const t=performance.now()*.001;
+  const speed=Math.max(.7,Math.min(1.8,(Number(e.sp)||1)*.65));
+  const phase=t*7.5*speed+(Number(e.spawnId)||0)*.37;
+  const jump=Math.max(0,Math.sin(phase));
+  const hop=Math.pow(jump,1.2)*11.5;
+  const crouch=(1-jump)*1.8;
+  const blue=[.025,.29,.91],light=[.055,.49,.98],highlight=[.23,.72,1];
+  const belly=[.24,.74,1],dark=[.018,.13,.48],deep=[.012,.065,.23];
+  const white=[.96,.99,1],pupil=[.025,.075,.13],shine=[1,1,1];
+  const y=5+hop-crouch;
+  // Rounded, smoothly shaded-looking mesh made from compact real triangles.
+  // No stretched box surfaces: each ring is triangulated into small panels.
+  function oval(cx,cy,cz,rx,ry,rz,col,rings=9,sides=16){
+    for(let j=0;j<rings;j++){
+      const v0=-Math.PI/2+j*Math.PI/rings,v1=-Math.PI/2+(j+1)*Math.PI/rings;
+      for(let i=0;i<sides;i++){
+        const u0=i*2*Math.PI/sides,u1=(i+1)*2*Math.PI/sides;
+        const at=(u,v)=>[cx+rx*Math.cos(v)*Math.cos(u),
+          cy+ry*Math.sin(v),cz+rz*Math.cos(v)*Math.sin(u)];
+        const A=at(u0,v0),B=at(u1,v0),C=at(u1,v1),D=at(u0,v1);
+        const tone=.90+.10*Math.cos((u0+u1)*.5-.6);
+        const c=col.map(x=>Math.min(1,x*tone));
+        fpsGLMothWingTriangle(verts,A,B,C,c);
+        fpsGLMothWingTriangle(verts,A,C,D,c);
+      }
+    }
+  }
+  // Contact shadow under the body, then a rounded torso and lighter upper back.
+  // Stationary landing shadow gets a little smaller when airborne.
+  fpsGLPrism(verts,px,-8.7,pz,18-hop*.40,14-hop*.32,.3,[.12,.16,.23],0,.95);
+  oval(px,y+4,pz,15,13.5,20,blue);
+  oval(px,y+16,pz-3,13,8,13,light);
+  // Chest and belly project slightly forward from the body.
+  oval(px,y+2,pz-11,10.5,8,8,belly);
+  oval(px,y+14,pz-12,10,5.5,6,light);
+  // Sculpted cobalt side plates and a bright raised spine: stronger 3D silhouette.
+  for(const side of [-1,1]){
+    fpsGLPrism(verts,px+side*11.9,y+6,pz+1,2.3,7.2,14,dark,side*.09,.95);
+    fpsGLPrism(verts,px+side*10.5,y+9,pz-5,1.3,4.5,7,highlight,side*.07,.94);
+    fpsGLPrism(verts,px+side*7.4,y+17.8,pz+5,2.6,1.3,6,highlight,0,.96);
+  }
+  fpsGLPrism(verts,px,y+19.4,pz+4,3.6,1.2,11,highlight,0,.97);
+  // Anatomical articulated limbs: tapered thigh -> angled shin -> ankle.
+  // Each segment is a connected 3D tube, not a stack of circular blobs.
+  function limb(a,b,r0,r1,col,sides=10){
+    const d=b.map((v,i)=>v-a[i]),len=Math.hypot(...d)||1;
+    const axis=d.map(v=>v/len);
+    const helper=Math.abs(axis[1])<.85?[0,1,0]:[1,0,0];
+    const cross=(u,v)=>[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+    const u=cross(axis,helper),ul=Math.hypot(...u)||1;
+    for(let i=0;i<3;i++)u[i]/=ul;
+    const v=cross(axis,u);
+    const ring=(c,r,angle)=>c.map((n,k)=>n+r*(Math.cos(angle)*u[k]+Math.sin(angle)*v[k]));
+    for(let j=0;j<sides;j++){
+      const ang=j*Math.PI*2/sides,ang2=(j+1)*Math.PI*2/sides;
+      const A=ring(a,r0,ang),B=ring(a,r0,ang2);
+      const C=ring(b,r1,ang2),D=ring(b,r1,ang);
+      const shade=.86+.14*Math.cos(ang-.8);
+      const tint=col.map(c=>Math.min(1,c*shade));
+      fpsGLMothWingTriangle(verts,A,B,C,tint);
+      fpsGLMothWingTriangle(verts,A,C,D,tint);
+    }
+  }
+  for(const side of [-1,1]){
+    // Thighs grow naturally out of the rear hips, with bent outward knees.
+    const hip=[px+side*11,y+1,pz+10];
+    const knee=[px+side*(22+jump*1.5),y-1+jump*1.5,pz+10];
+    const ankle=[px+side*(24-jump*3),-3+hop*.58,pz-12+jump*5];
+    limb(hip,knee,7.0,5.7,blue,14);
+    oval(knee[0],knee[1],knee[2],5.8,5.6,6.0,light,7,12);
+    // The long lower leg slopes forward and down like a frog's shin.
+    limb(knee,ankle,4.9,2.9,blue,12);
+    oval(ankle[0],ankle[1],ankle[2],3.0,2.9,3.0,light,6,10);
+    const heel=[ankle[0]+side*1,ankle[1]-1.0,ankle[2]-2.0];
+    const palm=[heel[0]+side*2,heel[1],heel[2]-7];
+    limb(heel,palm,3.3,2.7,light,10);
+    // Three separated, elongated toes with slim knuckles and webbing.
+    const tips=[];
+    for(let toe=-1;toe<=1;toe++){
+      const knuckle=[palm[0]+side*(1+Math.abs(toe)*1.2),
+        palm[1]-.2,palm[2]-4+toe*3.6];
+      const tip=[knuckle[0]+side*(1.7+Math.abs(toe)),
+        knuckle[1]-.4,knuckle[2]-5.8+toe*1.7];
+      limb(palm,knuckle,1.45,1.15,light,8);
+      limb(knuckle,tip,1.12,.65,highlight,8);
+      oval(...tip,1.3,.85,1.8,highlight,5,8);
+      tips.push(tip);
+    }
+    for(let j=0;j<2;j++){
+      const v1=[palm[0],palm[1]-.35,palm[2]-1];
+      const v2=[tips[j][0],tips[j][1],tips[j][2]+2];
+      const v3=[tips[j+1][0],tips[j+1][1],tips[j+1][2]+2];
+      fpsGLMothWingTriangle(verts,v1,v2,v3,[.12,.56,.88]);
+    }
+    // Front arms are thinner, with visible elbows and separate fingers.
+    const shoulder=[px+side*12,y+9,pz-9];
+    const elbow=[px+side*17,y+2+jump*2,pz-13];
+    const wrist=[px+side*14,y-4+jump*3,pz-20];
+    limb(shoulder,elbow,3.8,2.8,blue,10);
+    oval(...elbow,2.9,2.9,2.9,light,6,10);
+    limb(elbow,wrist,2.7,1.8,light,10);
+    for(let finger=-1;finger<=1;finger++){
+      const tip=[wrist[0]+side*(1+Math.abs(finger)),wrist[1]-1,
+        wrist[2]-5+finger*2.8];
+      limb(wrist,tip,1.1,.55,highlight,7);
+      oval(...tip,.85,.7,1.0,highlight,5,8);
+    }
+  }
+  // Two raised eye sockets, round white eyes, pupils and tiny catchlights.
+  for(const side of [-1,1]){
+    const ex=px+side*8;
+    oval(ex,y+20,pz-8,6.2,6.2,7.6,light,9,14);
+    oval(ex,y+23.2,pz-12.5,4.4,4.2,3.6,white,9,14);
+    oval(ex-side*.5,y+24.1,pz-15.6,2.35,2.7,1.6,pupil,7,12);
+    oval(ex-side*.9,y+25.7,pz-16.7,.85,.9,.5,shine,5,10);
+  }
+  // Defined brow ridges, eye outlines and vivid blue cheek markings.
+  for(const side of [-1,1]){
+    fpsGLPrism(verts,px+side*8,y+27,pz-11.1,5.3,1.0,2.1,dark,side*.08,.97);
+    fpsGLBox(verts,px+side*10.5,y+13.4,pz-12.2,2.1,3.4,.85,highlight);
+    fpsGLBox(verts,px+side*7.6,y+10.6,pz-12.5,3.5,1.2,.9,light);
+  }
+  // Little raised speckles and rounded cheek pads add depth from the sides.
+  for(const side of [-1,1]){
+    oval(px+side*10,y+12,pz-9,3.5,2.4,3.4,highlight,6,10);
+    for(let i=0;i<5;i++){
+      const z=pz+7+i*2.2;
+      oval(px+side*(8.3+(i%2)*1.5),y+17-i*.9,z,
+        1.15,1.0,1.35,i%2?light:highlight,5,8);
+    }
+  }
+  // Nostrils and a soft, three-part smiling mouth, all actual 3D geometry.
+  for(const side of [-1,1])
+    fpsGLBox(verts,px+side*3.2,y+17.2,pz-12.25,1.2,1.1,.8,dark);
+  fpsGLBox(verts,px,y+12.3,pz-12.25,9.5,.85,.85,deep);
+  fpsGLBox(verts,px-5,y+13.1,pz-12.2,1.3,1.6,.8,deep);
+  fpsGLBox(verts,px+5,y+13.1,pz-12.2,1.3,1.6,.8,deep);
+  // Distinctive lighter spots along the back, visible from the tower sides.
+  for(const side of [-1,1])for(let i=0;i<3;i++){
+    const spotX=px+side*(7.5+i*.65),spotZ=pz+2+i*3;
+    fpsGLPrism(verts,spotX,y+16-i*.75,spotZ,1.65,1.8,.6,highlight,0,.8);
+  }
+}
+
+// Sticky Moth 3D upgrade: time-driven, articulated wingbeats.
+// No changes to enemy movement, damage, pathing, or normal 2D rendering.
+function fpsGLMothWingTriangle(verts,a,b,c,color){
+  const push=(p)=>verts.push(p[0],p[1],p[2],...color);
+  push(a);push(b);push(c); // front
+  push(c);push(b);push(a); // back: visible from either side
+}
+function fpsGLMothWing(verts,px,cy,pz,side,angle,hind){
+  // Detailed articulated wing: curved scalloped outline, radial veins,
+  // warm translucent-looking layered cells and ornamental eyespots.
+  const rootX=px+side*(hind?5.8:7.2),rootY=cy+(hind?8.5:14.5);
+  const rootZ=pz+(hind?7:2.5);
+  const ca=Math.cos(angle),sa=Math.sin(angle);
+  const point=(out,along,depth=0)=>[
+    rootX+side*(out*ca-along*sa),
+    rootY+out*sa+along*ca,
+    rootZ+depth
+  ];
+  const span=hind?22:35;
+  const outline=hind?
+    [[0,0],[.16,-.31],[.42,-.50],[.70,-.47],[.95,-.18],[1,.05],[.89,.25],[.65,.41],[.38,.44],[.14,.25]]:
+    [[0,0],[.13,-.28],[.37,-.48],[.66,-.51],[.89,-.35],[1,-.06],[.99,.19],[.85,.39],[.61,.49],[.35,.43],[.12,.23]];
+  const base=hind?[.79,.48,.25]:[.96,.72,.39];
+  const ivory=[1,.90,.65],edge=[.39,.24,.16],vein=[.62,.39,.24],pale=[.97,.82,.52];
+  const center=point(span*.45,0,hind?1.8:-.7);
+  const outlinePts=outline.map(([u,v],i)=>point(span*u,span*v+(i%3===0?.55:0),hind?u*3.2:-u*2.2));
+  // A fan of compact triangles with varied tones creates visible wing cells.
+  for(let i=0;i<outlinePts.length;i++){
+    const j=(i+1)%outlinePts.length;
+    const col=i%4===0?ivory:i%3===0?pale:base;
+    fpsGLMothWingTriangle(verts,center,outlinePts[i],outlinePts[j],col);
+    // Slim dark edge trim (two-sided).
+    const q=outlinePts[i],r=outlinePts[j];
+    const toward=p=>p.map((v,k)=>v*.91+center[k]*.09);
+    fpsGLMothWingTriangle(verts,q,r,toward(r),edge);
+    fpsGLMothWingTriangle(verts,q,toward(r),toward(q),edge);
+  }
+  // Veins taper towards the wingtip and are attached to the moving wing.
+  function line(a,b,width,col){
+    const dx=b[0]-a[0],dy=b[1]-a[1],dz=b[2]-a[2];
+    const len=Math.hypot(dx,dy,dz)||1;
+    const perp=[-dy/len*width,dx/len*width,0];
+    const u=a.map((v,k)=>v+perp[k]),v=a.map((n,k)=>n-perp[k]);
+    const w=b.map((n,k)=>n-perp[k]*.35),z=b.map((n,k)=>n+perp[k]*.35);
+    fpsGLMothWingTriangle(verts,u,v,w,col);
+    fpsGLMothWingTriangle(verts,u,w,z,col);
+  }
+  for(let i=1;i<outlinePts.length-1;i+=2)
+    line(point(span*.08,0),outlinePts[i],hind?.35:.45,vein);
+  line(point(0,0),point(span*.93,-span*.04),.6,edge);
+  // Concentric eyespots: four nested moving polygons, both visible sides.
+  const cx=span*(hind?.68:.71),cz=hind?2.5:-2.1;
+  const spot=(radius,col)=>{
+    const mid=point(cx,0,cz+.3);
+    for(let i=0;i<12;i++){
+      const a=i*Math.PI/6,b=(i+1)*Math.PI/6;
+      fpsGLMothWingTriangle(verts,mid,
+        point(cx+Math.cos(a)*radius,Math.sin(a)*radius,cz+.3),
+        point(cx+Math.cos(b)*radius,Math.sin(b)*radius,cz+.3),col);
+    }
+  };
+  spot(hind?5.2:6.8,edge);
+  spot(hind?3.9:5.2,ivory);
+  spot(hind?2.8:3.7,[.45,.27,.16]);
+  spot(hind?1.2:1.6,[.98,.81,.43]);
+  // Amber sticky drops on the lower tips, drawn as small 3D droplets.
+  for(const u of (hind?[.62,.91]:[.37,.83])){
+    const d=point(span*u,-span*(hind?.34:.40),0);
+    fpsGLPrism(verts,d[0],d[1]-2,d[2],.8,.8,2.8,[1,.65,.20],0,.42);
+  }
+}
+function fpsGLMothEnemy(verts,e){
+  const px=e.x,pz=e.y;
+  const now=performance.now()/1000;
+  const phase=now*Math.PI*9.2+(px*.037+pz*.021);
+  const beat=Math.sin(phase);
+  const hover=Math.sin(now*5+px*.02)*1.5;
+  const cy=5+hover;
+  const amber=[.82,.53,.24],gold=[.98,.77,.42],cream=[1,.89,.65];
+  const brown=[.32,.20,.14],mid=[.58,.38,.22],dark=[.14,.095,.075];
+  for(const side of [-1,1]){
+    fpsGLMothWing(verts,px,cy,pz,side,beat*.74+.16,false);
+    fpsGLMothWing(verts,px,cy,pz,side,Math.sin(phase-1.1)*.58-.15,true);
+  }
+  // Segmented, rounded body with furry-looking overlapping bands.
+  fpsGLPrism(verts,px,cy-12,pz+2,6.4,6.7,25,mid,0,.79);
+  fpsGLPrism(verts,px,cy+5,pz-2,9.0,7.7,13,amber,0,.92);
+  fpsGLPrism(verts,px,cy+17,pz-6,8.3,7.5,11,cream,0,.91);
+  for(let i=0;i<6;i++){
+    const y=cy-10+i*4.4;
+    fpsGLPrism(verts,px,y,pz+2,6.9-i*.28,6.8-i*.23,1.2,i%2?gold:brown,0,.94);
+  }
+  for(const side of [-1,1]){
+    // Thick eye rims, oversized dark eyes and tiny reflective highlights.
+    fpsGLPrism(verts,px+side*4.4,cy+20,pz-12,4.0,3.6,5.1,brown,0,.94);
+    fpsGLPrism(verts,px+side*4.4,cy+21,pz-14.2,3.1,2.8,4.6,dark,0,.96);
+    fpsGLBox(verts,px+side*3.5,cy+24.3,pz-15.5,1.0,1.0,.8,[1,.97,.84]);
+    // Feathered antennae: central stalk with many short side branches.
+    for(let i=0;i<7;i++){
+      const y=cy+27+i*1.45;
+      fpsGLBox(verts,px+side*(7+i*.75),y,pz-6,1.1,2.0,1.1,brown);
+      fpsGLBox(verts,px+side*(9+i*.75),y,pz-6,4.5-i*.35,.5,.75,gold);
+    }
+    for(let i=0;i<3;i++){
+      const sway=Math.sin(now*4+i*1.4+side)*1.2;
+      const x=px+side*(7+i*1.4);
+      fpsGLBox(verts,x,cy-12-i*2+sway,pz-5+i*5,2.0,9,2.0,dark);
+      fpsGLPrism(verts,x+side*1.8,cy-15-i*2+sway,pz-5+i*5,1.1,1.1,3.5,brown,0,.6);
+    }
+    // Cream-colored tufts along thorax.
+    for(let i=0;i<4;i++)
+      fpsGLPrism(verts,px+side*(6+i*.6),cy+10+i*2,pz+1,1.6,1.5,3.2,cream,side*.12,.42);
+  }
+  fpsGLBox(verts,px,cy+16,pz-14.8,3.6,1.1,1.0,dark);
 }
 
 function fpsGLTransformPoint(px,pz,ox,oz,rot){const c=Math.cos(rot),s=Math.sin(rot);return {x:ox+px*c-pz*s,z:oz+px*s+pz*c};}
@@ -6157,13 +7568,11 @@ function fpsRender(){
   // Frame-rate independent smoothing: the camera eases toward the target
   // without lagging differently at different FPS rates.
   const now=performance.now();
-  const dt=Math.min(0.033,Math.max(0.001,(fpsRender._last||now-16) ? (now-(fpsRender._last||now-16))/1000 : 0.016));
+  const dt=Math.min(.05,Math.max(.001,(now-(fpsRender._last||now-16))/1000));
   fpsRender._last=now;
-  const yawDelta=fpsNormAngle(fpsYawTarget-fpsYaw);
-  fpsYaw=fpsYawTarget;
-  fpsPitch=0;fpsPitchTarget=0;
-  if(Math.abs(yawDelta)<0.00008)fpsYaw=fpsYawTarget;
-  if(Math.abs(fpsPitchTarget-fpsPitch)<0.00008)fpsPitch=fpsPitchTarget;
+  const follow=1-Math.exp(-dt*24);
+  fpsYaw=fpsNormAngle(fpsYaw+fpsNormAngle(fpsYawTarget-fpsYaw)*follow);
+  fpsPitch+=(fpsPitchTarget-fpsPitch)*follow;
   const scene=$('fpsScene'),targets=$('fpsTargets'),sw=scene.clientWidth||960,sh=scene.clientHeight||560;fpsDraw3DWorld(sw,sh);fpsDrawMiniMap();fpsUpdateBaseHP();
   targets.innerHTML='';
 
@@ -6176,7 +7585,7 @@ function fpsRender(){
     d.className='fpsTarget';
     d.style.left=q.x+'px';
     d.style.top=q.y+'px';
-    d.style.transform='translate(-50%,-82%) scale('+q.scale+')';
+    d.style.transform='translate(-50%,-100%) scale('+q.scale+')';
     d.style.width='150px';
     d.style.height='162px';
 
@@ -6197,7 +7606,8 @@ function fpsRender(){
     }finally{
       x=mainCtx;
     }
-    d.appendChild(sprite);
+    // WebGL frogs are rendered in depth, not as overlapping flat sprites.
+    if(!(fpsGLReady && (q.e.type==='frog'||q.e.type==='fly'))) d.appendChild(sprite);
 
     const hp=Math.max(0,Math.min(100,(q.e.hp/q.e.max)*100));
     const bar=document.createElement('div');
@@ -6209,7 +7619,7 @@ function fpsRender(){
     targets.appendChild(d);
   }
   const name=D[fpsTower.parts?.[0]||fpsTower.k]?.[0]||'Sock';
-  $('fpsInfo').textContent='🎯 '+name+' • STATIONARY FPS • Damage '+Math.round(fpsTower.damage);
+  $('fpsInfo').textContent='🎯 '+name+' • FPS 2.1 • Damage '+Math.round(fpsTower.damage);
   const emoji={fire:'🔥',ice:'❄️',thunder:'⚡',wizard:'🪄',ninja:'🥷',golden:'👑',portal:'🌀',laundry:'🧺',fight:'🥊'}[fpsTower.k]||'🧦';
   $('fpsWeapon').textContent=emoji;
   fpsAnim=requestAnimationFrame(fpsRender);
@@ -6217,67 +7627,52 @@ function fpsRender(){
 const fpsViewEl=$('fpsView');
 let fpsLastClientX=null, fpsLastClientY=null;
 
-// One input path only: RMB starts horizontal look, mouse movement rotates,
-// vertical movement only moves the crosshair. The cursor stays visible and
-// pointer-lock is never used.
+// Single input system. Hold the right mouse button to look in any direction,
+// left click to shoot; never let menu buttons trigger a shot.
 fpsViewEl.addEventListener('mousedown',e=>{
-  if(!fpsActive)return;
-  if(e.button===2){
-    const scene=$('fpsScene');
-    if(!scene.contains(e.target))return;
-    e.preventDefault();
-    fpsLookHeld=true;
-    fpsLastClientX=e.clientX;
-    fpsLastClientY=e.clientY;
-  }
-},true);
-
-document.addEventListener('mousemove',e=>{
-  if(!fpsActive)return;
-
-  if(fpsLookHeld){
-    if(fpsLastClientX===null){
-      fpsLastClientX=e.clientX;
-      fpsLastClientY=e.clientY;
-      return;
-    }
-    const dx=e.clientX-fpsLastClientX;
-    const dy=e.clientY-fpsLastClientY;
-    fpsLastClientX=e.clientX;
-    fpsLastClientY=e.clientY;
-    fpsApplyLook(dx,dy);
-    return;
-  }
-
+  if(!fpsActive||e.button!==2)return;
+  if(!$('fpsScene').contains(e.target)||e.target.closest('button'))return;
+  e.preventDefault();fpsLookHeld=true;
+  fpsLastClientX=e.clientX;fpsLastClientY=e.clientY;
+  // Soft fallback is right-drag if pointer lock isn't supported/allowed.
   const scene=$('fpsScene');
-  if(scene.contains(e.target)){
-    fpsAimFromMouse(e.clientX,e.clientY);
+  if(scene.requestPointerLock && document.pointerLockElement!==scene){
+    try{const p=scene.requestPointerLock();if(p&&p.catch)p.catch(()=>{});}catch(_){}
   }
 },true);
-
+document.addEventListener('pointerlockchange',()=>{
+  fpsPointerLocked=document.pointerLockElement===$('fpsScene');
+  fpsViewEl.classList.toggle('fpsLocked',fpsPointerLocked);
+  if(!fpsPointerLocked){fpsLastClientX=null;fpsLastClientY=null;}
+});
+document.addEventListener('mousemove',e=>{
+  if(!fpsActive||!fpsLookHeld)return;
+  if(fpsPointerLocked){
+    fpsApplyLook(e.movementX||0,e.movementY||0);
+  }else{
+    const dx=fpsLastClientX===null?0:e.clientX-fpsLastClientX;
+    const dy=fpsLastClientY===null?0:e.clientY-fpsLastClientY;
+    fpsLastClientX=e.clientX;fpsLastClientY=e.clientY;
+    fpsApplyLook(dx,dy);
+  }
+},true);
 document.addEventListener('mouseup',e=>{
   if(e.button!==2)return;
   if(fpsActive)e.preventDefault();
-  fpsLookHeld=false;
-  fpsLastClientX=null;
-  fpsLastClientY=null;
+  fpsLookHeld=false;fpsLastClientX=null;fpsLastClientY=null;
+  if(fpsPointerLocked&&document.exitPointerLock)document.exitPointerLock();
 },true);
-
-document.addEventListener('blur',()=>{
-  fpsLookHeld=false;
-  fpsLastClientX=null;
-  fpsLastClientY=null;
+window.addEventListener('blur',()=>{
+  fpsLookHeld=false;fpsLastClientX=null;fpsLastClientY=null;
+  if(fpsPointerLocked&&document.exitPointerLock)document.exitPointerLock();
 });
-
-document.addEventListener('contextmenu',e=>{
-  if(fpsActive)e.preventDefault();
-},true);
-
+document.addEventListener('contextmenu',e=>{if(fpsActive)e.preventDefault()},true);
 fpsViewEl.addEventListener('click',e=>{
-  if(e.target===$('fpsExit')||e.target===$('fpsFullscreen')||e.target.closest('#fpsBaseHP')||e.target.closest('#fpsMapPanel'))return;
-  if(e.button===0)fpsShoot();
+  if(!fpsActive||e.button!==0)return;
+  if(e.target.closest('button')||e.target.closest('#fpsBaseHP')||e.target.closest('#fpsMapPanel'))return;
+  fpsShoot();
 });
-
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fpsActive&&!fpsPointerLocked){exitFPSView();}},true);
 $('fpsExit').onclick=exitFPSView;
 function toggleFPSFullscreen(){
   const view=$('fpsView');
@@ -6297,7 +7692,7 @@ $('fpsFullscreen').addEventListener('mousedown',e=>{e.stopPropagation()});
 document.addEventListener('fullscreenchange',()=>{
   const b=$('fpsFullscreen');
   if(b)b.textContent=document.fullscreenElement?'⛶ Exit Fullscreen':'⛶ Fullscreen';
-  if(fpsActive)requestAnimationFrame(fpsRender);
+  if(fpsActive){cancelAnimationFrame(fpsAnim);fpsRender();}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fpsActive){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen().catch(()=>{});return;}exitFPSView()}});
 function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+d0[0]+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
@@ -7318,6 +8713,8 @@ document.addEventListener("DOMContentLoaded",function(){
    try{
      const data={format:'SockTD-save-backup',version:1,createdAt:new Date().toISOString(),items:{}};
      for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k!==null)data.items[k]=localStorage.getItem(k);}
+     // Explicit savefile metadata: regular localStorage never preserves Clock Sock unlock.
+     data.clockSockUnlocked=window.socktdClockUnlocked===true;
      const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
      a.href=url;a.download='sock-td-save-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Backup exported. Keep the .json file somewhere safe.');
    }catch(e){status('Could not export backup: '+e.message);}
@@ -7329,7 +8726,13 @@ document.addEventListener("DOMContentLoaded",function(){
      const data=JSON.parse(await file.text());
      if(!data||data.format!=='SockTD-save-backup'||!data.items||typeof data.items!=='object'||Array.isArray(data.items))throw new Error('This is not a valid Sock TD backup.');
      if(!confirm('Restore this backup? Existing browser save data with matching keys will be replaced. The game will reload after restoring.')){fileInput.value='';return;}
-     for(const [key,value] of Object.entries(data.items)){if(typeof key==='string'&&typeof value==='string')localStorage.setItem(key,value);}
+     for(const [key,value] of Object.entries(data.items)){
+       if(typeof key==='string'&&typeof value==='string'&&key!=='socktdClockImportedUnlockOnce')localStorage.setItem(key,value);
+     }
+     // A restored backup is the ONLY way to keep an unlocked Clock Sock on reload.
+     // Old backups without this explicit flag remain locked.
+     if(data.clockSockUnlocked===true)localStorage.setItem('socktdClockImportedUnlockOnce','yes');
+     else localStorage.removeItem('socktdClockImportedUnlockOnce');
      status('Backup restored. Reloading…');location.reload();
    }catch(e){status('Import failed: '+e.message);}
    finally{fileInput.value='';}
@@ -7440,7 +8843,7 @@ document.addEventListener("DOMContentLoaded",function(){
    skinGrid.querySelectorAll('.socktdSkinItemButton').forEach(b=>b.classList.toggle('selected',b.dataset.skinItemId===id));
    if(item.kind==='sock'&&item.key==='clock'){
      const available=!!window.socktdClockUnlocked;
-     skinDetail.innerHTML='<div class="item socktdSkinCard"><h3>⏰ Clock Sock — Alarm Clock Skin</h3><p>A polished golden alarm-clock sock with twin bells, engraved minute marks, Roman numerals, moving hands and fine stitched details.</p><span class="socktdSkinStatus '+(available?'available':'')+'">'+(available?'Unlocked after 15 minutes':'🔒 Unlock after 15 minutes of gameplay')+'</span><label for="socktdCatalogueClockSkin">Available skins</label><select id="socktdCatalogueClockSkin" class="socktdSkinDetailSelect"><option value="classic">⏰ Classic Clock Sock</option><option value="alarm" '+(available?'':'disabled')+'>🔔 Alarm Clock Sock '+(available?'':'🔒')+'</option></select><div id="socktdCatalogueClockSkinPreview" class="socktdSkinPreview">'+(available?'🔔 Alarm Clock skin unlocked!':'⏳ Play for 15 minutes to unlock this skin.')+'</div></div>';
+     skinDetail.innerHTML='<div class="item socktdSkinCard"><h3>⏰ Clock Sock — Alarm Clock Skin</h3><p>A black bedside digital alarm-clock sock with glossy red LED digits, a dark glass display, red accents and detailed buttons.</p><span class="socktdSkinStatus '+(available?'available':'')+'">'+(available?'Unlocked after 15 minutes':'🔒 Unlock after 15 minutes of gameplay')+'</span><label for="socktdCatalogueClockSkin">Available skins</label><select id="socktdCatalogueClockSkin" class="socktdSkinDetailSelect"><option value="classic">⏰ Classic Clock Sock</option><option value="alarm" '+(available?'':'disabled')+'>🔔 Alarm Clock Sock '+(available?'':'🔒')+'</option></select><div id="socktdCatalogueClockSkinPreview" class="socktdSkinPreview">'+(available?'🔔 Alarm Clock skin unlocked!':'⏳ Play for 15 minutes to unlock this skin.')+'</div></div>';
      const sel=$('socktdCatalogueClockSkin');sel.value=available&&window.socktdClockSkinMode==='alarm'?'alarm':'classic';sel.addEventListener('change',()=>{window.socktdClockSkinMode=sel.value;try{localStorage.setItem('socktdClockSkinChoice',sel.value)}catch(e){}if(typeof draw==='function')draw();});return;
    }
    if(item.kind==='sock'&&item.key==='fire'){
@@ -7721,7 +9124,11 @@ const MIGRATION='socktdClockFreshUnlockV2';
 try{if(localStorage.getItem(MIGRATION)!=='1'){localStorage.removeItem(KEY);localStorage.removeItem(UNLOCK);localStorage.setItem(MIGRATION,'1');}}catch(e){}
 let seconds=0;try{seconds=Math.max(0,Math.floor(Number(localStorage.getItem(KEY))||0));}catch(e){}
 // Unlock is intentionally session-only: each fresh launch starts locked.
-let unlocked=false;window.socktdClockUnlocked=false;window.socktdClockSkinMode='classic';try{localStorage.removeItem(UNLOCK);localStorage.removeItem('socktdClockSkinChoice');}catch(e){}
+// Only an explicit Settings save-file import can carry the unlock into a fresh launch.
+const IMPORT_FLAG='socktdClockImportedUnlockOnce';
+let unlocked=false;
+try{unlocked=localStorage.getItem(IMPORT_FLAG)==='yes';localStorage.removeItem(IMPORT_FLAG);localStorage.removeItem(UNLOCK);localStorage.removeItem('socktdClockSkinChoice');}catch(e){}
+window.socktdClockUnlocked=unlocked;window.socktdClockSkinMode='classic';
 let cinematic=null,cinematicRunning=false;
 let sessionSeconds=0, previousWave=0;
 const hud=document.createElement('div');hud.id='socktdClockHUD';hud.setAttribute('aria-label','Current game stopwatch');document.body.appendChild(hud);
@@ -7741,7 +9148,7 @@ function addTime(n,fromGameplay=false){if(!Number.isFinite(n)||n<0)return;const 
 function isPlaying(){const choose=document.getElementById('choose');if(choose&&!choose.classList.contains('hidden')&&getComputedStyle(choose).display!=='none')return false;if(typeof gameOver!=='undefined'&&gameOver)return false;if(typeof gamePaused!=='undefined'&&gamePaused)return false;return typeof wave!=='undefined'&&wave>=1;}
 let last=performance.now(),acc=0;setInterval(()=>{const now=performance.now(),delta=Math.min(1500,now-last);last=now;const currentWave=typeof wave==='number'?wave:0;if(currentWave===0&&previousWave>=1){sessionSeconds=0;sync();}previousWave=currentWave;if(cinematicRunning||document.visibilityState!=='visible'||!isPlaying()){acc=0;return;}acc+=delta;if(acc>=1000){const n=Math.floor(acc/1000);acc-=n*1000;addTime(n,true);}},250);
 const panel=document.querySelector('#adminModal .adminGrid')||document.querySelector('#adminModal .adminPanel');if(panel){const section=document.createElement('div');section.className='adminSection';section.innerHTML='<h3>⏰ Time Skip</h3><div class="small">Add played minutes to test the Clock Sock unlock.</div><div class="adminControl"><label for="socktdTimeSkipMinutes">Minutes to add</label><input class="adminInput" id="socktdTimeSkipMinutes" type="number" min="0" max="100000" step="1" value="15"></div><div class="adminRow"><button type="button" class="adminGood" id="socktdTimeSkipApply">⏩ Time Skip</button></div><div class="small" id="socktdTimeSkipStatus"></div>';panel.appendChild(section);section.querySelector('button').addEventListener('click',()=>{const v=Number(section.querySelector('input').value);if(!Number.isSafeInteger(v)||v<0||v>100000){section.querySelector('#socktdTimeSkipStatus').textContent='Enter a whole number between 0 and 100000.';return;}addTime(v*60,true);section.querySelector('#socktdTimeSkipStatus').textContent='Total played: '+fmt(seconds);});}
-window.socktdClockTime=()=>seconds;save();sync();
+window.socktdClockTime=()=>seconds;window.socktdClockSessionSeconds=()=>sessionSeconds;save();sync();
 })();
 </script>
 
