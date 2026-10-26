@@ -1,322 +1,684 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOCK TD - Play Free Online | SOCK.games</title>
-<meta name="description" content="Play SOCK TD for free online! Defend your base with powerful socks, discover unique towers, and explore the world of SOCK TD.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://socktdev.github.io/SOCK.games/">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play SOCK TD for free! Build powerful sock towers, master fire, ice and thunder, and defend your base against waves of enemies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://socktdev.github.io/SOCK.games/">
+  <meta name="theme-color" content="#191426">
+  <title>SOCK TD - Play Free Online | SOCK.games</title>
 
-        html {
-            scroll-behavior: smooth;
-        }
+  <style>
+    :root {
+      --bg: #171321;
+      --panel: #292137;
+      --cream: #fff0cf;
+      --muted: #c6bad4;
+      --orange: #ffae63;
+      --blue: #77dfff;
+      --purple: #b995ff;
+    }
 
-        body {
-            background: #111827;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
+    * { box-sizing: border-box; }
 
-        header {
-            background: #1f2937;
-            padding: 50px 20px;
-        }
+    html { scroll-behavior: smooth; }
 
-        h1 {
-            color: #38bdf8;
-            font-size: 48px;
-        }
+    body {
+      margin: 0;
+      color: var(--cream);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background:
+        radial-gradient(ellipse at 10% 10%, #53314e 0%, transparent 30%),
+        radial-gradient(ellipse at 90% 35%, #17465d 0%, transparent 30%),
+        #171321;
+      line-height: 1.6;
+    }
 
-        h2 {
-            color: #38bdf8;
-        }
+    a { color: inherit; }
 
-        nav {
-            background: #0b1220;
-            padding: 20px;
-        }
+    button, a { -webkit-tap-highlight-color: transparent; }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 10px;
-            font-weight: bold;
-        }
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #171321ed;
+      backdrop-filter: blur(15px);
+      border-bottom: 2px dashed #ffffff30;
+    }
 
-        section {
-            padding: 35px 15px;
-        }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 15px 0;
+    }
 
-        .card {
-            background: #1f2937;
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 30px;
-            border-radius: 15px;
-        }
+    .brand {
+      font-size: 23px;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
 
-        .button {
-            display: inline-block;
-            background: #38bdf8;
-            color: #111827;
-            padding: 14px 25px;
-            margin: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .brand span { color: var(--orange); }
 
-        .button:hover {
-            background: #7dd3fc;
-        }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
 
-        footer {
-            background: #0b1220;
-            padding: 25px;
-            color: #9ca3af;
-        }
-        
-/* SOCK.GAMES - SOCK UNIVERSE UPGRADE */
+    .nav-links a {
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ded4e8;
+    }
 
-:root {
-  --sock-cream: #fff0c9;
-  --sock-orange: #ff9a43;
-  --sock-blue: #70d9ff;
-  --sock-purple: #ad87ff;
-}
+    .nav-links a:hover { color: var(--orange); }
 
-body {
-  background:
-    radial-gradient(circle at 15% 20%, #45264b 0%, transparent 35%),
-    radial-gradient(circle at 85% 60%, #163f57 0%, transparent 35%),
-    #12101e;
-}
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 95px 20px 105px;
+      border-bottom: 4px dashed #ffcd8b66;
+      background:
+        radial-gradient(circle at 15% 35%, #ad452d44, transparent 35%),
+        radial-gradient(circle at 85% 35%, #2285c044, transparent 35%),
+        linear-gradient(145deg, #38233f, #181a30);
+    }
 
-/* Soft fabric pattern */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  opacity: .12;
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      transparent 0 9px,
-      #ffffff20 10px 11px
-    );
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent 0 12px,
+        #ffffff 13px,
+        transparent 14px 25px
+      );
+    }
 
-.logo::before {
-  content: "🧦 ";
-}
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      margin: auto;
+    }
 
-h1 {
-  color: var(--sock-cream);
-  text-shadow:
-    4px 5px 0 #663c68,
-    0 0 45px #ff9a4355;
-}
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 17px;
+      border: 2px dashed #ffce8a;
+      border-radius: 99px;
+      background: #ffffff12;
+      color: #ffdda9;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-h2 {
-  color: var(--sock-cream);
-}
+    .hero h1 {
+      font-size: clamp(65px, 13vw, 135px);
+      line-height: 1;
+      letter-spacing: -5px;
+      margin: 25px 0 16px;
+      color: #fff3d5;
+      text-shadow:
+        5px 7px 0 #744266,
+        0 0 45px #ff944b44;
+    }
 
-.card {
-  position: relative;
-  border: 3px dashed #ffffff38;
-  border-radius: 24px;
-  background: linear-gradient(145deg, #30263f, #1a172b);
-  transition: transform .2s, border-color .2s;
-}
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto 28px;
+      color: #e4d8e9;
+      font-size: clamp(17px, 2.5vw, 21px);
+    }
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #ffca80;
-}
+    .sock-parade {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(8px, 3vw, 30px);
+      margin: 25px 0;
+    }
 
-.btn {
-  border-radius: 16px;
-  border: 2px solid #fff2;
-}
+    .sock-character {
+      font-size: clamp(45px, 8vw, 85px);
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 12px 7px #0006);
+    }
 
-.art {
-  border: 4px dashed #ffcf8b;
-  background:
-    radial-gradient(circle at 25% 30%, #ff793d66, transparent 45%),
-    radial-gradient(circle at 75% 70%, #60d9ff55, transparent 45%),
-    #262038;
-}
+    .sock-character:nth-child(2) { animation-delay: -.8s; }
+    .sock-character:nth-child(3) { animation-delay: -1.6s; }
+    .sock-character:nth-child(4) { animation-delay: -2.4s; }
 
-.sock {
-  animation: sockBounce 2.8s ease-in-out infinite;
-}
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-16px) rotate(8deg); }
+    }
 
-@keyframes sockBounce {
-  0%, 100% { transform: translateY(0) rotate(-12deg); }
-  50% { transform: translateY(-22px) rotate(12deg); }
-}
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 27px;
+      margin: 7px;
+      border: 3px dashed #fff0c9;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffdc94, #ff9c56);
+      color: #302038;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 900;
+      box-shadow: 0 6px 0 #965338, 0 12px 25px #0005;
+      transition: transform .2s, box-shadow .2s;
+    }
 
-/* Sock-themed information panels */
-.sock-guide {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 0 #965338, 0 16px 30px #0005;
+    }
 
-.sock-step {
-  background: #272139;
-  border: 3px dashed #a48bc1;
-  border-radius: 22px;
-  padding: 24px;
-  text-align: center;
-}
+    .button.secondary {
+      background: #342b46;
+      color: var(--cream);
+      box-shadow: 0 6px 0 #181324;
+    }
 
-.sock-step .step-icon {
-  font-size: 46px;
-  margin-bottom: 10px;
-}
+    .button.secondary:hover {
+      box-shadow: 0 10px 0 #181324;
+    }
 
-.sock-step h3 {
-  color: #ffda9c;
-  margin: 8px 0;
-}
+    section {
+      padding: 75px 0;
+      scroll-margin-top: 85px;
+    }
 
-.sock-step p {
-  color: #c9c2db;
-  margin: 0;
-}
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
 
-.sock-banner {
-  margin: 25px 0;
-  padding: 26px;
-  border-radius: 24px;
-  background: linear-gradient(110deg, #67333d, #39316e, #175477);
-  border: 3px dashed #ffdfa6;
-  text-align: center;
-}
+    .section-heading h2 {
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.15;
+      margin: 12px 0;
+    }
 
-.sock-banner h3 {
-  font-size: 28px;
-  margin: 0 0 10px;
-}
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: auto;
+    }
 
-.sock-banner p {
-  color: #f1e8ff;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
 
-@media (max-width: 750px) {
-  .sock-guide {
-    grid-template-columns: 1fr;
-  }
-}
-    </style>
+    .card {
+      background: linear-gradient(145deg, #30263e, #221b30);
+      border: 3px dashed #ffffff35;
+      border-radius: 24px;
+      padding: 27px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #ffcb8b;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card-icon {
+      font-size: 53px;
+      line-height: 1.3;
+    }
+
+    .featured-game {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 30px;
+      padding: 38px;
+      background: linear-gradient(130deg, #38243e, #1c344c);
+      border: 3px dashed #ffcd8a;
+      border-radius: 30px;
+    }
+
+    .featured-game h3 {
+      font-size: clamp(35px, 5vw, 60px);
+      margin: 0 0 12px;
+    }
+
+    .featured-game p { color: #e0d5e7; }
+
+    .game-art {
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      border: 3px dashed #ffffff55;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 30% 40%, #ff6c3b55, transparent 45%),
+        radial-gradient(circle at 70% 60%, #46d9ff55, transparent 45%),
+        #1d1b32;
+    }
+
+    .game-art span {
+      font-size: clamp(45px, 6vw, 80px);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .game-art span:nth-child(2) { animation-delay: -1s; }
+    .game-art span:nth-child(3) { animation-delay: -2s; }
+
+    .step-number {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 10px;
+      background: #ffb96d;
+      color: #2b1b2e;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .element.fire { border-color: #e9785366; }
+    .element.ice { border-color: #69d9ff66; }
+    .element.thunder { border-color: #f5db6866; }
+
+    .element.fire h3 { color: #ffac7d; }
+    .element.ice h3 { color: #8de5ff; }
+    .element.thunder h3 { color: #ffe585; }
+
+    .cta {
+      text-align: center;
+      padding: 48px 25px;
+      margin-top: 35px;
+      border: 3px dashed #ffdcaa;
+      border-radius: 26px;
+      background: linear-gradient(115deg, #703b44, #453774, #18516c);
+    }
+
+    .cta h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin: 0 0 12px;
+    }
+
+    .cta p { color: #f0e4ff; }
+
+    .info-panel {
+      max-width: 750px;
+      margin: auto;
+      text-align: center;
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      border-top: 3px dashed #ffffff30;
+      background: #100e19;
+      color: #b8adc9;
+    }
+
+    footer strong { color: var(--orange); }
+
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+
+      .featured-game {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+
+      .nav-inner { justify-content: center; }
+
+      .hero { padding: 75px 15px 85px; }
+
+      .hero h1 { letter-spacing: -2px; }
+
+      section { padding: 55px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>SOCK.games</h1>
-        <p>The official home of SOCK TD!</p>
-        <p>Play games. Discover updates. Have fun!</p>
-    </header>
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home">🧦 SOCK<span>.games</span></a>
 
-    <nav>
+      <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#games">Games</a>
+        <a href="#how-to-play">How to Play</a>
+        <a href="#features">Features</a>
         <a href="#downloads">Downloads</a>
         <a href="#news">News</a>
         <a href="#about">About</a>
-    </nav>
+      </div>
+    </div>
+  </nav>
 
-    <section id="home">
-        <h2>Welcome to SOCK.games!</h2>
-        <p>
-            Discover the world of SOCK TD.
-            Play for free and explore new updates!
-        </p>
-    </section>
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">Welcome to the Sock Universe</span>
 
+      <div class="sock-parade" aria-hidden="true">
+        <span class="sock-character">🧦</span>
+        <span class="sock-character">🔥</span>
+        <span class="sock-character">❄️</span>
+        <span class="sock-character">⚡</span>
+      </div>
+
+      <h1>SOCK TD</h1>
+
+      <p>
+        Ordinary socks. Extraordinary powers.
+        Build your sock army, master the elements,
+        and defend your base from waves of enemies!
+      </p>
+
+      <a class="button" href="socktd.html">🎮 PLAY NOW — FREE</a>
+      <a class="button secondary" href="#how-to-play">📖 How to Play</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- GAMES -->
     <section id="games">
-        <h2>🎮 Our Games</h2>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Our Games</span>
+          <h2>Enter the Sock Universe</h2>
+          <p>One pair of socks can change everything.</p>
+        </div>
 
-        <div class="card">
-            <h2>SOCK TD</h2>
+        <div class="featured-game">
+          <div>
+            <span class="eyebrow">Play in Your Browser</span>
+            <h3>SOCK TD 🧦</h3>
 
             <p>
-                Defend your base with powerful socks!
-                Discover unique towers and defeat enemies.
+              Welcome to SOCK TD, a tower defense game
+              where socks become powerful defenders!
+              Build your defense, survive enemy waves,
+              and experiment with unique abilities.
+            </p>
+
+            <p>
+              Discover elemental towers, powerful fusions,
+              different game modes, and much more.
             </p>
 
             <a class="button" href="socktd.html">
-                Play SOCK TD
+              ▶ Play SOCK TD
             </a>
+          </div>
+
+          <div class="game-art" aria-label="Sock TD elemental powers">
+            <span>🔥</span>
+            <span>🧦</span>
+            <span>❄️</span>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- HOW TO PLAY -->
+    <section id="how-to-play">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Beginner Guide</span>
+          <h2>How Does SOCK TD Work?</h2>
+          <p>
+            New to the game? Here's everything you need
+            to know to get started.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="step-number">STEP 01</span>
+            <div class="card-icon">🧦</div>
+            <h3>Place Your Socks</h3>
+            <p>
+              Choose your sock towers and place them
+              on the battlefield. Different socks
+              have different powers.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="step-number">STEP 02</span>
+            <div class="card-icon">👾</div>
+            <h3>Defend Your Base</h3>
+            <p>
+              Enemies arrive in waves.
+              Your towers attack automatically.
+              Stop the enemies before they reach your base!
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="step-number">STEP 03</span>
+            <div class="card-icon">⚡</div>
+            <h3>Become Stronger</h3>
+            <p>
+              Earn coins, expand your defense,
+              and discover powerful sock combinations.
+              Find the strategy that works for you!
+            </p>
+          </article>
+        </div>
+
+        <div class="cta">
+          <h2>Ready for Your First Wave?</h2>
+          <p>Your sock army is waiting for you.</p>
+          <a class="button" href="socktd.html">
+            🧦 Start Playing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Discover the Powers</span>
+          <h2>Meet the Elemental Socks</h2>
+          <p>
+            Each sock brings something different
+            to your defense.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card element fire">
+            <div class="card-icon">🔥🧦</div>
+            <h3>Fire Sock</h3>
+            <p>
+              Bring the heat to the battlefield
+              with fiery attacks.
+            </p>
+          </article>
+
+          <article class="card element ice">
+            <div class="card-icon">❄️🧦</div>
+            <h3>Ice Sock</h3>
+            <p>
+              Use freezing powers to slow down
+              the enemy advance.
+            </p>
+          </article>
+
+          <article class="card element thunder">
+            <div class="card-icon">⚡🧦</div>
+            <h3>Thunder Sock</h3>
+            <p>
+              Strike your enemies with the
+              power of lightning.
+            </p>
+          </article>
+        </div>
+
+        <div class="section-heading" style="margin-top:65px;">
+          <h2>More Than Just Socks</h2>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">🧪</div>
+            <h3>Sock Fusions</h3>
+            <p>
+              Experiment with combinations
+              to discover powerful new defenses.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🎯</div>
+            <h3>FPS Tower View</h3>
+            <p>
+              Experience the battlefield from
+              a different perspective.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📖</div>
+            <h3>Sock Catalogue</h3>
+            <p>
+              Explore the world of SOCK TD
+              and discover its unique characters.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOADS -->
     <section id="downloads">
-        <h2>📥 Downloads</h2>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Get the Game</span>
+          <h2>Play SOCK TD</h2>
+          <p>
+            Jump into the game directly from your browser.
+          </p>
+        </div>
 
-        <div class="card">
-            <h2>SOCK TD - PC</h2>
+        <div class="card info-panel">
+          <div class="card-icon">💻</div>
+          <h3>Play Online — Free</h3>
+          <p>
+            No separate download required.
+            Open SOCK TD and start defending!
+          </p>
 
-            <p>
-                Download SOCK TD and play on your computer!
-            </p>
-
-            <a class="button"
-               href="downloads/SOCKTD.zip"
-               download>
-                Download SOCK TD
+          <div style="margin-top:20px;">
+            <a class="button" href="socktd.html">
+              ▶ Launch Game
             </a>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- NEWS -->
     <section id="news">
-        <h2>📰 News & Updates</h2>
-
-        <div class="card">
-            <h3>Welcome to SOCK.games!</h3>
-            <p>October 26, 2026</p>
-
-            <p>
-                Welcome to the official SOCK.games website!
-                Stay tuned for new games, updates,
-                and exciting announcements!
-            </p>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Latest News</span>
+          <h2>News From the Sock Universe</h2>
+          <p>Game updates and announcements.</p>
         </div>
+
+        <div class="card info-panel">
+          <div class="card-icon">📢</div>
+          <h3>Welcome to SOCK.games!</h3>
+          <p>October 26, 2026</p>
+          <p style="margin-top:14px;">
+            Welcome to the official home of SOCK TD!
+            Explore the game, learn how to play,
+            and check back for future updates.
+          </p>
+        </div>
+      </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
-        <h2>🧦 About SOCK TD</h2>
-
-        <div class="card">
-            <p>
-                SOCK TD is a tower defense game
-                featuring powerful socks,
-                unique abilities, and exciting battles!
-            </p>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">About Us</span>
+          <h2>Made for Sock Fans</h2>
         </div>
+
+        <div class="card info-panel">
+          <div class="card-icon">🧦</div>
+          <h3>Welcome to SOCK.games</h3>
+          <p>
+            SOCK.games is the home of SOCK TD,
+            a tower defense adventure filled
+            with unusual heroes, elemental powers,
+            and creative strategies.
+          </p>
+          <p style="margin-top:14px;">
+            Created by SockTDev.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <p>SOCK.games | Created by SockTDev</p>
-    </footer>
+  </main>
+
+  <footer>
+    <strong>🧦 SOCK.games</strong>
+    <p>Ordinary Socks. Extraordinary Powers.</p>
+    <p>Created by SockTDev · 2026</p>
+  </footer>
 
 </body>
 </html>
