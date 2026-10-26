@@ -89,6 +89,142 @@
             padding: 25px;
             color: #9ca3af;
         }
+        
+/* SOCK.GAMES - SOCK UNIVERSE UPGRADE */
+
+:root {
+  --sock-cream: #fff0c9;
+  --sock-orange: #ff9a43;
+  --sock-blue: #70d9ff;
+  --sock-purple: #ad87ff;
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 20%, #45264b 0%, transparent 35%),
+    radial-gradient(circle at 85% 60%, #163f57 0%, transparent 35%),
+    #12101e;
+}
+
+/* Soft fabric pattern */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .12;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 9px,
+      #ffffff20 10px 11px
+    );
+}
+
+.logo::before {
+  content: "🧦 ";
+}
+
+h1 {
+  color: var(--sock-cream);
+  text-shadow:
+    4px 5px 0 #663c68,
+    0 0 45px #ff9a4355;
+}
+
+h2 {
+  color: var(--sock-cream);
+}
+
+.card {
+  position: relative;
+  border: 3px dashed #ffffff38;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #30263f, #1a172b);
+  transition: transform .2s, border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #ffca80;
+}
+
+.btn {
+  border-radius: 16px;
+  border: 2px solid #fff2;
+}
+
+.art {
+  border: 4px dashed #ffcf8b;
+  background:
+    radial-gradient(circle at 25% 30%, #ff793d66, transparent 45%),
+    radial-gradient(circle at 75% 70%, #60d9ff55, transparent 45%),
+    #262038;
+}
+
+.sock {
+  animation: sockBounce 2.8s ease-in-out infinite;
+}
+
+@keyframes sockBounce {
+  0%, 100% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-22px) rotate(12deg); }
+}
+
+/* Sock-themed information panels */
+.sock-guide {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.sock-step {
+  background: #272139;
+  border: 3px dashed #a48bc1;
+  border-radius: 22px;
+  padding: 24px;
+  text-align: center;
+}
+
+.sock-step .step-icon {
+  font-size: 46px;
+  margin-bottom: 10px;
+}
+
+.sock-step h3 {
+  color: #ffda9c;
+  margin: 8px 0;
+}
+
+.sock-step p {
+  color: #c9c2db;
+  margin: 0;
+}
+
+.sock-banner {
+  margin: 25px 0;
+  padding: 26px;
+  border-radius: 24px;
+  background: linear-gradient(110deg, #67333d, #39316e, #175477);
+  border: 3px dashed #ffdfa6;
+  text-align: center;
+}
+
+.sock-banner h3 {
+  font-size: 28px;
+  margin: 0 0 10px;
+}
+
+.sock-banner p {
+  color: #f1e8ff;
+}
+
+@media (max-width: 750px) {
+  .sock-guide {
+    grid-template-columns: 1fr;
+  }
+}
     </style>
 </head>
 
