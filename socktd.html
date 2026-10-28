@@ -1060,6 +1060,62 @@ body.themeGamble #recipes #detail > .item{
 <script id="socktd-peerjs-reliability">
 /* Sock TD PeerJS reliability layer */
 (function(){
+  // Optional TURN relay for networks that block direct WebRTC connections.
+  // Credentials are configured by the game owner; no public shared password is embedded.
+  window.SockTDTurnServers=function(){return []};
+  window.SockTDConfigureTurn=function(){
+    var old={};try{old=JSON.parse(localStorage.getItem('socktd_turn_config')||'{}')||{}}catch(e){}
+    var urls=prompt('TURN relay URLs (comma-separated, e.g. turns:relay.example.com:5349). Leave empty to disable.',(old.urls||[]).join(', '));
+    if(urls===null)return;
+    if(!urls.trim()){localStorage.removeItem('socktd_turn_config');alert('TURN disabled. STUN-only mode active.');return}
+    var username=prompt('TURN username:',old.username||'');if(username===null)return;
+    var credential=prompt('TURN credential/password:',old.credential||'');if(credential===null)return;
+    var list=urls.split(',').map(function(u){return u.trim()}).filter(function(u){return /^turns?:/i.test(u)});
+    if(!list.length||!username.trim()||!credential){alert('Valid TURN URL, username and password required.');return}
+    localStorage.setItem('socktd_turn_config',JSON.stringify({urls:list,username:username.trim(),credential:credential}));
+    alert('TURN configured for this browser. Restart the multiplayer room on both devices.');
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var lobby=document.getElementById('multiplayerLobby');if(!lobby||document.getElementById('socktdTurnButton'))return;
+    var btn=document.createElement('button');btn.id='socktdTurnButton';btn.type='button';btn.textContent='🌐 Global TURN: automatic';btn.disabled=true;
+    btn.style.cssText='display:block;margin:10px auto;padding:8px 12px;border-radius:9px;background:#253c65;color:white;border:1px solid #88aaff;cursor:pointer;font-weight:bold;';
+    btn.title="TURN is loaded automatically from Cloudflare";lobby.appendChild(btn);
+  });
+  // Metered TURN is fetched from the owner's Cloudflare Worker, never hardcoded.
+  var turnEndpoint='https://socktd-turn-api.roanenlunavanwijngaarden.workers.dev/ice';
+  var turnCache=[],turnExpires=0,turnInFlight=null;
+  window.SockTDTurnStatus='not-loaded';
+  window.SockTDLoadTurn=async function(force){
+    if(!force&&turnCache.length&&Date.now()<turnExpires)return turnCache;
+    if(turnInFlight)return turnInFlight;
+    turnInFlight=(async function(){
+      try{
+        var response=await fetch(turnEndpoint,{method:'GET',mode:'cors',cache:'no-store'});
+        if(!response.ok)throw new Error('TURN endpoint HTTP '+response.status);
+        var payload=await response.json();
+        var list=Array.isArray(payload)?payload:payload&&payload.iceServers;
+        if(!Array.isArray(list))throw new Error('Invalid TURN response');
+        var valid=list.filter(function(server){
+          return server&&server.username&&server.credential&&
+            (Array.isArray(server.urls)?server.urls:[server.urls]).some(function(url){return typeof url==='string'&&/^turns?:/i.test(url)});
+        }).map(function(server){return {urls:server.urls,username:server.username,credential:server.credential}});
+        if(!valid.length)throw new Error('No TURN servers returned');
+        turnCache=valid;
+        // Refresh between sessions: Metered credentials may expire.
+        turnExpires=Date.now()+5*60*1000;
+        window.SockTDTurnStatus='ready';
+        return valid;
+      }catch(err){
+        window.SockTDTurnStatus='error';
+        console.warn('[Sock TD] Automatic TURN unavailable:',err&&err.message);
+        // Do not keep stale credentials when the endpoint is unavailable.
+        turnCache=[];turnExpires=0;
+        return [];
+      }finally{turnInFlight=null}
+    })();
+    return turnInFlight;
+  };
+  window.SockTDTurnServers=function(){return turnCache.slice()};
   window.SockTDPeerConfig = {
     host:"0.peerjs.com", port:443, path:"/", secure:true,
     debug:1, pingInterval:5000,
@@ -1067,7 +1123,8 @@ body.themeGamble #recipes #detail > .item{
       iceServers:[
         {urls:"stun:stun.l.google.com:19302"},
         {urls:"stun:stun1.l.google.com:19302"},
-        {urls:"stun:stun.cloudflare.com:3478"}
+        {urls:"stun:stun.cloudflare.com:3478"},
+        ...window.SockTDTurnServers()
       ],
       iceTransportPolicy:"all",
       iceCandidatePoolSize:10,
@@ -1082,7 +1139,8 @@ body.themeGamble #recipes #detail > .item{
       iceServers:[
         {urls:"stun:stun.l.google.com:19302"},
         {urls:"stun:stun1.l.google.com:19302"},
-        {urls:"stun:stun.cloudflare.com:3478"}
+        {urls:"stun:stun.cloudflare.com:3478"},
+        ...window.SockTDTurnServers()
       ],
       iceTransportPolicy:"all",
       iceCandidatePoolSize:10,
@@ -2005,7 +2063,7 @@ function mpOpen(){
   $('gameModesModal').classList.add('hidden');
   $('multiplayerLobby').classList.remove('hidden');
 }
-function mpHost(){
+async function mpHost(){
   mpConnectCancelled=false;
   if(typeof Peer!=='function'){
     mpLoading(false);
@@ -2018,7 +2076,10 @@ function mpHost(){
   $('mpHostSetup').classList.remove('hidden');
   mpRole='host';
   mpSetStatus('mpStatus','Creating room…');
-  mpLoading(true,'Creating room…','Connecting to the multiplayer server.');
+  mpLoading(true,'Creating room…','Loading global TURN relay…');
+  await window.SockTDLoadTurn();
+  if(mpConnectCancelled)return;
+  mpLoading(true,'Creating room…',window.SockTDTurnStatus==='ready'?'Connecting with global TURN relay…':'TURN unavailable; trying direct connection…');
 
   // The room code IS the host's PeerJS ID. This keeps the 6-character join code
   // directly routable while still generating a fresh code for every attempt.
@@ -2043,7 +2104,8 @@ function mpHost(){
         config:{iceServers:[
           {urls:'stun:stun.l.google.com:19302'},
           {urls:'stun:stun1.l.google.com:19302'},
-          {urls:'stun:stun.cloudflare.com:3478'}
+          {urls:'stun:stun.cloudflare.com:3478'},
+          ...window.SockTDTurnServers()
         ],iceTransportPolicy:'all',iceCandidatePoolSize:10,bundlePolicy:'balanced',rtcpMuxPolicy:'require'}
       });
   }catch(e){
@@ -2143,7 +2205,7 @@ function mpJoin(){
   $('mpHomeChoices').classList.add('hidden');$('mpJoinSetup').classList.remove('hidden');
   $('mpJoinCode').focus();mpBuildGuestMirror();
 }
-function mpConnect(){
+async function mpConnect(){
   mpConnectCancelled=false;
   const code=$('mpJoinCode').value.trim().toUpperCase();
   if(!/^[A-Z0-9]{6}$/.test(code)){
@@ -2158,7 +2220,10 @@ function mpConnect(){
 
   mpRole='guest';
   mpSetStatus('mpJoinStatus','Connecting…');
-  mpLoading(true,'Connecting to host…','Finding the host and opening the multiplayer connection.');
+  mpLoading(true,'Connecting to host…','Loading global TURN relay…');
+  await window.SockTDLoadTurn();
+  if(mpConnectCancelled)return;
+  mpLoading(true,'Connecting to host…',window.SockTDTurnStatus==='ready'?'Finding host with global TURN relay…':'TURN unavailable; trying direct connection…');
 
   let done=false, attempt=0, retryTimer=null, timeout=null;
 
@@ -2191,7 +2256,8 @@ function mpConnect(){
           config:{iceServers:[
             {urls:'stun:stun.l.google.com:19302'},
             {urls:'stun:stun1.l.google.com:19302'},
-            {urls:'stun:stun.cloudflare.com:3478'}
+            {urls:'stun:stun.cloudflare.com:3478'},
+            ...window.SockTDTurnServers()
           ],iceTransportPolicy:'all',iceCandidatePoolSize:10,bundlePolicy:'balanced',rtcpMuxPolicy:'require'}
         });
     }catch(e){
@@ -2240,7 +2306,7 @@ function mpConnect(){
         }else{
           finish('⚠️ The host was found, but the browser connection could not be opened. Try Chrome/Edge on both laptops.');
         }
-      },6000);
+      },14000);
 
       mpConn.on('open',()=>{
         clearTimeout(connTimeout);
@@ -12505,10 +12571,10 @@ function render(){
   });
 }
 function peerConfig(){
-  var ice=[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"},{urls:"stun.cloudflare.com:3478"}];
+  var ice=[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"},{urls:"stun:stun.cloudflare.com:3478"}].concat(window.SockTDTurnServers?window.SockTDTurnServers():[]);
   /* Optional TURN. Never put fake credentials here. Set window.SOCKTD_TURN before startPeer when you have real TURN credentials. */
   try{if(window.SOCKTD_TURN&&window.SOCKTD_TURN.urls&&window.SOCKTD_TURN.username&&window.SOCKTD_TURN.credential)ice.push({urls:window.SOCKTD_TURN.urls,username:window.SOCKTD_TURN.username,credential:window.SOCKTD_TURN.credential})}catch(e){}
-  var sameServer=location.protocol!=="file:"&&location.host;
+  var sameServer=!!(window.SockTDBackend&&window.SockTDBackend.ready&&location.protocol!=="file:"&&location.host);
   return sameServer?{host:location.hostname,port:location.port?(Number(location.port)):443,path:"/peerjs",secure:location.protocol==="https:",debug:2,config:{iceServers:ice,sdpSemantics:"unified-plan"}}:{host:"0.peerjs.com",port:443,path:"/",secure:true,debug:2,config:{iceServers:ice,sdpSemantics:"unified-plan"}};
 }
 function registerPeer(){if(window.SockTDBackend&&SockTDBackend.ready&&activePeerId)SockTDBackend.send({type:"peer_online",peerId:activePeerId,username:user()})}
@@ -12553,12 +12619,13 @@ function attachConnection(c,expected){
   c.on("error",function(e){console.error("[Peer] Connection error",e);showMsg("❌ Connection error: "+(e&&e.type||"unknown"),false)});
 }
 function handlePartyInvite(c,d){var from=String(d.from||"").trim();if(!from||blocked(from))return;pending={from:from,room:String(d.room||""),mode:d.mode==="wifi"?"wifi":"global",conn:c};var txt=$("socktdInviteText"),rm=$("socktdInviteRoom");if(txt)txt.textContent=from+" invited you to their multiplayer party.";if(rm)rm.textContent=pending.room?"Room code: "+pending.room:"The host is waiting for you.";$("socktdInviteOverlay").classList.add("sockshow")}
-function startPeer(force){
+async function startPeer(force){
   if(typeof window.Peer!=="function"){peerStatus("LIBRARY MISSING");showMsg("❌ PeerJS failed to load. The fixed file uses the official CDN; check internet access.",false);return}
   var u=user();if(!u||u==="Player"){render();return}
   if(peer&&!peer.destroyed&&!peer.closed){if(peer.open)registerPeer();return}
   if(peerStarting&&!force)return;peerStarting=true;console.log("[Peer] Initializing...");peerStatus("INITIALIZING...");
   try{
+    await window.SockTDLoadTurn();
     peer=new window.Peer(undefined,peerConfig());
     peer.on("open",function(id){peerStarting=false;activePeerId=id;console.log("[Peer] Open:",id);peerStatus("ONLINE • "+id);registerPeer();render()});
     peer.on("connection",function(c){console.log("[Peer] Incoming connection",c.peer);attachConnection(c);});
