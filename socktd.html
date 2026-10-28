@@ -2170,29 +2170,43 @@ async function mpHost(){
     });
   });
 
+  // A lobby code is only valid while the host is registered with PeerServer.
+  // Previously `finished=true` after opening disabled reconnect handling.
+  let reconnectTimer=null;
+  const hostDisconnected=()=>{
+    if(mpConnectCancelled||mpRole!=='host'||!mpPeer||mpPeer.destroyed)return;
+    mpSetStatus('mpStatus','⚠️ Signaling disconnected — reconnecting host… Do not share the code yet.');
+    if(reconnectTimer)clearTimeout(reconnectTimer);
+    reconnectTimer=setTimeout(()=>{
+      if(mpConnectCancelled||mpRole!=='host'||!mpPeer||mpPeer.destroyed)return;
+      try{if(mpPeer.disconnected)mpPeer.reconnect()}catch(err){console.warn('[MP Host] reconnect:',err)}
+    },1200);
+  };
   mpPeer.on('error',e=>{
-    clearTimeout(timeout);
-    const t=e&&e.type;
+    const t=e&&e.type||'unknown';
+    console.warn('[MP Host] PeerJS error:',t,e);
     if(t==='unavailable-id'){
-      // Extremely unlikely, but retry automatically instead of trapping the user.
+      clearTimeout(timeout);
       try{mpPeer.destroy()}catch(err){}
       mpPeer=null;
       finished=false;
-      mpSetStatus('mpStatus','Room code collision — creating a new room…');
-      setTimeout(()=>{if(mpRole==='host'&&!mpConnectCancelled)mpHost()},150);
+      mpSetStatus('mpStatus','Room code already in use — generating a new code…');
+      setTimeout(()=>{if(mpRole==='host'&&!mpConnectCancelled)mpHost()},200);
       return;
     }
-    finishFail(
-      t==='network'||t==='server-error'||t==='socket-error'||t==='socket-closed'
-        ? '⚠️ Could not reach the multiplayer server. Check your internet and try again.'
-        : '⚠️ Could not create the room ('+(t||'unknown error')+').'
-    );
+    if(!opened){clearTimeout(timeout);finishFail('⚠️ Signaling server unavailable ('+t+'). Try hosting again.');return}
+    if(['network','server-error','socket-error','socket-closed','disconnected'].includes(t)){
+      hostDisconnected();
+    }else{
+      mpSetStatus('mpStatus','⚠️ Multiplayer error ('+t+'). Recreate the lobby if it persists.');
+    }
   });
-
-  mpPeer.on('disconnected',()=>{
-    if(!opened || finished)return;
-    // PeerJS supports reconnecting a disconnected peer without changing its ID.
-    try{mpPeer.reconnect()}catch(e){}
+  mpPeer.on('disconnected',hostDisconnected);
+  mpPeer.on('open',()=>{
+    if(reconnectTimer){clearTimeout(reconnectTimer);reconnectTimer=null}
+    if(mpRole==='host'&&!mpConnectCancelled){
+      mpSetStatus('mpStatus',mpConn&&mpConn.open?'✅ Player connected.':'👑 Host ready — Waiting for player…');
+    }
   });
 }
 function mpJoin(){
@@ -2219,12 +2233,15 @@ async function mpConnect(){
   if(mpConnectCancelled)return;
   mpLoading(true,'Connecting to host…',window.SockTDTurnStatus==='ready'?'Finding host with global TURN relay…':'TURN unavailable; trying direct connection…');
 
-  let done=false, attempt=0, retryTimer=null, timeout=null;
+  let done=false, attempt=0, retryTimer=null, timeout=null, attemptTimer=null, connectionTimer=null;
+  let attemptGeneration=0;
 
   const finish=(message,keepLobby=true)=>{
     if(done)return;
     done=true;
     if(retryTimer)clearTimeout(retryTimer);
+    if(attemptTimer)clearTimeout(attemptTimer);
+    if(connectionTimer)clearTimeout(connectionTimer);
     if(timeout)clearTimeout(timeout);
     mpLoading(false);
     if(message)mpSetStatus('mpJoinStatus',message);
@@ -2238,6 +2255,10 @@ async function mpConnect(){
   const connectAttempt=()=>{
     if(done||mpConnectCancelled)return;
     attempt++;
+    const generation=++attemptGeneration;
+    if(attemptTimer)clearTimeout(attemptTimer);
+    if(connectionTimer)clearTimeout(connectionTimer);
+    if(retryTimer)clearTimeout(retryTimer);
     try{if(mpConn)mpConn.close()}catch(e){}
     try{if(mpPeer)mpPeer.destroy()}catch(e){}
     mpConn=null;mpPeer=null;
@@ -2261,8 +2282,8 @@ async function mpConnect(){
     }
 
     let peerReady=false;
-    const attemptTimeout=setTimeout(()=>{
-      if(done)return;
+    const attemptTimeout=attemptTimer=setTimeout(()=>{
+      if(done||generation!==attemptGeneration)return;
       if(attempt<4){
         mpSetStatus('mpJoinStatus','Still looking for the host… ('+attempt+'/4)');
         try{if(mpPeer)mpPeer.destroy()}catch(e){}
@@ -2273,7 +2294,7 @@ async function mpConnect(){
     },5000);
 
     mpPeer.on('open',()=>{
-      if(done||mpConnectCancelled)return;
+      if(done||mpConnectCancelled||generation!==attemptGeneration)return;
       peerReady=true;
       clearTimeout(attemptTimeout);
       const target='socktd-'+code;
@@ -2291,8 +2312,8 @@ async function mpConnect(){
         return;
       }
 
-      let connTimeout=setTimeout(()=>{
-        if(done)return;
+      let connTimeout=connectionTimer=setTimeout(()=>{
+        if(done||generation!==attemptGeneration)return;
         try{if(mpConn)mpConn.close()}catch(e){}
         if(attempt<4){
           mpSetStatus('mpJoinStatus','Connection attempt '+attempt+' timed out — retrying…');
@@ -2303,7 +2324,9 @@ async function mpConnect(){
       },14000);
 
       mpConn.on('open',()=>{
+        if(done||generation!==attemptGeneration)return;
         clearTimeout(connTimeout);
+        if(timeout)clearTimeout(timeout);
         done=true;
         mpLoading(false);
         $('mpJoinWaiting').classList.remove('hidden');
@@ -2340,6 +2363,7 @@ async function mpConnect(){
       });
 
       mpConn.on('close',()=>{
+        if(generation!==attemptGeneration)return;
         clearTimeout(connTimeout);
         if(done){
           if(mpPingTimer){clearInterval(mpPingTimer);mpPingTimer=null}
@@ -2351,6 +2375,7 @@ async function mpConnect(){
       });
 
       mpConn.on('error',()=>{
+        if(generation!==attemptGeneration)return;
         clearTimeout(connTimeout);
         if(done){
           mpLoading(false);
@@ -2362,14 +2387,14 @@ async function mpConnect(){
     });
 
     mpPeer.on('error',e=>{
-      if(done||mpConnectCancelled)return;
+      if(done||mpConnectCancelled||generation!==attemptGeneration)return;
       clearTimeout(attemptTimeout);
       const t=e&&e.type||'unknown';
       console.warn('[MP Join] PeerJS attempt '+attempt+' error:',t,e);
       // peer-unavailable can happen while the host is still registering;
       // retry instead of immediately killing the join flow.
       if(['peer-unavailable','network','server-error','socket-error','socket-closed','disconnected'].includes(t) && attempt<4){
-        mpSetStatus('mpJoinStatus','Waiting for host connection… ('+attempt+'/4)');
+        mpSetStatus('mpJoinStatus',(t==='peer-unavailable'?'Host code not registered on signaling server':'Signaling connection interrupted')+' ('+attempt+'/4)');
         retryTimer=setTimeout(connectAttempt,700);
         return;
       }
@@ -2383,7 +2408,7 @@ async function mpConnect(){
     });
 
     mpPeer.on('disconnected',()=>{
-      if(done||mpConnectCancelled)return;
+      if(done||mpConnectCancelled||generation!==attemptGeneration)return;
       if(attempt<4){
         try{mpPeer.reconnect()}catch(e){}
       }
