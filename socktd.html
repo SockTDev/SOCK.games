@@ -600,22 +600,16 @@ body.tutorialPlacement canvas{cursor:crosshair}
 /* Sock TD real rendezvous bridge. Accounts/friends stay client-side cached, but
    active PeerJS IDs are registered server-side because a browser cannot discover
    another browser's random PeerJS ID by itself. */
+/* GitHub Pages is static hosting: it cannot accept WebSocket upgrades at
+   /socktd. Disable the legacy friends rendezvous socket instead of retrying
+   endlessly. PeerJS/WebRTC and the Cloudflare Metered TURN endpoint are separate
+   and remain enabled. Friends lookup needs a real backend before it can work. */
 window.SockTDBackend={
-  ws:null,ready:false,queue:[],connect:function(){
-    if(location.protocol==='file:') return;
-    var proto=location.protocol==='https:'?'wss://':'ws://';
-    try{
-      this.ws=new WebSocket(proto+location.host+'/socktd');
-      this.ws.onopen=()=>{this.ready=true;this.send({type:'auth',username:(typeof getRecordUsername==='function'?getRecordUsername():(localStorage.getItem('socktdUsername')||'Player'))});this.flush()};
-      this.ws.onmessage=(e)=>{try{var d=JSON.parse(e.data);window.dispatchEvent(new CustomEvent('socktd-backend',{detail:d}))}catch(err){console.error('[Backend] Bad message',err)}};
-      this.ws.onclose=()=>{this.ready=false;setTimeout(()=>this.connect(),2000)};
-      this.ws.onerror=(e)=>console.error('[Backend] WebSocket error',e);
-    }catch(e){this.ready=false;setTimeout(()=>this.connect(),2000)}
-  },
-  send:function(o){if(this.ws&&this.ws.readyState===1)this.ws.send(JSON.stringify(o));else this.queue.push(o)},
-  flush:function(){while(this.queue.length&&this.ready)this.ws.send(JSON.stringify(this.queue.shift()))}
+  ws:null,ready:false,queue:[],
+  connect:function(){this.ready=false;return false},
+  send:function(){return false},
+  flush:function(){return false}
 };
-window.addEventListener('load',()=>SockTDBackend.connect());
 </script><style id="socktd-map-buttons-fix">
 #choose [data-m]{pointer-events:auto!important;position:relative;z-index:4!important;cursor:pointer!important}
 #choose [data-m]:disabled{opacity:1!important;filter:none!important;pointer-events:auto!important}
