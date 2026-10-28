@@ -946,6 +946,10 @@ body.themeGamble #recipes #detail > .item{
  box-shadow:inset 0 2px 0 #ffffff30,0 4px 0 color-mix(in srgb,var(--skin-theme,#9d87b5) 45%,#20212b)!important;
 }
 #socktdCatalogueSkinGrid button.socktdSkinItemButton small{color:#d5d9e2!important;-webkit-text-fill-color:#d5d9e2!important;opacity:1!important}
+</style><style id="socktdGraphicsStyles">
+#settingsModal .settingsPanel{max-height:88vh;overflow-y:auto;width:min(520px,94vw)}
+.socktdGraphicsTabs{display:flex;gap:8px;margin:12px 0}.socktdGraphicsTabs button{flex:1;border-radius:10px;padding:10px;font-weight:800}.socktdGraphicsTabs button[aria-selected="true"]{background:#314e41!important;color:#fff!important;border:2px solid #8fe6aa!important}
+#socktdGraphicsPanel{display:none;background:#152821;color:#f3fff7;padding:14px;border-radius:13px;text-align:left}#socktdGraphicsPanel.active{display:block}#socktdGraphicsPanel label{display:block;color:#d8f5e1;margin:12px 0 5px;font-size:13px}#socktdGraphicsPanel select,#socktdGraphicsPanel input[type=range]{width:100%;box-sizing:border-box}#socktdGraphicsPanel select{background:#274638;color:#fff;border:1px solid #80c8a1;border-radius:8px;padding:9px}#socktdGraphicsPanel input[type=checkbox]{width:18px;height:18px;vertical-align:middle}#socktdGraphicsPanel .gfxCheck{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:13px}#socktdGraphicsPanel .gfxCheck label{margin:0}#socktdGraphicsPanel .gfxHelp{font-size:11px;opacity:.76}#socktdGraphicsPanel .gfxValue{float:right}#socktdGraphicsPanel button{padding:9px;border-radius:8px}#socktdFPSCounter{position:fixed;top:70px;right:14px;z-index:1050;pointer-events:none;background:#0a1c16e8;color:#9effb0;border:1px solid #5fbb8c;border-radius:7px;padding:5px 8px;font:bold 12px monospace;display:none}body.socktdReducedMotion #settingsBtn:hover{transform:none}
 </style></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
 <filter id="cv-protanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-deuteranopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
@@ -955,14 +959,14 @@ body.themeGamble #recipes #detail > .item{
 <filter id="cv-tritanomaly" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.967 0.033 0 0 0  0 0.733 0.267 0 0  0 0.183 0.817 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-achromatopsia" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/></filter>
 <filter id="cv-achromatomaly" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.35"/></filter>
-</defs></svg><div id="app"><button id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button><div id="brightnessShade" style="opacity: 0; pointer-events: none;"></div><div id="settingsModal" class="modal hidden"><div class="panel settingsPanel"><h2>⚙️ Settings</h2><label>🎨 Themes</label><div id="themeOptions"><button data-theme="dark" class="active">🌙 Dark</button><button data-theme="light">☀️ Light</button><button data-theme="gamble" id="gambleThemeOption" class="hidden">🎰 Gamble</button></div><label for="colorVisionMode">👁️ Color vision mode</label><select id="colorVisionMode"><option value="none">Normal colors (off)</option><option value="protanopia">Protanopia — red-blindness</option><option value="protanomaly">Protanomaly — reduced red sensitivity</option><option value="deuteranopia">Deuteranopia — green-blindness</option><option value="deuteranomaly">Deuteranomaly — reduced green sensitivity</option><option value="tritanopia">Tritanopia — blue-yellow deficiency</option><option value="tritanomaly">Tritanomaly — reduced blue sensitivity</option><option value="achromatopsia">Achromatopsia — grayscale</option><option value="achromatomaly">Achromatomaly — reduced color</option><option value="monochromacy">Monochromacy — grayscale</option></select><div class="small" style="margin-top:5px;opacity:.75">Changes the game colors for accessibility. Your choice is saved on this device.</div><label for="socktdDefensesSide">🛡️ Defenses side</label><select id="socktdDefensesSide" aria-label="Defenses side"><option value="right">Right</option><option value="left">Left</option></select><div class="small" style="margin-top:5px;opacity:.75">Choose which side of the map shows the Defenses menu. Saved automatically.</div><label for="brightness">☀️ Brightness</label><input id="brightness" type="range" min="35" max="100" value="100"><button id="pauseGame">⏸️ Pause</button><label for="speedrunScreenBehavior">⚡ Speedrun Screen Behavior</label><select id="speedrunScreenBehavior"><option value="pause">Pause Waves in Menus</option><option value="run">Keep Waves Running in Menus</option></select><div id="speedrunScreenBehaviorNote" class="small" style="margin-top:6px;opacity:.75">When the Catalogue, Recipe Book, Monster Catalogue, Gamble or Fusion screen is open.</div>
+</defs></svg><div id="app"><button id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button><div id="brightnessShade" style="opacity: 0; pointer-events: none;"></div><div id="settingsModal" class="modal hidden"><div class="panel settingsPanel"><h2>⚙️ Settings</h2><div class="socktdGraphicsTabs"><button type="button" id="socktdGeneralTab" aria-selected="true">⚙️ General</button><button type="button" id="socktdGraphicsTab" aria-selected="false">🎮 Graphics</button></div><div id="socktdGeneralPanel"><label>🎨 Themes</label><div id="themeOptions"><button data-theme="dark" class="active">🌙 Dark</button><button data-theme="light">☀️ Light</button><button data-theme="gamble" id="gambleThemeOption" class="hidden">🎰 Gamble</button></div><label for="colorVisionMode">👁️ Color vision mode</label><select id="colorVisionMode"><option value="none">Normal colors (off)</option><option value="protanopia">Protanopia — red-blindness</option><option value="protanomaly">Protanomaly — reduced red sensitivity</option><option value="deuteranopia">Deuteranopia — green-blindness</option><option value="deuteranomaly">Deuteranomaly — reduced green sensitivity</option><option value="tritanopia">Tritanopia — blue-yellow deficiency</option><option value="tritanomaly">Tritanomaly — reduced blue sensitivity</option><option value="achromatopsia">Achromatopsia — grayscale</option><option value="achromatomaly">Achromatomaly — reduced color</option><option value="monochromacy">Monochromacy — grayscale</option></select><div class="small" style="margin-top:5px;opacity:.75">Changes the game colors for accessibility. Your choice is saved on this device.</div><label for="socktdDefensesSide">🛡️ Defenses side</label><select id="socktdDefensesSide" aria-label="Defenses side"><option value="right">Right</option><option value="left">Left</option></select><div class="small" style="margin-top:5px;opacity:.75">Choose which side of the map shows the Defenses menu. Saved automatically.</div><label for="brightness">☀️ Brightness</label><input id="brightness" type="range" min="35" max="100" value="100"><button id="pauseGame">⏸️ Pause</button><label for="speedrunScreenBehavior">⚡ Speedrun Screen Behavior</label><select id="speedrunScreenBehavior"><option value="pause">Pause Waves in Menus</option><option value="run">Keep Waves Running in Menus</option></select><div id="speedrunScreenBehaviorNote" class="small" style="margin-top:6px;opacity:.75">When the Catalogue, Recipe Book, Monster Catalogue, Gamble or Fusion screen is open.</div>
 <button id="openAdminFromSettings" class="hidden">🛠️ Open CRADMIN Panel</button><button id="returnToStart">🏠 Return to Start Screen</button><button id="shareGame">📤 Share Sock TD</button>
 <div id="codeSection">
 <h3>🔐 Codes</h3>
 <div id="codeRow"><input id="codeInput" type="text" placeholder="Enter code..." autocomplete="off" spellcheck="false" maxlength="32"><button id="redeemCode">Redeem</button></div>
 <div id="codeMsg"></div>
 </div>
-<div id="socktdSaveBackup" style="margin:14px 0;padding:12px;border:2px solid #8b5a2b;border-radius:12px;background:#fff8e7;color:#332211"><h3 style="margin:0 0 6px">💾 Save &amp; Progress Backup</h3><p style="margin:0 0 10px;font-size:13px">Export your settings, unlocked recipes, records and other Sock TD browser data before replacing the game file. Import a previous backup to restore it.</p><button id="socktdExportBackup" type="button">⬇️ Export Save Backup</button> <button id="socktdImportBackupBtn" type="button">⬆️ Import Save Backup</button><input id="socktdImportBackupFile" type="file" accept="application/json,.json" style="display:none"><div id="socktdBackupStatus" aria-live="polite" style="margin-top:6px;font-size:12px"></div></div><button id="closeSettings">Close</button></div></div><div id="pauseOverlay" class="hidden"><div class="pauseCard"><h2>⏸️ Game Paused</h2><p>Press Resume to continue.</p><button id="resumeGame">▶️ Resume</button></div></div><div id="gambleParticles" class="gambleParticles"></div><h1 style="text-shadow:0 4px 0 #0007;margin-bottom:2px">🧦 SOCK TD</h1><div class="small" style="margin-bottom:8px;color:#ffd54a">TEXTURED SOCK TOWER DEFENSE</div><div class="bar"><div class="card">💰 <b id="gold">150</b></div><div class="card">❤️ <b id="life">250</b></div><div class="card">🌊 <b id="wave">0</b></div><button id="recordBtn" class="recordButton">🏆 <span>Record</span> <b id="best">0</b></button><button id="start">Start wave</button><button id="fuse">🧬 Fusion</button><button id="catalogueBtn">📚 Catalogue</button><button id="book" class="hidden" style="display:none!important" aria-hidden="true" tabindex="-1">📖 Recipe Book</button><button id="catalogBtn" class="">👾 Monster Catalogue</button><button id="gamble">🎰 Gamble</button><button id="sandboxControlsBtn">🏖️ Sandbox</button></div><div id="socktdGameLayout"><div id="socktdMapColumn"><p id="msg">Range: 155 | Damage: 48</p><div id="info" class="towerInfo hiddenInfo"></div><canvas id="c" width="960" height="560"></canvas></div><aside id="socktdShopSidebar" aria-label="Defenses"><div class="socktdShopHeading">🛡️ DEFENSES <span>↕ scroll</span></div><div id="towers" class="bar"></div></aside></div>
+<div id="socktdSaveBackup" style="margin:14px 0;padding:12px;border:2px solid #8b5a2b;border-radius:12px;background:#fff8e7;color:#332211"><h3 style="margin:0 0 6px">💾 Save &amp; Progress Backup</h3><p style="margin:0 0 10px;font-size:13px">Export your settings, unlocked recipes, records and other Sock TD browser data before replacing the game file. Import a previous backup to restore it.</p><div style="margin:10px 0;padding:10px;border-radius:8px;background:#e7f2e2"><strong>🎮 Single-player run checkpoint</strong><p style="font-size:12px;margin:6px 0">Autosaves every 12 seconds and when leaving. Restores gold, lives, wave, map and placed/upgraded/fused socks. If saved mid-wave, resumes between waves safely.</p><button type="button" id="socktdSaveRunNow">💾 Save Run</button> <button type="button" id="socktdLoadRun">▶ Load Run</button> <button type="button" id="socktdClearRun">🗑 Clear Run</button><div id="socktdRunSaveStatus" role="status" style="font-size:12px;margin-top:6px"></div></div><button id="socktdExportBackup" type="button">⬇️ Export Save Backup</button> <button id="socktdImportBackupBtn" type="button">⬆️ Import Save Backup</button><input id="socktdImportBackupFile" type="file" accept="application/json,.json" style="display:none"><div id="socktdBackupStatus" aria-live="polite" style="margin-top:6px;font-size:12px"></div></div></div><section id="socktdGraphicsPanel" aria-label="Graphics settings"><label for="gfxQuality">Graphics Quality</label><select id="gfxQuality"><option value="low">Low — Performance</option><option value="medium">Medium — Balanced</option><option value="high">High — Beautiful</option><option value="ultra">Ultra — Cinematic</option><option value="custom">Custom</option></select><label for="gfxParticles">Particle Density <span class="gfxValue" id="gfxParticlesValue">80%</span></label><input id="gfxParticles" type="range" min="0" max="100" step="10"><div class="gfxHelp">Controls cosmetic particles and effect intensity, never damage or ability timing.</div><div class="gfxCheck"><input id="gfxGlow" type="checkbox"><label for="gfxGlow">Glow &amp; Lighting</label></div><div class="gfxCheck"><input id="gfxShadows" type="checkbox"><label for="gfxShadows">Dynamic Shadows</label></div><div class="gfxCheck"><input id="gfxDetails" type="checkbox"><label for="gfxDetails">Detailed Sock Models</label></div><div class="gfxCheck"><input id="gfxShake" type="checkbox"><label for="gfxShake">Screen Shake</label></div><label for="gfxFPSLimit">FPS Limit</label><select id="gfxFPSLimit"><option value="30">30 FPS</option><option value="60">60 FPS</option><option value="120">120 FPS</option><option value="0">Unlimited</option></select><div class="gfxCheck"><input id="gfxShowFPS" type="checkbox"><label for="gfxShowFPS">Show FPS Counter</label></div><div class="gfxCheck"><input id="gfxAuto" type="checkbox"><label for="gfxAuto">Auto Quality (reduce effects when FPS drops)</label></div><div class="gfxCheck"><input id="gfxReduced" type="checkbox"><label for="gfxReduced">Reduced Motion</label></div><label for="gfxResolution">Render Resolution</label><select id="gfxResolution"><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option></select><div class="gfxHelp">Settings are saved automatically. Render resolution affects the 2D canvas; gameplay coordinates stay unchanged.</div><button type="button" id="gfxReset">Reset Graphics</button></section><button id="closeSettings">Close</button></div></div><div id="pauseOverlay" class="hidden"><div class="pauseCard"><h2>⏸️ Game Paused</h2><p>Press Resume to continue.</p><button id="resumeGame">▶️ Resume</button></div></div><div id="gambleParticles" class="gambleParticles"></div><h1 style="text-shadow:0 4px 0 #0007;margin-bottom:2px">🧦 SOCK TD</h1><div class="small" style="margin-bottom:8px;color:#ffd54a">TEXTURED SOCK TOWER DEFENSE</div><div class="bar"><div class="card">💰 <b id="gold">150</b></div><div class="card">❤️ <b id="life">250</b></div><div class="card">🌊 <b id="wave">0</b></div><button id="recordBtn" class="recordButton">🏆 <span>Record</span> <b id="best">0</b></button><button id="start">Start wave</button><button id="fuse">🧬 Fusion</button><button id="catalogueBtn">📚 Catalogue</button><button id="book" class="hidden" style="display:none!important" aria-hidden="true" tabindex="-1">📖 Recipe Book</button><button id="catalogBtn" class="">👾 Monster Catalogue</button><button id="gamble">🎰 Gamble</button><button id="sandboxControlsBtn">🏖️ Sandbox</button></div><div id="socktdGameLayout"><div id="socktdMapColumn"><p id="msg">Range: 155 | Damage: 48</p><div id="info" class="towerInfo hiddenInfo"></div><canvas id="c" width="960" height="560"></canvas></div><aside id="socktdShopSidebar" aria-label="Defenses"><div class="socktdShopHeading">🛡️ DEFENSES <span>↕ scroll</span></div><div id="towers" class="bar"></div></aside></div>
 <div id="fpsView" class="hidden" aria-label="First person tower view">
   <div id="fpsScene">
     <canvas id="fpsWorld3D" aria-hidden="true"></canvas>
@@ -1179,18 +1183,20 @@ function selectMapPath(forcedPath=null, forcedIndex=null){
 selectMapPath();
 const D={fire:['Fire Sock',45,125,30,35,'#e84b36'],ice:['Ice Sock',60,115,14,25,'#50bfe6'],thunder:['ThunderSock',95,145,40,55,'#ffd34e'],wizard:['WizardSock',125,155,48,70,'#9c55d6'],ninja:['Ninja Sock',100,82,34,18,'#334'],golden:['GoldenSock',450,135,40,42,'#ffc52c'],portal:['Portal Sock',300,120,20,10,'#8058d6'],laundry:['Laundry Sock',85,100,22,30,'#e7edf2'],fight:['Fight Sock',150,68,72,22,'#ff7043']};
 D.clock=['Clock Sock',1500,145,72,18,'#d7b15c'];
-D.magnet=["Magnet Sock", 45, 120, 19, 34, "#df4b53"];
-D.ghost=["Ghost Sock", 45, 145, 17, 38, "#b5b8e8"];
+D.magnet=["Magnet Sock", 160, 180, 70, 69, "#df4b53"];
+D.ghost=["Ghost Sock", 90, 150, 45, 38, "#b5b8e8"];
 D.cactus=["Cactus Sock", 45, 100, 23, 44, "#54b56b"];
-D.mushroom=["Mushroom Sock", 45, 125, 12, 40, "#bb6a9a"];
-D.mirror=["Mirror Sock", 45, 130, 18, 40, "#a8e6f0"];
-D.gravity=["Gravity Sock", 45, 125, 14, 48, "#7a5aca"];
-D.dice=["Dice Sock", 45, 120, 20, 38, "#f3eee6"];
-D.bee=["Bee Sock", 45, 135, 16, 32, "#f3c846"];
-D.paint=["Paint Sock", 45, 125, 18, 36, "#fa77ad"];
-D.fossil=["Fossil Sock", 45, 115, 26, 55, "#c9a777"];
+D.mushroom=["Mushroom Sock", 200, 150, 55, 54, "#bb6a9a"];
+D.mirror=["Mirror Sock", 230, 140, 60, 36, "#a8e6f0"];
+D.gravity=["Gravity Sock", 250, 170, 55, 30, "#7a5aca"];
+D.dice=["Dice Sock", 45, 140, 40, 60, "#f3eee6"];
+D.bee=["Bee Sock", 100, 135, 80, 32, "#f3c846"];
+D.paint=["Paint Sock", 125, 145, 45, 75, "#fa77ad"];
+D.fossil=["Fossil Sock", 150, 130, 80, 102, "#c9a777"];
+const SOCKTD_ABILITY_LEVELS={"fire": 3, "ice": 3, "thunder": 3, "wizard": 3, "ninja": 3, "portal": 3, "laundry": 3, "golden": 5, "magnet": 4, "ghost": 2, "mushroom": 5, "mirror": 5, "gravity": 5, "bee": 4, "paint": 4, "fossil": 4};
+function socktdAbilityUnlocked(t){return !!t && (t.fused || (t.level||0)>=(SOCKTD_ABILITY_LEVELS[t.k]||0));}
 const E={frog:[55,1.25,7],fly:[32,2.1,6],golem:[290,.5,18],speed:[95,2.8,11],silver:[210,.82,16],wash:[430,.52,24],piggy:[650,.32,0],treeflame:[360,.72,28],psyguy:[190,.98,20],ironjaw:[520,.44,34],shellbum:[300,.62,25],boss:[1700,.38,75]};
-const strongVs={fire:'Sticky Moth, Washydilly and Piggy Bank',ice:'Sharpend Farao and Water Frog',thunder:'Sticky Moth, Mrsilver and Washydilly',wizard:'Stone Golem and Boss enemies',ninja:'Sticky Moth and Sharpend Farao',golden:'Piggy Bank and Boss enemies',portal:'Slow heavy enemies like Stone Golem',laundry:'Water Frog and fast enemies',fight:'Heavy enemies at close range'};
+const strongVs={fire:'Sticky Moth, Washydilly and Piggy Bank',ice:'Sharpend Farao and Water Frog',thunder:'Sticky Moth, Mrsilver and Washydilly',wizard:'Stone Golem and Boss enemies',ninja:'Sticky Moth and Sharpend Farao',golden:'Piggy Bank and Boss enemies',portal:'Slow heavy enemies like Stone Golem',laundry:'Water Frog and fast enemies',fight:'Heavy enemies at close range',mushroom:'Treeflame and Water Frog',mirror:'Piggy Bank and Mrsilver',gravity:'Stone Golem and Ironjaw',dice:'Washydilly and Sticky Moth',bee:'Sharpend Farao and Water Frog',paint:'Washydilly and Stone Golem',fossil:'Stone Golem and Sharpend Farao'};
 const enemyNames={frog:'Water Frog',fly:'Sticky Moth',golem:'Stone Golem',speed:'Sharpend Farao',silver:'Mrsilver',wash:'Washydilly',piggy:'Piggy Bank',treeflame:'Treeflame',psyguy:'Phantom Pain',ironjaw:'Ironjaw',shellbum:'Brick Turtle Tank',boss:'Michael the Blub'};
 const enemyInfo={frog:'A balanced amphibious monster. Medium speed and low health.',fly:'Very fast and fragile. Hard to catch with slow towers.',golem:'Slow stone monster with heavy health and armor.',speed:'Extremely fast and dangerous when paths are long.',silver:'Metallic enemy with solid health and steady movement.',wash:'A heavily armored washing-machine armadillo enemy.',piggy:'Golden Piggy Bank. Very slow, highest health in the catalogue. Every hit gives 1 coin.',treeflame:'A living tree covered in hot flames. Tough and steady.',psyguy:'A strange psychic creature that moves at medium speed.',ironjaw:'A heavy metal-jawed beast with very high health.',shellbum:'A sturdy shell-backed creature built to absorb punishment.',boss:'Michael the Blub — a blue, white and purple shoe-jellyfish boss. Appears as the final enemy every 10th wave and deals 50 base damage.'};
 const names=['Lava Sock','Storm Sock','Crystal Sock','Meteor Sock','Nature Sock','Cosmic Sock','Shadow Sock','Prism Sock','Energy Sock'];const recipes={};let ks=Object.keys(D),n=0;for(let i=0;i<ks.length;i++)for(let j=i+1;j<ks.length;j++){let k=[ks[i],ks[j]].sort().join('|');recipes[k]=names[n++%names.length]}recipes['fire|thunder']='Plasma Sock';
@@ -1274,7 +1280,60 @@ function obs(){
   if(diff==='nightmare'){if(map==='closet')a.push({x:500,y:150,w:120,h:55,kind:'clothes'},{x:600,y:260,w:110,h:55,kind:'shelf'},{x:820,y:100,w:80,h:65,kind:'shelf'});else a.push({x:280,y:240,w:110,h:70,kind:'bench'},{x:600,y:420,w:110,h:55,kind:'door'},{x:830,y:90,w:75,h:120,kind:'door'});}return a;
 }
 window.socktdNewSockButtonIcons={fire:'🔥',ice:'❄️',thunder:'⚡',wizard:'🪄',ninja:'🥷',golden:'🌟',clock:'⏰',portal:'🌀',laundry:'',fight:'🥊',magnet:'🧲',ghost:'👻',mushroom:'🍄',mirror:'🪞',gravity:'🪐',dice:'🎲',bee:'🐝',paint:'🎨',fossil:'🦴'};
-for(let k of ['fire','ice','thunder','wizard','ninja','golden',...Object.keys(D).filter(q=>!['fire','ice','thunder','wizard','golden','ninja'].includes(q))]){let v=D[k],b=document.createElement('button');b.dataset.sockType=k;b.textContent=v[0]+' $'+v[1];b.onclick=()=>{if(tutorialActive&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialPlacement')&&k!==(window.tutorialAllowedTower||'fire'))return;if(!sockTDChallengeCanUse(k))return;selected=k;fuseMode=false;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));b.classList.add('sel');$('msg').textContent='Range: '+(sockTDChallenge&&sockTDChallenge.rangeMult?Math.max(12,Math.round(v[2]*sockTDChallenge.rangeMult)):v[2])+' | Damage: '+(sockTDChallenge&&sockTDChallenge.damageMult?Math.round(v[3]*sockTDChallenge.damageMult):v[3])};b.classList.add('socktd-art-button');b.dataset.sockIcon=(window.socktdNewSockButtonIcons&&window.socktdNewSockButtonIcons[k])||'🧦';$('towers').appendChild(b)}
+let socktdDiceRolledCost=null;
+let socktdDiceRolling=false;
+let socktdDiceModalPause=false;
+const socktdDiceCosts=[40,50,60,70,80,100];
+const socktdDiceFaces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+function socktdDiceLocked(){return socktdDiceRolledCost!==null;}
+function socktdOpenDicePurchase(){
+ if(socktdDiceLocked()||socktdDiceRolling){$('msg').textContent='🎲 Place your already rolled Dice Sock first!';return;}
+ if(tutorialActive||document.body.classList.contains('tutorialLock'))return;
+ if(typeof mpStarted!=='undefined'&&mpStarted){$('msg').textContent='Dice roll pricing is available in singleplayer.';return;}
+ if(!sockTDChallengeCanUse('dice'))return;
+ socktdDiceModalPause=true;
+ $('socktdDiceModal').classList.add('open');
+ const die=$('socktdDiceShape');die.className='';die.textContent='⚄';
+ $('socktdDicePrice').textContent='Roll once to discover your price!';
+ $('socktdDiceRollButton').style.display='inline-block';$('socktdDiceRollButton').disabled=false;
+ $('socktdDicePlaceButton').style.display='none';
+ $('socktdDiceClose').style.display='inline-block';
+}
+function socktdCloseDicePurchase(){
+ if(socktdDiceRolling||socktdDiceLocked())return;
+ $('socktdDiceModal').classList.remove('open');socktdDiceModalPause=false;
+}
+function socktdDiceForcePlace(){
+ selected='dice';fuseMode=false;
+ document.querySelectorAll('#towers button').forEach(q=>q.classList.toggle('sel',q.dataset.sockType==='dice'));
+ $('msg').textContent='🎲 You rolled 🪙 '+socktdDiceRolledCost+'! Place your Dice Sock before choosing another sock.';
+ $('socktdDiceModal').classList.remove('open');socktdDiceModalPause=false;
+}
+function socktdDiceModalSetup(){
+ $('socktdDiceClose').onclick=socktdCloseDicePurchase;
+ $('socktdDiceModal').addEventListener('click',e=>{if(e.target===$('socktdDiceModal'))socktdCloseDicePurchase()});
+ $('socktdDiceRollButton').onclick=()=>{
+  if(socktdDiceRolling||socktdDiceLocked())return;
+  socktdDiceRolling=true;const button=$('socktdDiceRollButton');button.disabled=true;
+  $('socktdDiceClose').style.display='none';
+  const die=$('socktdDiceShape');die.classList.add('rolling');
+  let ticks=0;const total=24;
+  const animate=()=>{
+   ticks++;die.textContent=socktdDiceFaces[Math.floor(Math.random()*6)];
+   if(ticks<total){setTimeout(animate,35+Math.pow(ticks/total,2)*115);return;}
+   const number=1+Math.floor(Math.random()*6);
+   die.textContent=socktdDiceFaces[number-1];die.classList.remove('rolling');die.classList.add('landed');
+   socktdDiceRolledCost=socktdDiceCosts[number-1];socktdDiceRolling=false;
+   $('socktdDicePrice').textContent='You rolled '+number+'! Price: 🪙 '+socktdDiceRolledCost+' gold';
+   // No second roll: automatically leave the modal and require placement.
+   setTimeout(socktdDiceForcePlace,650);
+  };
+  animate();
+ };
+ $('socktdDicePlaceButton').onclick=socktdDiceForcePlace;
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',socktdDiceModalSetup);else socktdDiceModalSetup();
+for(let k of ['fire','ice','thunder','wizard','ninja','golden',...Object.keys(D).filter(q=>!['fire','ice','thunder','wizard','golden','ninja'].includes(q))]){let v=D[k],b=document.createElement('button');b.dataset.sockType=k;b.textContent=v[0]+' $'+v[1];b.onclick=()=>{if(socktdDiceLocked()){selected='dice';$('msg').textContent='🎲 Place your rolled Dice Sock first!';return;}if(k==='dice'&&!window.socktdDiceModalBypass){socktdOpenDicePurchase();return;}if(tutorialActive&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement'))return;if(document.body.classList.contains('tutorialPlacement')&&k!==(window.tutorialAllowedTower||'fire'))return;if(!sockTDChallengeCanUse(k))return;selected=k;fuseMode=false;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));b.classList.add('sel');$('msg').textContent='Range: '+(sockTDChallenge&&sockTDChallenge.rangeMult?Math.max(12,Math.round(v[2]*sockTDChallenge.rangeMult)):v[2])+' | Damage: '+(sockTDChallenge&&sockTDChallenge.damageMult?Math.round(v[3]*sockTDChallenge.damageMult):v[3])};b.classList.add('socktd-art-button');b.dataset.sockIcon=(window.socktdNewSockButtonIcons&&window.socktdNewSockButtonIcons[k])||'🧦';$('towers').appendChild(b)}
 // Clock Sock starts locked until 15 minutes of accumulated gameplay.
 (function(){const b=document.querySelector('#towers button[data-sock-type="clock"]');if(b){b.style.display='none';b.classList.add('socktdClockLocked');b.disabled=true;}})();
 // Safety guard: the tower shop must contain only one button per tower type.
@@ -1835,7 +1894,7 @@ function mpHandleGuestAction(data){
     if(!v||!Number.isFinite(px)||!Number.isFinite(py)||!valid(px,py))return;
     const cost=v[1];
     if(gold<cost)return;
-    tw.push({x:px,y:py,k,parts:[k],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});
+    tw.push({x:px,y:py,k,parts:[k],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});socktdCine('spawn',px,py);
     gold-=cost;
   }else if(action.action==='move'){
     const idx=Number(action.i),px=Number(action.x),py=Number(action.y),t=tw[idx];
@@ -2543,6 +2602,87 @@ function socktdWaveEnemyCount(w){
   for(let n=2;n<=Math.min(w,10);n++)total+=1+((n*7+1)%3);
   return Math.min(24,total);
 }
+
+// Cosmetic-only animation layer: spawn, fusion, gold and wave transitions.
+const socktdCinematicFx=[];
+let socktdCinematicGold=0;
+function socktdPlaySpawnPop(){
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  const ctx=window.socktdSpawnAudioContext||(window.socktdSpawnAudioContext=new AC());
+  if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+  const t=ctx.currentTime,osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type='sine';osc.frequency.setValueAtTime(360,t);osc.frequency.exponentialRampToValueAtTime(115,t+.085);
+  gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.13,t+.008);
+  gain.gain.exponentialRampToValueAtTime(.0001,t+.12);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start(t);osc.stop(t+.13);
+ }catch(_){/* Sound is optional; never interrupt tower placement. */}
+}
+function socktdCine(kind,x,y,label=''){
+ if(kind==='spawn')socktdPlaySpawnPop();
+ if(socktdCinematicFx.length>110)socktdCinematicFx.splice(0,25);
+ socktdCinematicFx.push({kind,x,y,label,born:performance.now(),seed:Math.random()*6.28});
+}
+function socktdCineRender(){
+ const now=performance.now(),g=window.socktdGraphics||{};
+ const density=typeof socktdVisualDensity==='function'?socktdVisualDensity():1;
+ if(density<=0){for(let i=socktdCinematicFx.length-1;i>=0;i--)if(now-socktdCinematicFx[i].born>1800)socktdCinematicFx.splice(i,1);return;}
+ x.save();x.setTransform(g.resolution||1,0,0,g.resolution||1,0,0);
+ for(let i=socktdCinematicFx.length-1;i>=0;i--){
+  const f=socktdCinematicFx[i],duration=f.kind==='wave'?1700:f.kind==='fusion'?1450:f.kind==='cash'?1150:1150;
+  const u=(now-f.born)/duration;
+  if(u>=1){socktdCinematicFx.splice(i,1);continue;}
+  const a=Math.max(0,Math.min(1,(1-u)*3));
+  x.save();x.globalAlpha=a;
+   if(f.kind==='fusion'){
+    const R=54*(.15+u);x.translate(f.x,f.y);
+
+    for(let ring=0;ring<3;ring++){
+     x.strokeStyle=['#ffdf75','#aa8dff','#6ef7ec'][ring];x.lineWidth=3.6*(1-u);x.beginPath();
+     x.ellipse(0,0,R*(1+ring*.3),R*(.48+ring*.08),0,0,Math.PI*2);x.stroke();
+    }
+    const n=Math.floor(26*Math.min(1,density));
+    for(let j=0;j<n;j++){
+     const ang=j*2.399+f.seed+u*2,rr=45*(u*.8+.15)*(1+j%3*.13);
+     x.fillStyle=j%2?'#e9bdff':'#ffe3a0';x.beginPath();x.arc(Math.cos(ang)*rr,Math.sin(ang)*rr*.8,1.2+(j%3)*.5,0,7);x.fill();
+    }
+    x.rotate(u*3);x.strokeStyle='#ffe7a6';x.lineWidth=2*(1-u);
+    for(let k=0;k<6;k++){let an=k*Math.PI/3;x.beginPath();x.moveTo(Math.cos(an)*12,Math.sin(an)*12);x.lineTo(Math.cos(an)*45,Math.sin(an)*45);x.stroke();}
+     }else if(f.kind==='cash'){
+   x.translate(f.x,f.y-22-u*47);
+   // Gold coin icon is vector-drawn for reliable rendering on every browser.
+   const amount=String(f.label).replace(/G$/,'');
+   x.font='bold 17px system-ui';const width=Math.max(62,x.measureText(amount).width+43);
+   x.fillStyle='rgba(18,61,37,.9)';x.strokeStyle='#e9cc66';x.lineWidth=1.7;
+   x.beginPath();x.roundRect(-width/2,-18,width,28,10);x.fill();x.stroke();
+   const cx=-width/2+17,cy=-4;
+   x.shadowColor='#ffd447';x.shadowBlur=9;
+   const coin=x.createRadialGradient(cx-3,cy-4,1,cx,cy,12);
+   coin.addColorStop(0,'#fff4a4');coin.addColorStop(.48,'#f9cf43');coin.addColorStop(1,'#a96a14');
+   x.fillStyle=coin;x.strokeStyle='#fff1a2';x.lineWidth=1.3;
+   x.beginPath();x.arc(cx,cy,11,0,Math.PI*2);x.fill();x.stroke();x.shadowBlur=0;
+   x.strokeStyle='#b78120';x.lineWidth=1;x.beginPath();x.arc(cx,cy,8,0,Math.PI*2);x.stroke();
+   x.fillStyle='#fff2a2';x.font='bold 13px Georgia,serif';x.textAlign='center';x.fillText('★',cx,cy+4);
+   x.fillStyle='#fff0a0';x.font='bold 17px system-ui';x.textAlign='left';x.fillText(amount,cx+16,1);
+   for(let j=0;j<Math.floor(12*Math.min(1,density));j++){
+    const ang=j*2.4+f.seed,rr=9+u*38;
+    x.fillStyle=j%2?'#f5d85d':'#fff5c2';x.beginPath();x.arc(Math.cos(ang)*rr,Math.sin(ang)*rr,1.5+j%3*.4,0,7);x.fill();
+   }
+  }else if(f.kind==='wave'){
+   const enter=Math.min(1,u*6),exit=Math.min(1,(1-u)*5);
+   x.globalAlpha=Math.min(enter,exit);
+   x.translate(480,95);
+   const sc=.78+.25*Math.sin(Math.min(1,u*2)*Math.PI/2);x.scale(sc,sc);
+   x.fillStyle='rgba(18,24,39,.86)';x.strokeStyle='#ffe0a1';x.lineWidth=2.5;
+   x.beginPath();x.roundRect(-188,-35,376,72,17);x.fill();x.stroke();
+   x.fillStyle='#fff1bf';x.font='bold 30px system-ui';x.textAlign='center';x.fillText(f.label,0,10);
+   x.strokeStyle='#78efca';x.lineWidth=3;x.beginPath();x.moveTo(-155,24);x.lineTo(-155+310*u,24);x.stroke();
+  }
+  x.restore();
+ }
+ x.restore();
+}
 function startWave(){
   if(active||life<=0||gameOver)return;
   if(!currentPath)selectMapPath();
@@ -2550,6 +2690,7 @@ function startWave(){
      and every other event are forbidden from generating/changing a path. */
   activeWavePath=currentPath.slice();
   wave++;
+  socktdCine('wave',480,90,'WAVE '+wave);
   activateWaveModifier();
 
   /* Speedrun-only upgrade checkpoint: when Wave 10, 20, 30... is reached,
@@ -2572,7 +2713,9 @@ function startWave(){
 }
 $('start').onclick=()=>{if(tutorialActive||speedrunCountdownActive)return;startWave()};$('fuse').onclick=()=>{if(sockTDChallenge&&sockTDChallenge.noFusion){$('msg').textContent='🚫 '+sockTDChallenge.name+' does not allow fusion.';return}if(tutorialActive&&!document.body.classList.contains('tutorialFusion'))return;if(document.body.classList.contains('tutorialFusion')&&(!tutorialFusionUnlocked||tutorialStep!==6))return;fuseMode=!fuseMode;selected=null;first=null;$('msg').textContent=fuseMode?'Select two socks to fuse. Fusion costs 35% of both sock prices.':'Fusion mode closed.'};
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}function seg(px,py,a,b){let dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((px-a.x)*dx+(py-a.y)*dy)/(dx*dx+dy*dy)));return Math.hypot(px-a.x-t*dx,py-a.y-t*dy)}function valid(px,py){if(!Number.isFinite(px)||!Number.isFinite(py)||px<0||px>960||py<0||py>560)return false;if(sandboxModeActive&&window.cradminFreeTowers)return true;if(obs().some(o=>px>o.x-18&&px<o.x+o.w+18&&py>o.y-18&&py<o.y+o.h+18))return false;let p=maps[map];return !p.some((a,i)=>i<p.length-1&&seg(px,py,a,p[i+1])<43)}
-C.onmousemove=e=>{if(!selected&&!movingTower)return;let r=C.getBoundingClientRect(),px=(e.clientX-r.left)*960/r.width,py=(e.clientY-r.top)*560/r.height;draw();let ok=valid(px,py),range=movingTower?movingTower.range:D[selected][2];x.save();x.globalAlpha=.18;x.fillStyle=ok?'#5cff88':'#ff5b5b';x.beginPath();x.arc(px,py,range,0,7);x.fill();x.globalAlpha=1;x.setLineDash([7,6]);x.strokeStyle=ok?'#7dff9b':'#ff7777';x.lineWidth=2;x.stroke();x.setLineDash([]);x.restore()};
+let socktdLastPlacementPointer=null;
+C.onmousemove=e=>{socktdLastPlacementPointer={clientX:e.clientX,clientY:e.clientY};if(selected||movingTower)draw();};
+C.onmouseleave=()=>{socktdLastPlacementPointer=null;if(selected||movingTower)draw();};
 C.onclick=e=>{if(speedrunCountdownActive)return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement')&&!document.body.classList.contains('tutorialFusion'))return;let r=C.getBoundingClientRect(),px=(e.clientX-r.left)*960/r.width,py=(e.clientY-r.top)*560/r.height;
 if(mpStarted&&mpRole==='guest'){
   if(movingTower){
@@ -2594,14 +2737,14 @@ if(mpStarted&&mpRole==='guest'){
     const v=D[selected],cost=v[1];
     if(gold<cost)return;
     gold-=cost;mpSend({type:'guestAction',action:{action:'place',k:selected,x:px,y:py}});
-    tw.push({x:px,y:py,k:selected,parts:[selected],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});
+    tw.push({x:px,y:py,k:selected,parts:[selected],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});socktdCine('spawn',px,py);
     selected=null;update();draw();return;
   }
   const clicked=tw.find(q=>dist(q,{x:px,y:py})<34);
   if(clicked){showInfo(clicked);return}
   return;
 }
-if(movingTower){if(!valid(px,py)){ $('msg').textContent='🚫 Cannot move there!';return }if(gold<50){$('msg').textContent='Not enough gold to move!';movingTower=null;return}gold-=50;movingTower.x=px;movingTower.y=py;movingTower=null;$('msg').textContent='🧦 Sock moved for 50 gold!';hideInfo();update();return}let clickedEnemy=en.find(q=>dist(q,{x:px,y:py})<34);if(clickedEnemy&&!fuseMode&&!selected&&!movingTower){showEnemyInfo(clickedEnemy);return}let clicked=tw.find(q=>dist(q,{x:px,y:py})<34);if(clicked&&!movingTower&&(!fuseMode||clicked.fused)&&!document.body.classList.contains('tutorialFusion')){selected=null;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));showInfo(clicked);return}if(fuseMode){if(sockTDChallenge&&sockTDChallenge.noFusion){fuseMode=false;first=null;$('msg').textContent='🚫 '+sockTDChallenge.name+' does not allow fusion.';return}let t=tw.find(q=>dist(q,{x:px,y:py})<32);if(!t||t.fused)return;if(!first){first=t;$('msg').textContent='First sock selected';return}if(t===first)return;let key=[first.k,t.k].sort().join('|');let fuseCost=window.cradminFreeFusion?0:Math.ceil((D[first.k][1]+D[t.k][1])*.35);if(gold<fuseCost){$('msg').textContent='Need '+fuseCost+' gold to fuse!';first=null;return}gold-=fuseCost;first.fused=true;first.parts=[first.k,t.k];first.name=recipes[key];first.fusionKey=key;first.level=0;first.cool=0;first.attack=0;first.fusionPulse=24;first.range=Math.max(D[first.k][2],D[t.k][2])+26;first.damage=Math.round((D[first.k][3]+D[t.k][3])*.88+16);first.rate=Math.round(Math.min(D[first.k][4],D[t.k][4])*1.32+2);tw=tw.filter(q=>q!==t);if(!unlocked.includes(key)){unlocked.push(key);localStorage.setItem('socktdrecipes',JSON.stringify(unlocked));}$('msg').textContent=first.name+' unlocked!';const fusionWasTutorial=document.body.classList.contains('tutorialFusion')&&tutorialStep===6;first=null;update();if(fusionWasTutorial){tutorialFusionPending=false;tutorialFusionUnlocked=false;document.body.classList.remove('tutorialFusion');tutorialStep=7;gamePaused=false;update();}return}if(!selected||!valid(px,py))return;if(!sockTDChallengeCanUse(selected))return;let placedCost=sockTDChallengeCost(selected);if(!window.cradminFreeTowers&&gold<placedCost){$('msg').textContent='Not enough gold! This challenge costs '+placedCost+' for that sock.';return}let placedTutorialTower=selected;let v=D[selected];let newChallengeTower={x:px,y:py,k:selected,parts:[selected],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0};sockTDChallengeApplyTower(newChallengeTower);tw.push(newChallengeTower);if(!window.cradminFreeTowers)gold-=placedCost;selected=null;
+if(socktdDiceModalPause)return;if(socktdDiceLocked()){selected='dice';fuseMode=false;movingTower=null;}if(movingTower){if(!valid(px,py)){ $('msg').textContent='🚫 Cannot move there!';return }if(gold<50){$('msg').textContent='Not enough gold to move!';movingTower=null;return}gold-=50;movingTower.x=px;movingTower.y=py;movingTower=null;$('msg').textContent='🧦 Sock moved for 50 gold!';hideInfo();update();return}let clickedEnemy=socktdDiceLocked()?null:en.find(q=>dist(q,{x:px,y:py})<34);if(clickedEnemy&&!fuseMode&&!selected&&!movingTower){showEnemyInfo(clickedEnemy);return}let clicked=socktdDiceLocked()?null:tw.find(q=>dist(q,{x:px,y:py})<34);if(clicked&&!movingTower&&(!fuseMode||clicked.fused)&&!document.body.classList.contains('tutorialFusion')){selected=null;document.querySelectorAll('#towers button').forEach(q=>q.classList.remove('sel'));showInfo(clicked);return}if(socktdDiceLocked())fuseMode=false;if(fuseMode){if(sockTDChallenge&&sockTDChallenge.noFusion){fuseMode=false;first=null;$('msg').textContent='🚫 '+sockTDChallenge.name+' does not allow fusion.';return}let t=tw.find(q=>dist(q,{x:px,y:py})<32);if(!t||t.fused)return;if(!first){first=t;$('msg').textContent='First sock selected';return}if(t===first)return;let key=[first.k,t.k].sort().join('|');let fuseCost=window.cradminFreeFusion?0:Math.ceil((D[first.k][1]+D[t.k][1])*.35);if(gold<fuseCost){$('msg').textContent='Need '+fuseCost+' gold to fuse!';first=null;return}gold-=fuseCost;first.fused=true;first.parts=[first.k,t.k];first.name=recipes[key];first.fusionKey=key;first.level=0;first.cool=0;first.attack=0;first.fusionPulse=24;socktdCine('fusion',first.x,first.y);first.range=Math.max(D[first.k][2],D[t.k][2])+26;first.damage=Math.round((D[first.k][3]+D[t.k][3])*.88+16);first.rate=Math.round(Math.min(D[first.k][4],D[t.k][4])*1.32+2);tw=tw.filter(q=>q!==t);if(!unlocked.includes(key)){unlocked.push(key);localStorage.setItem('socktdrecipes',JSON.stringify(unlocked));}$('msg').textContent=first.name+' unlocked!';const fusionWasTutorial=document.body.classList.contains('tutorialFusion')&&tutorialStep===6;first=null;update();if(fusionWasTutorial){tutorialFusionPending=false;tutorialFusionUnlocked=false;document.body.classList.remove('tutorialFusion');tutorialStep=7;gamePaused=false;update();}return}if(!selected||!valid(px,py))return;if(!sockTDChallengeCanUse(selected))return;let placedCost=selected==='dice'&&socktdDiceRolledCost!==null?socktdDiceRolledCost:sockTDChallengeCost(selected);if(!window.cradminFreeTowers&&gold<placedCost){$('msg').textContent='Not enough gold! This challenge costs '+placedCost+' for that sock.';return}let placedTutorialTower=selected;let v=D[selected];let newChallengeTower={x:px,y:py,k:selected,parts:[selected],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0};sockTDChallengeApplyTower(newChallengeTower);tw.push(newChallengeTower);socktdCine('spawn',px,py);if(!window.cradminFreeTowers)gold-=placedCost;if(selected==='dice')socktdDiceRolledCost=null;selected=null;
 if(document.body.classList.contains('tutorialPlacement')){
   
   document.body.classList.remove('tutorialPlacement');
@@ -2682,8 +2825,8 @@ function type(){
   for(const [kind,weight] of pool){roll-=weight;if(roll<0)return kind;}
   return 'frog';
 }
-function isCounter(t,e){const k=t.parts||[t.k];return k.some(a=>{if(a==='fire')return ['fly','wash','piggy'].includes(e.type);if(a==='ice')return ['speed','frog'].includes(e.type);if(a==='thunder')return ['fly','silver','wash'].includes(e.type);if(a==='wizard')return ['golem','boss'].includes(e.type);if(a==='ninja')return ['fly','speed'].includes(e.type);if(a==='golden')return ['piggy','boss'].includes(e.type);if(a==='portal')return ['golem','wash','ironjaw'].includes(e.type);if(a==='laundry')return ['frog','speed'].includes(e.type);if(a==='fight')return ['golem','wash','ironjaw','shellbum'].includes(e.type);return false})}
-function hit(e,d){if(window.cradminInstantKill&&!e.dead){e.hp=0;d=e.max;}e.hp-=d;e.hit=8;e.flash=5;if(e.type==='piggy')gold+=(sockTDChallenge&&sockTDChallenge.rewardMult?sockTDChallenge.rewardMult:1);if(e.hp<=0&&!e.dead){e.dead=true;let m=diff==='easy'?1.35:diff==='nightmare'?.6:diff==='hard'?.8:1;let reward=e.type==='piggy'?(diff==='easy'?50:diff==='normal'?25:diff==='hard'?15:10):Math.max(1,Math.round(e.g*m*0.85));if(sockTDChallenge&&sockTDChallenge.rewardMult)reward=Math.max(1,Math.floor(reward*sockTDChallenge.rewardMult));gold+=reward;
+function isCounter(t,e){const k=t.parts||[t.k];return k.some(a=>{if(a==='fire')return ['fly','wash','piggy'].includes(e.type);if(a==='ice')return ['speed','frog'].includes(e.type);if(a==='thunder')return ['fly','silver','wash'].includes(e.type);if(a==='wizard')return ['golem','boss'].includes(e.type);if(a==='ninja')return ['fly','speed'].includes(e.type);if(a==='golden')return ['piggy','boss'].includes(e.type);if(a==='portal')return ['golem','wash','ironjaw'].includes(e.type);if(a==='laundry')return ['frog','speed'].includes(e.type);if(a==='fight')return ['golem','wash','ironjaw','shellbum'].includes(e.type);if(a==='magnet')return ['silver','ironjaw','shellbum'].includes(e.type);if(a==='ghost')return ['speed','psyguy'].includes(e.type);if(a==='mushroom')return ['treeflame','frog'].includes(e.type);if(a==='mirror')return ['piggy','silver'].includes(e.type);if(a==='gravity')return ['golem','ironjaw'].includes(e.type);if(a==='dice')return ['wash','fly'].includes(e.type);if(a==='bee')return ['speed','frog'].includes(e.type);if(a==='paint')return ['wash','golem'].includes(e.type);if(a==='fossil')return ['golem','speed'].includes(e.type);return false})}
+function hit(e,d){if(window.cradminInstantKill&&!e.dead){e.hp=0;d=e.max;}e.hp-=d;e.hit=8;e.flash=5;if(e.type==='piggy')gold+=(sockTDChallenge&&sockTDChallenge.rewardMult?sockTDChallenge.rewardMult:1);if(e.hp<=0&&!e.dead){e.dead=true;let m=diff==='easy'?1.35:diff==='nightmare'?.6:diff==='hard'?.8:1;let reward=e.type==='piggy'?(diff==='easy'?50:diff==='normal'?25:diff==='hard'?15:10):Math.max(1,Math.round(e.g*m*0.85));if(sockTDChallenge&&sockTDChallenge.rewardMult)reward=Math.max(1,Math.floor(reward*sockTDChallenge.rewardMult));gold+=reward;socktdCine('cash',e.x,e.y,'+'+reward);
  if(e.midasUntil&&performance.now()<e.midasUntil){
    gold+=3; sockAbilityFx.push({kind:'coins',x:e.x,y:e.y,life:42,maxLife:42});
  }
@@ -2967,7 +3110,7 @@ function socktdDiceAttack(t,target,damage){
  t.dicePendant=1+Math.floor(Math.random()*6);
  t.diceNextAttack=t.diceEyeLeft===20&&t.diceEyeRight===20?'super':(t.diceEyeLeft===20||t.diceEyeRight===20?'crit':'normal');
  t.diceRollAt=performance.now();
- const face=1+Math.floor(Math.random()*4),green=roulette&&Math.random()<.01;
+ const face=t.diceAttackFace||1,green=roulette&&Math.random()<.01;
  socktdDiceShots.push({x:t.x,y:t.y,tx:target.x,ty:target.y,life:21,maxLife:21,face,roulette,green,spin:Math.random()*6.28});
  if(socktdDiceShots.length>70)socktdDiceShots.shift();
 }
@@ -4527,8 +4670,47 @@ function drawNewSockModel(t,fusionName){
  if(fusionName){x.strokeStyle='#ffe8a6';x.lineWidth=2;x.beginPath();x.arc(0,0,40,0,Math.PI*2);x.stroke();}
  x.restore();
 }
+function socktdSimpleSock(t){
+ const c=t.fused?fusionColor(t.fusionKey):(D[t.parts[0]]||D.fire)[5];
+ x.save();x.translate(t.x,t.y);x.fillStyle='rgba(0,0,0,.17)';x.beginPath();x.ellipse(0,35,26,5,0,0,Math.PI*2);x.fill();
+ x.fillStyle=c;x.strokeStyle='#28313a';x.lineWidth=2.4;x.beginPath();x.moveTo(-17,-29);x.lineTo(17,-29);x.lineTo(17,8);x.quadraticCurveTo(32,8,32,22);x.quadraticCurveTo(30,32,14,32);x.lineTo(-8,32);x.quadraticCurveTo(-19,30,-19,17);x.lineTo(-19,-26);x.closePath();x.fill();x.stroke();
+ x.fillStyle='#fff';for(const q of [-8,8]){x.beginPath();x.arc(q,-8,5,0,Math.PI*2);x.fill();x.fillStyle='#1b2633';x.beginPath();x.arc(q,-8,2.5,0,Math.PI*2);x.fill();x.fillStyle='#fff';}
+ x.restore();
+}
+function socktdGfx(){return window.socktdGraphics||{particles:80,glow:true,shadows:true,details:true,shake:true,reduced:false,autoFactor:1};}
+function socktdVisualDensity(){const g=socktdGfx();return Math.max(0,Math.min(1,(g.particles/100)*(g.autoFactor||1)));}
+// Placement animation: audible pop, falling sock, shrinking ground shadow, soft bounce.
+// The tower's real coordinates and collision geometry never change.
 function sock(t){
- if(!t.fused&&["magnet", "ghost", "cactus", "mushroom", "mirror", "gravity", "dice", "bee", "paint", "fossil"].includes(t.k)){drawNewSockModel(t);return;}
+ const now=performance.now();
+ let f=null;
+ for(let i=socktdCinematicFx.length-1;i>=0;i--){
+  const fx=socktdCinematicFx[i];
+  if(fx.kind==='spawn'&&Math.abs(fx.x-t.x)<.5&&Math.abs(fx.y-t.y)<.5&&now-fx.born<930){f=fx;break;}
+ }
+ if(!f){socktdOriginalSock(t);return;}
+ const u=Math.max(0,(now-f.born)/930),fall=Math.min(1,u/.58);
+ const ease=fall*fall*(3-2*fall);
+ const height=fall<1?Math.pow(1-ease,1.3)*170:0;
+ const bounce=u>.58?Math.sin((u-.58)/.42*Math.PI*2.3)*Math.pow(1-(u-.58)/.42,2)*17:0;
+ const offset=-height-bounce;
+ const shadowScale=.43+.57*fall;
+ x.save();
+ x.fillStyle='rgba(17,23,22,'+(.1+.21*fall)+')';
+ x.beginPath();x.ellipse(t.x,t.y+35,28*shadowScale,6.5*shadowScale,0,0,Math.PI*2);x.fill();
+ x.translate(0,offset);
+ // Subtle squash/stretch at landing, while keeping the original sock drawing intact.
+ if(u>.58){const b=(u-.58)/.42,stretch=Math.sin(b*Math.PI*2.3)*Math.pow(1-b,2)*.09;
+  x.translate(t.x,t.y);x.scale(1+stretch,1-stretch);x.translate(-t.x,-t.y);
+ }
+ socktdOriginalSock(t);
+ x.restore();
+}
+function socktdOriginalSock(t){
+ if(!socktdGfx().details){socktdSimpleSock(t);return;}
+ // Roll the D4 once per Dice Sock attack; the visible projectile and damage use the same result.
+if(!t.fused&&t.k==='dice')t.diceAttackFace=1+Math.floor(Math.random()*4);
+if(!t.fused&&["magnet", "ghost", "cactus", "mushroom", "mirror", "gravity", "dice", "bee", "paint", "fossil"].includes(t.k)){drawNewSockModel(t);return;}
  x.save();let idle=Math.sin(performance.now()/420+t.x)*2,col=t.fused?fusionColor(t.fusionKey):D[t.parts[0]][5],s=t.fused?1.42:1;
  if(t.fused){drawFusionSock(t,col);x.restore();return}
  x.translate(t.x,t.y);x.translate(0,idle);x.scale(s,s);
@@ -4652,44 +4834,67 @@ function sock(t){
  // Fire Sock gets a hanging Christmas-stocking silhouette.
  let cuffH=12, bodyW=30, ankleH=30, footW=43;
  if(t.k==='fire'){
-   x.fillStyle='#d9472f';
-   x.beginPath();
-   x.moveTo(-15,-31);x.lineTo(15,-31);x.lineTo(15,5);
-   x.lineTo(24,8);x.quadraticCurveTo(34,12,31,22);
-   x.quadraticCurveTo(28,31,17,32);x.lineTo(-7,32);
-   x.quadraticCurveTo(-19,30,-19,20);x.lineTo(-19,-25);
-   x.quadraticCurveTo(-19,-31,-15,-31);x.closePath();x.fill();
-   // fiery knit texture
-   x.fillStyle='#ff8a22';
-   for(let yy=-21;yy<=20;yy+=10)for(let xx=-12;xx<=10;xx+=11){
-     x.beginPath();x.arc(xx+(yy%20?4:0),yy,3.2,0,7);x.fill();
+   // INFERNO HEART: animated volcanic knit, original stocking silhouette and toe intact.
+   const now=performance.now(), beat=1+.09*Math.sin(now/240), hot=t.level>=3;
+   const silhouette=()=>{x.beginPath();x.moveTo(-15,-31);x.lineTo(15,-31);x.lineTo(15,5);x.lineTo(24,8);x.quadraticCurveTo(34,12,31,22);x.quadraticCurveTo(28,31,17,32);x.lineTo(-7,32);x.quadraticCurveTo(-19,30,-19,20);x.lineTo(-19,-25);x.quadraticCurveTo(-19,-31,-15,-31);x.closePath()};
+   // Warm light beneath the character, not a separate Lava Sock silhouette.
+   x.save();x.shadowColor='#ff6218';x.shadowBlur=hot?20:11;x.fillStyle='rgba(255,97,16,.16)';x.beginPath();x.ellipse(1,32,28,8,0,0,Math.PI*2);x.fill();x.restore();
+   // Five distinct animated flame tongues above the cuff.
+   for(let i=0;i<5;i++){
+     const px=-14+i*7, rise=12+(i%3)*5+3*Math.sin(now/210+i*1.8);
+     x.save();x.shadowColor='#ff7b15';x.shadowBlur=hot?12:7;
+     const fg=x.createLinearGradient(px,-35,px,-35-rise);fg.addColorStop(0,'#ff4216');fg.addColorStop(.55,'#ff9c18');fg.addColorStop(1,'#ffe56b');
+     x.fillStyle=fg;x.beginPath();x.moveTo(px-5,-31);x.quadraticCurveTo(px-8,-39,px+Math.sin(now/340+i)*3,-35-rise);x.quadraticCurveTo(px+9,-38,px+5,-31);x.closePath();x.fill();x.restore();
    }
-   x.fillStyle='#ffcf33';
-   x.beginPath();x.moveTo(-18,-34);x.quadraticCurveTo(0,-39,18,-34);x.lineTo(16,-26);x.quadraticCurveTo(0,-22,-16,-26);x.closePath();x.fill();
-   // flames on top
-   x.fillStyle='#ff3b18';x.beginPath();x.moveTo(-12,-35);x.quadraticCurveTo(-16,-48,-7,-43);x.quadraticCurveTo(-3,-54,2,-42);x.quadraticCurveTo(8,-51,9,-38);x.quadraticCurveTo(16,-44,14,-34);x.closePath();x.fill();
-   x.fillStyle='#ffd21f';x.beginPath();x.moveTo(-7,-35);x.quadraticCurveTo(-8,-43,-3,-40);x.quadraticCurveTo(1,-47,3,-38);x.quadraticCurveTo(8,-43,7,-34);x.closePath();x.fill();
-   // angry red eyes
-   x.fillStyle='#ff1d1d';
-   x.beginPath();x.moveTo(-13,-12);x.lineTo(-2,-9);x.lineTo(-12,-4);x.closePath();
-   x.moveTo(13,-12);x.lineTo(2,-9);x.lineTo(12,-4);x.closePath();x.fill();
-   x.fillStyle='#180000';x.beginPath();x.arc(-8,-8,2,0,7);x.arc(8,-8,2,0,7);x.fill();
-   // Fire Sock upgrade visuals: each level adds stronger flames/heat details.
-   if(t.level>=1){
-     x.fillStyle='#ffcf33';x.beginPath();x.moveTo(-15,30);x.quadraticCurveTo(-20,21,-14,16);x.quadraticCurveTo(-10,23,-5,17);x.quadraticCurveTo(-2,25,4,18);x.quadraticCurveTo(8,26,15,20);x.lineTo(15,32);x.closePath();x.fill();
+   const base=x.createLinearGradient(-19,-30,32,32);
+   base.addColorStop(0,'#f34d2b');base.addColorStop(.38,'#b92723');base.addColorStop(.72,'#7d1b1d');base.addColorStop(1,'#ec5c2b');
+   x.fillStyle=base;x.strokeStyle='#54151b';x.lineWidth=2.7;x.lineJoin='round';silhouette();x.fill();x.stroke();
+   x.save();silhouette();x.clip();
+   // Dense knitted fabric: visible thread loops with dark obsidian flecks.
+   for(let yy=-30;yy<34;yy+=4)for(let xx=-20;xx<35;xx+=5){
+     x.strokeStyle=(Math.floor(xx+yy)%3===0)?'rgba(255,160,87,.25)':'rgba(63,11,19,.24)';x.lineWidth=.75;
+     x.beginPath();x.moveTo(xx,yy-1);x.quadraticCurveTo(xx+2.5,yy+3,xx+5,yy-1);x.stroke();
    }
-   if(t.level>=2){
-     x.fillStyle='#ff6a18';x.beginPath();x.arc(0,-43,8,0,7);x.fill();x.fillStyle='#ffe04b';x.beginPath();x.arc(0,-43,4,0,7);x.fill();
+   // Glowing lava fissures branch organically across the woven sock, never replacing it.
+   for(let i=0;i<8;i++){
+     const sx=-16+(i*11)%38,sy=-22+(i*17)%48;
+     x.strokeStyle='#4c1418';x.lineWidth=3.6;x.beginPath();x.moveTo(sx,sy);x.lineTo(sx+3,sy+4);x.lineTo(sx-1,sy+9);x.lineTo(sx+4,sy+13);x.stroke();
+     x.save();x.shadowColor='#ffad29';x.shadowBlur=hot?9:5;x.globalAlpha=.65+.3*Math.sin(now/360+i);
+     x.strokeStyle=i%2?'#ff9a28':'#ffd06b';x.lineWidth=1.5;x.stroke();x.restore();
    }
-   if(t.level>=5){
-     x.strokeStyle='#ff8a18';x.lineWidth=3;x.beginPath();x.arc(0,0,31,0,7);x.stroke();
-     x.fillStyle='#ffd21f';x.font='bold 15px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.textAlign='center';x.fillText('🔥',0,12);
+   x.restore();
+   // Reinforced embroidered heel and toe, following the original contours.
+   x.strokeStyle='#ff9b46';x.lineWidth=1.6;x.beginPath();x.moveTo(-18,15);x.quadraticCurveTo(-9,25,-7,32);x.moveTo(14,6);x.quadraticCurveTo(23,14,31,18);x.stroke();
+   x.strokeStyle='rgba(255,225,144,.6)';x.lineWidth=.8;x.setLineDash([2,3]);x.beginPath();x.moveTo(-17,17);x.quadraticCurveTo(-10,27,-7,30);x.moveTo(17,8);x.quadraticCurveTo(26,14,29,18);x.stroke();x.setLineDash([]);
+   // Thick ribbed ember-gold cuff.
+   const cuff=x.createLinearGradient(0,-37,0,-24);cuff.addColorStop(0,'#ffe4a0');cuff.addColorStop(.5,'#eea643');cuff.addColorStop(1,'#b34a25');
+   x.fillStyle=cuff;x.strokeStyle='#70331f';x.lineWidth=1.6;x.beginPath();x.roundRect(-19,-36,38,12,4);x.fill();x.stroke();
+   x.strokeStyle='#ffecb3';x.lineWidth=1;for(let cx=-15;cx<=15;cx+=5){x.beginPath();x.moveTo(cx,-34);x.lineTo(cx,-26);x.stroke()}
+   // Two expressive molten eyes, glowing iris and little fiery eyebrows.
+   for(const side of [-1,1]){
+     const ex=side*8;x.save();x.shadowColor='#ff9e1b';x.shadowBlur=hot?9:5;
+     x.fillStyle='#38151b';x.beginPath();x.ellipse(ex,-12,6.3,7.6,0,0,7);x.fill();
+     x.fillStyle='#ffbf39';x.beginPath();x.ellipse(ex,-12,4.5,5.8,0,0,7);x.fill();
+     x.fillStyle='#ff6423';x.beginPath();x.arc(ex,-11.6,2.8,0,7);x.fill();
+     x.fillStyle='#28151a';x.beginPath();x.arc(ex,-11.5,1.6,0,7);x.fill();
+     x.fillStyle='#fff6ca';x.beginPath();x.arc(ex-1.4,-14.2,1.4,0,7);x.fill();x.restore();
+     x.strokeStyle='#632022';x.lineWidth=2;x.beginPath();x.moveTo(ex-side*4,-21);x.lineTo(ex+side*4,-19);x.stroke();
    }
-   if(t.level>=10){
-     x.fillStyle='#fff1a8';x.beginPath();x.arc(0,-50,6,0,7);x.fill();
-     x.fillStyle='#ff6a18';x.beginPath();x.arc(0,-50,11,0,7);x.fill();
-     x.fillStyle='#fff1a8';x.beginPath();x.arc(0,-50,5,0,7);x.fill();
+   // Inferno Heart: cracked faceted gemstone, animated pulse and hot inner core.
+   x.save();x.translate(0,12);x.scale(beat,beat);x.shadowColor='#ff941e';x.shadowBlur=hot?19:11;
+   x.fillStyle='#682020';x.strokeStyle='#ffe09a';x.lineWidth=1.8;
+   x.beginPath();x.moveTo(0,-10);x.lineTo(9,-5);x.lineTo(11,3);x.lineTo(0,13);x.lineTo(-11,3);x.lineTo(-9,-5);x.closePath();x.fill();x.stroke();
+   const gem=x.createLinearGradient(-7,-9,7,11);gem.addColorStop(0,'#fff0a6');gem.addColorStop(.35,'#ff9a22');gem.addColorStop(1,'#df331a');
+   x.fillStyle=gem;x.beginPath();x.moveTo(0,-7);x.lineTo(7,-3);x.lineTo(8,3);x.lineTo(0,10);x.lineTo(-8,3);x.lineTo(-7,-3);x.closePath();x.fill();
+   x.strokeStyle='#722326';x.lineWidth=1;x.beginPath();x.moveTo(0,-7);x.lineTo(-2,0);x.lineTo(3,4);x.lineTo(0,10);x.moveTo(-8,3);x.lineTo(-2,0);x.lineTo(8,3);x.stroke();x.restore();
+   // Small orbiting embers and heat shimmer, low particle count for performance.
+   for(let i=0;i<11;i++){
+     const q=(now/1300+i/11)%1,px=Math.sin(i*2.4+now/900)*22,py=26-q*74;
+     x.save();x.globalAlpha=(1-q)*.8;x.fillStyle=i%3?'#ffae36':'#fff0a5';x.shadowColor='#ff6c20';x.shadowBlur=4;
+     x.beginPath();x.arc(px,py,.75+(i%3)*.4,0,7);x.fill();x.restore();
    }
+   if(t.level>=5){x.strokeStyle='rgba(255,170,52,.7)';x.lineWidth=1.8;x.beginPath();x.arc(0,0,36+Math.sin(now/360)*1.5,0,7);x.stroke()}
+   if(t.level>=10){x.save();x.shadowColor='#ffcf4e';x.shadowBlur=13;x.strokeStyle='#ffe3a1';x.lineWidth=2;x.beginPath();x.arc(0,-3,41,0,7);x.stroke();x.restore()}
  }else if(t.k==='golden'){
    // Golden Sock: a royal hanging Christmas stocking, seated on a coin pile.
    x.fillStyle='rgba(255,205,45,.95)';
@@ -6369,9 +6574,114 @@ function drawKunais(){
    x.restore();
  }
 }
+
+// Fire Sock's level-3 ability: independently ticking burn with layered flame VFX.
+const socktdFireEmbers=[];
+function socktdApplyFireBurn(e,t){
+ if(!e||e.dead||!socktdAbilityUnlocked(t))return;
+ const now=performance.now();
+ e.socktdFireBurnUntil=now+3200;
+ e.socktdFireBurnStart=now;
+ e.socktdFireBurnTick=now;
+ e.socktdFireBurnSeed=Math.random()*6.283;
+ for(let i=0;i<15;i++)socktdFireEmbers.push({x:e.x,y:e.y,vx:(Math.random()-.5)*5,vy:-1-Math.random()*4,life:16+Math.random()*18,max:34,r:1+Math.random()*3});
+ if(socktdFireEmbers.length>260)socktdFireEmbers.splice(0,socktdFireEmbers.length-260);
+}
+function socktdUpdateFireBurn(){
+ const now=performance.now();
+ for(const e of en){
+  if(e.dead||now>=(e.socktdFireBurnUntil||0))continue;
+  if(now-(e.socktdFireBurnTick||now)>=250){
+   e.socktdFireBurnTick=now;
+   hit(e,Math.max(1,e.max*.006));
+  }
+ }
+ for(let i=socktdFireEmbers.length-1;i>=0;i--){
+  const f=socktdFireEmbers[i];f.x+=f.vx;f.y+=f.vy;f.vx*=.97;f.life--;
+  if(f.life<=0)socktdFireEmbers.splice(i,1);
+ }
+}
+function socktdDrawFireBurn(){
+ const now=performance.now();
+ x.save();
+ for(const e of en){
+  if(e.dead||now>=(e.socktdFireBurnUntil||0))continue;
+  const t=now/155+(e.socktdFireBurnSeed||0),fade=Math.min(1,(e.socktdFireBurnUntil-now)/400);
+  x.save();x.translate(e.x,e.y);x.globalAlpha=fade;
+  // Layered flame silhouettes, animated separately for an organic flicker.
+  for(let i=0;i<11;i++){
+   const a=i*2.399,px=Math.cos(a)*12,py=Math.sin(a)*9;
+   const flicker=Math.sin(t+i*1.7),height=13+(i%4)*4+flicker*5;
+   x.fillStyle=i%3===0?'rgba(255,244,136,.82)':i%3===1?'rgba(255,124,23,.78)':'rgba(255,61,10,.68)';
+   x.beginPath();x.moveTo(px-4,py+7);
+   x.quadraticCurveTo(px-7,py-height*.3,px+flicker*3,py-height);
+   x.quadraticCurveTo(px+6,py-height*.25,px+4,py+7);x.closePath();x.fill();
+  }
+  // Hot corona and sparks rising from the enemy.
+  x.globalCompositeOperation='lighter';
+  const glow=x.createRadialGradient(0,0,2,0,0,24);
+  glow.addColorStop(0,'rgba(255,225,100,.25)');glow.addColorStop(1,'rgba(255,69,0,0)');
+  x.fillStyle=glow;x.beginPath();x.arc(0,0,24,0,Math.PI*2);x.fill();
+  for(let i=0;i<8;i++){
+   const px=Math.sin(t*.7+i*2.5)*15,py=-((t*5+i*7)%38)+12;
+   x.fillStyle=i%2?'#ffdf5b':'#ff7b20';x.beginPath();x.arc(px,py,.8+i%3*.45,0,7);x.fill();
+  }
+  x.restore();
+ }
+ for(const f of socktdFireEmbers){
+  x.globalAlpha=Math.max(0,f.life/f.max);
+  x.fillStyle=f.life>12?'#ffda63':'#ff631b';x.shadowColor='#ff7b18';x.shadowBlur=7;
+  x.beginPath();x.arc(f.x,f.y,f.r,0,Math.PI*2);x.fill();
+ }
+ x.restore();
+}
 function spawnFireball(t,target){
  if(t.fused||t.k!=='fire'||!target)return;
  fireballs.push({x:t.x,y:t.y,tx:target.x,ty:target.y,life:18,maxLife:18,angle:Math.atan2(target.y-t.y,target.x-t.x)});
+}
+// Ice Sock level 3: a genuine frozen status with crystalline cinematic effects.
+const socktdIceBursts=[];
+function socktdApplyIceFreeze(e){
+ if(!e||e.dead)return;
+ const now=performance.now();
+ e.socktdFrozenUntil=Math.max(e.socktdFrozenUntil||0,now+1150);
+ e.socktdIceSlowUntil=Math.max(e.socktdIceSlowUntil||0,now+3100);
+ e.iceHit=24;
+ socktdIceBursts.push({x:e.x,y:e.y,born:now,until:now+650,seed:Math.random()*6.28});
+ if(socktdIceBursts.length>90)socktdIceBursts.splice(0,socktdIceBursts.length-90);
+}
+function socktdDrawIceFreeze(){
+ const now=performance.now();
+ for(const e of en){
+  if(e.dead||now>=(e.socktdIceSlowUntil||0))continue;
+  const frozen=now<(e.socktdFrozenUntil||0),pulse=.75+.2*Math.sin(now/110);
+  x.save();x.translate(e.x,e.y);x.globalAlpha=frozen?.88:.48;
+  x.shadowColor='#55e8ff';x.shadowBlur=frozen?19:8;
+  x.strokeStyle=frozen?'#d9faff':'#8fe9ff';x.lineWidth=frozen?2.8:1.6;
+  x.beginPath();x.ellipse(0,0,18*pulse,19*pulse,0,0,7);x.stroke();
+  for(let i=0;i<8;i++){
+   const a=i*Math.PI/4+now/2400,rr=frozen?19:17;
+   x.save();x.translate(Math.cos(a)*rr,Math.sin(a)*rr);x.rotate(a);
+   x.fillStyle=i%2?'#c7faff':'#7bd8ff';x.beginPath();x.moveTo(0,-7);x.lineTo(3,0);x.lineTo(0,7);x.lineTo(-3,0);x.closePath();x.fill();x.restore();
+  }
+  if(frozen){
+   x.fillStyle='rgba(158,231,255,.18)';x.beginPath();x.ellipse(0,0,15,17,0,0,7);x.fill();
+   x.strokeStyle='#ecffff';x.lineWidth=1.1;
+   for(let i=0;i<6;i++){const a=i*Math.PI/3; x.beginPath();x.moveTo(0,0);x.lineTo(Math.cos(a)*14,Math.sin(a)*14);x.stroke();}
+  }
+  x.restore();
+ }
+ for(let i=socktdIceBursts.length-1;i>=0;i--){
+  const b=socktdIceBursts[i];if(now>b.until){socktdIceBursts.splice(i,1);continue;}
+  const f=(now-b.born)/(b.until-b.born);x.save();x.translate(b.x,b.y);
+  x.globalAlpha=(1-f)*.95;x.shadowColor='#9ffaff';x.shadowBlur=13;
+  for(let k=0;k<16;k++){
+   const a=b.seed+k*Math.PI*2/16,rr=6+f*(21+k%3*5),px=Math.cos(a)*rr,py=Math.sin(a)*rr;
+   x.save();x.translate(px,py);x.rotate(a);x.fillStyle=k%3?'#8ce9ff':'#f1ffff';
+   x.beginPath();x.moveTo(5+f*6,0);x.lineTo(-2,2);x.lineTo(-4,0);x.lineTo(-2,-2);x.closePath();x.fill();x.restore();
+  }
+  x.strokeStyle='#baf8ff';x.lineWidth=2*(1-f);x.beginPath();x.arc(0,0,9+f*31,0,7);x.stroke();x.restore();
+ }
 }
 function spawnIceflake(t,target){
  if(t.fused||t.k!=='ice'||!target)return;
@@ -6481,14 +6791,14 @@ function getSockPortalRims(){
  if(!sockPortalRims){sockPortalRims=[false,true].map(second=>{const g=x.createLinearGradient(-25,-26,25,26);g.addColorStop(0,second?'#b7ffff':'#e1c5ff');g.addColorStop(.5,second?'#22baff':'#9b54f5');g.addColorStop(1,'#3e197d');return g;});}
  return sockPortalRims;
 }
-function sockFx(kind,x,y,life=40,extra={}){
+function sockFx(kind,x,y,life=40,extra={}){if((kind==='uppercut'||kind==='newSock')&&window.socktdGraphics?.shake&&!window.socktdGraphics?.reduced)window.socktdGraphicsShakeUntil=performance.now()+140;
  // Limit overlapping visuals, never the actual gameplay damage or abilities.
  if(sockAbilityFx.length>=65)sockAbilityFx.shift();
  sockAbilityFx.push({kind,x,y,life,maxLife:life,...extra});
 }
 
 function newSockSpecial(t,target,damage){
- if(!target||target.dead)return;
+ if(!target||target.dead||!socktdAbilityUnlocked(t))return;
  const now=performance.now();
  t.newSockHits=(t.newSockHits||0)+1;
  const every=n=>t.newSockHits%n===0;
@@ -6585,7 +6895,7 @@ function newFusionSpecial(t,target,damage){
 }
 
 function sockAbilityHit(t,target,damage){
- if(!target||target.dead||t.fused)return;
+ if(!target||target.dead||t.fused||!socktdAbilityUnlocked(t))return;
  const now=performance.now();
  if(t.k==='ninja'&&Math.random()<.15){
    sockFx('shadow',t.x+43,t.y-8,34,{fromX:t.x,fromY:t.y,toX:target.x,toY:target.y});
@@ -6595,7 +6905,7 @@ function sockAbilityHit(t,target,damage){
  }
  if(t.k==='fight'){
    t.uppercutCount=(t.uppercutCount||0)+1;
-   if(t.uppercutCount%5===0){
+   if(t.uppercutCount%10===0){
      sockFx('uppercut',target.x,target.y,32);
      hit(target,damage); // bonus damage: total 2x normal hit
      if(Number.isFinite(target.distAlongPath)){
@@ -6635,7 +6945,7 @@ function sockAbilityHit(t,target,damage){
    }
  }
 }
-function drawSockAbilityFx(){
+function drawSockAbilityFx(){if(socktdVisualDensity()===0)return;
  for(const f of sockAbilityFx){
    const a=Math.max(0,f.life/f.maxLife),q=1-a;
    if(f.target&&!f.target.dead){f.x=f.target.x;f.y=f.target.y;}
@@ -8208,7 +8518,7 @@ function socktdMoldStart(t){
  sockFx('newSock',target.x,target.y-12,38,{label:'CONTAGION!',color:'#75ef9b'});
  t.moldContagionNext=now+14000;
 }
-function drawSocktdMoldEffects(){
+function drawSocktdMoldEffects(){if(socktdVisualDensity()===0)return;
  drawSocktdMoldBeacons();
  const now=performance.now();
  for(const e of en){
@@ -8431,7 +8741,7 @@ function updateSocktdMirrorClones(){
  }
 }
 
-function draw(){updateMoneyBills();x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){drawShoeBoxCartoonBackground();}if(map==='closet'){drawMessyClosetBackground();}if(map==='hall'){drawChaoticHallBackground();}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let q of p.slice(1))x.lineTo(q.x,q.y);x.lineWidth=map==='box'?66:56;x.strokeStyle=map==='box'?'#653a29':map==='closet'?'#59405c':'#6c3136';x.stroke();x.lineWidth=map==='box'?57:42;x.strokeStyle=map==='box'?'#e0a464':map==='closet'?'#a788ba':'#b34d53';x.stroke();if(map==='box'){x.save();x.lineWidth=3;x.strokeStyle='rgba(255,239,190,.65)';x.setLineDash([7,15]);x.stroke();x.setLineDash([]);x.restore();drawShoeBoxCartoonPathDetails(p);}if(map==='hall')drawChaoticHallPathDetails(p);drawBeeHoneyPuddles();drawSocktdSmurfSlime();drawSocktdMoldEffects();drawSocktdOrbitSystems();drawSocktdMirrorClones();for(let [obstacleIndex,o] of obs().entries()){if(map==='box'){drawShoeBoxPackagingObstacle(o,obstacleIndex);continue;}if(map==='closet'){drawMessyClosetObstacle(o);continue;}if(map==='hall'){drawChaoticHallObstacle(o);continue;}if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
+function draw(){updateMoneyBills();x.setTransform((window.socktdGraphics?.resolution||1),0,0,(window.socktdGraphics?.resolution||1),0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){drawShoeBoxCartoonBackground();}if(map==='closet'){drawMessyClosetBackground();}if(map==='hall'){drawChaoticHallBackground();}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let q of p.slice(1))x.lineTo(q.x,q.y);x.lineWidth=map==='box'?66:56;x.strokeStyle=map==='box'?'#653a29':map==='closet'?'#59405c':'#6c3136';x.stroke();x.lineWidth=map==='box'?57:42;x.strokeStyle=map==='box'?'#e0a464':map==='closet'?'#a788ba':'#b34d53';x.stroke();if(map==='box'){x.save();x.lineWidth=3;x.strokeStyle='rgba(255,239,190,.65)';x.setLineDash([7,15]);x.stroke();x.setLineDash([]);x.restore();drawShoeBoxCartoonPathDetails(p);}if(map==='hall')drawChaoticHallPathDetails(p);drawBeeHoneyPuddles();drawSocktdSmurfSlime();if(socktdVisualDensity()>0)drawSocktdMoldEffects();drawSocktdOrbitSystems();drawSocktdMirrorClones();for(let [obstacleIndex,o] of obs().entries()){if(map==='box'){drawShoeBoxPackagingObstacle(o,obstacleIndex);continue;}if(map==='closet'){drawMessyClosetObstacle(o);continue;}if(map==='hall'){drawChaoticHallObstacle(o);continue;}if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
   x.save();
   const rr=infoTower.range, cx=infoTower.x, cy=infoTower.y;
   // Premium range indicator: soft black tint + layered rings + cardinal ticks.
@@ -8459,8 +8769,29 @@ function draw(){updateMoneyBills();x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x
   x.restore();
 }
 tw.forEach(sock);en.forEach(e=>drawSocktdOrbitEnemy(e));drawSocktdMoldAttackShots();drawFireballs();drawKunais();drawMoneyBills();drawSymbolShots();drawSoap();drawLavaShots();drawPrismShots();drawCosmicShots();drawShadowSpirals();drawThunder();drawEnergy();tw.forEach(t=>{if(t.fusionPulse>0)t.fusionPulse--});drops.forEach(g=>{x.fillStyle='#ffd54a';x.beginPath();x.arc(g.x,g.y,8,0,7);x.fill()});x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([])}
+// Keep the placement/move range preview attached to the live cursor on EVERY frame.
+// The old preview was painted only by mousemove, then erased by the game render loop.
+const socktdDrawWithoutCursorRange=draw;
+draw=function(){
+ socktdDrawWithoutCursorRange();
+ socktdCineRender();
+ if((!selected&&!movingTower)||!socktdLastPlacementPointer)return;
+ const r=C.getBoundingClientRect();
+ const mx=socktdLastPlacementPointer.clientX,my=socktdLastPlacementPointer.clientY;
+ if(mx<r.left||mx>r.right||my<r.top||my>r.bottom)return;
+ const px=(mx-r.left)*960/r.width,py=(my-r.top)*560/r.height;
+ const range=movingTower?movingTower.range:(D[selected]&&D[selected][2]);
+ if(!Number.isFinite(range))return;
+ const ok=valid(px,py);
+ x.save();x.globalAlpha=.16;x.fillStyle=ok?'#5cff88':'#ff5b5b';
+ x.beginPath();x.arc(px,py,range,0,Math.PI*2);x.fill();
+ x.globalAlpha=.95;x.strokeStyle=ok?'#7dff9b':'#ff7777';
+ x.lineWidth=2;x.setLineDash([7,6]);x.beginPath();x.arc(px,py,range,0,Math.PI*2);x.stroke();
+ x.setLineDash([]);x.fillStyle=ok?'#7dff9b':'#ff7777';
+ x.beginPath();x.arc(px,py,3,0,Math.PI*2);x.fill();x.restore();
+};
 let gamePaused=false;
-function loop(){socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused){requestAnimationFrame(loop);return}if(mpStarted&&mpRole==='guest'){draw();requestAnimationFrame(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
+function loop(){if(socktdDiceLocked()&&!socktdDiceModalPause){selected='dice';fuseMode=false;}socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused||socktdDiceModalPause){requestAnimationFrame(loop);return}if(mpStarted&&mpRole==='guest'){draw();requestAnimationFrame(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
 for(let e of en){
   if(window.sandboxFreeze){continue;}
   if(performance.now()>=(e.fossilAmberUntil||0))e.walk+=.25;
@@ -8504,7 +8835,8 @@ for(let e of en){
   const moldContagionSlow=nowFx<(e.moldContagionUntil||0)?.8:1;
   const moldBeaconSlow=nowFx<(e.moldBeaconSlowUntil||0)?.65:1;
   const fossilAmberFrozen=nowFx<(e.fossilAmberUntil||0);
-  const step=e.sp*e.slow*window.cradminEnemySpeedMult*wizardSpeedMult*extraSpeed*newSockSlow*moldContagionSlow*moldBeaconSlow*beeHoneySlow*smurfSlimeSlow*paintSpeed*(fossilAmberFrozen||orbitFrozen?0:1);
+  const socktdIceSpeed=nowFx<(e.socktdFrozenUntil||0)?0:nowFx<(e.socktdIceSlowUntil||0)?.55:1;
+  const step=e.sp*socktdIceSpeed*e.slow*window.cradminEnemySpeedMult*wizardSpeedMult*extraSpeed*newSockSlow*moldContagionSlow*moldBeaconSlow*beeHoneySlow*smurfSlimeSlow*paintSpeed*(fossilAmberFrozen||orbitFrozen?0:1);
   if(fossilAmberFrozen||orbitFrozen){ /* Amber and Orbit Hijack suspend path movement without rewinding. */
   }else if(e.magnetPullFrames>0&&Math.abs(e.magnetPullRemaining||0)>.01){
     const shift=e.magnetPullRemaining/e.magnetPullFrames;
@@ -8532,7 +8864,7 @@ for(let e of en){
   }
   const pos=pointAtDistance(p,lengths,e.distAlongPath);
   e.x=pos.x;e.y=pos.y;
-  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.k==='mirror'&&!t.fused){
+  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.k==='mirror'&&!t.fused&&socktdAbilityUnlocked(t)){
  const mirrorNow=performance.now();
  if(t.mirrorNext===undefined)t.mirrorNext=mirrorNow+14000;
  if(mirrorNow>=t.mirrorNext){
@@ -8550,7 +8882,7 @@ for(let e of en){
   }else t.mirrorNext=mirrorNow+400;
  }
 }
-if(t.k==='gravity'&&!t.fused){
+if(t.k==='gravity'&&!t.fused&&socktdAbilityUnlocked(t)){
  const orbitNow=performance.now();
  if(t.orbitNext===undefined)t.orbitNext=orbitNow+12000;
  if(orbitNow>=t.orbitNext){
@@ -8565,7 +8897,7 @@ if(t.k==='gravity'&&!t.fused){
  }
 }
 if(t.fused&&t.name==='Mold Sock'){socktdMoldStart(t);socktdMoldBreach(t);}
-if(t.k==='mushroom'&&!t.fused){
+if(t.k==='mushroom'&&!t.fused&&socktdAbilityUnlocked(t)){
  const now=performance.now();
  if(t.fungalNext===undefined)t.fungalNext=now+12000;
  if(now>=t.fungalNext){
@@ -8580,7 +8912,7 @@ if(t.k==='mushroom'&&!t.fused){
   }else t.fungalNext=now+350;
  }
 }
-if(t.k==='bee'&&!t.fused){
+if(t.k==='bee'&&!t.fused&&socktdAbilityUnlocked(t)){
  const beeNow=performance.now();
  if(t.beeHoneyNext===undefined)t.beeHoneyNext=beeNow+10000;
  if(beeNow>=t.beeHoneyNext){
@@ -8592,7 +8924,7 @@ if(t.k==='bee'&&!t.fused){
    sockFx('newSock',e.x,e.y,38,{label:'STICKY HONEY!',color:'#ffd24b'});
   }else t.beeHoneyNext=beeNow+400; // Wait for a target on the path.
  }
-}if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused)spawnFireball(t,target);if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);target.iceHit=24;}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);target.slow=.48;}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&!target.dead&&Math.random()<.15){
+}if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused){spawnFireball(t,target);if(socktdAbilityUnlocked(t))socktdApplyFireBurn(target,t);}if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);if(socktdAbilityUnlocked(t)){const iceNow=performance.now();if(iceNow>=(t.socktdIceFreezeReadyAt||0)){socktdApplyIceFreeze(target);t.socktdIceFreezeReadyAt=iceNow+7000;}}}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(socktdAbilityUnlocked(t)&&Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&socktdAbilityUnlocked(t)&&!target.dead&&Math.random()<.15){
   target.midasUntil=performance.now()+2000;
   target.midasSlowUntil=target.midasUntil;
   sockFx('midas',target.x,target.y,55,{target});
@@ -8602,9 +8934,9 @@ if(!t.fused&&["magnet", "ghost", "cactus", "mushroom", "mirror", "gravity", "dic
 if(t.fused&&t.name==='Mold Sock')socktdMoldFireAttack(t,target);
 if(t.fused&&['Electromagnet Sock','Soulfire Sock','Mold Sock'].includes(t.name))
   newFusionSpecial(t,target,t.damage*srDamage);
-if((t.k!=='clock'||t.fused)&&(!t.fused||(!['Crystal Sock','Cosmic Sock','Nature Sock'].includes(t.name))))hit(target,t.damage*srDamage*(isCounter(t,target)?1.5:1));if(!t.fused&&['ninja','fight','golden','laundry','thunder','portal'].includes(t.k))
+if((t.k!=='clock'||t.fused)&&(!t.fused||(!['Crystal Sock','Cosmic Sock','Nature Sock'].includes(t.name))))hit(target,t.damage*srDamage*(isCounter(t,target)?1.5:1)*(!t.fused&&t.k==='dice'&&t.diceAttackFace===4?2:1));if(!t.fused&&['ninja','fight','golden','laundry','thunder','portal'].includes(t.k))
   sockAbilityHit(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));
-for(let k of t.parts){if(k==='ice'||k==='laundry')target.slow=.6;if(k==='thunder')for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();update();draw();tw.forEach(t=>{if(t.attack>0)attackFx(t)});drawClockMiniShots();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();drawClockRewindOverlays();drawWizardEffects();drawSocktdDiceShots();tw.forEach(t=>{if(t.k==='gravity'&&!t.fused)drawSocktdGravityPulse(t)});drawSocktdGhostTrails();drawSocktdSoulVortices();drawSockAbilityFx();requestAnimationFrame(loop)}
+for(let k of t.parts){if((k==='ice'||k==='laundry')&&socktdAbilityUnlocked(t))target.slow=.6;if(k==='thunder'&&socktdAbilityUnlocked(t))for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);socktdUpdateFireBurn();updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();update();if(!window.socktdGraphics||!window.socktdGraphics.fpsLimit||performance.now()-(window.socktdGraphicsLastFrame||0)>=1000/window.socktdGraphics.fpsLimit){window.socktdGraphicsLastFrame=performance.now();draw();}tw.forEach(t=>{if(t.attack>0)attackFx(t)});drawClockMiniShots();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();socktdDrawIceFreeze();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();drawClockRewindOverlays();drawWizardEffects();socktdDrawFireBurn();drawSocktdDiceShots();tw.forEach(t=>{if(t.k==='gravity'&&!t.fused)drawSocktdGravityPulse(t)});if(socktdVisualDensity()>0){drawSocktdGhostTrails();drawSocktdSoulVortices();drawSockAbilityFx();}requestAnimationFrame(loop)}
 
 
 let stormShots=[];
@@ -8669,7 +9001,7 @@ function drawStormShots(){
  }
 }
 
-function fireRate(t){return (60/Math.max(1,t.rate)).toFixed(2)}
+function fireRate(t){return (Math.max(1,t.rate)/60).toFixed(2)}
 function showEnemyInfo(e){infoTower=null;let box=$('info');box.classList.remove('hiddenInfo');let weakness=Object.entries(strongVs).filter(([k,v])=>v.includes(enemyNames[e.type])||(e.type==='golem'&&['wizard','portal','fight'].includes(k))||(e.type==='boss'&&['wizard','golden','fight'].includes(k))||(e.type==='speed'&&['ice','ninja','laundry'].includes(k))).map(([k])=>D[k][0]).join(', ')||'No special counter listed';box.innerHTML='<h3>👾 '+enemyNames[e.type]+'</h3><p>'+enemyInfo[e.type]+'</p><p>❤️ HP: <b>'+Math.ceil(e.hp)+' / '+Math.ceil(e.max)+'</b><br>⚔️ Base damage: <b>'+enemyBaseDamage(e.type)+'</b><br>👟 Speed: <b>'+e.sp.toFixed(2)+'</b><br>💰 Base reward: <b>'+e.g+'</b></p><p><b>🛡️ Best counter socks:</b><br>'+weakness+'</p><button onclick="hideInfo()">Close</button>'}
 
 /* Basic first-person control for a selected sock. This is intentionally local-only:
@@ -11226,7 +11558,7 @@ document.addEventListener('fullscreenchange',()=>{
   if(fpsActive){cancelAnimationFrame(fpsAnim);fpsRender();}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fpsActive){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen().catch(()=>{});return;}exitFPSView()}});
-function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+d0[0]+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' attacks/sec</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
+function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+d0[0]+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
 
 let socktdPendingSell=null;
 function socktdSellPrice(t){
@@ -11278,7 +11610,7 @@ function confirmSockSell(){
   if(infoTower===t)hideInfo();
   update();draw();closeSockSell();
 }
-function hideInfo(){infoTower=null;$('info').classList.add('hiddenInfo');draw()}function moveTower(i){if(fpsActive)return;let t=tw[i];if(!t)return;if(gold<50){$('msg').textContent='Not enough gold! Moving costs 50 gold.';return}movingTower=t;selected=null;fuseMode=false;first=null;hideInfo();$('msg').textContent='↔ Click a valid place to move this sock. Cost: 50 gold.'}function upgradeTower(i){if(sockTDChallenge&&sockTDChallenge.noUpgrades){$('msg').textContent='🚫 No Upgrades challenge: upgrading is disabled.';return}let t=tw[i];if(mpStarted&&mpRole==='guest'){if(!t||t.fused||t.level>=10)return;let cost=25+t.level*35;if(gold<cost)return;gold-=cost;mpSend({type:'guestAction',action:{action:'upgrade',i}});$('msg').textContent='Upgrade sent to host.';return}if(!t||t.fused)return;if(t.level>=10){$('msg').textContent='MAX LEVEL';showInfo(t);return}let cost=25+t.level*35;if(gold<cost){$('msg').textContent='Not enough gold!';return}gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2*(t.challengeDamageMult||1));t.range+=Math.round(14*(t.challengeRangeMult||1));showInfo(t);update();$('msg').textContent=t.level>=10?'MAX LEVEL reached!':'Upgrade complete! New model detail unlocked.'}
+function hideInfo(){infoTower=null;$('info').classList.add('hiddenInfo');draw()}function moveTower(i){if(fpsActive)return;let t=tw[i];if(!t)return;if(gold<50){$('msg').textContent='Not enough gold! Moving costs 50 gold.';return}movingTower=t;selected=null;fuseMode=false;first=null;hideInfo();$('msg').textContent='↔ Click a valid place to move this sock. Cost: 50 gold.';const r=C.getBoundingClientRect();draw()}function upgradeTower(i){if(sockTDChallenge&&sockTDChallenge.noUpgrades){$('msg').textContent='🚫 No Upgrades challenge: upgrading is disabled.';return}let t=tw[i];if(mpStarted&&mpRole==='guest'){if(!t||t.fused||t.level>=10)return;let cost=25+t.level*35;if(gold<cost)return;gold-=cost;mpSend({type:'guestAction',action:{action:'upgrade',i}});$('msg').textContent='Upgrade sent to host.';return}if(!t||t.fused)return;if(t.level>=10){$('msg').textContent='MAX LEVEL';showInfo(t);return}let cost=25+t.level*35;if(gold<cost){$('msg').textContent='Not enough gold!';return}gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2*(t.challengeDamageMult||1));t.range+=Math.round(14*(t.challengeRangeMult||1));showInfo(t);update();$('msg').textContent=t.level>=10?'MAX LEVEL reached!':'Upgrade complete! New model detail unlocked.'}
 function triggerGameOver(){if(gameOver)return;if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}if(speedrunModeActive)saveSpeedrunRecord();if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gameOver=true;active=false;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}else{$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>🏖️ Sandbox runs do not count for records.';}if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Challenge complete — keep pushing your record!';}$('gameOver').classList.remove('hidden');update()}
 function positionSpeedrunUpgradeMini(){
   const el=$('speedrunUpgradeMini'),canvas=$('c');
@@ -11291,7 +11623,63 @@ function positionSpeedrunUpgradeMini(){
 window.addEventListener('resize',positionSpeedrunUpgradeMini);
 window.addEventListener('scroll',positionSpeedrunUpgradeMini,{passive:true});
 
-function resetForRetry(){sockTDChallenge=null;if(typeof sockTDChallengeRefreshTowerButtons==='function')sockTDChallengeRefreshTowerButtons();speedrunModeActive=false;sandboxModeActive=false;$('sandboxControlsBtn').classList.remove('sandboxVisible');$('sandboxControlsBtn').style.display='none';speedrunCountdownActive=false;speedrunUpgradePending=false;speedrunHardPauseAt=0;speedrunHardPauseAccum=0;speedrunUpgrade=null;waveModifier=null;window.speedrunBonuses={};$('speedrunUpgradeMini').classList.remove('visible','miniLegendary');if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gold=150;life=250;wave=0;active=false;left=0;timer=0;selected=null;movingTower=null;fuseMode=false;first=null;tw=[];en=[];drops=[];fireballs=[];gameOver=false;activeWavePath=null;hideInfo();selectMapPath();$('gameOver').classList.add('hidden');$('choose').classList.remove('hidden');$('msg').textContent='Choose a new difficulty and map.';update();draw()}
+// Durable, versioned single-player checkpoint. Runtime objects are rebuilt, never serialized.
+const SOCKTD_RUN_KEY='socktd.runCheckpoint.v3';
+const SOCKTD_RUN_BACKUP='socktd.runCheckpoint.backup.v3';
+let socktdCheckpointRestoring=false;
+function socktdCheckpointStatus(message){const el=document.getElementById('socktdRunSaveStatus');if(el)el.textContent=message;}
+function socktdCheckpointAllowed(){return !socktdCheckpointRestoring&&!gameOver&&!speedrunModeActive&&!sandboxModeActive&&!mpStarted&&!sockTDChallenge&&document.getElementById('choose')?.classList.contains('hidden')&&wave>=0;}
+function socktdCheckpointBuild(){
+ const safeTowers=tw.map(t=>{const o={};for(const key of ['x','y','k','name','fusionKey','parts','range','damage','rate','level','fused','attack','attackCount','fusionSpecialCount','cost','totalSpent']){const v=t[key];if(typeof v==='number'&&Number.isFinite(v)||typeof v==='string'||typeof v==='boolean'||key==='parts'&&Array.isArray(v))o[key]=v;}return o;});
+ return {format:'SockTD-run',version:3,savedAt:Date.now(),map,diff,gold,life,wave,towers:safeTowers,wasWaveActive:!!active};
+}
+function socktdCheckpointSave(manual=false){
+ if(!socktdCheckpointAllowed()){if(manual)socktdCheckpointStatus('Save is available during a normal single-player game.');return false;}
+ try{
+  const data=socktdCheckpointBuild(),str=JSON.stringify(data);
+  const previous=localStorage.getItem(SOCKTD_RUN_KEY);
+  if(previous&&previous!==str)localStorage.setItem(SOCKTD_RUN_BACKUP,previous);
+  localStorage.setItem(SOCKTD_RUN_KEY,str);
+  if(manual)socktdCheckpointStatus('Saved ✓ '+new Date(data.savedAt).toLocaleString());
+  return true;
+ }catch(err){socktdCheckpointStatus('Save failed: browser storage may be full or blocked. Export a backup.');return false;}
+}
+function socktdCheckpointRead(){
+ for(const key of [SOCKTD_RUN_KEY,SOCKTD_RUN_BACKUP]){
+  try{const d=JSON.parse(localStorage.getItem(key)||'null');if(d?.format==='SockTD-run'&&d.version===3&&['box','closet','hall'].includes(d.map)&&['easy','normal','hard'].includes(d.diff)&&Number.isFinite(d.gold)&&Number.isFinite(d.life)&&Number.isInteger(d.wave)&&d.wave>=0&&d.wave<100000&&d.life>0&&Array.isArray(d.towers)&&d.towers.length<=300&&d.towers.every(t=>Number.isFinite(t.x)&&Number.isFinite(t.y)&&typeof t.k==='string'&&D[t.k]&&Number.isFinite(t.level)&&t.level>=0&&t.level<100))return d;}catch(_){}
+ }
+ return null;
+}
+function socktdCheckpointLoad(){
+ const d=socktdCheckpointRead();if(!d){socktdCheckpointStatus('No valid saved run found.');return;}
+ if(mpStarted||speedrunModeActive||sandboxModeActive){socktdCheckpointStatus('Leave multiplayer/special modes before loading.');return;}
+ if(!confirm('Load your saved single-player run? Your current unsaved run will be replaced.'))return;
+ socktdCheckpointRestoring=true;
+ try{
+  if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null;}
+  map=d.map;diff=d.diff;selectMapPath();activeWavePath=null;
+  gold=Math.max(0,d.gold);life=Math.max(1,d.life);wave=d.wave;
+  active=false;left=0;timer=0;gameOver=false;selected=null;movingTower=null;first=null;fuseMode=false;
+  en=[];drops=[];fireballs=[];
+  tw=d.towers.map(o=>{const base=D[o.k];return {...o,x:o.x,y:o.y,k:o.k,parts:Array.isArray(o.parts)?o.parts:[o.k],range:Number.isFinite(o.range)?o.range:base[2],damage:Number.isFinite(o.damage)?o.damage:base[3],rate:Number.isFinite(o.rate)?o.rate:base[4],level:o.level,fused:!!o.fused,cool:0,attackTarget:null};});
+  document.getElementById('choose')?.classList.add('hidden');document.getElementById('gameOver')?.classList.add('hidden');
+  hideInfo();update();draw();
+  socktdCheckpointStatus('Run restored ✓');
+  document.getElementById('msg').textContent=d.wasWaveActive?'💾 Saved during a wave: resumed safely between waves. Press Start wave to continue.':'💾 Saved run restored. Press Start wave to continue.';
+ }catch(e){socktdCheckpointStatus('Could not restore run: '+e.message);}finally{socktdCheckpointRestoring=false;}
+}
+function socktdCheckpointDelete(){try{localStorage.removeItem(SOCKTD_RUN_KEY);localStorage.removeItem(SOCKTD_RUN_BACKUP);socktdCheckpointStatus('Saved run cleared.');}catch(_){}}
+setInterval(()=>socktdCheckpointSave(false),12000);
+window.addEventListener('pagehide',()=>socktdCheckpointSave(false));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')socktdCheckpointSave(false)});
+setTimeout(()=>{
+ const b=document.getElementById('socktdSaveRunNow'),l=document.getElementById('socktdLoadRun'),c=document.getElementById('socktdClearRun');
+ if(b)b.addEventListener('click',()=>socktdCheckpointSave(true));
+ if(l)l.addEventListener('click',socktdCheckpointLoad);
+ if(c)c.addEventListener('click',()=>{if(confirm('Delete the saved run? Your skins, unlocks, records and settings will remain.'))socktdCheckpointDelete()});
+ const d=socktdCheckpointRead();if(d)socktdCheckpointStatus('Saved run: wave '+d.wave+' • '+new Date(d.savedAt).toLocaleString()+' • '+d.towers.length+' socks');
+},0);
+function resetForRetry(){socktdCheckpointDelete();sockTDChallenge=null;if(typeof sockTDChallengeRefreshTowerButtons==='function')sockTDChallengeRefreshTowerButtons();speedrunModeActive=false;sandboxModeActive=false;$('sandboxControlsBtn').classList.remove('sandboxVisible');$('sandboxControlsBtn').style.display='none';speedrunCountdownActive=false;speedrunUpgradePending=false;speedrunHardPauseAt=0;speedrunHardPauseAccum=0;speedrunUpgrade=null;waveModifier=null;window.speedrunBonuses={};$('speedrunUpgradeMini').classList.remove('visible','miniLegendary');if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gold=150;life=250;wave=0;active=false;left=0;timer=0;selected=null;movingTower=null;fuseMode=false;first=null;tw=[];en=[];drops=[];fireballs=[];gameOver=false;activeWavePath=null;hideInfo();selectMapPath();$('gameOver').classList.add('hidden');$('choose').classList.remove('hidden');$('msg').textContent='Choose a new difficulty and map.';update();draw()}
 $('retry').onclick=resetForRetry;
 function addGambleGoldPoints(){
   const wheel=$('wheel');
@@ -12325,8 +12713,8 @@ document.addEventListener("DOMContentLoaded",function(){
  function renderSockInfo(){
    const list=$('socktdSockInfoList'),detail=$('socktdSockInfoDetail'); if(!list||!detail||typeof D==='undefined')return;
    list.innerHTML='';
-   const role={fire:'Burning damage',ice:'Slows enemies',thunder:'Fast attacks',wizard:'Magic damage',ninja:'Quick attacks',golden:'Strong against bosses',portal:'Special utility',laundry:'Balanced support',fight:'Heavy close-range damage',magnet:'Control',ghost:'Magic',mushroom:'Poison',mirror:'Support',gravity:'Control',dice:'Luck',bee:'Swarm',paint:'Elemental',fossil:'Heavy'};
-   const ability={fire:'Burns enemies over time.',ice:'Slows enemies down.',thunder:'Thunderstorm: Every 8 seconds, lightning hits up to 5 enemies and stuns them for 0.5 seconds.',wizard:'Each attack has a 25% chance to apply a random effect: Poison, Burn, Slow or Freeze (1 second). Each effect has a unique animation.',ninja:'Shadow Clone: 15% chance to strike the same enemy 2 extra times (50% damage each).',golden:'Midas Touch: 15% chance to turn an enemy gold for 2 seconds, slowing it by 40%. Defeating it grants +3 gold.',portal:'Portal Duplicate: 15% chance to send a second attack through portals to another enemy (75% damage).',laundry:'Soap Splash: Every 4th attack splashes up to 3 enemies, slowing them by 25% for 1 second.',fight:'Uppercut: Every 5th punch deals double damage and pushes an enemy 30 pixels backward.',clock:'Rewinds enemies up to 55 pixels (2-second ability cooldown).',magnet:'Attraction: every 4th hit pulls up to 3 enemies toward each other, from ahead or behind. Reach: 145px; max pull: 55px per enemy.',ghost:'Haunting: every 5th hit summons a ghost for 3 bonus strikes.',mushroom:'Fungal Takeover: every 12 seconds transforms one enemy into a Shroom Army for 3 seconds. It leaves grey bubbling slime on the path for 7 seconds; enemies standing in it are poisoned and slowed.',mirror:'Mirror Dimension: every 14 seconds creates up to 3 mirrored enemy clones for 4 seconds. They run backward along the path and attack non-cloned enemies they encounter. Clones cannot damage the base or earn gold.',gravity:'Orbit Hijack: every 12 seconds captures up to 3 enemies in a spectacular miniature solar system for 3 seconds, suspending their path movement. On release, each takes 20% maximum HP damage (capped at 180).',dice:'Each attack rolls both D20 eyes independently and the D6 pendant. A 20 on either eye makes the next attack critical; double 20 makes the next attack instantly defeat up to 5 enemies in range. Throws a rolling D4 (roulette skin: mini roulette table).',bee:'Sticky Honey: every 10 seconds Bee Sock drops a honey puddle on the path near an enemy in range. Enemies crossing it move 52% slower; the puddle lasts 6.5 seconds.',paint:'Color Splash: red burns, green poisons, blue slows, yellow stuns and purple freezes enemies.',fossil:'Dinosaur Stomp: every 6th hit stomps nearby enemies.'};
+   const role={fire:'Burning damage',ice:'Slows enemies',thunder:'Fast attacks',wizard:'Magic damage',ninja:'Quick attacks',golden:'Strong against bosses',portal:'Special utility',laundry:'Balanced support',fight:'Heavy close-range damage',magnet:'Control / Anti-armor',ghost:'Magic',mushroom:'Poison',mirror:'Support',gravity:'Control',dice:'Luck',bee:'Swarm',paint:'Elemental',fossil:'Heavy'};
+   const ability={fire:'Burn: from level 3, fireballs ignite enemies for 3.2 seconds, dealing damage over time with spectacular animated flames.',ice:'Slows enemies down.',thunder:'Thunderstorm: Every 8 seconds, lightning hits up to 5 enemies and stuns them for 0.5 seconds.',wizard:'Each attack has a 25% chance to apply a random effect: Poison, Burn, Slow or Freeze (1 second). Each effect has a unique animation.',ninja:'Shadow Clone: 15% chance to strike the same enemy 2 extra times (50% damage each).',golden:'Midas Touch: 15% chance to turn an enemy gold for 2 seconds, slowing it by 40%. Defeating it grants +3 gold.',portal:'Portal Duplicate: 15% chance to send a second attack through portals to another enemy (75% damage).',laundry:'Soap Splash: Every 4th attack splashes up to 3 enemies, slowing them by 25% for 1 second.',fight:'Uppercut: Every 10th punch deals double damage and pushes an enemy 30 pixels backward.',clock:'Rewinds enemies up to 55 pixels (2-second ability cooldown).',magnet:'Attraction: every 4th hit pulls up to 3 enemies toward each other, from ahead or behind. Pull reach: 145px; max pull: 55px per enemy. Attack range: 180px. Deals 50% extra damage to Mrsilver, Ironjaw and Brick Turtle Tank.',ghost:'Haunting: every 5th hit summons a ghost for 3 bonus strikes.',mushroom:'Fungal Takeover: every 12 seconds transforms one enemy into a Shroom Army for 3 seconds. It leaves grey bubbling slime on the path for 7 seconds; enemies standing in it are poisoned and slowed.',mirror:'Mirror Dimension: every 14 seconds creates up to 3 mirrored enemy clones for 4 seconds. They run backward along the path and attack non-cloned enemies they encounter. Clones cannot damage the base or earn gold.',gravity:'Deals 50% extra damage to Stone Golem and Ironjaw. Orbit Hijack: every 12 seconds captures up to 3 enemies in a spectacular miniature solar system for 3 seconds, suspending their path movement. On release, each takes 20% maximum HP damage (capped at 180).',dice:'40 base damage (80 when the attack D4 rolls a 4). Deals 50% extra damage to Washydilly and Sticky Moth. Each attack rolls both D20 eyes independently and the D6 pendant. A 20 on either eye makes the next attack critical; double 20 makes the next attack instantly defeat up to 5 enemies in range. Throws a rolling D4 (roulette skin: mini roulette table).',bee:'Deals 50% extra damage to Sharpend Farao and Water Frog. Sticky Honey: every 10 seconds Bee Sock drops a honey puddle on the path near an enemy in range. Enemies crossing it move 52% slower; the puddle lasts 6.5 seconds.',paint:'Deals 50% extra damage to Washydilly and Stone Golem. Color Splash: red burns, green poisons, blue slows, yellow stuns and purple freezes enemies.',fossil:'Deals 50% extra damage to Stone Golem and Sharpend Farao. Amber Prison: traps the struck enemy in fossil resin for 1.6 seconds (3-second cooldown).'};
    Object.keys(D).forEach(k=>{
      // Clock Sock's name, stats and ability stay secret until the actual unlock.
      if(k==='clock' && window.socktdClockUnlocked!==true)return;
@@ -12335,7 +12723,7 @@ document.addEventListener("DOMContentLoaded",function(){
      card.addEventListener('click',()=>{
        list.querySelectorAll('.socktdSockCard').forEach(c=>c.classList.toggle('selected',c===card));
        const range=Number(d[2])||0,damage=Number(d[3])||0,rate=Number(d[4])||0;
-       detail.innerHTML='<div class="item"><h3 style="margin-top:0">🧦 '+d[0]+'</h3><p>'+ (role[k]||'A tower sock with its own combat stats.')+'</p><p>💰 <b>Cost:</b> $'+d[1]+'<br>🏷️ <b>Class:</b> '+(role[k]||'Tower sock')+'<br>🎯 <b>Range:</b> '+range+'<br>💥 <b>Damage:</b> '+damage+'<br>⚡ <b>Attack stat:</b> '+rate+'<br>✨ <b>Ability:</b> '+(ability[k]||'No special ability.')+'</p><p class="small">Stats are taken from the sock definitions currently used by this game.</p></div>';
+       detail.innerHTML='<div class="item"><h3 style="margin-top:0">🧦 '+d[0]+'</h3><p>'+ (role[k]||'A tower sock with its own combat stats.')+'</p><p>💰 <b>Cost:</b> $'+d[1]+'<br>🏷️ <b>Class:</b> '+(role[k]||'Tower sock')+'<br>🎯 <b>Range:</b> '+range+'<br>💥 <b>Damage:</b> '+damage+'<br>⚡ <b>Attack stat:</b> '+rate+'<br>✨ <b>Ability:</b> '+(ability[k]||'No special ability.')+(SOCKTD_ABILITY_LEVELS[k]?' <br><b>🔒 Pas verkrijgbaar vanaf level '+SOCKTD_ABILITY_LEVELS[k]+'.</b>':'')+'</p><p class="small">Stats are taken from the sock definitions currently used by this game.</p></div>';
      });
      list.appendChild(card);
    });
@@ -12632,7 +13020,7 @@ document.addEventListener("DOMContentLoaded",function(){
   const gameData={};
   for(let i=0;i<localStorage.length;i++){
    const k=localStorage.key(i);
-   if(k && k!==STORE_KEY && k!==BACKUP_KEY){try{gameData[k]=localStorage.getItem(k)}catch(_){}}
+   if(k && k!==STORE_KEY && k!==BACKUP_KEY && !k.startsWith('socktd.runCheckpoint.')){try{gameData[k]=localStorage.getItem(k)}catch(_){}}
   }
   const themeBtn=$('#themeOptions button.active');
   return {version:2,savedAt:Date.now(),controls,skins,gameData,theme:themeBtn?.dataset?.theme||localStorage.getItem('socktdTheme')||localStorage.getItem('theme')||'dark'};
@@ -12863,4 +13251,86 @@ window.socktdClockTime=()=>seconds;window.socktdClockSessionSeconds=()=>sessionS
 })();
 </script>
 
+<script id="socktdGraphicsBindings">
+(()=>{
+ const canvas=document.getElementById('c');if(!canvas)return;
+ const ctx=canvas.getContext('2d');
+ const proto=Object.getPrototypeOf(ctx);
+ const desc=Object.getOwnPropertyDescriptor(proto,'shadowBlur');
+ if(desc&&desc.get&&desc.set){
+  try{Object.defineProperty(ctx,'shadowBlur',{configurable:true,get(){return desc.get.call(this)},set(v){const g=window.socktdGraphics;if(g&&!g.glow){desc.set.call(this,0)}else{desc.set.call(this,Math.max(0,Math.min(45,Number(v)||0)))} }});}catch(e){}
+ }
+})();
+</script>
+<script id="socktdGraphicsRuntime">
+(()=>{
+'use strict';
+const KEY='socktdGraphicsV1';
+const presets={low:{particles:20,glow:false,shadows:false,details:false,shake:false},medium:{particles:50,glow:true,shadows:false,details:true,shake:false},high:{particles:80,glow:true,shadows:true,details:true,shake:true},ultra:{particles:100,glow:true,shadows:true,details:true,shake:true}};
+const defaults={quality:'high',...presets.high,fpsLimit:60,showFPS:false,auto:false,reduced:false,resolution:1};
+let state={...defaults};try{let v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&typeof v==='object')state={...state,...v}}catch(_){}
+window.socktdGraphics=state;
+const $=id=>document.getElementById(id);
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}};
+const setCanvasResolution=()=>{
+ const canvas=$('c');if(!canvas)return;
+ // Canvas backing-store scaling with unchanged 960x560 world coordinates.
+ const ratio=Math.max(.5,Math.min(1,Number(state.resolution)||1));
+ const w=Math.round(960*ratio),h=Math.round(560*ratio);
+ if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+ canvas.style.width='100%';canvas.style.imageRendering=ratio<1?'auto':'';
+};
+function sync(){
+ const ids={quality:'gfxQuality',particles:'gfxParticles',glow:'gfxGlow',shadows:'gfxShadows',details:'gfxDetails',shake:'gfxShake',fpsLimit:'gfxFPSLimit',showFPS:'gfxShowFPS',auto:'gfxAuto',reduced:'gfxReduced',resolution:'gfxResolution'};
+ for(const [k,id] of Object.entries(ids)){const el=$(id);if(!el)continue;if(el.type==='checkbox')el.checked=!!state[k];else el.value=String(state[k]);}
+ if($('gfxParticlesValue'))$('gfxParticlesValue').textContent=state.particles+'%';
+ document.body.classList.toggle('socktdReducedMotion',!!state.reduced);
+ if($('socktdFPSCounter'))$('socktdFPSCounter').style.display=state.showFPS?'block':'none';
+ setCanvasResolution();
+ const canvas=$('c');if(canvas){canvas.style.filter=state.shadows?'drop-shadow(0px 5px 6px rgba(0,0,0,.25))':'none';}
+}
+function init(){
+ const general=$('socktdGeneralPanel'),graphics=$('socktdGraphicsPanel');if(!general||!graphics)return;
+ const tabs=[[$('socktdGeneralTab'),false],[$('socktdGraphicsTab'),true]];
+ tabs.forEach(([btn,isGraphics])=>btn?.addEventListener('click',()=>{general.style.display=isGraphics?'none':'';graphics.classList.toggle('active',isGraphics);tabs.forEach(([b,g])=>b?.setAttribute('aria-selected',String(g===isGraphics)));}));
+ const ids={quality:'gfxQuality',particles:'gfxParticles',glow:'gfxGlow',shadows:'gfxShadows',details:'gfxDetails',shake:'gfxShake',fpsLimit:'gfxFPSLimit',showFPS:'gfxShowFPS',auto:'gfxAuto',reduced:'gfxReduced',resolution:'gfxResolution'};
+ for(const [k,id] of Object.entries(ids))$(id)?.addEventListener('input',e=>{
+  let v=e.target.type==='checkbox'?e.target.checked:e.target.value;
+  if(['particles','fpsLimit','resolution'].includes(k))v=Number(v);
+  if(k==='quality'&&presets[v])Object.assign(state,presets[v]);
+  state[k]=v;
+  if(['particles','glow','shadows','details','shake'].includes(k))state.quality='custom';
+  sync();persist();
+ });
+ $('gfxReset')?.addEventListener('click',()=>{Object.assign(state,defaults);sync();persist()});
+ const counter=document.createElement('div');counter.id='socktdFPSCounter';counter.textContent='FPS: --';document.body.appendChild(counter);
+ sync();
+ // FPS monitoring and adaptive visual detail; game mechanics remain untouched.
+ let count=0,last=performance.now(),slowFrames=0;
+ const tick=now=>{
+  const canvas=$('c');
+  if(canvas){const enabled=state.shake&&!state.reduced&&state.particles>0;
+    const active=enabled&&Math.random()<.07&&typeof window.socktdGraphicsShakeUntil==='number'&&now<window.socktdGraphicsShakeUntil;
+    canvas.style.transform=active?`translate(${Math.round((Math.random()-.5)*4)}px,${Math.round((Math.random()-.5)*4)}px)`:'';
+  }
+  count++;if(now-last>=1000){let fps=Math.round(count*1000/(now-last));counter.textContent='FPS: '+fps;count=0;last=now;if(state.auto){slowFrames=fps<38?Math.min(4,slowFrames+1):Math.max(0,slowFrames-1);state.autoFactor=slowFrames>=3?.55:1;}else state.autoFactor=1;}requestAnimationFrame(tick)};
+ requestAnimationFrame(tick);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script><style>
+#socktdDiceModal{position:fixed;inset:0;z-index:30000;display:none;align-items:center;justify-content:center;background:rgba(2,10,40,.91);backdrop-filter:blur(9px);padding:18px}
+#socktdDiceModal.open{display:flex}#socktdDicePanel{position:relative;width:min(420px,96vw);text-align:center;color:#eef5ff;background:linear-gradient(150deg,#122b60,#071432 65%,#142451);border:2px solid #83b8ff;border-radius:24px;padding:27px 24px;box-shadow:0 0 75px #3475e466,inset 0 0 30px #87aaff17;font-family:system-ui,sans-serif}
+#socktdDicePanel h2{margin:0 0 10px;font-size:26px}#socktdDiceShape{width:138px;height:138px;margin:22px auto 20px;border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#d3e5ff 60%,#8daee1);border:7px solid #e9f5ff;color:#153c79;box-shadow:15px 17px 0 #071027,0 0 35px #77a7ff77;font-size:75px;font-weight:900;transform:rotate(-8deg);transition:transform .2s}
+#socktdDiceShape{position:relative;transform-style:preserve-3d;perspective:500px;filter:drop-shadow(0 14px 13px #0009)}
+#socktdDiceShape:before{content:'';position:absolute;inset:10px;border-radius:15px;box-shadow:inset 5px 6px 10px #ffffffcc,inset -8px -10px 14px #4977bb66;pointer-events:none}
+#socktdDiceShape.rolling{animation:socktdDiceRoll .75s linear infinite;will-change:transform}
+#socktdDiceShape.landed{animation:socktdDiceLand .15s ease-out both}
+@keyframes socktdDiceRoll{0%{transform:rotate(-8deg) rotateY(0deg)}100%{transform:rotate(-8deg) rotateY(360deg)}}
+@keyframes socktdDiceLand{0%{transform:rotate(-8deg) rotateY(0deg)}100%{transform:rotate(-8deg) rotateY(0deg)}}
+.socktdDicePrices{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;margin-top:12px;padding-top:10px;border-top:1px solid #466da8;color:#ffdf85;font-weight:700;font-size:13px}
+#socktdDicePanel .instructions{text-align:left;background:#07152e;border:1px solid #507cbd;border-radius:13px;padding:16px 18px;line-height:1.9;margin:20px 0}#socktdDicePanel .instructions strong{color:#b9d7ff;font-size:19px}
+#socktdDicePanel button{cursor:pointer;padding:12px 20px;border-radius:11px;background:#3475db;color:white;font-weight:800;border:2px solid #a4cbff}#socktdDicePanel button:disabled{opacity:.5;cursor:wait}#socktdDiceClose{position:absolute;right:13px;top:12px;padding:5px 11px!important;background:#a33448!important}#socktdDicePrice{min-height:27px;color:#ffe08c;font-size:18px;font-weight:800}
+</style>
+<div id="socktdDiceModal" role="dialog" aria-modal="true" aria-labelledby="socktdDiceTitle"><div id="socktdDicePanel"><button id="socktdDiceClose" type="button" aria-label="Close">✕</button><h2 id="socktdDiceTitle">🎲 Dice Sock</h2><div id="socktdDiceShape" aria-live="polite">⚄</div><div class="instructions"><strong>instructions!</strong><div>1. roll the dice.</div><div>2. the number you get determines how much you pay.</div><div class="socktdDicePrices"><span>⚀ 1 dot = 40G</span><span>⚁ 2 dots = 50G</span><span>⚂ 3 dots = 60G</span><span>⚃ 4 dots = 70G</span><span>⚄ 5 dots = 80G</span><span>⚅ 6 dots = 100G</span></div></div><div id="socktdDicePrice" aria-live="polite">Roll to discover your price!</div><button id="socktdDiceRollButton" type="button">🎲 Roll the dice</button><button id="socktdDicePlaceButton" type="button" style="display:none">Place Dice Sock</button></div></div>
 </body></html>
