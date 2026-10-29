@@ -1,0 +1,26 @@
+{
+  "id": "./socktd.html",
+  "name": "Sock TD",
+  "short_name": "Sock TD",
+  "description": "Sock TD tower defense game with PC and mobile layouts.",
+  "start_url": "./socktd.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#17131f",
+  "theme_color": "#17131f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
