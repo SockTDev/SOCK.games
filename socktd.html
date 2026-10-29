@@ -1230,7 +1230,9 @@ body.themeGamble #recipes #detail > .item{
   });
   window.SockTDMakePeer = function(id){
     var o=Object.assign({},window.SockTDPeerConfig);
-    if(id)o.id=id;
+    // PeerJS expects the room ID as its FIRST argument, not options.id.
+    // options.id was silently ignored, giving the host a random ID.
+    if(id)delete o.id;
     o.config={
       iceServers:[
         {urls:"stun:stun.l.google.com:19302"},
@@ -1243,7 +1245,7 @@ body.themeGamble #recipes #detail > .item{
       bundlePolicy:"balanced",
       rtcpMuxPolicy:"require"
     };
-    return new Peer(o);
+    return id ? new Peer(id,o) : new Peer(o);
   };
 })();
 
@@ -2259,7 +2261,12 @@ async function mpHost(){
     }
   },12000);
 
-  mpPeer.on('open',()=>{
+  mpPeer.on('open',(registeredId)=>{
+    if(registeredId!==peerId){
+      clearTimeout(timeout);
+      finishFail('⚠️ Host registration mismatch. Please create the room again.');
+      return;
+    }
     opened=true;
     clearTimeout(timeout);
     if(mpConnectCancelled){try{mpPeer.destroy()}catch(e){};return}
@@ -2457,7 +2464,7 @@ async function mpConnect(){
       peerReady=true;
       clearTimeout(attemptTimeout);
       const target='socktd-'+(window.SockTDNetworkMode==='global'?'g-':'l-')+code;
-      mpSetStatus('mpJoinStatus','Host found — opening connection…');
+      mpSetStatus('mpJoinStatus','Signaling connected — looking up host room…');
       try{
         mpConn=mpPeer.connect(target,{reliable:true,serialization:'json',label:'socktd-room'});
       }catch(e){
