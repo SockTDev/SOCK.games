@@ -2049,7 +2049,26 @@ function mpCompactTower(t){const o={};for(const k of ['x','y','k','parts','range
 function mpCompactEnemy(e){const o={};for(const k of ['x','y','type','hp','max','sp','slow','walk','distAlongPath','dead','death','hit','flash','iceHit','damage'])if(e[k]!==undefined)o[k]=e[k];return o}
 function mpBroadcastState(){
   if(mpRole!=='host'||!mpConn||!mpConn.open||!mpStarted)return;
-  mpSend({type:'state',seq:++mpStateSeq,map,diff,path:mpPathSnapshot(),pathIndex:selectedPathIndex,wave,left,timer,life,tw:tw.map(mpCompactTower),en:en.map(mpCompactEnemy),active});
+  mpSend({type:'state',seq:++mpStateSeq,map,diff,path:mpPathSnapshot(),pathIndex:selectedPathIndex,wave,left,timer,life,gold,tw:tw.map(mpCompactTower),en:en.map(mpCompactEnemy),active});
+}
+// Guest-side render smoothing. Host remains authoritative for gameplay.
+let mpGuestPreviousEnemies=null,mpGuestSnapshotAt=0,mpGuestSnapshotInterval=120;
+let mpGuestLastPathKey='';
+function mpDrawSmoothedGuest(){
+  if(!mpGuestPreviousEnemies||!en.length){draw();return;}
+  const elapsed=performance.now()-mpGuestSnapshotAt;
+  const alpha=Math.max(0,Math.min(1,elapsed/Math.max(50,mpGuestSnapshotInterval)));
+  const saved=[];
+  for(let i=0;i<en.length;i++){
+    const e=en[i],prev=mpGuestPreviousEnemies[i];
+    if(!prev||prev.type!==e.type||!Number.isFinite(prev.x)||!Number.isFinite(prev.y))continue;
+    // Do not interpolate when the enemy list has shifted or an enemy respawned.
+    if(Math.hypot(e.x-prev.x,e.y-prev.y)>75)continue;
+    saved.push([e,e.x,e.y]);
+    e.x=prev.x+(e.x-prev.x)*alpha;
+    e.y=prev.y+(e.y-prev.y)*alpha;
+  }
+  try{draw()}finally{for(const [e,x,y] of saved){e.x=x;e.y=y}}
 }
 function mpApplyState(data){
   if(!data)return;
@@ -2058,18 +2077,30 @@ function mpApplyState(data){
   if(data.map){
     const mapChanged=data.map!==map;
     map=data.map;
-    if(Array.isArray(data.path)&&data.path.length>=2) selectMapPath(data.path,data.pathIndex);
-    else if(mapChanged) selectMapPath();
+    const pathKey=Array.isArray(data.path)?JSON.stringify([data.map,data.pathIndex,data.path]):String(data.map);
+    if(pathKey!==mpGuestLastPathKey){
+      if(Array.isArray(data.path)&&data.path.length>=2)selectMapPath(data.path,data.pathIndex);
+      else if(mapChanged)selectMapPath();
+      mpGuestLastPathKey=pathKey;
+    }
     mpSetRoomState(data.map,data.diff,data.path,data.pathIndex);
     mpMap=data.map;
   }else if(Array.isArray(data.path)&&data.path.length>=2){
-    selectMapPath(data.path,data.pathIndex);
+    const pathKey=JSON.stringify([map,data.pathIndex,data.path]);
+    if(pathKey!==mpGuestLastPathKey){selectMapPath(data.path,data.pathIndex);mpGuestLastPathKey=pathKey;}
   }
   if(data.diff){diff=data.diff;mpDiff=data.diff}
-  wave=Number(data.wave)||0;left=Number(data.left)||0;timer=Number(data.timer)||0;life=Number(data.life)||0;active=!!data.active;
+  wave=Number(data.wave)||0;left=Number(data.left)||0;timer=Number(data.timer)||0;life=Number(data.life)||0;if(Number.isFinite(Number(data.gold)))gold=Number(data.gold);active=!!data.active;
   if(Array.isArray(data.tw))tw=data.tw;
-  if(Array.isArray(data.en))en=data.en;
-  update();draw();
+  if(Array.isArray(data.en)){
+    const now=performance.now();
+    if(mpGuestSnapshotAt)mpGuestSnapshotInterval=Math.max(70,Math.min(350,now-mpGuestSnapshotAt));
+    mpGuestPreviousEnemies=en.map(e=>({x:e.x,y:e.y,type:e.type}));
+    mpGuestSnapshotAt=now;
+    en=data.en;
+  }
+  // UI changes are updated on receipt; canvas is rendered by requestAnimationFrame.
+  update();
 }
 function mpHandleGuestAction(data){
   if(mpRole!=='host'||!data||!mpStarted)return;
@@ -2079,7 +2110,9 @@ function mpHandleGuestAction(data){
   if(action.action==='place'){
     const k=action.k,px=Number(action.x),py=Number(action.y),v=D[k];
     if(!v||!Number.isFinite(px)||!Number.isFinite(py)||!valid(px,py))return;
-    const cost=v[1];
+    let cost=sockTDChallengeCost(k);
+    if(k==='dice'){if(![40,50,60,70,80,100].includes(Number(action.rolledCost)))return;cost=Number(action.rolledCost);}
+    if(action.discounted)cost=Math.ceil(cost*.5);
     if(gold<cost)return;
     tw.push({x:px,y:py,k,parts:[k],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});socktdCine('spawn',px,py);
     gold-=cost;
@@ -2970,6 +3003,8 @@ C.onmousemove=e=>{socktdLastPlacementPointer={clientX:e.clientX,clientY:e.client
 C.onmouseleave=()=>{socktdLastPlacementPointer=null;if(selected||movingTower)draw();};
 C.onclick=e=>{if(speedrunCountdownActive)return;if(document.body.classList.contains('tutorialLock')&&!document.body.classList.contains('tutorialPlacement')&&!document.body.classList.contains('tutorialFusion'))return;let r=C.getBoundingClientRect(),px=(e.clientX-r.left)*960/r.width,py=(e.clientY-r.top)*560/r.height;
 if(mpStarted&&mpRole==='guest'){
+  if(socktdDiceModalPause)return;
+  if(socktdDiceLocked()){selected='dice';fuseMode=false;movingTower=null;}
   if(movingTower){
     const idx=tw.indexOf(movingTower);
     if(idx>=0&&valid(px,py)&&gold>=50){gold-=50;movingTower.x=px;movingTower.y=py;mpSend({type:'guestAction',action:{action:'move',i:idx,x:px,y:py}});movingTower=null;hideInfo();update();draw();}
@@ -2986,9 +3021,16 @@ if(mpStarted&&mpRole==='guest'){
   }
   if(selected){
     if(!valid(px,py))return;
-    const v=D[selected],cost=v[1];
-    if(gold<cost)return;
-    gold-=cost;mpSend({type:'guestAction',action:{action:'place',k:selected,x:px,y:py}});
+    const v=D[selected];
+    if(!v)return;
+    if(selected==='dice'&&!socktdDiceLocked()){socktdOpenDicePurchase();return;}
+    let cost=selected==='dice'?socktdDiceRolledCost:sockTDChallengeCost(selected);
+    const discounted=window.socktdSlotsDiscountSock===selected;
+    if(discounted)cost=Math.ceil(cost*.5);
+    if(gold<cost){$('msg').textContent='Not enough gold! Need '+cost+'G.';return;}
+    gold-=cost;mpSend({type:'guestAction',action:{action:'place',k:selected,x:px,y:py,cost,rolledCost:selected==='dice'?socktdDiceRolledCost:null,discounted}});
+    if(selected==='dice')socktdDiceRolledCost=null;
+    if(discounted){window.socktdSlotsDiscountSock=null;try{localStorage.removeItem('socktdSlotsDiscountSock')}catch(e){}}
     tw.push({x:px,y:py,k:selected,parts:[selected],range:v[2],damage:v[3],rate:v[4],cool:0,fused:false,attack:0,attackTarget:null,level:0});socktdCine('spawn',px,py);
     selected=null;update();draw();return;
   }
@@ -9198,7 +9240,7 @@ draw=function(){
  x.beginPath();x.arc(px,py,3,0,Math.PI*2);x.fill();x.restore();
 };
 let gamePaused=false;
-function loop(){if(socktdDiceLocked()&&!socktdDiceModalPause){selected='dice';fuseMode=false;}socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused||socktdDiceModalPause){requestAnimationFrame(loop);return}if(mpStarted&&mpRole==='guest'){draw();requestAnimationFrame(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
+function loop(){if(socktdDiceLocked()&&!socktdDiceModalPause){selected='dice';fuseMode=false;}socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused||socktdDiceModalPause){requestAnimationFrame(loop);return}if(mpStarted&&mpRole==='guest'){mpDrawSmoothedGuest();requestAnimationFrame(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
 for(let e of en){
   if(window.sandboxFreeze){continue;}
   if(performance.now()>=(e.fossilAmberUntil||0))e.walk+=.25;
