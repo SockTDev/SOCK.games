@@ -1025,6 +1025,33 @@ body.themeGamble #recipes #detail > .item{
 #slotsSpin:disabled{opacity:.55;cursor:wait}#slotsClose{display:block;margin:12px auto 0;background:#302644;color:#fff;border:1px solid #bba47e;padding:8px 25px;border-radius:9px;cursor:pointer}
 @keyframes slotsCelebrate{from{filter:brightness(1)}to{filter:brightness(1.8);transform:scale(1.05)}}
 @media(max-width:520px){.gambleChoices{grid-template-columns:1fr}.gambleChoices button{min-height:110px;font-size:28px}.slotsReel{height:85px;font-size:43px}.slotsMachine{padding:15px 8px}.slotsLamps{letter-spacing:8px}}
+</style><style id="socktdDeviceModeStyles">
+/* SOCK TD device layout selector and touch-first mobile interface */
+#socktdDeviceGate{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;box-sizing:border-box;background:radial-gradient(circle at 50% 20%,#3b285a,#100f1d 72%);font-family:Arial,sans-serif;color:#fff;overflow:auto}
+#socktdDeviceGate[hidden]{display:none!important}
+.socktdDeviceCard{width:min(540px,100%);padding:clamp(20px,5vw,40px);border:2px solid #8a70cb;border-radius:24px;background:linear-gradient(150deg,#302647,#181629);box-shadow:0 25px 75px #000b;text-align:center}
+.socktdDeviceCard h2{font-size:clamp(28px,6vw,40px);margin:8px 0}.socktdDeviceCard p{color:#d9d3e8;line-height:1.5}
+.socktdDeviceOptions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:25px}
+.socktdDeviceOptions button{min-height:128px;border:2px solid #bba1ed;border-radius:17px;background:linear-gradient(145deg,#5a4091,#332458);color:#fff;font-size:22px;cursor:pointer;touch-action:manipulation}
+.socktdDeviceOptions button span{display:block;font-size:43px;margin-bottom:8px}.socktdDeviceOptions button small{display:block;font-size:12px;font-weight:normal;margin-top:7px;color:#e6def8}
+.socktdDeviceOptions button:focus-visible{outline:3px solid #ffe087;outline-offset:3px}
+#socktdDeviceSwitch{position:fixed;bottom:12px;left:12px;z-index:9990;border:1px solid #c5b1ed;background:#32244b;color:#fff;border-radius:100px;padding:8px 12px;font-size:12px;box-shadow:0 3px 14px #0009;opacity:.88}
+body.socktd-mobile{overflow-x:hidden;touch-action:pan-y}
+body.socktd-mobile #app{max-width:100%;width:100%;box-sizing:border-box;padding:4px 6px 76px}
+body.socktd-mobile #socktdGameLayout{display:flex!important;flex-direction:column!important;gap:9px!important;width:100%!important;max-width:100%!important}
+body.socktd-mobile #socktdMapColumn{width:100%!important;min-width:0!important;order:0}
+body.socktd-mobile #socktdMapColumn #c{width:100%!important;height:auto!important;max-width:100%!important;display:block;touch-action:none}
+body.socktd-mobile #socktdShopSidebar{order:1;width:100%!important;max-height:none!important;overflow:visible!important;box-sizing:border-box;border-radius:13px}
+body.socktd-mobile #socktdShopSidebar #towers{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;max-height:none!important;min-height:92px;gap:9px!important;padding:8px!important;scroll-snap-type:x proximity;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x}
+body.socktd-mobile #socktdShopSidebar #towers button.socktd-art-button{flex:0 0 145px!important;width:145px!important;min-height:78px!important;scroll-snap-align:start;font-size:12px!important}
+body.socktd-mobile .socktdShopHeading{padding:8px 12px!important}
+body.socktd-mobile .bar{gap:5px;margin:5px 0;justify-content:center}
+body.socktd-mobile .bar>button,body.socktd-mobile .bar>.card{font-size:12px!important;padding:8px!important;min-height:38px;box-sizing:border-box;touch-action:manipulation}
+body.socktd-mobile #info{max-width:100%;box-sizing:border-box}
+body.socktd-mobile .modal .panel{width:min(96vw,760px);max-width:96vw;max-height:85dvh;overflow-y:auto;box-sizing:border-box;padding:14px;-webkit-overflow-scrolling:touch}
+body.socktd-mobile #choose .panel{max-height:78dvh}
+body.socktd-mobile button{touch-action:manipulation}
+@media(max-width:520px){.socktdDeviceOptions{gap:9px}.socktdDeviceOptions button{font-size:18px;min-height:115px}body.socktd-mobile #app>h1{font-size:23px;margin:5px}body.socktd-mobile #socktdMapColumn #msg{font-size:12px}}
 </style></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
 <filter id="cv-protanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-deuteranopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
@@ -14164,6 +14191,30 @@ const spinSlots=$('slotsSpin'),slotResult=$('slotsResult');if(spinSlots&&slotRes
 const drop=$('plinkoDrop'),plinkoResult=$('plinkoResult');if(drop&&plinkoResult){let waiting=false;drop.addEventListener('click',()=>{if(!drop.disabled)waiting=true;});new MutationObserver(()=>{if(!waiting)return;const msg=plinkoResult.textContent||'';if(/COSMIC|LUCKY|NEON|ROYAL|GLOW|STAR|landed|land in|bin /i.test(msg)&&!/drop position|drop the ball/i.test(msg)){waiting=false;const bins=['COSMIC','LUCKY','NEON','ROYAL','GLOW','STAR'];const hit=bins.find(x=>new RegExp('\\b'+x+'\\b','i').test(msg));add('plinko',hit||null);}}).observe(plinkoResult,{childList:true,subtree:true,characterData:true});}
 const contractStatus=$('plinkoContractStatus');if(contractStatus){let prior='';new MutationObserver(()=>{const msg=contractStatus.textContent||'';if(msg!==prior&&/contract complete|contract completed|completed|success/i.test(msg)&&!/already|all contracts/i.test(msg)){prior=msg;add('contracts');}}).observe(contractStatus,{childList:true,subtree:true,characterData:true});}
 save();render();
+})();
+</script>
+<div id="socktdDeviceGate" role="dialog" aria-modal="true" aria-label="Choose device layout"><div class="socktdDeviceCard"><div style="font-size:44px">🧦</div><h2>Choose your device</h2><p>Choose a layout before selecting your map. You can switch layouts later without restarting the game.</p><div class="socktdDeviceOptions"><button type="button" data-device-mode="pc"><span>🖥️</span>PC<small>Original desktop layout</small></button><button type="button" data-device-mode="mobile"><span>📱</span>Mobile<small>Touch-friendly game layout</small></button></div></div></div><button id="socktdDeviceSwitch" type="button" hidden aria-label="Change device layout">Change layout</button>
+<script id="socktdDeviceModeScript">
+(function(){
+  'use strict';
+  const gate=document.getElementById('socktdDeviceGate');
+  const switcher=document.getElementById('socktdDeviceSwitch');
+  function setMode(mode){
+    if(mode!=='mobile'&&mode!=='pc')return;
+    document.body.classList.toggle('socktd-mobile',mode==='mobile');
+    document.body.classList.toggle('socktd-pc',mode==='pc');
+    document.documentElement.dataset.socktdDevice=mode;
+    gate.hidden=true;
+    switcher.hidden=false;
+    switcher.textContent=mode==='mobile'?'📱 Mobile layout':'🖥️ PC layout';
+    try{localStorage.setItem('socktdDeviceMode',mode)}catch(e){}
+    window.dispatchEvent(new Event('resize'));
+  }
+  gate.querySelectorAll('[data-device-mode]').forEach(btn=>btn.addEventListener('click',()=>setMode(btn.dataset.deviceMode)));
+  switcher.addEventListener('click',()=>{gate.hidden=false;});
+  // Always ask at launch, as requested. The selection only changes presentation, never game state.
+  switcher.hidden=true;
+  gate.hidden=false;
 })();
 </script>
 </body></html>
