@@ -2045,7 +2045,7 @@ function mpSetRoomState(m,d,path=null,pathIndex=null){
   mpRoomState.path=Array.isArray(path)?path.map(p=>({x:Number(p.x),y:Number(p.y)})):null;
   mpRoomState.pathIndex=Number.isFinite(Number(pathIndex))?Number(pathIndex):null;
 }
-function mpCompactTower(t){const o={};for(const k of ['x','y','k','parts','range','damage','rate','fused','level','name','fusionKey','fusionPulse'])if(t[k]!==undefined)o[k]=t[k];return o}
+function mpCompactTower(t){const o={};for(const k of ['x','y','k','parts','range','damage','rate','fused','level','name','fusionKey','fusionPulse','attack','attackTarget'])if(t[k]!==undefined)o[k]=t[k];return o}
 function mpCompactEnemy(e){const o={};for(const k of ['x','y','type','hp','max','sp','slow','walk','distAlongPath','dead','death','hit','flash','iceHit','damage'])if(e[k]!==undefined)o[k]=e[k];return o}
 function mpBroadcastState(){
   if(mpRole!=='host'||!mpConn||!mpConn.open||!mpStarted)return;
@@ -2053,9 +2053,40 @@ function mpBroadcastState(){
 }
 // Guest-side render smoothing. Host remains authoritative for gameplay.
 let mpGuestPreviousEnemies=null,mpGuestSnapshotAt=0,mpGuestSnapshotInterval=120;
+const mpGuestAttackFrames=new Map();
+let mpGuestLastVisualTick=0;
+function mpGuestAttackVisuals(){
+  const now=performance.now();
+  const step=Math.max(0,Math.min(3,(now-(mpGuestLastVisualTick||now))/16.67));
+  mpGuestLastVisualTick=now;
+  // Guest does not run gameplay combat, so advance cosmetic projectiles only.
+  const visualUpdates=['updateFireballs','updateIceflakes','updateKunais','updateSoap','updateLavaShots','updatePortalShots','updateWizardWaves','updateThunder','updateFightPunches','updateSymbolShots','updatePrismShots','updateCosmicShots','updateMudShots','updatePlasmaShots','updateShadowSpirals','updateEnergy','updateStormShots','updateMeteorShots','updateCrystalShots'];
+  if(step>0){for(const name of visualUpdates){try{if(typeof window[name]==='function')window[name]();}catch(_){}}}
+  for(const [i,fx] of mpGuestAttackFrames){
+    const t=tw[i];if(!t||now-fx.at>190){mpGuestAttackFrames.delete(i);continue;}
+    t.attack=Math.max(1,9-Math.floor((now-fx.at)/16.67));t.attackTarget=fx.target;
+  }
+}
+function mpGuestDrawAttackOverlays(){
+  for(const t of tw){if(t.attack>0&&t.attackTarget){try{attackFx(t)}catch(_){}}}
+  const overlays=['drawClockMiniShots','drawStormShots','drawMeteorShots','drawMeteorExplosions','drawCrystalShots','drawIceflakes','socktdDrawIceFreeze','drawPortalShots','drawWizardWaves','drawPlasmaShots','drawMudShots','drawWizardEffects','socktdDrawFireBurn','drawSocktdDiceShots','drawSocktdGhostTrails','drawSocktdSoulVortices','drawSockAbilityFx'];
+  for(const name of overlays){try{if(typeof window[name]==='function')window[name]();}catch(_){}}
+}
+function mpGuestReceiveAttack(data){
+  if(mpRole!=='guest'||!mpStarted||!data)return;
+  const i=Number(data.i),t=tw[i],target=data.target;
+  if(!t||!target||!Number.isFinite(target.x)||!Number.isFinite(target.y))return;
+  mpGuestAttackFrames.set(i,{at:performance.now(),target});
+  t.attack=9;t.attackTarget=target;
+  const e={x:target.x,y:target.y,type:target.type||'normal',hp:1,max:1};
+  const fx=t.fused?(t.name||''):t.k;
+  const fn=({fire:'spawnFireball',ice:'spawnIceflake',wizard:'spawnWizardWave',ninja:'spawnKunai',golden:'spawnMoneyBill',laundry:'spawnSoap',portal:'spawnPortalShot',fight:'spawnFightPunch',thunder:'spawnThunderChain',ghost:'spawnSocktdGhostTrail',clock:'spawnClockMiniShot', 'Lava Sock':'spawnLavaShot','Crystal Sock':'spawnCrystalShot','Storm Sock':'spawnStormShot','Plasma Sock':'spawnPlasmaDonut'})[fx];
+  if(fn&&typeof window[fn]==='function'){try{window[fn](t,e)}catch(_){}}
+}
+
 let mpGuestLastPathKey='';
 function mpDrawSmoothedGuest(){
-  if(!mpGuestPreviousEnemies||!en.length){draw();return;}
+  if(!mpGuestPreviousEnemies||!en.length){mpGuestAttackVisuals();draw();mpGuestDrawAttackOverlays();return;}
   const elapsed=performance.now()-mpGuestSnapshotAt;
   const alpha=Math.max(0,Math.min(1,elapsed/Math.max(50,mpGuestSnapshotInterval)));
   const saved=[];
@@ -2068,7 +2099,7 @@ function mpDrawSmoothedGuest(){
     e.x=prev.x+(e.x-prev.x)*alpha;
     e.y=prev.y+(e.y-prev.y)*alpha;
   }
-  try{draw()}finally{for(const [e,x,y] of saved){e.x=x;e.y=y}}
+  try{mpGuestAttackVisuals();draw();mpGuestDrawAttackOverlays()}finally{for(const [e,x,y] of saved){e.x=x;e.y=y}}
 }
 function mpApplyState(data){
   if(!data)return;
@@ -2099,7 +2130,13 @@ function mpApplyState(data){
     mpGuestSnapshotAt=now;
     en=data.en;
   }
-  // UI changes are updated on receipt; canvas is rendered by requestAnimationFrame.
+  // A state snapshot may contain a short attack frame. Keep it visible between packets.
+  if(mpRole==='guest'&&Array.isArray(data.tw)){
+    for(let i=0;i<tw.length;i++){
+      const t=tw[i];
+      if(t&&t.attack>0&&t.attackTarget)mpGuestAttackFrames.set(i,{at:performance.now(),target:t.attackTarget});
+    }
+  }
   update();
 }
 function mpHandleGuestAction(data){
@@ -2557,7 +2594,7 @@ async function mpConnect(){
           mpSetStatus('mpJoinStatus','Host selected '+data.map+' / '+data.diff+'. Waiting for Start…');
           $('mpJoinWaiting').classList.remove('hidden');
           mpBuildGuestMirror();mpUpdateGuestMirror();
-        }else if(data.type==='state')mpApplyState(data);
+        }else if(data.type==='attackFx')mpGuestReceiveAttack(data);else if(data.type==='state')mpApplyState(data);
         else if(data.type==='hostLeftStart')mpSetStatus('mpJoinStatus','⚠️ The host returned to the start screen.');
       });
 
@@ -9373,7 +9410,7 @@ if(t.k==='bee'&&!t.fused&&socktdAbilityUnlocked(t)){
    sockFx('newSock',e.x,e.y,38,{label:'STICKY HONEY!',color:'#ffd24b'});
   }else t.beeHoneyNext=beeNow+400; // Wait for a target on the path.
  }
-}if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused){spawnFireball(t,target);if(socktdAbilityUnlocked(t))socktdApplyFireBurn(target,t);}if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);if(socktdAbilityUnlocked(t)){const iceNow=performance.now();if(iceNow>=(t.socktdIceFreezeReadyAt||0)){socktdApplyIceFreeze(target);socktdPlayIceAbilitySound();t.socktdIceFreezeReadyAt=iceNow+7000;}}}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(socktdAbilityUnlocked(t)&&Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&socktdAbilityUnlocked(t)&&!target.dead&&Math.random()<.15){
+}if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};if(mpStarted&&mpRole==='host')mpSend({type:'attackFx',i:tw.indexOf(t),target:{x:target.x,y:target.y,type:target.type}});let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused){spawnFireball(t,target);if(socktdAbilityUnlocked(t))socktdApplyFireBurn(target,t);}if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);if(socktdAbilityUnlocked(t)){const iceNow=performance.now();if(iceNow>=(t.socktdIceFreezeReadyAt||0)){socktdApplyIceFreeze(target);socktdPlayIceAbilitySound();t.socktdIceFreezeReadyAt=iceNow+7000;}}}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(socktdAbilityUnlocked(t)&&Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&socktdAbilityUnlocked(t)&&!target.dead&&Math.random()<.15){
   target.midasUntil=performance.now()+2000;
   target.midasSlowUntil=target.midasUntil;
   sockFx('midas',target.x,target.y,55,{target});
