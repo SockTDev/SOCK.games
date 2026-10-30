@@ -80,6 +80,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 @media(max-height:850px){#gambleModal .panel{padding:12px 22px 10px!important}#gambleModal h2{font-size:25px!important;margin:0 0 2px!important}#gambleModal h2:after{margin:2px auto 0}#gambleModal .panel>p:not(#gambleMsg){margin:5px auto 7px;line-height:1.3}#gambleModal .wheelWrap{zoom:.82;margin:6px auto 8px}#gambleModal #gambleMsg{min-height:24px;margin:5px auto}#gambleModal #gambleClose{margin-top:3px}}
 @media(max-height:690px){#gambleModal .panel{padding:8px 16px!important}#gambleModal h2{font-size:21px!important}#gambleModal .wheelWrap{zoom:.66;margin:2px auto 4px}#gambleModal #bet{font-size:17px!important;padding:5px!important}#gambleModal .panel>p:not(#gambleMsg){font-size:12px;margin:3px auto}#gambleModal #gambleMsg{font-size:14px;min-height:20px}}
 @media(max-width:460px){#gambleModal .panel{padding:12px 8px!important}#gambleModal .wheelWrap{zoom:.75}#gambleModal h2{font-size:22px!important}}
+#socktdBulkConfirm .socktdBulkButtons{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}#socktdBulkConfirm .socktdBulkButtons button{flex:1 1 130px;min-height:44px;cursor:pointer}#socktdBulkConfirm .socktdBulkButtons button:disabled{opacity:.5;cursor:not-allowed}
 </style><style>body {transition: opacity ease-in 0.2s; } 
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 
@@ -1052,7 +1053,98 @@ body.socktd-mobile .modal .panel{width:min(96vw,760px);max-width:96vw;max-height
 body.socktd-mobile #choose .panel{max-height:78dvh}
 body.socktd-mobile button{touch-action:manipulation}
 @media(max-width:520px){.socktdDeviceOptions{gap:9px}.socktdDeviceOptions button{font-size:18px;min-height:115px}body.socktd-mobile #app>h1{font-size:23px;margin:5px}body.socktd-mobile #socktdMapColumn #msg{font-size:12px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#17131f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sock TD"><link rel="apple-touch-icon" href="./icons/icon-192.png"></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#17131f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Sock TD"><link rel="apple-touch-icon" href="./icons/icon-192.png"><style id="socktdMobileCompactV2">
+/* Compact controls apply ONLY after choosing Mobile. PC is unchanged. */
+body.socktd-mobile #app{padding:2px 4px 46px!important}
+body.socktd-mobile #app>h1{font-size:19px!important;line-height:1.15!important;margin:2px 0!important}
+body.socktd-mobile #app>h1+.small{font-size:9px!important;margin:1px 0 4px!important}
+body.socktd-mobile .bar{gap:4px!important;margin:3px 0!important}
+body.socktd-mobile .bar>button,body.socktd-mobile .bar>.card{font-size:10px!important;padding:5px 7px!important;min-height:30px!important;line-height:1.15!important;border-radius:7px!important}
+body.socktd-mobile #socktdGameLayout{gap:4px!important}
+body.socktd-mobile #socktdMapColumn #msg{font-size:10px!important;margin:2px 0!important;line-height:1.15!important}
+body.socktd-mobile #socktdShopSidebar{padding:2px!important;margin:0!important;border-radius:8px!important;max-height:112px!important;overflow:hidden!important}
+body.socktd-mobile #socktdShopSidebar .socktdShopHeading{padding:3px 6px!important;min-height:20px!important;display:flex!important;align-items:center!important;justify-content:space-between!important}
+body.socktd-mobile #socktdShopSidebar .socktdDefenseTitle{font-size:11px!important;line-height:1.1!important}
+body.socktd-mobile #socktdSortToggle{font-size:10px!important;padding:2px 7px!important;min-height:23px!important}
+body.socktd-mobile #socktdShopSidebar #towers{min-height:0!important;height:70px!important;max-height:70px!important;padding:3px 4px!important;gap:5px!important;align-items:stretch!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:thin}
+body.socktd-mobile #socktdShopSidebar #towers button.socktd-art-button{flex:0 0 94px!important;width:94px!important;min-width:94px!important;height:62px!important;min-height:62px!important;max-height:62px!important;box-sizing:border-box!important;font-size:10px!important;line-height:1.12!important;padding:4px 4px 4px 25px!important;border-width:1px!important;border-radius:8px!important;white-space:normal!important;overflow:hidden!important}
+body.socktd-mobile #towers button[data-sock-type].socktd-art-button::before{left:3px!important;font-size:17px!important}
+body.socktd-mobile #towers button[data-sock-type].socktd-art-button::after{left:23px!important}
+body.socktd-mobile #socktdSortPanel{padding:4px!important;font-size:10px!important}
+body.socktd-mobile #socktdSortMode{font-size:11px!important;max-width:100%!important;padding:3px!important}
+body.socktd-mobile #socktdDeviceSwitch{bottom:5px!important;left:5px!important;padding:4px 7px!important;font-size:10px!important;opacity:.78!important}
+@media(max-width:430px){body.socktd-mobile #socktdShopSidebar #towers button.socktd-art-button{flex-basis:84px!important;width:84px!important;min-width:84px!important;font-size:9px!important}body.socktd-mobile #socktdShopSidebar{max-height:104px!important}body.socktd-mobile #socktdShopSidebar #towers{height:65px!important;max-height:65px!important}body.socktd-mobile #socktdShopSidebar #towers button.socktd-art-button{height:57px!important;min-height:57px!important;max-height:57px!important}}
+</style><style>
+.socktdQolOverlay{position:fixed;inset:0;background:#000b;z-index:99999;display:flex;align-items:center;justify-content:center;padding:15px}.socktdQolPanel{position:relative;background:linear-gradient(140deg,#142a46,#1b2444);color:#fff;border:2px solid #6dcaff;border-radius:18px;padding:20px;width:min(570px,95vw);max-height:85vh;overflow:auto;box-shadow:0 15px 50px #0009}.socktdQolClose{position:absolute;right:12px;top:12px}.socktdQolItem{padding:9px;border-bottom:1px solid #ffffff24}.socktdQolPanel h3{margin:18px 0 8px}.socktdQolStats{margin:10px 0;padding:9px;background:#122d4b;border-radius:10px}.socktdQolStats p{margin:5px 0}.socktdQolStats select{max-width:150px}.socktdQolResults{margin:10px auto;padding:10px;border:1px solid #80caff;border-radius:9px;color:#fff;background:#14304b}#socktdProgressButton{position:fixed;right:12px;bottom:12px;z-index:1000;padding:8px 12px;border-radius:12px;background:#16385a;color:#fff;border:1px solid #68baff;font-weight:700;cursor:pointer}@media(max-width:650px){#socktdProgressButton{font-size:11px;padding:5px 7px;bottom:4px;right:4px}}
+</style><style id="socktdMobileQolFix">
+/* Sock TD QoL: scrollable tower information and mobile-friendly controls */
+#info.towerInfo{box-sizing:border-box!important;max-height:calc(100dvh - 108px)!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#83bdf1 #21192b;touch-action:pan-y;}
+#info.towerInfo button,#info.towerInfo select{box-sizing:border-box;max-width:100%;}
+#info.towerInfo .socktdQolStats{overflow-wrap:anywhere;}
+#info.towerInfo .socktdQolStats select{width:100%;max-width:100%;min-height:36px;margin-top:5px;}
+#info.towerInfo:focus-visible{outline:2px solid #7bd8ff;outline-offset:2px;}
+body.socktd-mobile #info.towerInfo{position:fixed!important;top:auto!important;bottom:max(8px,env(safe-area-inset-bottom))!important;left:8px!important;right:8px!important;width:auto!important;max-width:none!important;max-height:min(65dvh,540px)!important;overflow-y:auto!important;overflow-x:hidden!important;padding:12px!important;border-radius:15px!important;z-index:10010!important;box-shadow:0 -10px 42px #000c!important;touch-action:pan-y!important;}
+body.socktd-mobile #info.towerInfo h3{font-size:17px!important;margin:0 0 5px!important;}
+body.socktd-mobile #info.towerInfo p{font-size:12px!important;line-height:1.35!important;margin:6px 0!important;}
+body.socktd-mobile #info.towerInfo button{min-height:38px!important;font-size:12px!important;line-height:1.25!important;margin-top:5px!important;padding:7px 9px!important;white-space:normal!important;touch-action:manipulation!important;}
+body.socktd-mobile #info.towerInfo .socktdQolStats{padding:8px!important;margin:8px 0!important;font-size:12px!important;}
+body.socktd-mobile #info.towerInfo .socktdQolStats select{font-size:14px!important;min-height:38px!important;}
+body.socktd-mobile .socktdQolOverlay{box-sizing:border-box;padding:8px!important;align-items:center!important;}
+body.socktd-mobile .socktdQolPanel{box-sizing:border-box;width:100%!important;max-width:100%!important;max-height:calc(100dvh - 20px)!important;padding:13px 12px!important;overflow-y:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+body.socktd-mobile .socktdQolPanel h2{font-size:19px!important;margin:6px 34px 10px 0!important;}
+body.socktd-mobile .socktdQolPanel h3{font-size:15px!important;margin:12px 0 5px!important;}
+body.socktd-mobile .socktdQolItem{font-size:12px!important;line-height:1.45!important;padding:7px 3px!important;overflow-wrap:anywhere;}
+body.socktd-mobile .socktdQolItem button{min-height:34px!important;font-size:12px!important;padding:5px 10px!important;}
+body.socktd-mobile .socktdQolClose{position:sticky!important;float:right!important;top:0!important;right:0!important;z-index:2!important;min-width:38px!important;min-height:38px!important;}
+body.socktd-mobile #socktdProgressButton{font-size:10px!important;max-width:35vw!important;bottom:max(4px,env(safe-area-inset-bottom))!important;}
+@media(max-height:480px){body.socktd-mobile #info.towerInfo{max-height:80dvh!important;top:5px!important;bottom:5px!important;}body.socktd-mobile .socktdQolPanel{max-height:95dvh!important;}}
+</style>
+<style>
+#socktdHome{position:fixed;inset:0;z-index:210000;display:flex;align-items:center;justify-content:center;overflow:auto;background:radial-gradient(ellipse at 50% 30%,#493a7b 0%,#201a3e 40%,#080c1c 100%);color:white;font-family:system-ui,Arial,sans-serif}
+#settingsModal.socktdSettingsFromHome{z-index:210010!important}
+#socktdHome[hidden]{display:none!important}#socktdHome:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(135deg,transparent 0 65px,#ffffff08 66px 68px,transparent 69px 140px)}
+.socktdHomeCard{position:relative;width:min(530px,90vw);padding:34px 28px;text-align:center;border-radius:28px;border:3px solid #f4ce79;background:linear-gradient(145deg,#33265aeF,#171a34f5);box-shadow:0 20px 85px #000b,0 0 60px #ecb85125}
+.socktdHomeLogo{font-size:clamp(42px,8vw,76px);font-weight:1000;letter-spacing:2px;color:#fff4ce;text-shadow:0 5px #8b4e28,0 9px 24px #000b}.socktdHomeSubtitle{color:#f8d36d;font-weight:900;letter-spacing:2px;margin:0 0 25px}
+.socktdHomePage[hidden]{display:none!important}.socktdHomePage{display:grid;gap:13px}.socktdHomePage h2{margin:0 0 9px;font-size:29px}.socktdHomePage button{width:100%;min-height:57px;border-radius:15px;border:2px solid #ffffff85;color:#fff;font-size:20px;font-weight:900;cursor:pointer;text-shadow:0 2px 4px #0009;background:linear-gradient(135deg,#5766db,#28378e);box-shadow:0 5px 0 #10152b,0 10px 20px #0006;transition:transform .12s,filter .12s}.socktdHomePage button:hover{filter:brightness(1.17);transform:translateY(-2px)}.socktdHomePage button:active{transform:translateY(3px);box-shadow:0 2px 0 #10152b}.socktdHomePage button[data-kind="play"]{background:linear-gradient(135deg,#25b979,#096745)}.socktdHomePage button[data-kind="exit"]{background:linear-gradient(135deg,#f26c73,#a3213b)}.socktdHomePage button[data-kind="back"]{background:linear-gradient(135deg,#777b9e,#3c4063);font-size:17px;min-height:44px}.socktdHomeFoot{font-size:12px;opacity:.6;margin-top:22px}
+</style><style id="socktdV16HomePolish">
+#socktdHome{overflow:auto}
+#socktdHome::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.42;background:radial-gradient(circle at 15% 24%,#fbd67a55 0 2px,transparent 3px),radial-gradient(circle at 85% 19%,#7ad8ff77 0 3px,transparent 4px),radial-gradient(circle at 24% 76%,#ffc8f066 0 3px,transparent 4px),radial-gradient(circle at 78% 80%,#9ef1bd66 0 2px,transparent 3px);background-size:180px 150px;animation:socktdV16Stars 15s linear infinite}
+@keyframes socktdV16Stars{to{background-position:180px -150px}}
+.socktdHomeCard{isolation:isolate;overflow:hidden;box-shadow:0 22px 95px #000c,0 0 70px #edc35b38!important}
+.socktdHomeCard::before{content:"🧦    ⚡    🔥    ❄️    🧦";display:block;font-size:24px;letter-spacing:9px;margin-bottom:8px;filter:drop-shadow(0 2px 8px #ffd67099);animation:socktdV16Float 4s ease-in-out infinite alternate}
+@keyframes socktdV16Float{to{transform:translateY(-7px)}}
+.socktdHomeCard::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 65px #f5b94715}
+.socktdHomePage button{transition:transform .15s,filter .15s,box-shadow .15s}
+.socktdHomePage button:hover{transform:translateY(-3px) scale(1.02);filter:brightness(1.13);box-shadow:0 8px 20px #0007}
+.socktdHomeFoot{margin-top:18px!important;letter-spacing:2px}
+.socktdRecordAchievements{margin:18px 0;padding:15px;border:1px solid #f1ca73;border-radius:14px;background:linear-gradient(135deg,#293958,#183a47);color:#fff;text-align:center}
+.socktdRecordAchievements h3{margin:0 0 7px;color:#ffe39a}
+.socktdRecordAchievements p{margin:0 0 12px;opacity:.85}
+#recordModal #socktdProgressButton{position:static!important;display:inline-block!important;max-width:none!important;font-size:14px!important;padding:10px 18px!important}
+@media(prefers-reduced-motion:reduce){#socktdHome::before,.socktdHomeCard::before{animation:none}}
+</style><style id="socktdV17PlayMenu">
+/* The Play hub is visually distinct from the classic main menu. */
+#socktdHome:has(#socktdHomePlayPage:not([hidden])) .socktdHomeCard{width:min(690px,93vw);background:linear-gradient(155deg,#273b68f5,#24183ff7 58%,#111c34f9);border-color:#82e9ff;box-shadow:0 25px 90px #000c,0 0 65px #57c7ff44!important}
+#socktdHomePlayPage{gap:15px;position:relative;padding:4px 0 8px}
+#socktdHomePlayPage .socktdPlayHeading{margin:0;color:#fff0b3;font-size:clamp(27px,5vw,38px);font-weight:1000;letter-spacing:2px;text-shadow:0 3px 0 #674b89,0 8px 18px #0009}
+#socktdHomePlayPage .socktdPlayLead{margin:-7px 0 5px;color:#c8e7ff;font-size:14px;letter-spacing:.6px}
+#socktdHomePlayPage .socktdPlayDecor{display:flex;align-items:center;justify-content:center;gap:20px;font-size:31px;filter:drop-shadow(0 5px 9px #0008);animation:socktdPlayBob 3s ease-in-out infinite alternate}
+@keyframes socktdPlayBob{to{transform:translateY(-6px)}}
+#socktdHomePlayPage .socktdPlayChoice{display:flex;align-items:center;gap:15px;text-align:left;padding:15px 18px;min-height:86px;border-radius:20px;position:relative;overflow:hidden;isolation:isolate}
+#socktdHomePlayPage .socktdPlayChoice::after{content:"";position:absolute;inset:-100% auto -100% -65%;width:35%;transform:rotate(22deg);background:linear-gradient(90deg,transparent,#ffffff2c,transparent);transition:left .5s;pointer-events:none}
+#socktdHomePlayPage .socktdPlayChoice:hover::after{left:140%}
+#socktdHomePlayPage .socktdPlayIcon{font-size:36px;flex:0 0 48px;text-align:center;filter:drop-shadow(0 4px 5px #0008)}
+#socktdHomePlayPage .socktdPlayCopy{display:grid;gap:4px;min-width:0}
+#socktdHomePlayPage .socktdPlayCopy strong{font-size:21px;line-height:1.1}
+#socktdHomePlayPage .socktdPlayCopy small{font-size:12px;font-weight:650;opacity:.88;line-height:1.4;text-shadow:none}
+#socktdHomePlayPage #socktdHomeMatch{background:linear-gradient(115deg,#19b780,#08715f);border-color:#8dffdb}
+#socktdHomePlayPage #socktdHomeModes{background:linear-gradient(115deg,#7655e5,#4231a0);border-color:#d3bbff}
+#socktdHomePlayPage #socktdHomeTutorial{background:linear-gradient(115deg,#df9137,#a34e2a);border-color:#ffe1a0}
+#socktdHomePlayPage #socktdHomeBack{width:fit-content;justify-self:center;min-height:42px;padding:8px 28px;margin-top:3px}
+#choose #gameModesBtn,#choose #tutorialBtn{display:none!important}
+@media(max-width:480px){#socktdHomePlayPage .socktdPlayChoice{padding:12px;min-height:76px;gap:9px}#socktdHomePlayPage .socktdPlayIcon{font-size:28px;flex-basis:36px}#socktdHomePlayPage .socktdPlayCopy strong{font-size:17px}#socktdHomePlayPage .socktdPlayCopy small{font-size:11px}}
+@media(prefers-reduced-motion:reduce){#socktdHomePlayPage .socktdPlayDecor{animation:none}#socktdHomePlayPage .socktdPlayChoice::after{display:none}}
+</style></head><body class="themeDark"><svg aria-hidden="true" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
 <filter id="cv-protanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-deuteranopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
 <filter id="cv-tritanopia" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/></filter>
@@ -1062,7 +1154,7 @@ body.socktd-mobile button{touch-action:manipulation}
 <filter id="cv-achromatopsia" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/></filter>
 <filter id="cv-achromatomaly" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.35"/></filter>
 </defs></svg><div id="app"><button id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button><div id="brightnessShade" style="opacity: 0; pointer-events: none;"></div><div id="settingsModal" class="modal hidden"><div class="panel settingsPanel"><h2>⚙️ Settings</h2><div class="socktdGraphicsTabs"><button type="button" id="socktdGeneralTab" aria-selected="true">⚙️ General</button><button type="button" id="socktdGraphicsTab" aria-selected="false">🎮 Graphics</button></div><div id="socktdGeneralPanel"><label>🎨 Themes</label><div id="themeOptions"><button data-theme="dark" class="active">🌙 Dark</button><button data-theme="light">☀️ Light</button><button data-theme="gamble" id="gambleThemeOption" class="hidden">🎰 Gamble</button></div><label for="colorVisionMode">👁️ Color vision mode</label><select id="colorVisionMode"><option value="none">Normal colors (off)</option><option value="protanopia">Protanopia — red-blindness</option><option value="protanomaly">Protanomaly — reduced red sensitivity</option><option value="deuteranopia">Deuteranopia — green-blindness</option><option value="deuteranomaly">Deuteranomaly — reduced green sensitivity</option><option value="tritanopia">Tritanopia — blue-yellow deficiency</option><option value="tritanomaly">Tritanomaly — reduced blue sensitivity</option><option value="achromatopsia">Achromatopsia — grayscale</option><option value="achromatomaly">Achromatomaly — reduced color</option><option value="monochromacy">Monochromacy — grayscale</option></select><div class="small" style="margin-top:5px;opacity:.75">Changes the game colors for accessibility. Your choice is saved on this device.</div><label for="socktdDefensesSide">🛡️ Defenses side</label><select id="socktdDefensesSide" aria-label="Defenses side"><option value="right">Right</option><option value="left">Left</option></select><div class="small" style="margin-top:5px;opacity:.75">Choose which side of the map shows the Defenses menu. Saved automatically.</div><div id="socktdSoundSettings" style="margin:14px 0;padding:13px;border:1px solid #777;border-radius:12px;background:#ffffff22"><h3 style="margin:0 0 10px">🔊 Sound Effects</h3><label for="socktdSfxEnabled" style="display:flex;align-items:center;gap:10px;margin:8px 0"><input id="socktdSfxEnabled" type="checkbox" checked style="width:20px;height:20px"> Sound Effects On</label><label for="socktdSfxVolume" style="margin:12px 0 5px;display:block">SFX Volume: <span id="socktdSfxVolumeLabel">100%</span></label><input id="socktdSfxVolume" type="range" min="0" max="100" value="100" step="1" style="width:100%"><div class="small" style="opacity:.75;margin-top:6px">Controls all game sound effects. Saved automatically.</div></div><label for="brightness">☀️ Brightness</label><input id="brightness" type="range" min="35" max="100" value="100"><button id="pauseGame">⏸️ Pause</button><label for="speedrunScreenBehavior">⚡ Speedrun Screen Behavior</label><select id="speedrunScreenBehavior"><option value="pause">Pause Waves in Menus</option><option value="run">Keep Waves Running in Menus</option></select><div id="speedrunScreenBehaviorNote" class="small" style="margin-top:6px;opacity:.75">When the Catalogue, Recipe Book, Monster Catalogue, Gamble or Fusion screen is open.</div>
-<button id="openAdminFromSettings" class="hidden">🛠️ Open CRADMIN Panel</button><button id="returnToStart">🏠 Return to Start Screen</button><button id="shareGame">📤 Share Sock TD</button>
+<button id="openAdminFromSettings" class="hidden">🛠️ Open CRADMIN Panel</button><button id="returnToStart">🏠 Return to Main Menu</button><button id="shareGame">📤 Share Sock TD</button>
 <div id="codeSection">
 <h3>🔐 Codes</h3>
 <div id="codeRow"><input id="codeInput" type="text" placeholder="Enter code..." autocomplete="off" spellcheck="false" maxlength="32"><button id="redeemCode">Redeem</button></div>
@@ -1086,7 +1178,7 @@ body.socktd-mobile button{touch-action:manipulation}
     <div id="fpsHint">RECHTSKLIK + SLEPEN = RONDKIJKEN (ook omhoog/omlaag) • LINKSKLIK = SCHIETEN • ESC = TERUG</div>
   </div>
 </div>
-</div><div id="choose" class="modal"><button id="gameModesBtn">🎮 Game Modes</button><div class="panel"><div></div><h2>Choose your map</h2><h3>Map</h3><button data-m="box" style="pointer-events: auto; position: relative; z-index: 4;">📦 Shoe Box</button><button data-m="closet" style="pointer-events: auto; position: relative; z-index: 4;">🚪 Closet</button><button data-m="hall" style="pointer-events: auto; position: relative; z-index: 4;">🚶 Hallway</button><button id="tutorialBtn">📚 Tutorial</button><h2>Choose difficulty</h2><p style="opacity:.8;margin-top:0">🧦 Build your sock army • 🧬 Discover fusions • 👾 Stop the monsters</p><button data-d="easy">🟢 Easy</button><button data-d="normal" class="clickPop">🟡 Normal</button><button data-d="hard">🔴 Hard</button><button data-d="nightmare">☠️ Nightmare</button></div></div><div id="gameModesModal" class="modal hidden"><div class="panel" style="text-align:center"><h2>🎮 Game Modes</h2><div class="gameModesTopActions"><button id="backToStartFromModes" type="button">↩ Back to Start</button></div><div class="gameModeChoices"><button id="campaignMode" class="gameModeChoice newModeChoice">📖 Campaign</button><button id="multiplayerMode" class="gameModeChoice">🌐 Multiplayer</button><button id="speedrunMode" class="gameModeChoice">⚡ Speedrun</button><button id="sandboxMode" class="gameModeChoice">🏖️ Sandbox</button><button id="eventMode" class="gameModeChoice newModeChoice">🎉 Event</button><button id="challengeMode" class="gameModeChoice newModeChoice">🏆 Challenge</button></div><button id="gameModesClose">Close</button></div></div><div id="challengeDifficultyModal" class="modal hidden"><div class="panel challengeDifficultyPanel" style="text-align:center"><h2>🏆 Choose Challenge Difficulty</h2><p>Pick a difficulty to play a random challenge on a random map.</p><div class="challengeDifficultyChoices"><button type="button" class="challengeDifficultyChoice" data-challenge-diff="easy">🟢 Easy</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="normal">🟡 Normal</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="hard">🔴 Hard</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="nightmare">☠️ Nightmare</button></div><p id="challengeDifficultyNote" aria-live="polite">Choose one of the four difficulties.</p><button id="challengeDifficultyBack" type="button">↩ Back to Game Modes</button></div></div><div id="eventHubModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event Hub"><div class="eventPainting"><div class="eventArtwork"><span class="eventGarland"></span><span class="eventSpark spark1">✦</span><span class="eventSpark spark2">★</span><span class="eventSpark spark3">✧</span><span class="eventSpark spark4">✦</span><svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px;overflow:hidden"><defs>
+</div><div id="choose" class="modal"><button id="gameModesBtn" type="button" hidden aria-hidden="true" tabindex="-1" style="display:none!important">Game Modes</button><div class="panel"><div></div><h2>Choose your map</h2><h3>Map</h3><button data-m="box" style="pointer-events: auto; position: relative; z-index: 4;">📦 Shoe Box</button><button data-m="closet" style="pointer-events: auto; position: relative; z-index: 4;">🚪 Closet</button><button data-m="hall" style="pointer-events: auto; position: relative; z-index: 4;">🚶 Hallway</button><button id="tutorialBtn" hidden style="display:none!important" aria-hidden="true" tabindex="-1">📚 Tutorial</button><h2>Choose difficulty</h2><p style="opacity:.8;margin-top:0">🧦 Build your sock army • 🧬 Discover fusions • 👾 Stop the monsters</p><button data-d="easy">🟢 Easy</button><button data-d="normal" class="clickPop">🟡 Normal</button><button data-d="hard">🔴 Hard</button><button data-d="nightmare">☠️ Nightmare</button></div></div><div id="gameModesModal" class="modal hidden"><div class="panel" style="text-align:center"><h2>🎮 Game Modes</h2><div class="gameModesTopActions"><button id="backToStartFromModes" type="button">↩ Main Menu</button></div><div class="gameModeChoices"><button id="campaignMode" class="gameModeChoice newModeChoice">📖 Campaign</button><button id="multiplayerMode" class="gameModeChoice">🌐 Multiplayer</button><button id="speedrunMode" class="gameModeChoice">⚡ Speedrun</button><button id="sandboxMode" class="gameModeChoice">🏖️ Sandbox</button><button id="eventMode" class="gameModeChoice newModeChoice">🎉 Event</button><button id="challengeMode" class="gameModeChoice newModeChoice">🏆 Challenge</button></div><button id="gameModesClose">Close</button></div></div><div id="challengeDifficultyModal" class="modal hidden"><div class="panel challengeDifficultyPanel" style="text-align:center"><h2>🏆 Choose Challenge Difficulty</h2><p>Pick a difficulty to play a random challenge on a random map.</p><div class="challengeDifficultyChoices"><button type="button" class="challengeDifficultyChoice" data-challenge-diff="easy">🟢 Easy</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="normal">🟡 Normal</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="hard">🔴 Hard</button><button type="button" class="challengeDifficultyChoice" data-challenge-diff="nightmare">☠️ Nightmare</button></div><p id="challengeDifficultyNote" aria-live="polite">Choose one of the four difficulties.</p><button id="challengeDifficultyBack" type="button">↩ Back to Game Modes</button></div></div><div id="eventHubModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event Hub"><div class="eventPainting"><div class="eventArtwork"><span class="eventGarland"></span><span class="eventSpark spark1">✦</span><span class="eventSpark spark2">★</span><span class="eventSpark spark3">✧</span><span class="eventSpark spark4">✦</span><svg width="0" height="0" aria-hidden="true" style="position:absolute;left:-9999px;overflow:hidden"><defs>
 <linearGradient id="eventSockPink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a91f49"/><stop offset=".42" stop-color="#f65b83"/><stop offset=".72" stop-color="#f98da5"/><stop offset="1" stop-color="#a91f49"/></linearGradient>
 <linearGradient id="eventSockBlue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#164c8b"/><stop offset=".45" stop-color="#48b6ec"/><stop offset=".72" stop-color="#a0e6ff"/><stop offset="1" stop-color="#174779"/></linearGradient>
 <linearGradient id="eventSockViolet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#54248b"/><stop offset=".45" stop-color="#a66be2"/><stop offset=".72" stop-color="#e0bdff"/><stop offset="1" stop-color="#4d217d"/></linearGradient>
@@ -1278,7 +1370,26 @@ body.socktd-mobile button{touch-action:manipulation}
 
 </script>
 <script>
-const C=document.getElementById('c'); let x=C.getContext('2d'),$=id=>document.getElementById(id);let gold=150,life=250,wave=0,waveStartTimeout=null,best=+localStorage.getItem('socktdbest')||0,diff='normal',map='box',active=false,left=0,timer=0,gameOver=false,selected=null,movingTower=null,fuseMode=false,first=null,tw=[],en=[],drops=[],fireballs=[],iceflakes=[],kunais=[],thunderChains=[],thunderSparks=[],wizardWaves=[],wizardBursts=[],moneyBills=[],portalShots=[],soapShots=[],soapBubbles=[],symbolShots=[],lavaShots=[],prismShots=[],prismRainbows=[],cosmicShots=[],cosmicBursts=[],plasmaShots=[],shadowSpirals=[],energyChains=[],energySparks=[],mudShots=[],mudSplats=[],unlocked=(()=>{try{const saved=JSON.parse(localStorage.getItem('socktdrecipes')||'[]');return Array.isArray(saved)?[...new Set(saved.filter(x=>typeof x==='string'))]:[]}catch(e){return[]}})();let speedrunCountdownActive=false,speedrunCountdownTimer=null,speedrunModeActive=false,sandboxModeActive=false;
+const C=document.getElementById('c'); let x=C.getContext('2d'),$=id=>document.getElementById(id);
+/* Performance V4: expensive canvas shadow blurs can dominate browser GPU/compositing
+   even when JS drawing times appear small. Cap only the main game canvas shadows.
+   The option is reversible and does not change game simulation or damage. */
+window.socktdFastCanvas = {enabled:true, blurCap:5};
+try {
+ const proto=CanvasRenderingContext2D.prototype;
+ const shadow=Object.getOwnPropertyDescriptor(proto,'shadowBlur');
+ if(shadow && shadow.get && shadow.set){
+  Object.defineProperty(x,'shadowBlur',{
+   configurable:true, enumerable:true,
+   get(){return shadow.get.call(this)},
+   set(value){
+    const v=Number(value);
+    shadow.set.call(this,window.socktdFastCanvas.enabled && Number.isFinite(v) ? Math.min(v,window.socktdFastCanvas.blurCap) : value);
+   }
+  });
+ }
+}catch(err){console.warn('Canvas shadow optimization unavailable:',err)}
+let gold=150,life=250,wave=0,waveStartTimeout=null,best=+localStorage.getItem('socktdbest')||0,diff='normal',map='box',active=false,left=0,timer=0,gameOver=false,selected=null,movingTower=null,fuseMode=false,first=null,tw=[],en=[],drops=[],fireballs=[],iceflakes=[],kunais=[],thunderChains=[],thunderSparks=[],wizardWaves=[],wizardBursts=[],moneyBills=[],portalShots=[],soapShots=[],soapBubbles=[],symbolShots=[],lavaShots=[],prismShots=[],prismRainbows=[],cosmicShots=[],cosmicBursts=[],plasmaShots=[],shadowSpirals=[],energyChains=[],energySparks=[],mudShots=[],mudSplats=[],unlocked=(()=>{try{const saved=JSON.parse(localStorage.getItem('socktdrecipes')||'[]');return Array.isArray(saved)?[...new Set(saved.filter(x=>typeof x==='string'))]:[]}catch(e){return[]}})();let speedrunCountdownActive=false,speedrunCountdownTimer=null,speedrunModeActive=false,sandboxModeActive=false;
 let speedrunScreenBehavior=localStorage.getItem('socktdSpeedrunScreenBehavior')||'pause';
 let speedrunScreenPrevPaused=false,speedrunHardPauseAt=0,speedrunHardPauseAccum=0;
 function speedrunElapsedNow(){
@@ -2072,7 +2183,7 @@ function mpSetRoomState(m,d,path=null,pathIndex=null){
   mpRoomState.path=Array.isArray(path)?path.map(p=>({x:Number(p.x),y:Number(p.y)})):null;
   mpRoomState.pathIndex=Number.isFinite(Number(pathIndex))?Number(pathIndex):null;
 }
-function mpCompactTower(t){const o={};for(const k of ['x','y','k','parts','range','damage','rate','fused','level','name','fusionKey','fusionPulse','attack','attackTarget'])if(t[k]!==undefined)o[k]=t[k];return o}
+function mpCompactTower(t){const o={};for(const k of ['x','y','k','parts','range','damage','rate','fused','level','name','fusionKey','fusionPulse','attack','attackTarget','targetPriority','socktdBattle'])if(t[k]!==undefined)o[k]=t[k];return o}
 function mpCompactEnemy(e){const o={};for(const k of ['x','y','type','hp','max','sp','slow','walk','distAlongPath','dead','death','hit','flash','iceHit','damage'])if(e[k]!==undefined)o[k]=e[k];return o}
 function mpBroadcastState(){
   if(mpRole!=='host'||!mpConn||!mpConn.open||!mpStarted)return;
@@ -2190,7 +2301,7 @@ function mpHandleGuestAction(data){
     const cost=25+t.level*35;
     if(gold<cost)return;
     gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2);t.range+=14;
-  }else if(action.action==='sell'){
+  }else if(action.action==='target'){const t=tw[Number(action.i)];if(t&&SOCKTD_TARGET_MODES.includes(action.mode))t.targetPriority=action.mode;}else if(action.action==='sell'){
     const idx=Number(action.i),t=tw[idx];
     if(!t||tw.length<=1)return;
     gold+=socktdSellPrice(t);tw.splice(idx,1);
@@ -3131,9 +3242,15 @@ if(tw.length===1&&wave===0&&!active&&!waveStartTimeout){$('msg').textContent='Fi
 update()};
 const ENEMY_BASE_DAMAGE={frog:1,fly:1,golem:1,speed:1,silver:1,wash:1,piggy:1,treeflame:1,psyguy:1,ironjaw:1,shellbum:1,boss:10};
 function enemyBaseDamage(type){return type==='boss'?Math.max(0,Number(window.cradminBossEnemyDamage??50)):Math.max(0,Number(window.cradminNormalEnemyDamage??10))}
+// Cache immutable route geometry: all enemies on a wave share these paths.
+const socktdPathLengthCache=new WeakMap();
 function pathLengths(p){
+  if(!p||!p.length)return [0];
+  const cached=socktdPathLengthCache.get(p);
+  if(cached&&cached.count===p.length&&cached.first===p[0]&&cached.last===p[p.length-1])return cached.lengths;
   const a=[0];
-  for(let i=1;i<p.length;i++) a[i]=a[i-1]+Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y);
+  for(let i=1;i<p.length;i++)a[i]=a[i-1]+Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y);
+  socktdPathLengthCache.set(p,{count:p.length,first:p[0],last:p[p.length-1],lengths:a});
   return a;
 }
 function pointAtDistance(p,lengths,d){
@@ -3146,11 +3263,20 @@ function pointAtDistance(p,lengths,d){
   const t=segLen?((d-lengths[i-1])/segLen):0;
   return {x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t};
 }
+// V13: reuse path distance tables when a wave spawns multiple enemies on the same path.
+const socktdV13PathCache=new WeakMap();
+function socktdV13SpawnPathLengths(p){
+ if(!p||typeof p!== 'object')return pathLengths(p);
+ const signature=p.length+'|'+p.map(v=>v.x+','+v.y).join(';');
+ const entry=socktdV13PathCache.get(p);
+ if(entry&&entry.signature===signature)return entry.lengths;
+ const lengths=pathLengths(p);socktdV13PathCache.set(p,{signature,lengths});return lengths;
+}
 function spawn(k){
   let q=E[k],scale=1+wave*.19+Math.pow(Math.max(0,wave-5),1.20)*.032;
   const speedScale=Math.min(2.05,1+Math.max(0,wave-1)*.021);
   const p=activeWavePath||currentPath||maps[map];
-  const lengths=pathLengths(p);
+  const lengths=socktdV13SpawnPathLengths(p);
   const pos=pointAtDistance(p,lengths,0);
   en.push({
     x:pos.x,y:pos.y,path:p,pathLengths:lengths,distAlongPath:0,
@@ -5046,7 +5172,7 @@ function sock(t){
   const fx=socktdCinematicFx[i];
   if(fx.kind==='spawn'&&Math.abs(fx.x-t.x)<.5&&Math.abs(fx.y-t.y)<.5&&now-fx.born<930){f=fx;break;}
  }
- if(!f){socktdOriginalSock(t);return;}
+ if(!f){socktdV8CachedSock(t);return;}
  const u=Math.max(0,(now-f.born)/930),fall=Math.min(1,u/.58);
  const ease=fall*fall*(3-2*fall);
  const height=fall<1?Math.pow(1-ease,1.3)*170:0;
@@ -5061,8 +5187,77 @@ function sock(t){
  if(u>.58){const b=(u-.58)/.42,stretch=Math.sin(b*Math.PI*2.3)*Math.pow(1-b,2)*.09;
   x.translate(t.x,t.y);x.scale(1+stretch,1-stretch);x.translate(-t.x,-t.y);
  }
- socktdOriginalSock(t);
+ socktdV8CachedSock(t);
  x.restore();
+}
+// V8: Cache detailed tower artwork in a small transparent sprite canvas.
+// Repaint animated sprites at a controlled rate; the main canvas only blits images.
+// Each tower has its own cache, so upgrades, skins and evolutions stay independent.
+const socktdV8SpriteCache=new WeakMap();
+let socktdV8CacheEnabled=true;
+try{socktdV8CacheEnabled=localStorage.getItem('socktdV8Cache')!=='off';}catch(e){}
+function socktdV8CachedSock(t){
+ if(!socktdV8CacheEnabled||!socktdGfx().details){socktdOriginalSock(t);return;}
+ const now=performance.now();
+ const key=[t.k,t.fused,t.fusionKey,t.name,t.level,t.lvl,t.skin,t.skinId,t.evolution,t.evolutionStage,t.diceAttackFace,window.socktdClockSkinMode,window.fireSockSkinMode,socktdGfx().glow,socktdGfx().shadows].join('|');
+ let entry=socktdV8SpriteCache.get(t);
+ if(!entry){
+  const canvas=document.createElement('canvas');canvas.width=192;canvas.height=192;
+  entry={canvas,ctx:canvas.getContext('2d',{alpha:true}),key:'',last:-1};
+  socktdV8SpriteCache.set(t,entry);
+ }
+ // V9: refresh detailed artwork only four times a second; dynamic fire is drawn separately.
+ // Different towers are staggered to avoid simultaneous expensive cache rebuilds.
+ const isFire=t.k==='fire'&&!t.fused;
+ const refreshMs=isFire?Infinity:220;
+ if(entry.key!==key||now-entry.last>=refreshMs){
+  const old=x;
+  try{
+   x=entry.ctx;
+   x.setTransform(1,0,0,1,0,0);
+   x.clearRect(0,0,192,192);
+   x.save();x.translate(96-t.x,96-t.y);
+   socktdOriginalSock(t);
+   x.restore();
+   entry.last=now;entry.key=key;
+  }catch(err){
+   // Fall back to the original renderer rather than hiding a sock.
+   entry.last=-1;entry.key='';
+   x=old;socktdOriginalSock(t);return;
+  }finally{x=old;}
+ }
+ x.drawImage(entry.canvas,t.x-96,t.y-96);
+ // V10: never re-render the complete Fire Sock at 4 FPS. The static model
+ // remains cached; independent flames, embers and glow animate every render.
+ if(isFire){
+  const sec=now*.001, hot=t.level>=3, evo=t.level>=10?2:t.level>=5?1:0;
+  const idle=Math.sin(now/420+t.x)*2;
+  x.save();x.translate(t.x,t.y+idle);
+  // Five continuously moving flames above the cuff (no stepped sprite updates).
+  for(let i=0;i<5;i++){
+   const px=-14+i*7, phase=sec*5+i*1.8;
+   const rise=12+(i%3)*5+3*Math.sin(phase);
+   x.save();x.shadowColor='#ff7b15';x.shadowBlur=hot?10:6;
+   const grad=x.createLinearGradient(px,-35,px,-35-rise);
+   grad.addColorStop(0,'#ff4216');grad.addColorStop(.55,'#ff9c18');grad.addColorStop(1,'#ffe56b');
+   x.fillStyle=grad;x.beginPath();x.moveTo(px-5,-36);
+   x.quadraticCurveTo(px-8,-41,px+Math.sin(sec*3+i)*3,-35-rise);
+   x.quadraticCurveTo(px+9,-40,px+5,-36);x.closePath();x.fill();x.restore();
+  }
+  // Smooth heartbeat/glow over the cached heart without rebuilding its texture.
+  const beat=1+(.09+.025*evo)*Math.sin(now/(240-25*evo));
+  x.save();x.translate(0,12);x.scale(beat,beat);
+  x.globalAlpha=.24+.12*Math.sin(sec*4.3);x.shadowColor='#ff9b24';x.shadowBlur=hot?15:9;
+  x.fillStyle='#ffb83d';x.beginPath();x.moveTo(0,-8);x.lineTo(8,-3);
+  x.lineTo(9,3);x.lineTo(0,11);x.lineTo(-9,3);x.lineTo(-8,-3);x.closePath();x.fill();x.restore();
+  for(let i=0;i<11;i++){
+   const q=(now/1300+i/11)%1, px=Math.sin(i*2.4+now/900)*22,py=26-q*74;
+   x.globalAlpha=(1-q)*.8;x.fillStyle=i%3?'#ffae36':'#fff0a5';
+   x.beginPath();x.arc(px,py,.75+(i%3)*.4,0,Math.PI*2);x.fill();
+  }
+  x.restore();
+ }
+
 }
 function socktdOriginalSock(t){
  if(!socktdGfx().details){socktdSimpleSock(t);return;}
@@ -5481,31 +5676,83 @@ if(!t.fused&&["magnet", "ghost", "cactus", "mushroom", "mirror", "gravity", "dic
      if(active){const rayT=(phase-(.48+seeded*.12))/.095,alpha=Math.sin(Math.PI*rayT),angle=(-1.05+seeded*.75);x.save();x.globalAlpha=alpha*.78;x.lineCap='round';x.shadowColor='#fff6a1';x.shadowBlur=13;x.strokeStyle='#fff6a1';x.lineWidth=5;x.beginPath();x.moveTo(Math.cos(angle)*57-6,Math.sin(angle)*57-12);x.lineTo(Math.cos(angle)*20,Math.sin(angle)*20-3);x.stroke();x.shadowBlur=0;x.strokeStyle='#ffffff';x.lineWidth=1.6;x.beginPath();x.moveTo(Math.cos(angle)*54-6,Math.sin(angle)*54-12);x.lineTo(Math.cos(angle)*19,Math.sin(angle)*19-3);x.stroke();x.restore()}
      if(t.level>=1){x.strokeStyle='#fff36a';x.lineWidth=2;x.beginPath();x.arc(0,0,34,0,7);x.stroke()}if(t.level>=5){x.shadowColor='#ffd84a';x.shadowBlur=14;x.strokeStyle='#fff2a1';x.lineWidth=3;x.beginPath();x.arc(0,0,40,0,7);x.stroke();x.shadowBlur=0}if(t.level>=10){x.fillStyle='#fff6b0';x.font='bold 13px Arial';x.textAlign='center';x.fillText('☀',0,-43)}
    }else{
-   // Thunder Sock: hanging Christmas stocking with a charged golden-yellow body.
-   x.fillStyle='rgba(245,207,39,0.62)';
-   x.beginPath();x.moveTo(-16,-31);x.lineTo(16,-31);x.lineTo(16,5);
-   x.lineTo(25,8);x.quadraticCurveTo(35,12,31,22);x.quadraticCurveTo(27,31,17,32);
-   x.lineTo(-7,32);x.quadraticCurveTo(-19,30,-19,20);x.lineTo(-19,-25);x.quadraticCurveTo(-19,-31,-16,-31);x.closePath();x.fill();
-   // Electric knit/shock texture covers the whole sock.
-   x.lineWidth=2;
-   for(let yy=-24;yy<=24;yy+=10)for(let xx=-14;xx<=14;xx+=10){
-     x.strokeStyle='#fff2a6';
-     x.beginPath();x.moveTo(xx-5,yy-4);x.lineTo(xx,yy);x.lineTo(xx-3,yy+5);x.lineTo(xx+5,yy+1);x.stroke();
+   // PURE ELECTRICITY: three evolution forms, no per-level attachments.
+   const stage=t.level>=10?2:t.level>=5?1:0;
+   const time=performance.now()*.001, pulse=.5+.5*Math.sin(time*8+t.x*.1);
+   const electric=stage===2?'#9cfaff':stage===1?'#fff3a0':'#ffe05a';
+   const secondary=stage===2?'#2e8dff':stage===1?'#ff9d17':'#ffb928';
+   const shape=()=>{x.beginPath();x.moveTo(-17,-32);x.quadraticCurveTo(0,-36,17,-32);x.lineTo(17,4);x.quadraticCurveTo(20,7,27,9);x.quadraticCurveTo(37,16,32,26);x.quadraticCurveTo(27,34,13,34);x.lineTo(-8,34);x.quadraticCurveTo(-21,32,-21,20);x.lineTo(-21,-21);x.closePath()};
+   // A dark translucent silhouette acts as negative space between the moving electric filaments.
+   x.save();x.shadowColor=electric;x.shadowBlur=16+stage*7+pulse*9;
+   const plasma=x.createLinearGradient(-22,-37,32,35);plasma.addColorStop(0,stage===2?'#2765b8':'#9b5517');plasma.addColorStop(.45,'#101d3b');plasma.addColorStop(1,stage===2?'#1b72bd':'#703c0a');
+   shape();x.fillStyle=plasma;x.fill();x.strokeStyle=electric;x.lineWidth=2.8+stage*.7;x.stroke();x.restore();
+   // Lightning threads follow the entire stocking, including its curved foot.
+   x.save();shape();x.clip();x.lineJoin='round';x.lineCap='round';
+   for(let i=0;i<19+stage*9;i++){
+     const seed=i*2.39996,phase=time*(1.1+(i%4)*.25)+seed;
+     const startX=-22+(i*17%53),startY=-40;
+     x.beginPath();x.moveTo(startX,startY);
+     for(let j=1;j<=12;j++){
+       const yy=-40+j*7;
+       const xx=startX+Math.sin(seed+j*1.91+phase)*5+Math.sin(j*.9+seed)*7+(yy>8?Math.min(19,(yy-8)*.6):0);
+       x.lineTo(xx,yy);
+     }
+     x.globalAlpha=.24+.52*(.5+.5*Math.sin(phase*2));
+     x.strokeStyle=i%4===0?'#ffffff':i%3===0?secondary:electric;
+     x.lineWidth=i%5===0?2.3:1.1;x.shadowColor=electric;x.shadowBlur=5+stage*2;x.stroke();
    }
-   x.fillStyle='#fff7b0';x.beginPath();x.moveTo(-18,-34);x.quadraticCurveTo(0,-39,18,-34);
-   x.lineTo(16,-26);x.quadraticCurveTo(0,-23,-16,-26);x.closePath();x.fill();
-   // Electric-wire hair.
-   x.lineWidth=3;x.lineCap='round';
-   [-12,-6,0,6,12].forEach((xx,i)=>{x.strokeStyle=i%2===0?'#ff304f':'#2f8fff';x.beginPath();x.moveTo(xx,-34);x.quadraticCurveTo(xx-5,-43,xx+2,-48);x.lineTo(xx-2,-53+(i%2)*3);x.stroke()});
-   // Bright eyes and a charged lightning emblem.
-   x.fillStyle='#fff';x.beginPath();x.arc(-7,-9,5,0,7);x.arc(7,-9,5,0,7);x.fill();
-   x.fillStyle='#5b4a00';x.beginPath();x.arc(-7,-9,2.2,0,7);x.arc(7,-9,2.2,0,7);x.fill();
-   x.fillStyle='#fff06a';x.font='bold 17px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.textAlign='center';x.fillText('⚡',0,15);
-   // Upgrade stages remain Thunder-specific: extra charge rings/crystals.
-   if(t.level>=1){x.strokeStyle='#fff36a';x.lineWidth=2;x.beginPath();x.arc(0,0,34,0,7);x.stroke()}
-   if(t.level>=3){x.fillStyle='#fff8a0';[-17,17].forEach(xx=>{x.beginPath();x.moveTo(xx,-2);x.lineTo(xx-7,-10);x.lineTo(xx-3,-13);x.lineTo(xx+3,-8);x.closePath();x.fill()})}
-   if(t.level>=5){x.strokeStyle='#ffe600';x.lineWidth=3;x.beginPath();x.arc(0,0,40,0,7);x.stroke();x.fillStyle='#fff';x.font='bold 14px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.fillText('⚡',0,-41)}
-   if(t.level>=10){x.strokeStyle='#fff';x.lineWidth=3;x.beginPath();x.arc(0,0,45,0,7);x.stroke();x.fillStyle='#fff36a';x.beginPath();x.arc(0,-3,7,0,7);x.fill()}
+   x.globalAlpha=1;x.restore();
+   // The cuff and toe are formed from bright currents, not fabric or armor.
+   for(let k=0;k<3;k++){
+     x.save();x.globalAlpha=.34+k*.23;x.strokeStyle=k===2?'#ffffff':electric;x.lineWidth=3.8-k*.95;x.shadowColor=electric;x.shadowBlur=12;
+     x.beginPath();x.moveTo(-19,-32-k*2);x.quadraticCurveTo(0,-39-k*2,19,-32-k*2);x.stroke();
+     x.beginPath();x.moveTo(16,33-k*2);x.quadraticCurveTo(36,34-k*2,33,19-k*2);x.stroke();x.restore();
+   }
+   // Floating electricity arcs: each stage becomes increasingly unstable.
+   const count=stage===0?7:stage===1?13:22;
+   x.save();x.lineCap='round';
+   for(let i=0;i<count;i++){
+     const a=i*2.399+time*(i%2?-.8:.9),r=stage===0?31:stage===1?39:46;
+     const xx=Math.cos(a)*r,yy=Math.sin(a)*r-3;
+     const reach=stage===2?15:stage===1?11:7;
+     x.beginPath();x.moveTo(xx,yy);x.lineTo(xx+Math.cos(a+.6)*reach*.5,yy+Math.sin(a+.6)*reach*.5);x.lineTo(xx+Math.cos(a)*reach,yy+Math.sin(a)*reach);
+     x.strokeStyle=i%3===0?'#ffffff':i%2===0?secondary:electric;x.lineWidth=stage===2?2.2:1.7;
+     x.globalAlpha=.35+.55*(.5+.5*Math.sin(time*11+i*3));x.shadowColor=electric;x.shadowBlur=9;x.stroke();
+   }
+   x.restore();
+   // New face: opaque faceplate masks all underlying electric filaments.
+   // Draw exactly TWO eyes once, with no layered older eye graphics.
+   x.save();
+   const face=x.createLinearGradient(-16,-25,16,2);
+   face.addColorStop(0,'#101b37');face.addColorStop(.55,'#07152d');face.addColorStop(1,'#17264a');
+   x.shadowColor=electric;x.shadowBlur=7;
+   x.fillStyle=face;x.beginPath();x.roundRect(-17,-25,34,28,10);x.fill();
+   x.shadowBlur=0;x.strokeStyle=stage===2?'#9beeff':'#eacb70';x.lineWidth=1.5;x.stroke();
+   // Two single-piece almond eyes: bright amber irises, dark pupils and tiny highlights.
+   for(const ex of [-8,8]){
+     x.fillStyle='#effbff';x.beginPath();x.ellipse(ex,-12,6.3,7.7,0,0,Math.PI*2);x.fill();
+     x.fillStyle=stage===2?'#39caff':'#ffc43d';x.beginPath();x.ellipse(ex+1,-11.3,3.65,5.25,0,0,Math.PI*2);x.fill();
+     x.fillStyle='#081329';x.beginPath();x.ellipse(ex+1.4,-11,1.9,3.35,0,0,Math.PI*2);x.fill();
+     x.fillStyle='#ffffff';x.beginPath();x.arc(ex-.7,-14.6,1.35,0,Math.PI*2);x.fill();
+   }
+   x.restore();
+   // No chest core or emblem: the sock itself is the electricity source.
+   if(stage>=1){
+     // Storm Sentinel: an animated orbit of current and a forked lightning crest.
+     x.save();x.strokeStyle=electric;x.lineWidth=2.4;x.shadowColor=electric;x.shadowBlur=15;x.globalAlpha=.65+.25*pulse;
+     x.beginPath();x.ellipse(0,4,39,13,-.3+Math.sin(time)*.12,0,Math.PI*2);x.stroke();x.restore();
+     x.save();x.fillStyle=electric;x.shadowColor=electric;x.shadowBlur=14;x.beginPath();x.moveTo(-6,-38);x.lineTo(-17,-58);x.lineTo(-3,-51);x.lineTo(1,-68);x.lineTo(7,-50);x.lineTo(19,-58);x.lineTo(12,-37);x.closePath();x.fill();x.restore();
+   }
+   if(stage===2){
+     // Tempest Emperor: huge wing-shaped discharges and a revolving electric halo.
+     x.save();x.strokeStyle='#c4ffff';x.shadowColor='#6bdfff';x.shadowBlur=17;x.lineWidth=3.4;
+     [-1,1].forEach(d=>{for(let j=0;j<3;j++){
+       const flicker=Math.sin(time*9+j*2+d)*4;
+       x.beginPath();x.moveTo(d*19,-16+j*12);x.lineTo(d*(34+j*3),-29+j*8);x.lineTo(d*(49+j*4),-42+j*5+flicker);x.lineTo(d*(44+j*5),-21+j*10);x.lineTo(d*(59+j*4),-16+j*12);x.stroke();
+     }});x.restore();
+     x.save();x.strokeStyle='#f2ffff';x.shadowColor='#67cfff';x.shadowBlur=17;x.lineWidth=2.8;x.setLineDash([9,4]);x.lineDashOffset=-time*23;x.beginPath();x.ellipse(0,-50,27,7,0,0,Math.PI*2);x.stroke();x.restore();
+   }
+
    }
  }else if(t.k==='ice'){
    if(t.skin==='water'||window.iceSockSkinMode==='water'){
@@ -5757,9 +6004,9 @@ if(!t.fused&&["magnet", "ghost", "cactus", "mushroom", "mirror", "gravity", "dic
  x.fillStyle='#fff2';x.beginPath();x.ellipse(17,15,12,7,0,0,7);x.fill();
  x.strokeStyle='#fff8';x.lineWidth=1.5;x.beginPath();x.arc(17,15,9,Math.PI*.15,Math.PI*.85);x.stroke();
  // face (Fire Sock has custom angry eyes above)
- if(t.k!=='fire'&&t.k!=='ice'&&t.k!=='ninja'&&t.k!=='portal'&&t.k!=='fight'){x.fillStyle='#fff';x.beginPath();x.arc(-7,-8,5,0,7);x.fill();x.arc(7,-8,5,0,7);x.fill();x.fillStyle='#222';x.beginPath();x.arc(-7,-8,2,0,7);x.arc(7,-8,2,0,7);x.fill();}
+ if(t.k!=='fire'&&t.k!=='ice'&&t.k!=='thunder'&&t.k!=='ninja'&&t.k!=='portal'&&t.k!=='fight'){x.fillStyle='#fff';x.beginPath();x.arc(-7,-8,5,0,7);x.fill();x.arc(7,-8,5,0,7);x.fill();x.fillStyle='#222';x.beginPath();x.arc(-7,-8,2,0,7);x.arc(7,-8,2,0,7);x.fill();}
  // element-specific knitted details
- x.fillStyle='#fff9';if(t.k!=='fire'){if(t.k==='thunder')x.fillText('⚡',-7,11)}if(t.k==='thunder'){x.fillText('⚡',-7,11)}if(t.k==='wizard'){x.fillStyle='#4b2368';x.beginPath();x.moveTo(-17,-29);x.lineTo(0,-48);x.lineTo(17,-29);x.closePath();x.fill()}if(t.k==='golden'){x.fillText('♛',-6,12)}if(t.k==='laundry'){x.fillStyle='#c8d2d8';x.beginPath();x.arc(0,10,9,0,7);x.fill()}if(t.k==='fight'){x.fillText('🥊',-6,12)}
+ x.fillStyle='#fff9';if(t.k!=='fire'){}if(t.k==='wizard'){x.fillStyle='#4b2368';x.beginPath();x.moveTo(-17,-29);x.lineTo(0,-48);x.lineTo(17,-29);x.closePath();x.fill()}if(t.k==='golden'){x.fillText('♛',-6,12)}if(t.k==='laundry'){x.fillStyle='#c8d2d8';x.beginPath();x.arc(0,10,9,0,7);x.fill()}if(t.k==='fight'){x.fillText('🥊',-6,12)}
 
  // Fight Sock skins share the original sock silhouette.
  if(t.k==='fight'){
@@ -7209,21 +7456,32 @@ function updateIceflakes(){
  }
  iceflakes=iceflakes.filter(f=>f.life>0);
 }
+// V13: rasterize the expensive color emoji once, animate the sprite each draw.
+const socktdV13ProjectileSprites=new Map();
+let socktdV13ProjectileCacheEnabled=true;
+try{socktdV13ProjectileCacheEnabled=localStorage.getItem('socktdV13ProjectileCache')!=='off';}catch(_){}
+function socktdV13ProjectileSprite(glyph){
+ let sprite=socktdV13ProjectileSprites.get(glyph);
+ if(sprite)return sprite;
+ const c=document.createElement('canvas');c.width=64;c.height=64;
+ const ctx=c.getContext('2d',{alpha:true});
+ ctx.font='30px Segoe UI Emoji, Apple Color Emoji, sans-serif';
+ ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(glyph,32,32);
+ socktdV13ProjectileSprites.set(glyph,c);return c;
+}
 function drawFireballs(){
- for(const f of fireballs){x.save();x.translate(f.x,f.y);x.rotate(f.angle);x.globalAlpha=Math.min(1,f.life/5);x.font='30px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('🔥',0,0);x.restore();}
+ const sprite=socktdV13ProjectileCacheEnabled?socktdV13ProjectileSprite('🔥'):null;
+ for(const f of fireballs){x.save();x.translate(f.x,f.y);x.rotate(f.angle);x.globalAlpha=Math.min(1,f.life/5);
+  if(sprite)x.drawImage(sprite,-32,-32);
+  else{x.font='30px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('🔥',0,0);}
+  x.restore();}
 }
 function drawIceflakes(){
- for(const f of iceflakes){
-   x.save();
-   x.translate(f.x,f.y);
-   x.rotate(f.angle);
-   x.globalAlpha=Math.min(1,f.life/6);
-   x.font='30px Segoe UI Emoji, Apple Color Emoji, sans-serif';
-   x.textAlign='center';
-   x.textBaseline='middle';
-   x.fillText('❄️',0,0);
-   x.restore();
- }
+ const sprite=socktdV13ProjectileCacheEnabled?socktdV13ProjectileSprite('❄️'):null;
+ for(const f of iceflakes){x.save();x.translate(f.x,f.y);x.rotate(f.angle);x.globalAlpha=Math.min(1,f.life/6);
+  if(sprite)x.drawImage(sprite,-32,-32);
+  else{x.font='30px Segoe UI Emoji, Apple Color Emoji, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('❄️',0,0);}
+  x.restore();}
 }
 function spawnThunderChain(t,target){
  if(t.fused||t.k!=='thunder'||!target)return;
@@ -8003,20 +8261,33 @@ function monster(e){
 
   // Each enemy has its own silhouette, palette, face and animated details.
   if(e.type==='frog'){
-    // Water Frog: clean blue aquatic frog, no glasses or pink lips, with animated blue swimming legs.
-    const bob=Math.sin(e.walk*3.1)*2.2, kick=Math.sin(e.walk*4.2)*0.16;
-    x.save();x.translate(0,bob);
-    // Powerful blue rear legs: alternating paddles with articulated joints and webbed toes.
-    const swimA=Math.sin(e.walk*4.2)*.42, swimB=Math.sin(e.walk*4.2+Math.PI)*.42;
-    function frogLeg(side,ang){
-      x.save();x.scale(side,1);x.translate(17,13);x.rotate(ang);
-      x.fillStyle='#167fa9';x.beginPath();x.ellipse(0,2,11,7,.18,0,7);x.fill();x.stroke();
-      x.fillStyle='#35b9d8';x.beginPath();x.roundRect(5,-3,15,7,3);x.fill();x.stroke();
-      x.beginPath();x.moveTo(17,0);x.lineTo(29,-7);x.lineTo(27,-1);x.lineTo(34,2);x.lineTo(27,4);x.lineTo(31,10);x.lineTo(17,5);x.closePath();x.fill();x.stroke();
-      x.strokeStyle='#0c6385';x.lineWidth=1.4;x.beginPath();x.moveTo(21,0);x.lineTo(29,-5);x.moveTo(23,2);x.lineTo(32,2);x.moveTo(22,4);x.lineTo(29,8);x.stroke();
-      x.restore();
+    // TD Water Frog: true synchronized hop, articulated thighs, shins and webbed feet.
+    // This is drawn inside the 48-phase enemy sprite cache, so it remains cheap.
+    const phase=((e.walk%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
+    const lift=Math.pow(Math.max(0,Math.sin(phase)),.85);
+    const hop=lift*19;
+    const landing=Math.max(0,Math.sin(phase-Math.PI))*3;
+    x.save();x.translate(0,-hop+landing);
+    // Front and rear limbs bend together, instead of paddling in opposite directions.
+    function frogLeg(side){
+      x.save();x.scale(side,1);
+      const tuck=lift;
+      // Large muscular thigh attached to the hip.
+      x.fillStyle='#167fa9';x.beginPath();x.ellipse(20,13,10,9,-.22-tuck*.35,0,Math.PI*2);x.fill();x.stroke();
+      // Bent knee and long lower leg, clearly separate from the body.
+      const kneeX=29-tuck*5,kneeY=17-tuck*8;
+      const ankleX=35-tuck*13,ankleY=31-tuck*13;
+      x.strokeStyle='#125a7e';x.lineWidth=9;x.beginPath();x.moveTo(23,14);x.lineTo(kneeX,kneeY);x.lineTo(ankleX,ankleY);x.stroke();
+      x.strokeStyle='#37bde3';x.lineWidth=5;x.beginPath();x.moveTo(23,14);x.lineTo(kneeX,kneeY);x.lineTo(ankleX,ankleY);x.stroke();
+      x.fillStyle='#269fc8';x.strokeStyle='#104968';x.lineWidth=1.8;
+      x.beginPath();x.ellipse(kneeX,kneeY,5,5,0,0,Math.PI*2);x.fill();x.stroke();
+      // Flat, three-toed webbed frog foot, stretching forward on take-off.
+      x.save();x.translate(ankleX,ankleY);x.rotate(-tuck*.48);
+      x.beginPath();x.moveTo(-2,0);x.lineTo(10,-4);x.lineTo(21,-9);x.lineTo(19,-3);x.lineTo(26,0);x.lineTo(19,3);x.lineTo(23,9);x.lineTo(10,5);x.closePath();x.fill();x.stroke();
+      x.strokeStyle='#0b6385';x.lineWidth=1.2;x.beginPath();x.moveTo(9,0);x.lineTo(21,-7);x.moveTo(10,1);x.lineTo(24,0);x.moveTo(9,2);x.lineTo(21,8);x.stroke();
+      x.restore();x.restore();
     }
-    frogLeg(-1,swimA);frogLeg(1,swimB);
+    frogLeg(-1);frogLeg(1);
     // Main aquatic body
     const body=x.createLinearGradient(0,-20,0,25);body.addColorStop(0,'#4bd0e8');body.addColorStop(.5,'#219fc8');body.addColorStop(1,'#126d9b');
     x.fillStyle=body;x.beginPath();x.ellipse(0,5,28,22,0,0,7);x.fill();x.stroke();
@@ -8044,26 +8315,30 @@ function monster(e){
   }else if(e.type==='fly'){
     // Sticky Moth: a clearly recognizable cartoon moth with warm yellow/brown wings,
     // fuzzy body, antennae, tiny legs and a gently flapping animation.
-    const flap=Math.sin(e.walk*4.2)*0.20;
-    const wingPulse=Math.sin(e.walk*2.1)*0.04;
+    // Full articulated wingbeat: both wings pivot at the shoulders.
+    // Works with the existing 48-phase enemy sprite cache.
+    const beat=Math.sin(e.walk*2.0);
+    const wingFold=.40+.60*(beat+1)/2;
+    const wingRise=10*beat;
     x.save();
-    // Broad moth wings with layered scales/texture.
-    const wingL=x.createLinearGradient(-38,-24,-4,16);
-    wingL.addColorStop(0,'#ffe37a');wingL.addColorStop(.55,'#d89b32');wingL.addColorStop(1,'#8a5528');
-    const wingR=x.createLinearGradient(38,-24,4,16);
-    wingR.addColorStop(0,'#ffe37a');wingR.addColorStop(.55,'#d89b32');wingR.addColorStop(1,'#8a5528');
-    x.fillStyle=wingL;x.beginPath();x.moveTo(-6,-4);x.quadraticCurveTo(-28,-27-flap*25,-40,-16);
-    x.quadraticCurveTo(-42,3,-25,16);x.quadraticCurveTo(-13,18,-5,9);x.closePath();x.fill();x.stroke();
-    x.fillStyle=wingR;x.beginPath();x.moveTo(6,-4);x.quadraticCurveTo(28,-27+flap*25,40,-16);
-    x.quadraticCurveTo(42,3,25,16);x.quadraticCurveTo(13,18,5,9);x.closePath();x.fill();x.stroke();
-    // Moth wing markings.
-    x.fillStyle='#6b3b1f';
-    for(const s of [-1,1]){
-      x.beginPath();x.ellipse(s*24,-7,7,11,s*.25,0,7);x.fill();x.stroke();
-      x.fillStyle='#f5c94b';x.beginPath();x.arc(s*24,-7,3.2,0,7);x.fill();
-      x.fillStyle='#6b3b1f';
-      x.beginPath();x.moveTo(s*12,3);x.lineTo(s*31,9);x.stroke();
-    }
+    const drawWing=(side)=>{
+      x.save();
+      x.translate(side*7,-10);
+      x.rotate(side*(.12+beat*.46));
+      x.scale(wingFold,1);
+      const g=x.createLinearGradient(0,-26,side*40,18);
+      g.addColorStop(0,'#ffe78b');g.addColorStop(.55,'#d99c3b');g.addColorStop(1,'#8b5428');
+      x.fillStyle=g;x.strokeStyle='#603c25';x.lineWidth=2;
+      x.beginPath();x.moveTo(0,2);
+      x.bezierCurveTo(side*14,-36-wingRise,side*38,-39-wingRise,side*43,-15-wingRise);
+      x.bezierCurveTo(side*49,8,side*24,27,side*3,12);
+      x.closePath();x.fill();x.stroke();
+      x.fillStyle='#6b3b1f';x.beginPath();x.ellipse(side*25,-7-wingRise*.5,7,11,side*.25,0,Math.PI*2);x.fill();
+      x.fillStyle='#f5c94b';x.beginPath();x.arc(side*25,-7-wingRise*.5,3.2,0,Math.PI*2);x.fill();
+      x.strokeStyle='#6b3b1f';x.beginPath();x.moveTo(side*11,3);x.lineTo(side*31,9);x.stroke();
+      x.restore();
+    };
+    drawWing(-1);drawWing(1);
     // Fuzzy brown body.
     const fur=x.createLinearGradient(0,-22,0,22);fur.addColorStop(0,'#8b552b');fur.addColorStop(.5,'#c17b38');fur.addColorStop(1,'#5b321d');
     x.fillStyle=fur;x.beginPath();x.ellipse(0,2,10,22,0,0,7);x.fill();x.stroke();
@@ -8077,13 +8352,13 @@ function monster(e){
     x.fillStyle='#ffe9a3';x.beginPath();x.arc(-4,-18,2.8,0,7);x.arc(4,-18,2.8,0,7);x.fill();
     x.fillStyle='#24170f';x.beginPath();x.arc(-4,-18,1.3,0,7);x.arc(4,-18,1.3,0,7);x.fill();
     // Short fuzzy legs that move as the moth flutters.
-    const leg=Math.sin(e.walk*4.2)*4;
+    const leg=Math.sin(e.walk*2.0)*4;
     x.strokeStyle='#4a2918';x.lineWidth=2.5;
     x.beginPath();x.moveTo(-7,5);x.lineTo(-16,13+leg);x.lineTo(-21,11+leg);
     x.moveTo(7,5);x.lineTo(16,13-leg);x.lineTo(21,11-leg);
     x.moveTo(-7,12);x.lineTo(-14,20-leg);x.moveTo(7,12);x.lineTo(14,20+leg);x.stroke();
     // Tiny sticky pollen/sap flecks around the wings.
-    x.fillStyle='#fff0a0';x.globalAlpha=.7+.2*wingPulse;
+    x.fillStyle='#fff0a0';x.globalAlpha=.7+.2*beat;
     x.beginPath();x.arc(-31,18,1.6,0,7);x.arc(32,17,1.4,0,7);x.arc(0,27,1.5,0,7);x.fill();
     x.globalAlpha=1;x.restore();
 
@@ -8449,13 +8724,49 @@ function drawShoeBoxCartoonBackground(){
     x.save();x.translate(px,py);x.rotate(a);x.fillStyle='#fff0c9';x.strokeStyle='#bb8657';x.lineWidth=2;
     x.beginPath();x.moveTo(-14,-8);x.lineTo(13,-11);x.lineTo(17,8);x.lineTo(-11,10);x.closePath();x.fill();x.stroke();x.restore();
   }
-  // Ambient floating dust; no game physics or collisions.
-  for(let i=0;i<17;i++){
-    const px=36+(i*113.31)%888,py=35+((i*83.11+t*(4+i%3))%480);
-    x.globalAlpha=.18+.12*Math.sin(t*1.6+i);x.fillStyle=i%2?'#fff9dc':'#a8794b';
-    x.beginPath();x.arc(px,py,1.5+(i%3)*.5,0,Math.PI*2);x.fill();
-  }
   x.restore();
+}
+
+// V14: cache the static shoebox backdrop, render its drifting dust separately.
+// The cache is independent of tower, enemy and projectile caches.
+let socktdV14BackdropEnabled=true;
+try{socktdV14BackdropEnabled=localStorage.getItem('socktdV14Backdrop')!=='off';}catch(_){}
+let socktdV14BackdropCanvas=null;
+let socktdV14BackdropContext=null;
+let socktdV14BackdropBuilds=0;
+function socktdV14DrawDust(){
+ const t=performance.now()/1000;
+ x.save();
+ for(let i=0;i<17;i++){
+  const px=36+(i*113.31)%888,py=35+((i*83.11+t*(4+i%3))%480);
+  x.globalAlpha=.18+.12*Math.sin(t*1.6+i);x.fillStyle=i%2?'#fff9dc':'#a8794b';
+  x.beginPath();x.arc(px,py,1.5+(i%3)*.5,0,Math.PI*2);x.fill();
+ }
+ x.restore();
+}
+function socktdV14DrawBoxBackground(){
+ if(!socktdV14BackdropEnabled){
+  drawShoeBoxCartoonBackground();
+  socktdV14DrawDust();
+  return;
+ }
+ if(!socktdV14BackdropCanvas){
+  const canvas=document.createElement('canvas');
+  canvas.width=960;canvas.height=560;
+  const ctx=canvas.getContext('2d',{alpha:false});
+  if(!ctx){drawShoeBoxCartoonBackground();socktdV14DrawDust();return;}
+  const previous=x;
+  try{
+   x=ctx;
+   x.setTransform(1,0,0,1,0,0);
+   drawShoeBoxCartoonBackground();
+   socktdV14BackdropCanvas=canvas;
+   socktdV14BackdropContext=ctx;
+   socktdV14BackdropBuilds++;
+  }finally{x=previous;}
+ }
+ x.drawImage(socktdV14BackdropCanvas,0,0);
+ socktdV14DrawDust();
 }
 function drawShoeBoxCartoonPathDetails(p){
   x.save();
@@ -9182,11 +9493,62 @@ function drawSocktdShroomArmy(e){
  x.fillStyle='#f1f6ec';x.fillText('SHROOM ARMY!',0,-44);
  x.restore();
 }
+// V12: shared, phase-indexed enemy sprites. Each enemy type reuses the same
+// detailed artwork; movement, HP, hits, ice, tint and special states remain live.
+const socktdV12EnemySprites=new Map();
+const socktdV12EnemyStats={hits:0,misses:0,bypasses:0};
+let socktdV12EnemyCacheEnabled=true;
+try{socktdV12EnemyCacheEnabled=localStorage.getItem('socktdV12EnemyCache')!=='off';}catch(_){}
+function socktdV12DrawEnemy(e){
+ if(!socktdV12EnemyCacheEnabled||!socktdV8CacheEnabled||!socktdGfx().details||
+    e.dead||e.hit>0||e.iceHit>0||e.flash>0||e.type==='boss'||
+    performance.now()<(e.midasUntil||0)||
+    performance.now()<(e.paintTintUntil||0)||
+    performance.now()<(e.fossilAmberUntil||0)||
+    performance.now()<(e.smurfCatUntil||0)){
+  socktdV12EnemyStats.bypasses++;monster(e);return;
+ }
+ // Sample 48 walking poses, reused by every enemy of the same kind.
+ // Unlike slowing down model redraws, moving enemies always blit every frame.
+ const phase=((Math.round(e.walk*7.639437268410976)%48)+48)%48;
+ const key=e.type+'|'+phase+'|'+(socktdGfx().shadows?'s':'n');
+ let sprite=socktdV12EnemySprites.get(key);
+ if(!sprite){
+  socktdV12EnemyStats.misses++;
+  const c=document.createElement('canvas');c.width=160;c.height=160;
+  const ctx=c.getContext('2d',{alpha:true});
+  const prev=x;
+  try{
+   x=ctx;ctx.translate(80,80);
+   // Use an isolated copy so enemy positions and gameplay values never change.
+   const proxy={...e,x:0,y:0,walk:phase*Math.PI*2/48,hp:1,max:1,flash:0};
+   monster(proxy);
+   sprite=c;
+   socktdV12EnemySprites.set(key,sprite);
+   // Keep memory bounded even when many enemy types appear.
+   if(socktdV12EnemySprites.size>480){
+    const first=socktdV12EnemySprites.keys().next().value;
+    socktdV12EnemySprites.delete(first);
+   }
+  }catch(err){x=prev;monster(e);return;}
+  finally{x=prev;}
+ }else socktdV12EnemyStats.hits++;
+ // The sprite includes a full HP bar. Cover it and redraw the live HP value.
+ if(e.type==='frog'){
+  const phase=((e.walk%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
+  const lift=Math.max(0,Math.sin(phase));
+  x.save();x.globalAlpha=.22*(1-lift*.5);x.fillStyle='#123b57';
+  x.beginPath();x.ellipse(e.x,e.y+29,24+lift*5,5+lift*2,0,0,Math.PI*2);x.fill();x.restore();
+ }
+ x.drawImage(sprite,e.x-80,e.y-80);
+ x.fillStyle='#321';x.fillRect(e.x-22,e.y-36,44,5);
+ x.fillStyle='#62d66b';x.fillRect(e.x-22,e.y-36,44*Math.max(0,e.hp/e.max),5);
+}
 function drawSocktdOrbitEnemy(e){
  const c=e.orbitCapture;
- if(!c||e.dead){if(performance.now()<(e.smurfCatUntil||0))drawSocktdShroomArmy(e);else monster(e);drawFossilAmberPrison(e);return;}
+ if(!c||e.dead){if(performance.now()<(e.smurfCatUntil||0))drawSocktdShroomArmy(e);else socktdV12DrawEnemy(e);drawFossilAmberPrison(e);return;}
  const sys=c.system,now=performance.now();
- if(sys.released||now>=sys.until){if(now<(e.smurfCatUntil||0))drawSocktdShroomArmy(e);else monster(e);drawFossilAmberPrison(e);return;}
+ if(sys.released||now>=sys.until){if(now<(e.smurfCatUntil||0))drawSocktdShroomArmy(e);else socktdV12DrawEnemy(e);drawFossilAmberPrison(e);return;}
  const age=(now-sys.born)/1000,angle=age*2.6*(c.index%2?-1:1)+c.index*2.094;
  const ox=sys.x+Math.cos(angle)*(38+c.index*8);
  const oy=sys.y+Math.sin(angle)*(19+c.index*5);
@@ -9196,7 +9558,7 @@ function drawSocktdOrbitEnemy(e){
  x.shadowColor='#b37bff';x.shadowBlur=14;
  // Render existing monster model at orbit location without mutating its actual path coordinates.
  const px=e.x,py=e.y;
- try{e.x=ox;e.y=oy;monster(e);drawFossilAmberPrison(e);}
+ try{e.x=ox;e.y=oy;socktdV12DrawEnemy(e);drawFossilAmberPrison(e);}
  finally{e.x=px;e.y=py;x.restore();}
 }
 
@@ -9254,7 +9616,7 @@ function updateSocktdMirrorClones(){
  }
 }
 
-function draw(){updateMoneyBills();x.setTransform((window.socktdGraphics?.resolution||1),0,0,(window.socktdGraphics?.resolution||1),0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){drawShoeBoxCartoonBackground();}if(map==='closet'){drawMessyClosetBackground();}if(map==='hall'){drawChaoticHallBackground();}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let q of p.slice(1))x.lineTo(q.x,q.y);x.lineWidth=map==='box'?66:56;x.strokeStyle=map==='box'?'#653a29':map==='closet'?'#59405c':'#6c3136';x.stroke();x.lineWidth=map==='box'?57:42;x.strokeStyle=map==='box'?'#e0a464':map==='closet'?'#a788ba':'#b34d53';x.stroke();if(map==='box'){x.save();x.lineWidth=3;x.strokeStyle='rgba(255,239,190,.65)';x.setLineDash([7,15]);x.stroke();x.setLineDash([]);x.restore();drawShoeBoxCartoonPathDetails(p);}if(map==='hall')drawChaoticHallPathDetails(p);drawBeeHoneyPuddles();drawSocktdSmurfSlime();if(socktdVisualDensity()>0)drawSocktdMoldEffects();drawSocktdOrbitSystems();drawSocktdMirrorClones();for(let [obstacleIndex,o] of obs().entries()){if(map==='box'){drawShoeBoxPackagingObstacle(o,obstacleIndex);continue;}if(map==='closet'){drawMessyClosetObstacle(o);continue;}if(map==='hall'){drawChaoticHallObstacle(o);continue;}if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
+function draw(){updateMoneyBills();x.setTransform((window.socktdGraphics?.resolution||1),0,0,(window.socktdGraphics?.resolution||1),0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.setLineDash([]);let p=activeWavePath||currentPath||maps[map];x.fillStyle=map==='box'?'#d4a66d':map==='closet'?'#8a6244':'#d8d0bf';x.fillRect(0,0,960,560);if(map==='box'){socktdV14DrawBoxBackground();}if(map==='closet'){drawMessyClosetBackground();}if(map==='hall'){drawChaoticHallBackground();}x.beginPath();x.moveTo(p[0].x,p[0].y);for(let qi=1;qi<p.length;qi++)x.lineTo(p[qi].x,p[qi].y);x.lineWidth=map==='box'?66:56;x.strokeStyle=map==='box'?'#653a29':map==='closet'?'#59405c':'#6c3136';x.stroke();x.lineWidth=map==='box'?57:42;x.strokeStyle=map==='box'?'#e0a464':map==='closet'?'#a788ba':'#b34d53';x.stroke();if(map==='box'){x.save();x.lineWidth=3;x.strokeStyle='rgba(255,239,190,.65)';x.setLineDash([7,15]);x.stroke();x.setLineDash([]);x.restore();drawShoeBoxCartoonPathDetails(p);}if(map==='hall')drawChaoticHallPathDetails(p);drawBeeHoneyPuddles();drawSocktdSmurfSlime();if(socktdVisualDensity()>0)drawSocktdMoldEffects();drawSocktdOrbitSystems();drawSocktdMirrorClones();for(let [obstacleIndex,o] of obs().entries()){if(map==='box'){drawShoeBoxPackagingObstacle(o,obstacleIndex);continue;}if(map==='closet'){drawMessyClosetObstacle(o);continue;}if(map==='hall'){drawChaoticHallObstacle(o);continue;}if(o.kind==='shoe'){x.fillStyle='#334a72';x.beginPath();x.roundRect(o.x,o.y+12,o.w,o.h-12,18);x.fill();x.fillStyle='#e8edf5';for(let i=0;i<4;i++)x.fillRect(o.x+30+i*18,o.y+18,12,3)}else if(o.kind==='box'){x.fillStyle='#9a6338';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#d9a66c';x.lineWidth=5;x.beginPath();x.moveTo(o.x+o.w/2,o.y);x.lineTo(o.x+o.w/2,o.y+o.h);x.stroke();}else if(o.kind==='clothes'){x.fillStyle='#8f5c9f';x.fillRect(o.x,o.y,o.w,o.h);for(let i=0;i<5;i++){x.fillStyle=i%2?'#e7a3b3':'#6ca7c8';x.fillRect(o.x+8+i*28,o.y+5,22,o.h-10)}}else if(o.kind==='shelf'){x.fillStyle='#6b4028';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#d7b37c';for(let i=0;i<4;i++)x.fillRect(o.x+10+i*27,o.y+7,20,o.h-14)}else if(o.kind==='door'){x.fillStyle='#7b5b42';x.fillRect(o.x,o.y,o.w,o.h);x.strokeStyle='#cba97e';x.strokeRect(o.x+10,o.y+12,o.w-20,o.h-24);x.fillStyle='#e2c16d';x.beginPath();x.arc(o.x+o.w-20,o.y+o.h/2,5,0,7);x.fill()}else{x.fillStyle='#725e4d';x.fillRect(o.x,o.y,o.w,o.h);x.fillStyle='#b7a38e';for(let i=0;i<5;i++)x.fillRect(o.x+8+i*28,o.y+8,18,8)}}if(infoTower){
   x.save();
   const rr=infoTower.range, cx=infoTower.x, cy=infoTower.y;
   // Premium range indicator: soft black tint + layered rings + cardinal ticks.
@@ -9304,19 +9666,122 @@ draw=function(){
  x.beginPath();x.arc(px,py,3,0,Math.PI*2);x.fill();x.restore();
 };
 let gamePaused=false;
-function loop(){if(socktdDiceLocked()&&!socktdDiceModalPause){selected='dice';fuseMode=false;}socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused||socktdDiceModalPause){requestAnimationFrame(loop);return}if(mpStarted&&mpRole==='guest'){mpDrawSmoothedGuest();requestAnimationFrame(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
+
+/* Sock TD performance diagnostics (F8 toggles overlay). Rolling samples, no network. */
+const socktdPerfV3={on:false,sim:0,render:0,base:0,extras:0,frames:0,draws:0,last:performance.now(),fps:0,renderFps:0,stamp:0,rafGap:0,rafSamples:0,lastRaf:0,frameWall:0};
+(function(){
+ const panel=document.createElement('div');panel.id='socktdPerfV3Panel';
+ panel.style.cssText='position:fixed;right:8px;top:8px;z-index:999999;pointer-events:none;white-space:pre;font:12px/1.5 monospace;color:#b9f8e8;background:rgba(4,12,24,.88);border:1px solid #38d6be;border-radius:8px;padding:9px;display:none';
+ panel.textContent='Performance monitor loading...';
+ const attach=()=>{if(!panel.isConnected)document.body.appendChild(panel)};
+ if(document.body)attach();else document.addEventListener('DOMContentLoaded',attach,{once:true});
+ const toggle=()=>{socktdPerfV3.on=!socktdPerfV3.on;attach();panel.style.display=socktdPerfV3.on?'block':'none';button.textContent=socktdPerfV3.on?'Hide FPS Stats':'Show FPS Stats';button.setAttribute('aria-pressed',String(socktdPerfV3.on));};
+ const button=document.createElement('button');button.type='button';button.id='socktdPerfToggle';button.textContent='Show FPS Stats';button.setAttribute('aria-label','Toggle performance diagnostics');button.setAttribute('aria-pressed','false');
+ button.style.cssText='position:fixed;bottom:12px;left:12px;z-index:999998;background:#103c4d;color:#fff;border:2px solid #48dcca;border-radius:10px;padding:9px 12px;font:700 12px system-ui;cursor:pointer;box-shadow:0 3px 12px #0008;max-width:140px;touch-action:manipulation';
+ button.addEventListener('click',toggle);
+ const fastButton=document.createElement('button');
+ fastButton.type='button';fastButton.id='socktdFastCanvasToggle';
+ fastButton.textContent='Fast Effects: ON';
+ fastButton.title='Limits costly canvas glow blur. Click to compare performance.';
+ fastButton.style.cssText='position:fixed;bottom:56px;left:12px;z-index:999998;background:#21465b;color:white;border:2px solid #76bcf0;border-radius:10px;padding:8px 10px;font:700 12px system-ui;cursor:pointer;touch-action:manipulation';
+ fastButton.addEventListener('click',()=>{window.socktdFastCanvas.enabled=!window.socktdFastCanvas.enabled;fastButton.textContent='Fast Effects: '+(window.socktdFastCanvas.enabled?'ON':'OFF');});
+ const attachFastButton=()=>{};
+ if(document.body)attachFastButton();else document.addEventListener('DOMContentLoaded',attachFastButton,{once:true});
+
+ const attachButton=()=>{};
+ if(document.body)attachButton();else document.addEventListener('DOMContentLoaded',attachButton,{once:true});
+ document.addEventListener('keydown',e=>{if(e.key==='F8'&&!e.repeat){e.preventDefault();toggle();}});
+ socktdPerfV3.show=function(){
+  const now=performance.now();if(now-this.last<1000)return;
+  const elapsed=(now-this.last)/1000;
+  this.fps=Math.round(this.frames/elapsed);this.renderFps=Math.round(this.draws/elapsed);
+  if(this.on){panel.textContent='SOCK TD PERFORMANCE  [F8]\nSimulation: '+(this.sim/Math.max(1,this.frames)).toFixed(1)+' ms/frame\nCanvas base: '+(this.base/Math.max(1,this.draws)).toFixed(1)+' ms/draw\nExtra effects: '+(this.extras/Math.max(1,this.draws)).toFixed(1)+' ms/draw\nTotal canvas: '+(this.render/Math.max(1,this.draws)).toFixed(1)+' ms/draw\nLoop FPS: '+this.fps+' | Draw FPS: '+this.renderFps+'\nRAF interval: '+(this.rafGap/Math.max(1,this.rafSamples)).toFixed(1)+' ms'+'\nUnmeasured/frame: '+Math.max(0,(this.rafGap/Math.max(1,this.rafSamples))-(this.sim/Math.max(1,this.frames))-(this.render/Math.max(1,this.frames))).toFixed(1)+' ms'+'\nFrame scheduler: '+(window.socktdV5Scheduler||'raf').toUpperCase()+'\nConfigured FPS cap: '+(window.socktdGraphics&&window.socktdGraphics.fpsLimit||60)+'\nFast Effects: '+(window.socktdFastCanvas.enabled?'ON':'OFF')+'\nV11 RAF callbacks: '+(window.socktdV11Metrics?window.socktdV11Metrics.raf:0)+' | skipped: '+(window.socktdV11Metrics?window.socktdV11Metrics.skipped:0)+'\nV11 draw wall: '+(window.socktdV11Metrics&&window.socktdV11Metrics.draw?(window.socktdV11Metrics.drawMs/window.socktdV11Metrics.draw).toFixed(1):'0.0')+' ms | peak: '+(window.socktdV11Metrics?window.socktdV11Metrics.peakDraw.toFixed(1):'0.0')+' ms\nEnemies: '+en.length+' | Socks: '+tw.length;}
+  this.frames=0;this.draws=0;this.sim=0;this.render=0;this.base=0;this.extras=0;this.rafGap=0;this.rafSamples=0;this.last=now;if(window.socktdV11Metrics){const m=window.socktdV11Metrics;m.raf=0;m.draw=0;m.skipped=0;m.rafMs=0;m.drawMs=0;m.peakDraw=0;}
+ };
+})();
+
+// V7: fixed-rate simulation with an independent RAF renderer in HYBRID mode.
+window.socktdV5Scheduler='hybrid';
+window.socktdV7HybridActive=true;
+window.socktdV7SimTimer=null;
+window.socktdV7RenderPending=false;
+window.socktdV7LastRender=0;
+window.socktdV7NextSim=0;
+window.socktdV7Draw=function(){};
+window.socktdV5Schedule=function(cb){
+  if(window.socktdV5Scheduler==='hybrid'){
+    const cap=Math.max(15,Math.min(120,Number(window.socktdGraphics&&window.socktdGraphics.fpsLimit)||60));
+    const step=1000/cap, now=performance.now();
+    if(!window.socktdV7NextSim || now-window.socktdV7NextSim>step*4)window.socktdV7NextSim=now+step;
+    else window.socktdV7NextSim+=step;
+    window.socktdV7SimTimer=setTimeout(cb,Math.max(1,Math.ceil(window.socktdV7NextSim-now)));
+  }else if(window.socktdV5Scheduler==='timer'){
+    const cap=Math.max(15,Math.min(120,Number(window.socktdGraphics&&window.socktdGraphics.fpsLimit)||60));
+    const now=performance.now();
+    setTimeout(cb,Math.max(1,Math.ceil(1000/cap-(now-(window.socktdV6LastTick||now)))));
+  }else requestAnimationFrame(cb);
+};
+(function(){
+ const makeButton=()=>{
+  return; // production: debug control removed
+  if(document.getElementById('socktdV5SchedulerBtn'))return;
+  const btn=document.createElement('button');btn.id='socktdV5SchedulerBtn';btn.textContent='Frame mode: HYBRID';
+  Object.assign(btn.style,{position:'fixed',left:'12px',bottom:'112px',zIndex:'2147483000',padding:'9px 12px',border:'2px solid #51c9ff',borderRadius:'10px',background:'#173950',color:'#fff',fontWeight:'bold',cursor:'pointer'});
+  btn.onclick=()=>{
+   const modes=['hybrid','raf','timer'];window.socktdV5Scheduler=modes[(modes.indexOf(window.socktdV5Scheduler)+1)%modes.length];
+   window.socktdGraphicsLastFrame=0;window.socktdV6LastTick=0;window.socktdV7NextSim=0;
+   btn.textContent='Frame mode: '+window.socktdV5Scheduler.toUpperCase();
+  };
+  document.body.appendChild(btn);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',makeButton);else makeButton();
+})();
+// V11: RAF-driven rendering with a drift-free deadline and vsync-aware tolerance.
+// V10's strict 16 ms threshold can skip a whole 60 Hz refresh when RAF arrives
+// just under 16.67 ms, resulting in ~30-45 visible draws per second.
+window.socktdV11Metrics={raf:0,draw:0,skipped:0,rafMs:0,lastRaf:0,drawMs:0,peakDraw:0};
+(function renderHybrid(rafTime){
+ requestAnimationFrame(renderHybrid);
+ const m=window.socktdV11Metrics;
+ const now=typeof rafTime==='number'?rafTime:performance.now();
+ if(m.lastRaf>0){const gap=now-m.lastRaf;if(gap>0&&gap<250)m.rafMs+=gap;}
+ m.lastRaf=now;m.raf++;
+ if(window.socktdV5Scheduler!=='hybrid'||typeof window.socktdV7Draw!=='function')return;
+ if(gamePaused||socktdDiceModalPause||(mpStarted&&mpRole==='guest'))return;
+ const cap=Math.max(15,Math.min(120,Number(window.socktdGraphics&&window.socktdGraphics.fpsLimit)||60));
+ const step=1000/cap;
+ const elapsed=now-window.socktdV7LastRender;
+ // A 60 Hz display reports ~16.6ms between RAF callbacks; allow for jitter
+ // without drawing faster than the monitor's own callback cadence.
+ if(window.socktdV7LastRender&&elapsed<step-Math.min(2.5,step*.16)){
+  m.skipped++;return;
+ }
+ window.socktdV7LastRender=now;
+ const start=performance.now();
+ window.socktdV7Draw();
+ const cost=performance.now()-start;
+ m.draw++;m.drawMs+=cost;m.peakDraw=Math.max(m.peakDraw,cost);
+})();
+window.socktdV7Draw=function(){
+const socktdDrawStart=performance.now();
+draw();const socktdBaseDrawEnd=performance.now();tw.forEach(t=>{if(t.attack>0)attackFx(t)});drawClockMiniShots();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();socktdDrawIceFreeze();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();drawClockRewindOverlays();drawWizardEffects();socktdDrawFireBurn();drawSocktdDiceShots();tw.forEach(t=>{if(t.k==='gravity'&&!t.fused)drawSocktdGravityPulse(t)});if(socktdVisualDensity()>0){drawSocktdGhostTrails();drawSocktdSoulVortices();drawSockAbilityFx();}
+const socktdDrawEnd=performance.now();
+socktdPerfV3.draws++;socktdPerfV3.base+=socktdBaseDrawEnd-socktdDrawStart;socktdPerfV3.extras+=socktdDrawEnd-socktdBaseDrawEnd;socktdPerfV3.render+=socktdDrawEnd-socktdDrawStart;
+};
+function loop(){const socktdPerfStart=performance.now();window.socktdV6LastTick=socktdPerfStart;if(socktdPerfV3.lastRaf){socktdPerfV3.rafGap+=socktdPerfStart-socktdPerfV3.lastRaf;socktdPerfV3.rafSamples++;}socktdPerfV3.lastRaf=socktdPerfStart;if(socktdDiceLocked()&&!socktdDiceModalPause){selected='dice';fuseMode=false;}socktdMoldUpdate();for(let i=socktdSmurfSlime.length-1;i>=0;i--)if(performance.now()>=socktdSmurfSlime[i].until)socktdSmurfSlime.splice(i,1);updateSocktdMirrorClones();for(let i=socktdOrbitSystems.length-1;i>=0;i--)if(performance.now()>=socktdOrbitSystems[i].until){socktdOrbitRelease(socktdOrbitSystems[i]);socktdOrbitSystems.splice(i,1);}for(let i=beeHoneyPuddles.length-1;i>=0;i--)if(performance.now()>=beeHoneyPuddles[i].until)beeHoneyPuddles.splice(i,1);if(gamePaused||socktdDiceModalPause){window.socktdV5Schedule(loop);return}if(mpStarted&&mpRole==='guest'){mpDrawSmoothedGuest();window.socktdV5Schedule(loop);return}if(active){if(--timer<=0&&left>0){spawn(type());left--;timer=Math.max(20,30-Math.floor(wave/4))}if(tutorialWavePending&&wave===1&&left===0&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialWavePending=false;tutorialStep=5;tutorialDialogue("OH NO! THERE ARE TOO MANY OF THEM! QUICK, PLACE SOME BACKUP!");}if(tutorialStep===6&&wave===2&&gold>=35&&!tutorialActive&&!gamePaused&&!tutorialFusionPending&&!tutorialFusionDialogueShown){gamePaused=true;tutorialFusionPending=true;tutorialFusionDialogueShown=true;disableTutorialButtons();enableTutorialButton('fuse');tutorialDialogue("We are winning, but we need to keep the upper hand, so let's use the power of fusing. Press the Fuse button and click on both socks to fuse them.");}if(tutorialStep===7&&wave===3&&!tutorialActive&&!gamePaused){gamePaused=true;tutorialGambleUnlocked=true;tutorialForceFirstGambleLoss=true;disableTutorialButtons();enableTutorialButton('gamble');tutorialDialogue("Nice fusion! It really shows the power of socks. But we are getting low on money like this. LET'S GAMBLE.");$('msg').textContent='Tutorial: Gamble has been unlocked!';}if(!left&&!en.length){socktdStats.highestWave=Math.max(socktdStats.highestWave,wave);socktdDailyCurrent().waves++;socktdDailySave();socktdTrackAchievement();active=false;activeWavePath=null;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);}if(wave>0&&!gameOver){if(speedrunModeActive){if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}if(!speedrunUpgradePending){startWave();$('msg').textContent='⚡ Speedrun • Wave '+wave+' complete! Wave '+(wave+1)+' started instantly.'}}else if(!waveStartTimeout){waveStartTimeout=setTimeout(()=>{waveStartTimeout=null;startWave()},5000);$('msg').textContent='Wave '+wave+' complete! Next wave starts in 5 seconds.'}}}}
+const socktdEnemyFrameNow=performance.now();
 for(let e of en){
   if(window.sandboxFreeze){continue;}
-  if(performance.now()>=(e.fossilAmberUntil||0))e.walk+=.25;
+  if(socktdEnemyFrameNow>=(e.fossilAmberUntil||0))e.walk+=.25;
   const p=e.path||activeWavePath||currentPath||maps[map];
   const lengths=e.pathLengths||pathLengths(p);
   e.path=p;e.pathLengths=lengths;
   const total=lengths[lengths.length-1];
-  const wizardNow=performance.now();
+  const wizardNow=socktdEnemyFrameNow;
   updateWizardEffects(e,wizardNow);
   const wizardStatus=e.wizardEffect;
   const wizardSpeedMult=wizardStatus==='freeze'?0:wizardStatus==='slow'?.50:1;
-  const nowFx=performance.now();
+  const nowFx=socktdEnemyFrameNow;
   const extraSpeed=(nowFx<(e.thunderStunUntil||0))?0:
     (nowFx<(e.midasSlowUntil||0)? .6:1)*
     (nowFx<(e.soapSlowUntil||0)? .75:1);
@@ -9377,7 +9842,7 @@ for(let e of en){
   }
   const pos=pointAtDistance(p,lengths,e.distAlongPath);
   e.x=pos.x;e.y=pos.y;
-  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.k==='mirror'&&!t.fused&&socktdAbilityUnlocked(t)){
+  e.slow=Math.min(1,e.slow+.015);if(e.hit>0)e.hit--;if(e.flash>0)e.flash--;if(e.iceHit>0)e.iceHit--}en.forEach(e=>{if(e.dead)e.death=(e.death||0)+1});en=en.filter(e=>!e.dead||e.death<10);if(life<=0)triggerGameOver();socktdRebuildEnemyGrid();for(let t of tw){if(fpsActive&&t===fpsTower){t.attack=0;t.attackTarget=null;continue;}if(t.k==='portal'&&!t.fused){t.portalTimer=(t.portalTimer||0)+1;if(t.portalTimer>=1800){t.portalTimer=0;t.portalTentacleLife=70;t.portalTentacleAngle=(Math.random()<.5?-1:1)*(0.38+Math.random()*0.32);}}if(t.portalTentacleLife>0)t.portalTentacleLife--;if(t.attack>0)t.attack--;if(t.k==='thunder'&&!t.fused&&Math.random()<0.012)spawnThunderSpark(t);if(t.k==='mirror'&&!t.fused&&socktdAbilityUnlocked(t)){
  const mirrorNow=performance.now();
  if(t.mirrorNext===undefined)t.mirrorNext=mirrorNow+14000;
  if(mirrorNow>=t.mirrorNext){
@@ -9437,7 +9902,7 @@ if(t.k==='bee'&&!t.fused&&socktdAbilityUnlocked(t)){
    sockFx('newSock',e.x,e.y,38,{label:'STICKY HONEY!',color:'#ffd24b'});
   }else t.beeHoneyNext=beeNow+400; // Wait for a target on the path.
  }
-}if(t.cool-->0)continue;let target=null,bd=1e9;for(let e of en){let z=dist(t,e);if(z<t.range&&z<bd){target=e;bd=z}}if(target){t.attack=9;t.attackTarget={x:target.x,y:target.y};if(mpStarted&&mpRole==='host')mpSend({type:'attackFx',i:tw.indexOf(t),target:{x:target.x,y:target.y,type:target.type}});let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused){spawnFireball(t,target);if(socktdAbilityUnlocked(t))socktdApplyFireBurn(target,t);}if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);if(socktdAbilityUnlocked(t)){const iceNow=performance.now();if(iceNow>=(t.socktdIceFreezeReadyAt||0)){socktdApplyIceFreeze(target);socktdPlayIceAbilitySound();t.socktdIceFreezeReadyAt=iceNow+7000;}}}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(socktdAbilityUnlocked(t)&&Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&socktdAbilityUnlocked(t)&&!target.dead&&Math.random()<.15){
+}if(t.cool-->0)continue;let target=socktdTargetPick(t);if(target){t.socktdBattle=t.socktdBattle||{shots:0,damage:0,kills:0};t.socktdBattle.shots++;socktdStats.shots++;const estimated=Math.min(Math.max(0,target.hp||0),Math.max(0,t.damage||0));t.socktdBattle.damage+=estimated;socktdStats.damage+=estimated;if(target.hp<=t.damage){t.socktdBattle.kills++;socktdStats.kills++;}socktdDailyCurrent().shots++;if(socktdStats.shots%25===0){socktdDailySave();socktdTrackAchievement()}t.attack=9;t.attackTarget={x:target.x,y:target.y};if(mpStarted&&mpRole==='host')mpSend({type:'attackFx',i:tw.indexOf(t),target:{x:target.x,y:target.y,type:target.type}});let sr=window.speedrunBonuses||{};let srDamage=window.cradminDamageMult*window.sandboxSockModifier*(1+(sr.damage||0)+(sr.training||0)+(sr.overlord||0)+(sr.legendaryGold||0)+(sr.waveMaster||0)*Math.floor(wave/10));if(sr.heavy)srDamage+=sr.heavy;if(sr.fast)srDamage-=sr.fast;if(sr.demon)srDamage*=1;let srType=t.k; if(sr[srType])srDamage*=1+sr[srType]; if(sr.boss&&target.type==='boss')srDamage*=1+sr.boss; if(sr.armor&&['ironjaw','shellbum'].includes(target.type))srDamage*=1+sr.armor; if(sr.lastStand&&life<life*0.25)srDamage*=1+sr.lastStand; if(sr.demon)srDamage*=1+sr.demon*0.5;if(t.fused&&(t.name||'')==='Meteor Sock'){spawnMeteorShot(t,target)};if(t.k==='ghost'&&!t.fused)spawnSocktdGhostTrail(t,target);if(t.k==='fire'&&!t.fused){spawnFireball(t,target);if(socktdAbilityUnlocked(t))socktdApplyFireBurn(target,t);}if(t.k==='ice'&&!t.fused){spawnIceflake(t,target);if(socktdAbilityUnlocked(t)){const iceNow=performance.now();if(iceNow>=(t.socktdIceFreezeReadyAt||0)){socktdApplyIceFreeze(target);socktdPlayIceAbilitySound();t.socktdIceFreezeReadyAt=iceNow+7000;}}}if(t.k==='wizard'&&!t.fused){spawnWizardWave(t,target);if(socktdAbilityUnlocked(t)&&Math.random()<0.25)applyWizardEffect(target);}if(t.k==='ninja'&&!t.fused){spawnKunai(t,target);}if(t.k==='golden'&&!t.fused){spawnMoneyBill(t,target);}if(t.k==='laundry'&&!t.fused){spawnSoap(t,target);}if(t.k==='portal'&&!t.fused){spawnPortalShot(t,target);}if(t.k==='fight'&&!t.fused){spawnFightPunch(t,target);}if(t.k==='clock'&&!t.fused){spawnClockMiniShot(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));}if(t.fused&&(t.name||'').toLowerCase().includes('undefined')){spawnSymbolShot(t,target);}if(t.fused&&(t.name||'').includes('Lava')){spawnLavaShot(t,target);}if(t.fused&&(t.name||'')==='Crystal Sock'){spawnCrystalShot(t,target);}if(t.fused&&(t.name||'').includes('Prism')){spawnPrismShot(t,target);}if(t.fused&&(t.name||'').includes('Cosmic')){spawnCosmicShot(t,target);}if(t.fused&&(t.name||'').includes('Nature')){spawnMudShot(t,target);}if(t.k==='thunder'&&!t.fused){spawnThunderChain(t,target);}if(t.fused&&(t.name||'').includes('Energy')){spawnEnergyChain(t,target);}if(t.fused&&t.name==='Storm Sock'){spawnStormShot(t,target);}if(t.fused&&(t.name||'').includes('Shadow')){spawnShadowSpiral(t,target);}if(t.fused&&t.name==='Plasma Sock'){spawnPlasmaDonut(t,target);}if(t.k==='golden'&&!t.fused&&socktdAbilityUnlocked(t)&&!target.dead&&Math.random()<.15){
   target.midasUntil=performance.now()+2000;
   target.midasSlowUntil=target.midasUntil;
   sockFx('midas',target.x,target.y,55,{target});
@@ -9449,7 +9914,25 @@ if(t.fused&&['Electromagnet Sock','Soulfire Sock','Mold Sock'].includes(t.name))
   newFusionSpecial(t,target,t.damage*srDamage);
 if((t.k!=='clock'||t.fused)&&(!t.fused||(!['Crystal Sock','Cosmic Sock','Nature Sock'].includes(t.name))))hit(target,t.damage*srDamage*(isCounter(t,target)?1.5:1)*(!t.fused&&t.k==='dice'&&t.diceAttackFace===4?2:1));if(!t.fused&&['ninja','fight','golden','laundry','thunder','portal'].includes(t.k))
   sockAbilityHit(t,target,t.damage*srDamage*(isCounter(t,target)?1.5:1));
-for(let k of t.parts){if((k==='ice'||k==='laundry')&&socktdAbilityUnlocked(t))target.slow=.6;if(k==='thunder'&&socktdAbilityUnlocked(t))for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);socktdUpdateFireBurn();updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();update();if(!window.socktdGraphics||!window.socktdGraphics.fpsLimit||performance.now()-(window.socktdGraphicsLastFrame||0)>=1000/window.socktdGraphics.fpsLimit){window.socktdGraphicsLastFrame=performance.now();draw();}tw.forEach(t=>{if(t.attack>0)attackFx(t)});drawClockMiniShots();drawStormShots();drawMeteorShots();drawMeteorExplosions();drawCrystalShots();drawIceflakes();socktdDrawIceFreeze();drawPortalShots();drawWizardWaves();drawPlasmaShots();drawMudShots();drawClockRewindOverlays();drawWizardEffects();socktdDrawFireBurn();drawSocktdDiceShots();tw.forEach(t=>{if(t.k==='gravity'&&!t.fused)drawSocktdGravityPulse(t)});if(socktdVisualDensity()>0){drawSocktdGhostTrails();drawSocktdSoulVortices();drawSockAbilityFx();}requestAnimationFrame(loop)}
+for(let k of t.parts){if((k==='ice'||k==='laundry')&&socktdAbilityUnlocked(t))target.slow=.6;if(k==='thunder'&&socktdAbilityUnlocked(t))for(let e of en)if(e!==target&&dist(target,e)<75)hit(e,t.damage*.3)}t.cool=Math.max(1,t.rate/((1+(sr.rate||0)+(sr.overlord||0)+(sr.demon||0)+(t.k==='ninja'?(sr.ninja||0):0))*window.cradminAttackSpeedMult));}}drops.forEach(g=>g.life--);drops=drops.filter(g=>g.life>0);socktdUpdateFireBurn();updateFireballs();updateIceflakes();updateKunais();updateSoap();updateLavaShots();updatePortalShots();updateWizardWaves();updateThunder();updateFightPunches();updateSymbolShots();updatePrismShots();updateCosmicShots();updateMudShots();updatePlasmaShots();updateShadowSpirals();updateEnergy();updateStormShots();updateMeteorShots();updateCrystalShots();// Update DOM counters only when their displayed values may have changed.
+// Canvas rendering is expensive; cap heavy waves at 30 visual frames/second,
+// while simulation, cooldowns, damage and movement continue every game tick.
+if(!window.socktdLastHudUpdate||performance.now()-window.socktdLastHudUpdate>125){
+ window.socktdLastHudUpdate=performance.now();update();
+}
+const socktdRenderNow=performance.now();
+const socktdSimDuration=socktdRenderNow-socktdPerfStart;
+const socktdConfiguredCap=Number(window.socktdGraphics&&window.socktdGraphics.fpsLimit)||60;
+// V5: respect the user's chosen graphics limit; do not silently force 30 FPS in waves.
+const socktdRenderCap=Math.max(15,Math.min(120,socktdConfiguredCap));
+// V6: timer ticks are already paced to the configured cap. Draw on each timer tick;
+// RAF retains its normal graphics FPS limiter. This avoids double throttling.
+if(window.socktdV5Scheduler!=='hybrid' && (window.socktdV5Scheduler==='timer'||!window.socktdGraphicsLastFrame||socktdRenderNow-window.socktdGraphicsLastFrame>=1000/socktdRenderCap-0.75)){
+ window.socktdGraphicsLastFrame=socktdRenderNow;
+ window.socktdV7Draw();
+} // hybrid rendering runs independently via requestAnimationFrame simulation still runs each tick
+socktdPerfV3.frames++;socktdPerfV3.sim+=socktdSimDuration;socktdPerfV3.show();
+window.socktdV5Schedule(loop)}
 
 
 let stormShots=[];
@@ -12071,8 +12554,105 @@ document.addEventListener('fullscreenchange',()=>{
   if(fpsActive){cancelAnimationFrame(fpsAnim);fpsRender();}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fpsActive){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen().catch(()=>{});return;}exitFPSView()}});
-function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10,fireForm=t.k==='fire'?(t.level>=10?'Solar Sock':t.level>=5?'Inferno Sock':'Fire Sock'):t.k==='ice'?(t.level>=10?'Absolute Zero Sock':t.level>=5?'Glacier Guardian':'Ice Sock'):null;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+(fireForm||d0[0])+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
 
+/* Sock TD quality-of-life systems: bulk upgrade, targeting, battle stats and challenges. */
+const SOCKTD_TARGET_MODES=['Closest','First','Last','Strongest','Weakest'];
+let socktdStats={shots:0,damage:0,kills:0,upgrades:0,highestWave:0};
+const socktdAchievementDefs=[['first_upgrade','First Upgrade','Upgrade any sock once',()=>socktdStats.upgrades>=1],['upgrader','Sock Engineer','Buy 25 upgrades',()=>socktdStats.upgrades>=25],['sharpshooter','Sharpshooter','Fire 500 attacks',()=>socktdStats.shots>=500],['damage','Powerhouse','Deal 10,000 damage',()=>socktdStats.damage>=10000],['wave10','Wave Survivor','Reach wave 10',()=>socktdStats.highestWave>=10],['wave25','Defender','Reach wave 25',()=>socktdStats.highestWave>=25]];
+function socktdStoreRead(key,fallback){try{return JSON.parse(localStorage.getItem(key))||fallback}catch(_){return fallback}}
+let socktdAchievements=socktdStoreRead('socktd.achievements.v1',{});
+function socktdTrackAchievement(){if(mpStarted&&mpRole==='guest')return;let newly=[];for(const [id,name,,test] of socktdAchievementDefs)if(!socktdAchievements[id]&&test()){socktdAchievements[id]=Date.now();newly.push(name)}if(newly.length){try{localStorage.setItem('socktd.achievements.v1',JSON.stringify(socktdAchievements))}catch(_){};$('msg').textContent='Achievement unlocked: '+newly.join(', ')+'!';}}
+function socktdDailyKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+let socktdDaily=socktdStoreRead('socktd.daily.v1',{});
+function socktdDailyCurrent(){const key=socktdDailyKey();if(socktdDaily.day!==key){socktdDaily={day:key,upgrades:0,shots:0,waves:0,claimed:{}};socktdDailySave()}return socktdDaily}
+function socktdDailySave(){try{localStorage.setItem('socktd.daily.v1',JSON.stringify(socktdDaily))}catch(_){}}
+const socktdDailyTasks=[['upgrades','Upgrade 5 socks',5,40],['shots','Fire 100 attacks',100,50],['waves','Complete 3 waves',3,60]];
+function socktdDailyClaim(id){const d=socktdDailyCurrent(),task=socktdDailyTasks.find(t=>t[0]===id);if(!task||d.claimed[id]||d[id]<task[2])return;d.claimed[id]=true;gold+=task[3];socktdDailySave();update();socktdOpenProgress();}
+function socktdOpenProgress(){socktdDailyCurrent();let modal=document.getElementById('socktdProgressModal');if(!modal){modal=document.createElement('div');modal.id='socktdProgressModal';modal.className='socktdQolOverlay';modal.innerHTML='<section class="socktdQolPanel"><button class="socktdQolClose" onclick="document.getElementById(\'socktdProgressModal\').remove()">✕</button><h2>Achievements & Daily Challenges</h2><div id="socktdProgressBody"></div></section>';document.body.appendChild(modal)}const d=socktdDailyCurrent();document.getElementById('socktdProgressBody').innerHTML='<h3>Achievements</h3>'+socktdAchievementDefs.map(([id,name,desc])=>'<div class="socktdQolItem">'+(socktdAchievements[id]?'✓ ':'○ ')+'<b>'+name+'</b> — '+desc+'</div>').join('')+'<h3>Daily Challenges — '+d.day+'</h3>'+socktdDailyTasks.map(([id,name,goal,reward])=>'<div class="socktdQolItem"><b>'+name+'</b> ('+Math.min(goal,d[id])+'/'+goal+') — '+reward+'G '+(d.claimed[id]?'✓ Claimed':d[id]>=goal?'<button onclick="socktdDailyClaim(\''+id+'\')">Claim</button>':'')+'</div>').join('')+'<p style="opacity:.7">Daily progress resets at local midnight. Rewards are stored on this device.</p>'}
+function socktdUpgradeCost(t){return 25+t.level*35}
+function socktdUpgradeOne(t){const cost=socktdUpgradeCost(t);if(!t||t.fused||t.level>=10||gold<cost)return false;gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2*(t.challengeDamageMult||1));t.range+=Math.round(14*(t.challengeRangeMult||1));socktdStats.upgrades++;socktdDailyCurrent().upgrades++;socktdDailySave();socktdTrackAchievement();return true}
+function socktdUpgradeAll(kind){
+  const notice=(message)=>{const el=document.getElementById('msg');if(el)el.textContent=message;};
+  if(typeof sockTDChallenge!=='undefined'&&sockTDChallenge&&sockTDChallenge.noUpgrades){notice('Upgrades are disabled in this challenge.');return;}
+  if(typeof mpStarted!=='undefined'&&mpStarted&&mpRole==='guest'){notice('Only the host can use Upgrade All.');return;}
+  const eligible=tw.filter(t=>t&&!t.fused&&t.level<10&&(kind==='all'||t.k===kind));
+  if(!eligible.length){notice('No eligible socks to upgrade.');return;}
+  const total=eligible.reduce((sum,t)=>sum+socktdUpgradeCost(t),0);
+  const old=document.getElementById('socktdBulkConfirm');if(old)old.remove();
+  const overlay=document.createElement('div');overlay.id='socktdBulkConfirm';overlay.className='socktdQolOverlay';
+  const panel=document.createElement('section');panel.className='socktdQolPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label','Confirm bulk upgrade');
+  const heading=document.createElement('h2');heading.textContent='Confirm Upgrades';panel.appendChild(heading);
+  const description=document.createElement('p');description.textContent='Upgrade '+eligible.length+' '+(kind==='all'?'socks':D[kind][0]+' socks')+' by one level each?';panel.appendChild(description);
+  const price=document.createElement('p');price.innerHTML='<strong>Total: '+total+'G</strong> · Available: '+Math.floor(gold)+'G';panel.appendChild(price);
+  const controls=document.createElement('div');controls.className='socktdBulkButtons';
+  const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';cancel.onclick=()=>overlay.remove();
+  const accept=document.createElement('button');accept.type='button';accept.textContent='Upgrade '+eligible.length+' Socks';
+  accept.disabled=gold<total;
+  accept.onclick=()=>{
+    if(gold<total){notice('Not enough gold: '+total+'G needed.');return;}
+    let upgraded=0;
+    for(const tower of eligible){if(tw.includes(tower)&&socktdUpgradeOne(tower))upgraded++;}
+    overlay.remove();
+    if(infoTower&&tw.includes(infoTower))showInfo(infoTower);
+    update();draw();
+    if(typeof mpStarted!=='undefined'&&mpStarted&&mpRole==='host')mpBroadcastState();
+    notice(upgraded+' socks upgraded for '+total+'G.');
+  };
+  controls.append(cancel,accept);panel.appendChild(controls);
+  if(gold<total){const warning=document.createElement('p');warning.textContent='Not enough gold to upgrade all selected socks.';panel.appendChild(warning);}
+  overlay.appendChild(panel);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove();});document.body.appendChild(overlay);
+}
+
+// Rebuild the lightweight enemy grid once per simulation frame, after enemy movement.
+// Only target selection uses this grid; ability and projectile logic stays unchanged.
+const socktdEnemyGridCell=96;
+let socktdEnemyGrid=null;
+function socktdRebuildEnemyGrid(){
+ const grid=new Map();
+ for(const e of en){
+  if(e.dead)continue;
+  const cx=Math.floor(e.x/socktdEnemyGridCell),cy=Math.floor(e.y/socktdEnemyGridCell);
+  const key=cx+','+cy;
+  let bucket=grid.get(key);
+  if(!bucket){bucket=[];grid.set(key,bucket)}
+  bucket.push(e);
+ }
+ socktdEnemyGrid=grid;
+}
+function socktdTargetPick(t){
+ const mode=SOCKTD_TARGET_MODES.includes(t.targetPriority)?t.targetPriority:'Closest';
+ const r=t.range, r2=r*r, cell=socktdEnemyGridCell;
+ const minX=Math.floor((t.x-r)/cell),maxX=Math.floor((t.x+r)/cell);
+ const minY=Math.floor((t.y-r)/cell),maxY=Math.floor((t.y+r)/cell);
+ let chosen=null,score=0;
+ const check=e=>{
+  if(e.dead)return;
+  const dx=e.x-t.x,dy=e.y-t.y,d2=dx*dx+dy*dy;
+  if(d2>=r2)return;
+  let value;
+  if(mode==='First'||mode==='Last')value=Number(e.distAlongPath)||0;
+  else if(mode==='Strongest'||mode==='Weakest')value=e.hp;
+  else value=d2;
+  const higher=mode==='First'||mode==='Strongest';
+  if(!chosen||(higher?value>score:value<score)){chosen=e;score=value}
+ };
+ if(socktdEnemyGrid){
+  for(let cy=minY;cy<=maxY;cy++)for(let cx=minX;cx<=maxX;cx++){
+   const bucket=socktdEnemyGrid.get(cx+','+cy);
+   if(bucket)for(const e of bucket)check(e);
+  }
+ }else for(const e of en)check(e);
+ return chosen;
+}
+function socktdSetTarget(i,mode){const t=tw[i];if(!t||!SOCKTD_TARGET_MODES.includes(mode))return;t.targetPriority=mode;if(mpStarted&&mpRole==='guest')mpSend({type:'guestAction',action:{action:'target',i,mode}});showInfo(t);}
+function socktdInfoExtra(t,i){const st=t.socktdBattle||{shots:0,damage:0,kills:0};const modes=SOCKTD_TARGET_MODES.map(mode=>'<option value="'+mode+'" '+((t.targetPriority||'Closest')===mode?'selected':'')+'>'+mode+'</option>').join('');const ready=t.k==='ice'&&socktdAbilityUnlocked(t)?Math.max(0,Math.ceil(((t.socktdIceFreezeReadyAt||0)-performance.now())/1000))+'s':'See Sock Catalogue for ability details';return '<div class="socktdQolStats"><b>Battle Statistics</b><p>Attacks: '+st.shots+' · Damage: '+Math.floor(st.damage)+' · Kills: '+st.kills+'</p><label>Target Priority: <select onchange="socktdSetTarget('+i+',this.value)">'+modes+'</select></label><p>Ability: '+ready+'</p></div>'}
+function socktdMultiplayerResults(){const summary='Wave '+wave+' · Socks '+tw.length+' · Attacks '+socktdStats.shots+' · Damage '+Math.floor(socktdStats.damage)+' · Kills '+socktdStats.kills+' · Upgrades '+socktdStats.upgrades;let el=document.getElementById('socktdMpResults');if(!el){el=document.createElement('div');el.id='socktdMpResults';el.className='socktdQolResults';const box=$('gameOverStats');box.parentNode.insertBefore(el,box.nextSibling)}el.textContent=mpStarted?'Multiplayer results (host-tracked totals): '+summary:'Run statistics: '+summary;}
+function socktdSetupQol(){if(document.getElementById('socktdProgressButton'))return;const b=document.createElement('button');b.id='socktdProgressButton';b.textContent='🏆 Achievements & Daily';b.onclick=socktdOpenProgress;const records=document.getElementById('recordModal');const panel=records?.querySelector('.recordPanel');if(panel){const section=document.createElement('section');section.className='socktdRecordAchievements';section.innerHTML='<h3>🏆 Achievements & Daily Challenges</h3><p>View your achievements and daily missions here.</p>';b.textContent='🏅 View Achievements & Daily';section.appendChild(b);const close=document.getElementById('recordClose');panel.insertBefore(section,close||null);}else{b.style.display='none';document.body.appendChild(b);}}
+setTimeout(socktdSetupQol,1000);
+function showInfo(t){infoTower=t;let box=$('info'),idx=tw.indexOf(t),fpsButton='<button class="fpsTowerButton" type="button" onclick="enterFPSView('+idx+')">🎯 FPS View</button>',moveButton='<button type="button" onclick="moveTower('+idx+')">↔ Move Sock — $50</button>';if(t.fused){box.classList.remove('hiddenInfo');let fusionStrong=[...new Set((t.parts||[]).map(k=>strongVs[k]).filter(Boolean))].join(' + ')||'No special counter listed';box.innerHTML='<h3>🧬 '+t.name+'</h3><p>Special Fusion Sock</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+fusionStrong+'</b></p>'+fpsButton+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>';return}let d0=D[t.k],cost=25+t.level*35,max=t.level>=10,fireForm=t.k==='fire'?(t.level>=10?'Solar Sock':t.level>=5?'Inferno Sock':'Fire Sock'):t.k==='ice'?(t.level>=10?'Absolute Zero Sock':t.level>=5?'Glacier Guardian':'Ice Sock'):t.k==='thunder'?(t.level>=10?'Tempest Emperor':t.level>=5?'Storm Sentinel':'Thunder Sock'):null;box.classList.remove('hiddenInfo');box.innerHTML='<h3>'+(fireForm||d0[0])+' — Level '+t.level+'</h3><p>A unique sock tower. Better range and power can be unlocked.</p><p>🎯 Range: <b>'+Math.round(t.range)+'</b><br>💥 Damage: <b>'+Math.round(t.damage)+'</b><br>⚡ Fire Rate: <b>'+fireRate(t)+' sec/attack</b><br>🛡️ Strong against: <b>'+strongVs[t.k]+'</b></p>'+fpsButton+(max?'<button disabled>MAX LEVEL</button>':'<button type="button" onclick="upgradeTower('+idx+')">Upgrade $'+cost+'</button>')+moveButton+'<button class="socktdSellBtn" type="button" onclick="openSockSell('+idx+')">💰 Sell</button><button type="button" onclick="hideInfo()">Close</button>'}
+
+const socktdOriginalShowInfo=showInfo;
+showInfo=function(t){const previousBox=$('info');const previousScroll=(previousBox&&!previousBox.classList.contains('hiddenInfo')&&infoTower===t)?previousBox.scrollTop:0;socktdOriginalShowInfo(t);const box=$('info');if(t&&box){const i=tw.indexOf(t);box.insertAdjacentHTML('beforeend',socktdInfoExtra(t,i)+(t.fused?'':'<button type="button" data-socktd-bulk="type">Upgrade All '+D[t.k][0]+' (one level)</button>')+'<button type="button" data-socktd-bulk="all">Upgrade All Socks (one level)</button>');box.querySelectorAll('[data-socktd-bulk]').forEach(btn=>{btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();socktdUpgradeAll(btn.dataset.socktdBulk==='all'?'all':t.k);});});box.scrollTop=previousScroll;box.setAttribute('tabindex','0');box.setAttribute('aria-label','Sock information; scroll for more actions');}};
 let socktdPendingSell=null;
 function socktdSellPrice(t){
   if(!t)return 0;
@@ -12123,8 +12703,8 @@ function confirmSockSell(){
   if(infoTower===t)hideInfo();
   update();draw();closeSockSell();
 }
-function hideInfo(){infoTower=null;$('info').classList.add('hiddenInfo');draw()}function moveTower(i){if(fpsActive)return;let t=tw[i];if(!t)return;if(gold<50){$('msg').textContent='Not enough gold! Moving costs 50 gold.';return}movingTower=t;selected=null;fuseMode=false;first=null;hideInfo();$('msg').textContent='↔ Click a valid place to move this sock. Cost: 50 gold.';const r=C.getBoundingClientRect();draw()}function upgradeTower(i){if(sockTDChallenge&&sockTDChallenge.noUpgrades){$('msg').textContent='🚫 No Upgrades challenge: upgrading is disabled.';return}let t=tw[i];if(mpStarted&&mpRole==='guest'){if(!t||t.fused||t.level>=10)return;let cost=25+t.level*35;if(gold<cost)return;gold-=cost;mpSend({type:'guestAction',action:{action:'upgrade',i}});$('msg').textContent='Upgrade sent to host.';return}if(!t||t.fused)return;if(t.level>=10){$('msg').textContent='MAX LEVEL';showInfo(t);return}let cost=25+t.level*35;if(gold<cost){$('msg').textContent='Not enough gold!';return}gold-=cost;t.level++;t.damage=Math.round(t.damage*1.28+2*(t.challengeDamageMult||1));t.range+=Math.round(14*(t.challengeRangeMult||1));showInfo(t);update();$('msg').textContent=t.level>=10?'MAX LEVEL reached!':(t.k==='fire'?(t.level===5?'Evolution unlocked: INFERNO SOCK!':t.level===10?'Final evolution: SOLAR SOCK!':'Fire Sock upgraded!'):t.k==='ice'?(t.level===5?'Evolution unlocked: GLACIER GUARDIAN!':t.level===10?'Final evolution: ABSOLUTE ZERO SOCK!':'Ice Sock upgraded!'):'Upgrade complete! New model detail unlocked.')}
-function triggerGameOver(){if(gameOver)return;if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}if(speedrunModeActive)saveSpeedrunRecord();if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gameOver=true;active=false;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}else{$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>🏖️ Sandbox runs do not count for records.';}if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Challenge complete — keep pushing your record!';}$('gameOver').classList.remove('hidden');update()}
+function hideInfo(){infoTower=null;$('info').classList.add('hiddenInfo');draw()}function moveTower(i){if(fpsActive)return;let t=tw[i];if(!t)return;if(gold<50){$('msg').textContent='Not enough gold! Moving costs 50 gold.';return}movingTower=t;selected=null;fuseMode=false;first=null;hideInfo();$('msg').textContent='↔ Click a valid place to move this sock. Cost: 50 gold.';const r=C.getBoundingClientRect();draw()}function upgradeTower(i){if(sockTDChallenge&&sockTDChallenge.noUpgrades){$('msg').textContent='🚫 No Upgrades challenge: upgrading is disabled.';return}let t=tw[i];if(mpStarted&&mpRole==='guest'){if(!t||t.fused||t.level>=10)return;let cost=25+t.level*35;if(gold<cost)return;gold-=cost;mpSend({type:'guestAction',action:{action:'upgrade',i}});$('msg').textContent='Upgrade sent to host.';return}if(!t||t.fused)return;if(t.level>=10){$('msg').textContent='MAX LEVEL';showInfo(t);return}let cost=25+t.level*35;if(gold<cost){$('msg').textContent='Not enough gold!';return}socktdUpgradeOne(t);showInfo(t);update();$('msg').textContent=t.level>=10?'MAX LEVEL reached!':(t.k==='fire'?(t.level===5?'Evolution unlocked: INFERNO SOCK!':t.level===10?'Final evolution: SOLAR SOCK!':'Fire Sock upgraded!'):t.k==='ice'?(t.level===5?'Evolution unlocked: GLACIER GUARDIAN!':t.level===10?'Final evolution: ABSOLUTE ZERO SOCK!':'Ice Sock upgraded!'):t.k==='thunder'?(t.level===5?'Evolution unlocked: STORM SENTINEL!':t.level===10?'Final evolution: TEMPEST EMPEROR!':'Thunder Sock upgraded!'):'Upgrade complete! New model detail unlocked.')}
+function triggerGameOver(){if(gameOver)return;if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}if(speedrunModeActive)saveSpeedrunRecord();if(waveStartTimeout){clearTimeout(waveStartTimeout);waveStartTimeout=null}gameOver=true;active=false;if(!sandboxModeActive){best=Math.max(best,wave);localStorage.setItem('socktdbest',best);$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>Best record: <b>'+best+'</b>';}else{$('gameOverStats').innerHTML='Highest wave this run: <b>'+wave+'</b><br>🏖️ Sandbox runs do not count for records.';}if(sockTDChallenge){$('gameOverStats').innerHTML='Challenge: <b>'+sockTDChallenge.name+'</b> ('+sockTDChallenge.difficulty.toUpperCase()+')<br>Map: <b>'+map+'</b><br>Waves reached: <b>'+wave+'</b><br>Challenge complete — keep pushing your record!';}$('gameOver').classList.remove('hidden');socktdMultiplayerResults();update()}
 function positionSpeedrunUpgradeMini(){
   const el=$('speedrunUpgradeMini'),canvas=$('c');
   if(!el||!canvas||!el.classList.contains('visible'))return;
@@ -12925,16 +13505,19 @@ document.getElementById('adminModal').addEventListener('click',e=>{if(e.target.i
     }
   });
   document.getElementById('returnToStart').addEventListener('click',()=>{
-    if(mpStarted && mpRole){
-      mpReturnToStart(mpRole);
-      return;
+    // Do not reset a match or disconnect multiplayer without confirmation.
+    if(!window.confirm('Return to Main Menu? Your current match will end. Make sure your progress is saved before continuing.'))return;
+    if(mpStarted && mpRole){mpReturnToStart(mpRole);}
+    else{
+      resetForRetry();
+      document.getElementById('gameModesModal').classList.add('hidden');
+      document.getElementById('choose').classList.add('hidden');
+      $('msg').textContent='🏠 Back at the main menu.';
+      update();draw();
     }
-    resetForRetry();
     settingsModal.classList.add('hidden');
-    document.getElementById('gameModesModal').classList.add('hidden');
-    document.getElementById('choose').classList.remove('hidden');
-    $('msg').textContent='🏠 Back at the start screen.';
-    update();draw();
+    window.socktdHomeStarted=false;
+    if(typeof window.socktdShowMainMenu==='function')window.socktdShowMainMenu();
   });
   function setPaused(v){
     gamePaused=v;
@@ -14217,4 +14800,289 @@ save();render();
   gate.hidden=false;
 })();
 </script>
-<script>if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(e=>console.warn('[Sock TD PWA] Service worker:',e));});}</script></body></html>
+<script>if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(e=>console.warn('[Sock TD PWA] Service worker:',e));});}</script><style id="socktdCatalogueLiveSearchStyle">
+.socktdLiveSearch{display:flex;align-items:center;gap:9px;margin:12px 0;padding:9px 12px;background:#182c40;border:2px solid #65b9e9;border-radius:12px;box-sizing:border-box;max-width:100%;color:#eaf7ff}
+.socktdLiveSearch input{min-width:0;flex:1;width:100%;background:transparent;border:0!important;outline:0!important;color:#fff!important;font-size:16px!important;padding:5px 0!important;box-shadow:none!important}
+.socktdLiveSearch input::placeholder{color:#bdcfe1;opacity:1}
+.socktdLiveSearch button{flex:none;background:#314d68!important;color:white!important;border:1px solid #6789a6!important;border-radius:8px!important;padding:5px 10px!important;min-width:36px}
+.socktdLiveSearchEmpty{padding:12px;text-align:center;color:#e9d7b0;font-weight:600}
+@media(max-width:600px){.socktdLiveSearch{padding:6px 9px;margin:8px 0}.socktdLiveSearch input{font-size:16px!important}.socktdLiveSearch button{padding:4px 8px!important}}
+</style>
+<script id="socktdCatalogueLiveSearchPatch">
+(()=>{
+ const configs=[
+  {pane:'socktdCatalogueSockInfo',list:'socktdSockInfoList',placeholder:'Search socks...'},
+  {pane:'socktdCatalogueRecipes',list:'recipeList',placeholder:'Search recipes or ingredients...'},
+  {pane:'socktdCatalogueSkins',list:'socktdCatalogueSkinGrid',placeholder:'Search sock and fusion skins...'}
+ ];
+ const normalize=s=>String(s||'').toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+ for(const cfg of configs){
+  const pane=document.getElementById(cfg.pane);if(!pane)continue;
+  const bar=document.createElement('label');bar.className='socktdLiveSearch';
+  const symbol=document.createElement('span');symbol.textContent='🔎';symbol.setAttribute('aria-hidden','true');
+  const input=document.createElement('input');input.type='search';input.autocomplete='off';input.spellcheck=false;input.placeholder=cfg.placeholder;input.setAttribute('aria-label',cfg.placeholder);
+  const clear=document.createElement('button');clear.type='button';clear.textContent='✕';clear.title='Clear search';clear.setAttribute('aria-label','Clear search');
+  bar.append(symbol,input,clear);
+  const target=document.getElementById(cfg.list);
+  if(target&&target.parentElement===pane)pane.insertBefore(bar,target);
+  else pane.insertBefore(bar,pane.firstChild);
+  const empty=document.createElement('p');empty.className='socktdLiveSearchEmpty';empty.hidden=true;empty.textContent='No matching results.';
+  if(target)target.insertAdjacentElement('afterend',empty);else pane.appendChild(empty);
+  let busy=false;
+  const filter=()=>{
+   if(busy)return;busy=true;
+   try{
+    const list=document.getElementById(cfg.list);if(!list)return;
+    const query=normalize(input.value);
+    const cards=[...list.children].filter(el=>el.nodeType===1&& !el.classList.contains('socktdLiveSearchEmpty'));
+    let matches=0;
+    for(const card of cards){
+      let searchable=normalize(card.textContent);
+      if(cfg.list==='recipeList'&&query&&typeof recipes!=='undefined'&&typeof D!=='undefined'){
+       const title=card.querySelector('b')?.textContent.replace(/^🧬\s*/,'').trim();
+       if(title){for(const [key,result] of Object.entries(recipes)){
+        if(result!==title)continue;
+        const [a,b]=key.split('|');
+        searchable+=' '+normalize((D[a]?.[0]||a)+' '+(D[b]?.[0]||b));
+       }}
+      }
+      const show=!query||searchable.includes(query);
+      if(card.hidden!==!show)card.hidden=!show;
+      card.style.display=show?'':'none';
+      if(show)matches++;
+    }
+    empty.hidden=matches>0||!query;
+   }finally{busy=false;}
+  };
+  input.addEventListener('input',filter);
+  clear.addEventListener('click',()=>{input.value='';filter();input.focus()});
+  if(target){new MutationObserver(()=>{if(!busy)filter()}).observe(target,{childList:true});}
+  filter();
+ }
+})();
+</script><style id="socktdCatalogueSortingStyle">
+.socktdCatalogueSortBar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:8px 0 12px;padding:9px 12px;border-radius:12px;background:#20384b;border:1px solid #65b9e9;color:#f3f8ff}
+.socktdCatalogueSortBar label{font-weight:750;font-size:14px;white-space:nowrap}
+.socktdCatalogueSortBar select{flex:1;min-width:140px;max-width:320px;border:1px solid #83bad8;border-radius:8px;padding:9px;background:#10263a;color:#fff;font-size:14px}
+@media(max-width:600px){.socktdCatalogueSortBar{padding:7px;gap:6px}.socktdCatalogueSortBar select{font-size:13px;padding:7px;min-width:115px}}
+</style>
+<script id="socktdCatalogueSortingPatch">
+(()=>{
+ const settings=[
+  {pane:'socktdCatalogueSockInfo',list:'socktdSockInfoList',options:[['costAsc','Cost: low → high'],['costDesc','Cost: high → low'],['class','Class'],['damage','Damage: high → low'],['rate','Fire rate: fastest first'],['range','Range: high → low'],['nameAsc','Name: A → Z'],['nameDesc','Name: Z → A']]},
+  {pane:'socktdCatalogueRecipes',list:'recipeList',options:[['nameAsc','Name: A → Z'],['nameDesc','Name: Z → A'],['ingredients','Ingredients: A → Z']]},
+  {pane:'socktdCatalogueSkins',list:'socktdCatalogueSkinGrid',options:[['nameAsc','Name: A → Z'],['nameDesc','Name: Z → A'],['class','Type: socks first'],['fusion','Type: fusions first']]}
+ ];
+ const getName=el=>((el.querySelector('b')?.textContent||el.textContent||'').replace(/^[^\w]+/,'').trim()).toLocaleLowerCase();
+ const getD=el=>{try{return typeof D!=='undefined'?D[el.dataset.sockKey]:null}catch(_){return null}};
+ for(const cfg of settings){
+  const pane=document.getElementById(cfg.pane),list=document.getElementById(cfg.list);if(!pane||!list)continue;
+  const bar=document.createElement('div');bar.className='socktdCatalogueSortBar';
+  const label=document.createElement('label');label.textContent='⇅ Sort by';
+  const select=document.createElement('select');select.setAttribute('aria-label','Sort '+cfg.list);
+  for(const [value,name] of cfg.options){const opt=document.createElement('option');opt.value=value;opt.textContent=name;select.appendChild(opt)}
+  bar.append(label,select);
+  const search=pane.querySelector('.socktdLiveSearch');
+  if(search)search.insertAdjacentElement('afterend',bar);else list.insertAdjacentElement('beforebegin',bar);
+  const storageKey='socktdCatalogueSort_'+cfg.list;
+  try{const saved=localStorage.getItem(storageKey);if(saved&&cfg.options.some(o=>o[0]===saved))select.value=saved}catch(_){ }
+  let working=false;
+  function sort(){
+   if(working)return;
+   const nodes=[...list.children].filter(n=>n.nodeType===1);
+   if(nodes.length<2)return;
+   const mode=select.value;
+   const indexed=nodes.map((el,i)=>({el,i}));
+   const type=el=>el.textContent.includes('Fusion skin slot')?1:0;
+   const ingredients=el=>{const title=el.querySelector('b')?.textContent.replace(/^🧬\s*/,'').trim();if(!title||typeof recipes==='undefined'||typeof D==='undefined')return getName(el);for(const [key,result] of Object.entries(recipes)){if(result===title){return key.split('|').map(k=>D[k]?.[0]||k).sort().join(' ').toLowerCase()}}return getName(el)};
+   const cmp=(a,b)=>{
+    const A=a.el,B=b.el,da=getD(A),db=getD(B);
+    if(cfg.list==='socktdSockInfoList'&&da&&db){
+     const num=(d,i)=>Number(d[i])||0;
+     if(mode==='costAsc')return num(da,1)-num(db,1);
+     if(mode==='costDesc')return num(db,1)-num(da,1);
+     if(mode==='damage')return num(db,3)-num(da,3);
+     if(mode==='range')return num(db,2)-num(da,2);
+     if(mode==='rate')return num(da,4)-num(db,4);
+     if(mode==='class')return (A.querySelector('small:last-child')?.textContent||'').localeCompare(B.querySelector('small:last-child')?.textContent||'');
+    }
+    if(cfg.list==='socktdCatalogueSkins'){if(mode==='class')return type(A)-type(B)||getName(A).localeCompare(getName(B));if(mode==='fusion')return type(B)-type(A)||getName(A).localeCompare(getName(B))}
+    if(mode==='ingredients')return ingredients(A).localeCompare(ingredients(B));
+    if(mode==='nameDesc')return getName(B).localeCompare(getName(A));
+    return getName(A).localeCompare(getName(B));
+   };
+   indexed.sort((a,b)=>cmp(a,b)||a.i-b.i);
+   if(indexed.every((v,i)=>v.el===nodes[i]))return;
+   working=true;
+   const frag=document.createDocumentFragment();indexed.forEach(v=>frag.appendChild(v.el));list.appendChild(frag);
+   queueMicrotask(()=>{working=false});
+  }
+  select.addEventListener('change',()=>{try{localStorage.setItem(storageKey,select.value)}catch(_){}sort()});
+  new MutationObserver(()=>{if(!working)sort()}).observe(list,{childList:true});
+  sort();
+ }
+})();
+</script><script>
+// V9 optimized sprite-cache comparison switch (available on desktop and mobile).
+(function(){
+ function setup(){
+  return; // production: debug control removed
+  if(document.getElementById('socktdV8CacheBtn'))return;
+  const b=document.createElement('button');b.id='socktdV8CacheBtn';b.type='button';
+  b.style.cssText='position:fixed;bottom:12px;right:12px;z-index:28000;padding:9px 12px;border-radius:10px;background:#183d54;color:#fff;border:2px solid #62d3f5;font:bold 12px system-ui;cursor:pointer;max-width:45vw';
+  function refresh(){b.textContent='V11 Model Cache: '+(socktdV8CacheEnabled?'ON':'OFF');}
+  b.addEventListener('click',function(){socktdV8CacheEnabled=!socktdV8CacheEnabled;try{localStorage.setItem('socktdV8Cache',socktdV8CacheEnabled?'on':'off');}catch(e){}refresh();});
+  refresh();document.body.appendChild(b);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
+<script>
+(function(){
+ function add(){
+  return; // production: debug control removed
+  if(document.getElementById('socktdV12EnemyToggle'))return;
+  const b=document.createElement('button');b.id='socktdV12EnemyToggle';
+  b.style.cssText='position:fixed;bottom:65px;right:12px;z-index:99998;background:#11354b;color:#fff;border:2px solid #49caff;border-radius:12px;padding:10px 12px;font:bold 12px system-ui;cursor:pointer;box-shadow:0 3px 12px #0009';
+  const update=()=>{b.textContent='V12 Enemy Cache: '+(socktdV12EnemyCacheEnabled?'ON':'OFF');};
+  b.addEventListener('click',()=>{socktdV12EnemyCacheEnabled=!socktdV12EnemyCacheEnabled;try{localStorage.setItem('socktdV12EnemyCache',socktdV12EnemyCacheEnabled?'on':'off')}catch(_){}update();});
+  update();document.body.appendChild(b);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();
+})();
+</script>
+
+<script>
+// V13 diagnostic switch: projectile glyph cache (independent of enemy/model caches).
+(function(){
+ function install(){
+  return; // production: debug control removed
+  if(document.getElementById('socktdV13ProjectileToggle'))return;
+  const b=document.createElement('button');b.id='socktdV13ProjectileToggle';
+  b.style.cssText='position:fixed;right:12px;bottom:106px;z-index:9998;padding:9px 12px;border:2px solid #65d7f3;border-radius:12px;background:#17334c;color:white;font:bold 12px system-ui;cursor:pointer;box-shadow:0 3px 12px #0007';
+  function update(){b.textContent='V13 Projectiles: '+(socktdV13ProjectileCacheEnabled?'ON':'OFF')}
+  b.addEventListener('click',()=>{socktdV13ProjectileCacheEnabled=!socktdV13ProjectileCacheEnabled;try{localStorage.setItem('socktdV13ProjectileCache',socktdV13ProjectileCacheEnabled?'on':'off')}catch(_){}update()});
+  update();document.body.appendChild(b);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
+</script>
+
+<script>
+(function(){
+ function install(){
+  return; // production: debug control removed
+  if(document.getElementById('socktdV14BackdropToggle'))return;
+  const b=document.createElement('button');
+  b.id='socktdV14BackdropToggle';
+  b.type='button';
+  b.style.cssText='position:fixed;bottom:108px;left:20px;z-index:99999;background:#103b50;color:#fff;border:2px solid #4fd4eb;border-radius:12px;padding:10px 13px;font:bold 13px Arial;cursor:pointer;box-shadow:0 3px 8px #0007';
+  function update(){b.textContent='V14 Achtergrondcache: '+(socktdV14BackdropEnabled?'ON':'OFF');}
+  b.addEventListener('click',function(){
+   socktdV14BackdropEnabled=!socktdV14BackdropEnabled;
+   try{localStorage.setItem('socktdV14Backdrop',socktdV14BackdropEnabled?'on':'off')}catch(_){}
+   update();
+  });
+  update();document.body.appendChild(b);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
+</script>
+<script>
+// Production UI: hide diagnostic controls; retain every performance optimization.
+(function(){
+ function apply(){
+  const ids=['socktdPerfToggle','socktdFastCanvasToggle','socktdV5SchedulerBtn','socktdV8CacheBtn','socktdV12EnemyToggle','socktdV13ProjectileToggle','socktdV14BackdropToggle','socktdPerfV3Panel'];
+  for(const id of ids){const el=document.getElementById(id);if(el)el.remove();}
+  if(typeof socktdV8CacheEnabled!=='undefined')socktdV8CacheEnabled=true;
+  if(typeof socktdV12EnemyCacheEnabled!=='undefined')socktdV12EnemyCacheEnabled=true;
+  if(typeof socktdV13ProjectileCacheEnabled!=='undefined')socktdV13ProjectileCacheEnabled=true;
+  if(typeof socktdV14BackdropEnabled!=='undefined')socktdV14BackdropEnabled=true;
+  if(window.socktdFastCanvas)window.socktdFastCanvas.enabled=true;
+  window.socktdV5Scheduler='hybrid';
+  if(typeof socktdPerfV3!=='undefined')socktdPerfV3.on=false;
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+})();
+</script>
+<div id="socktdHome" role="dialog" aria-modal="true" aria-label="Sock TD main menu"><div class="socktdHomeCard"><div class="socktdHomeLogo">🧦 SOCK TD</div><div class="socktdHomeSubtitle">TEXTURED SOCK TOWER DEFENSE</div>
+<div class="socktdHomePage" id="socktdHomeMain"><button data-kind="play" id="socktdHomePlay">▶ PLAY</button><button id="socktdHomeSettings">⚙ SETTINGS</button><button data-kind="exit" id="socktdHomeExit">⏻ EXIT GAME</button></div>
+<div class="socktdHomePage" id="socktdHomePlayPage" hidden>
+<div class="socktdPlayDecor" aria-hidden="true"><span>🔥</span><span>🧦</span><span>⚡</span><span>❄️</span><span>🧦</span></div>
+<h2 class="socktdPlayHeading">CHOOSE YOUR ADVENTURE</h2>
+<p class="socktdPlayLead">Build your sock army. Defend your world. Become a legend!</p>
+<button data-kind="play" id="socktdHomeMatch" class="socktdPlayChoice"><span class="socktdPlayIcon" aria-hidden="true">⚔️</span><span class="socktdPlayCopy"><strong>START MATCH</strong><small>Choose a map and difficulty, then defend!</small></span></button>
+<button id="socktdHomeModes" class="socktdPlayChoice"><span class="socktdPlayIcon" aria-hidden="true">🕹️</span><span class="socktdPlayCopy"><strong>GAME MODES</strong><small>Discover special challenges and new ways to play</small></span></button>
+<button id="socktdHomeTutorial" class="socktdPlayChoice"><span class="socktdPlayIcon" aria-hidden="true">📖</span><span class="socktdPlayCopy"><strong>TUTORIAL</strong><small>Learn the basics and master your sock strategy</small></span></button>
+<button data-kind="back" id="socktdHomeBack">← MAIN MENU</button></div>
+<div class="socktdHomePage" id="socktdHomeExitPage" hidden><h2>⚠ EXIT SOCK TD?</h2><p>Your current match may be interrupted. Save your progress before leaving.</p><button data-kind="exit" id="socktdHomeConfirmExit">CONFIRM EXIT</button><button data-kind="back" id="socktdHomeCancelExit">CANCEL</button></div><div class="socktdHomeFoot">SOCK TD • YOUR SOCK ARMY AWAITS</div></div></div><script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const home=$('socktdHome'),main=$('socktdHomeMain'),play=$('socktdHomePlayPage'),exit=$('socktdHomeExitPage');
+function page(which){main.hidden=which!=='main';play.hidden=which!=='play';exit.hidden=which!=='exit';home.hidden=false;}
+function leave(){home.hidden=true;settingsModal?.classList.remove('socktdSettingsFromHome');}
+function showChoose(){leave();$('gameModesModal')?.classList.add('hidden');$('choose')?.classList.remove('hidden');}
+$('socktdHomePlay').onclick=()=>page('play');
+$('socktdHomeBack').onclick=()=>page('main');
+$('socktdHomeExit').onclick=()=>page('exit');
+$('socktdHomeCancelExit').onclick=()=>page('main');
+$('socktdHomeMatch').onclick=showChoose;
+$('socktdHomeModes').onclick=()=>{leave();$('choose')?.classList.add('hidden');$('gameModesModal')?.classList.remove('hidden');};
+$('socktdHomeTutorial').onclick=()=>{showChoose();$('tutorialBtn')?.click();};
+// Keep the real main menu visible behind Settings, instead of exposing the old map picker.
+// Settings lives outside #app, so elevate only that modal while the home menu is open.
+const settingsModal=$('settingsModal');
+function syncSettingsLayer(){
+ const onHome=!window.socktdHomeStarted && !home.hidden && !settingsModal.classList.contains('hidden');
+ settingsModal.classList.toggle('socktdSettingsFromHome',onHome);
+}
+$('socktdHomeSettings').onclick=()=>{
+ page('main');
+ $('settingsBtn')?.click();
+ syncSettingsLayer();
+};
+$('closeSettings')?.addEventListener('click',()=>{
+ settingsModal.classList.remove('socktdSettingsFromHome');
+ if(!window.socktdHomeStarted)page('main');
+});
+window.socktdShowMainMenu=function(){
+ settingsModal.classList.remove('socktdSettingsFromHome');
+ $('choose')?.classList.add('hidden');
+ page('main');
+};
+$('socktdHomeConfirmExit').onclick=()=>{
+ try{window.close();}catch(_){}
+ // Browsers generally refuse to close a tab they did not open themselves.
+ $('socktdHomeExitPage').querySelector('p').textContent='Your browser prevented automatic closing. You can safely close this tab now.';
+};
+// Once a mode or match is selected, Settings closes back to the game, not the home menu.
+$('socktdHomeMatch').addEventListener('click',()=>window.socktdHomeStarted=true);
+$('socktdHomeModes').addEventListener('click',()=>window.socktdHomeStarted=true);
+$('socktdHomeTutorial').addEventListener('click',()=>window.socktdHomeStarted=true);
+// The original map picker is initially visible; keep it behind the new menu.
+page('main');
+})();
+</script><script id="socktdV16Navigation">
+(function(){
+ const get=id=>document.getElementById(id);
+ function home(){
+  const root=get('socktdHome');if(!root)return;
+  for(const id of ['choose','gameModesModal','multiplayerLobby','sandboxSetup'])get(id)?.classList.add('hidden');
+  window.socktdHomeStarted=false;
+  if(typeof window.socktdShowMainMenu==='function')window.socktdShowMainMenu();
+  else{root.hidden=false;get('socktdHomeMain').hidden=false;get('socktdHomePlayPage').hidden=true;}
+ }
+ // Mode back now returns to the new home menu, not the legacy map picker.
+ get('backToStartFromModes')?.addEventListener('click',function(ev){ev.preventDefault();ev.stopImmediatePropagation();home()},true);
+ get('gameModesClose')?.addEventListener('click',function(ev){ev.preventDefault();ev.stopImmediatePropagation();home()},true);
+ // Add a visible way to leave the map/difficulty picker.
+ const choose=get('choose');if(choose&&!get('socktdV16ChooseBack')){
+  const b=document.createElement('button');b.id='socktdV16ChooseBack';b.type='button';b.textContent='← Main Menu';
+  b.style.cssText='position:relative;z-index:8;margin:12px 15px;padding:10px 18px;border:2px solid #f2c76b;border-radius:12px;background:#293858;color:#fff;font-weight:800;cursor:pointer';
+  b.addEventListener('click',home);choose.querySelector('.panel')?.prepend(b);
+ }
+ // When Settings returns home, the new menu should be used.
+ get('returnToStart')?.addEventListener('click',function(){setTimeout(()=>{if(get('choose')&&!get('choose').classList.contains('hidden'))home()},0)},false);
+})();
+</script></body></html>
